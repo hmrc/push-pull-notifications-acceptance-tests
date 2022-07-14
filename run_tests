@@ -1,0 +1,73 @@
+#!/bin/bash
+set -e
+set -o pipefail
+
+function usage() {
+    echo "Usage: run_tests [-h] [-o OPTIONS] [-t TAG] [-p DATA_FILE] [-d WEB_DRIVER]"
+    echo
+    echo "Run acceptance tests"
+    echo
+    echo "optional arguments:"
+    echo "  -h             Show this help"
+    echo "  -r             Retry failed tests"
+    echo "  -o OPTIONS     NOT USED"
+    echo "  -t TAGS        Tags to run. For example '@tag1' or '@tag1 and @tag2'"
+    echo "  -p DATA_FILE   Data file containing environmental variables. This is loaded from the './profiles/' directory. Default '${data_file}'"
+    echo "  -d WEB_DRIVER  Selenium web driver to use for browser tests. For example 'chrome', 'firefox', 'remote'. Default '${web_driver}'"
+}
+
+# Defaults
+data_file=qa.txt
+web_driver=chrome
+
+# Parse CLI arguments
+while getopts 'hro:t:p:d:' OPTION; do
+  case "$OPTION" in
+    h)
+      usage
+      exit 1
+      ;;
+    r)
+      retry="true"
+      ;;
+    o)
+      ;;
+    t)
+      tag=$OPTARG
+      ;;
+    p)
+      data_file=$OPTARG
+      ;;
+    d)
+      web_driver=$OPTARG
+      ;;
+    ?)
+      usage
+      exit 1
+      ;;
+  esac
+done
+
+if [[ ! -f profiles/$data_file ]]; then
+  echo "Data file 'profiles/${data_file}' not found"
+fi
+
+source profiles/$data_file
+
+gradlew_return_code=0
+
+./gradlew clean test aggregate \
+		-Dwebdriver.driver="${web_driver}" \
+		-DbaseUrl="${BASE_URL}" \
+		-Dcucumber.filter.tags="${tag}" \
+		--info \
+		|| gradlew_return_code=$?
+
+if [[ "$retry" == "true" && "$gradlew_return_code" != "0" ]]; then
+  echo "== Retrying failed tests =="
+  ./gradlew clean test aggregate \
+      -Dwebdriver.driver="${web_driver}" \
+      -DbaseUrl="${BASE_URL}" \
+      -Dcucumber.features="@rerun/failed_scenarios.txt" \
+      --info
+fi

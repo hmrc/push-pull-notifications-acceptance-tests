@@ -1,13 +1,23 @@
-!.gitignore
-!.gitattributes
 /.classpath
-tmp
 logs
-/out
-/.settings
-*.DS_Store
-/.project
+project/project
+project/target
+target
+lib_managed
+tmp
 .history
+dist
+/out
+/.project
+/RUNNING_PID
+/.settings
+build/*
+project/*
+/.gradle
+/.DS_Store
+.DS_Store
+**/*.DS_Store
+/rerun
 
 # IDE files
 /.idea
@@ -18,10 +28,3 @@ logs
 eclipse
 .scala_dependencies
 
-# sbt files
-dist
-target
-lib_managed
-src_managed/
-project/project
-project/target
