@@ -6,8 +6,16 @@ logs
 /out
 /.settings
 *.DS_Store
+.DS_Store
+**/*.DS_Store
+/.DS_Store
 /.project
+project/*
 .history
+/RUNNING_PID
+build/*
+/.gradle
+/rerun
 
 # IDE files
 /.idea
@@ -17,11 +25,3 @@ logs
 /.idea_modules
 eclipse
 .scala_dependencies
-
-# sbt files
-dist
-target
-lib_managed
-src_managed/
-project/project
-project/target

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="1" name="Gatekeeper - XML Organisations" skipped="0" tests="1" time="17.57" timestamp="2022-03-08 03:54:54"><testcase name="Gatekeeper user is able to view developer details for a specific organisation team member"><failure message="&#10;Expected: is &quot;ggug&quot;&#10;     but: was &quot;api.platform@digital.hmrc.gov.uk&quot;" type="java.lang.AssertionError">
+Expected: is "ggug"
+     but: was "api.platform@digital.hmrc.gov.uk"</failure><system-err>
+Expected: is "ggug"
+     but: was "api.platform@digital.hmrc.gov.uk"
+steps.gatekeeper.xmlOrganisationsSteps.iCanViewDeveloperDetails(xmlOrganisationsSteps.java:124)
+✽.I can view developer details "api.platform@digital.hmrc.gov.uk"(classpath:features/gatekeeper/xmlOrganisations.feature:89)
+</system-err></testcase></testsuite>

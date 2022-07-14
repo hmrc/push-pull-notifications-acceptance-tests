@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Features</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<!--[if IE 7]>
+<!--<link rel="stylesheet" href="font-awesome/css/font-awesome-ie7.min.css">-->
+
+<link rel="stylesheet" href="fontawesome-free-5.7.2-web/css/all.min.css">
+<link rel="stylesheet" href="fontawesome-free-5.7.2-web/css/v4-shims.min.css">
+
+<!-- JQuery -->
+<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><link rel="stylesheet" href="chartist/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.css">
+<link rel="stylesheet" href="chartist/dist/chartist.min.css">
+<script src="chartist/dist/chartist.min.js"></script>
+<script src="chartist/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script><!-- Required Stylesheets -->
+<link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
+
+<!-- Required Javascript -->
+<script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/1.10.19/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.10.19/datatables.min.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="datatables/1.10.19/datatables.bootstrap4.min.js"></script>
+<link type="text/css" href="datatables/1.10.19/datatables.bootstrap4.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/core.css"/>
+<link rel="stylesheet" href="css/link.css"/>
+<link type="text/css" media="screen" href="css/screen.css" rel="Stylesheet"/><!-- JQuery-UI -->
+<link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
+<script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/1.10.19/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.10.19/datatables.min.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="datatables/1.10.19/datatables.bootstrap4.min.js"></script>
+<link type="text/css" href="datatables/1.10.19/datatables.bootstrap4.min.css" rel="stylesheet" />
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            var scenarioTable = $('.scenario-result-table').DataTable({
+
+                "order": [],
+                "language": {
+                    searchPlaceholder: "Filter",
+                    search: ""
+                }
+            });
+
+            $('.example-table table').DataTable({
+                searching: false,
+                ordering: false,
+                paging: false,
+                info: false
+            });
+
+            $('.example-table-in-scenario table').DataTable({
+                searching: false,
+                ordering: false,
+                paging: false,
+                info: false
+            });
+
+            $('#evidence-table').DataTable(
+                    {
+                        searching: false,
+                        ordering: false,
+                        paging: false,
+                        info: false
+                    }
+            );
+
+
+            $(".scenario-docs .card-body table").wrap("<div class='table-responsive'></div>");
+
+            $("#requirements-tabs").tabs();
+            $("#test-tabs").tabs();
+
+            var requirementsTree = [{"text":"API Gateway Responses","type":"feature","href":"2d1696b077fdd3bde15d27a8b51abbb4a0d7274cc71e64d955e59f93beaf4573.html","nodes":[],"selectable":false,"tags":["",""]}];
+
+            $('#tree').treeview({
+                data: requirementsTree,
+                enableLinks: true,
+                showTags: true,
+                expandIcon: "glyphicon glyphicon-folder-close",
+                collapseIcon: "glyphicon glyphicon-folder-open",
+                emptyIcon: "glyphicon glyphicon-book"
+            });
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(".scenario-docs > div > p").html(function () {
+                var text = $(this).text().trim().split(" ");
+                var first = text.shift();
+                return (text.length > 0 ? "<strong>" + first + "</strong> " : first) + text.join(" ");
+            });
+        });
+    </script>
+</head>
+
+<body class="results-page">
+<div id="topheader">
+    <div id="topbanner">
+        <div id="logo"><a href="index.html"><img src="images/serenity-logo.png" border="0"/></a></div>
+        <div id="projectname-banner" style="float:right">
+            <span class="projectname"></span>
+        </div>
+    </div>
+</div>
+
+
+<div class="middlecontent">
+    <div id="contenttop">
+        <div class="middlebg">
+            <span class="breadcrumbs">
+            <a href='index.html'>Home</a> > <a href="capabilities.html">Requirements</a>
+
+
+
+                > <span class="truncate-40">API Gateway Responses</span>
+
+            </span>
+        </div>
+        <div class="rightbg"></div>
+    </div>
+    <div class="clr"></div>
+
+    <!--/* starts second table*/-->
+
+<div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li >
+            <a href="index.html"><i class="fa fa-check-square-o"></i> Overall Test Results</a>
+        </li>
+        <li >
+            <a href="capabilities.html"><i class="fa fa-book"></i> Requirements</a>
+        </li>
+        <li >
+            <a href="7ea0a5e2d679b9deeda9910ae4a9bcd3a281e0d908303a9e16e486103e98880c.html"><i class="fa fa-comments-o"></i> Capabilities</a>
+        </li>
+        <li class="active">
+            <a href="#"><i class="fa fa-comments-o"></i> Features</a>
+        </li>
+    </ul>
+    <span class="date-and-time"><a href="build-info.html"><i class="fa fa-info-circle"></i></a> Report generated </span>
+    <br style="clear:left"/>
+</div>
+
+    <div class="clr"></div>
+
+    <div id="beforetable"></div>
+    <div id="results-dashboard">
+        <div class="table">
+                <div class=row">
+                    <div class="col-sm-12">
+                        <div>
+                            <div clas="table">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    <span>
+                                            <h2><i class="fa fa-book"></i> Feature:  API Gateway Responses</h2>
+                                        </span>
+                                </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="requirementNarrativeTitle">
+                                
+                            </div>
+
+                        </div>
+                    </div>
+
+
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <!-- Requirements result tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#specs"><i class="fas fa-comments"></i> Specifications</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#results"><i class="fas fa-tachometer-alt"></i> Test Results</a>
+                        </li>
+                    </ul>
+
+                    <!-- Specifications and Results tabs -->
+                    <div class="card border">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div id="specs" class="tab-pane fade in active">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+
+                                            <h3>Scenarios</h3>
+
+                                            <div id="toc">
+                                                <table class="table" id="toc-table">
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#f184ddf418c69a43c4af3705f969d4e52acf769d8c5599bc4ffc22dda840f105" title="View scenario details" >Calling Hello World with an invalid context returns a 404 matching resource not found</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#a355097162fa6cd2291064a8667f459bfbedeea803633f2213558f69e6a8a013" title="View scenario details" >Calling Hello World with an invalid URI returns a 404 Invalid URI</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#42e1d0b905455e83b8e4d5372728bf6633832140d89658827ea3e9bb81ae0de9" title="View scenario details" >Calling Hello World with an incorrect header version returns a 404 matching resource not found</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#853900f818b9d57d16d87d9dbe730e601e1f7c86d9aa1e8563bc22886fe6b1f7" title="View scenario details" >Calling Hello World with an invalid method returns a 405 method not allowed</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#76b4de405ebd977795a6881b48e9f66f22f1b72a25cbbe28ed03d0951486a9e1" title="View scenario details" >Calling Hello World endpoint without an accept header results in a 406 Not acceptable</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#c086dc2a20672b9c8f1ea3850c5cf39cb123de1c15eb91818e5422d42b5fdf51" title="View scenario details" >Calling Hello World endpoint without an unrecognized accept header results in a 406 Not acceptable</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#f5a43d9f84ddeaad1377d6b46ef7d2e22026e381ee1d2821dc2284fee7343a82" title="View scenario details" >Calling Hello Application endpoint with a invalid server token fails</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#adc96b0030739ab09d73fb2cb976feed7597408735b0b41de56675ddea2ddaa8" title="View scenario details" >Calling Hello Application endpoint without server token fails</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#af4c731df18bdf0854bb32a8ed4b0c9287493552706a10d6ea837bddb9ca72e6" title="View scenario details" >Calling Hello User endpoint with an invalid bearer token fails</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#34765b83a41fa883042050e5fdbde98e1b9b41f51c1389712c7e663fb6bb2f78" title="View scenario details" >Calling Hello User endpoint with an incorrect bearer token type fails</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#3b0a004030caf7a3137b2b5cda336e0a01f184ec75ee86076ba338cdf9786207" title="View scenario details" >Calling Hello User endpoint with valid bearer token but wrong scope fails</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#d32115aa8e470270ec3fb3b5bd1fdb5d24cce0870d1b05a40333206115a1de56" title="View scenario details" >Calling the Marriage Allowance API with no subscription</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#3d1a7a3edf0b7b71dbabec05abb9245af5216452cdfeb7424e75e379f30d47c3" title="View scenario details" >Calling Hello Application endpoint with a blocked server token works</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#4ec7501d30ed187d76c9996a6b1d2cce993e8388e5c9e778387be5d378f9db8d" title="View scenario details" >Calling Hello User endpoint with valid bearer token using blocked application</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#cf93b34cb9815700fc8f0799b31c953ba1b4d702ef293b4a20a97beedca33e9f" title="View scenario details" >Calling the api-platform-test API post postcode endpoint with no JSON payload returns a 503</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#b682f8f09f8e83fc276fe3fc8067af4cd487f0997ab7e9e5db2cc0a97739721b" title="View scenario details" >Calling the api-platform-test API post XML endpoint with no XML payload returns a 503</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#376258ace43ead54478a1a2b408b6c67d431dbc0bc4ee5265a65c45eebb909f1" title="View scenario details" >Unsupported media type response due to missing JSON content type header</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#b8f2c2acc6c8aabcd3813e380901675a0ccb06db22b45439357b7d800dac5eba" title="View scenario details" >Unsupported media type response due to missing XML content type header</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#3acb5fe96d7ce1b02f4eb3f7f361fe40e6fd4844dcaae8f394aeecfff3d7b5ee" title="View scenario details" >Bad request response with an invalid JSON payload</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#0437cfe3492426638cd8a7c18f32454b892022de6f47255181b528b0cd859266" title="View scenario details" >Bad request response with an invalid XML payload</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#3dc611b415f24e38edd88e57ef0f977595a5b9cbf67647264604f1e92f1b26eb" title="View scenario details" >Calling Hello Application with with a whitelisted IP returns a status 200</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#10446665b50ad6045e1a6d0e5cc12c62a141be58259c948272c2edeaba7cc243" title="View scenario details" >Calling Hello Application with with an IP not whitelisted returns a 403 endpoint not available</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#3fb4310223b1e136bdd71ee51f7bf3a4a34391adb8566104e73ff289468769cc" title="View scenario details" >Generate a bearer token using an authorisation header and calling Hello User</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#65eaeb0b22f95290b25324282be6e734c9b670253cc2f976be9de8664c4e41f0" title="View scenario details" >Generate a bearer token using JSON payload and calling Hello User</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            
+                                                                            
+
+                                                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                </table>
+
+                                            </div>
+
+                                            <h3>Scenario details</h3>
+
+
+                                                <div class="scenario-docs card" id="f184ddf418c69a43c4af3705f969d4e52acf769d8c5599bc4ffc22dda840f105">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello World with an invalid context returns a 404 matching resource not found</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have no authorisation header</p>
+                                                            <p>When I make a call to the get hello world endpoint with an invalid context</p>
+                                                            <p>Then I get a matching resource not found response</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="a355097162fa6cd2291064a8667f459bfbedeea803633f2213558f69e6a8a013">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello World with an invalid URI returns a 404 Invalid URI</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have no authorisation header</p>
+                                                            <p>When I make a call to the incorrect get hello world endpoint</p>
+                                                            <p>Then I get a matching resource not found response</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="42e1d0b905455e83b8e4d5372728bf6633832140d89658827ea3e9bb81ae0de9">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello World with an incorrect header version returns a 404 matching resource not found</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have an incorrect accept header version</p>
+                                                            <p>When I make a call to the get hello world endpoint</p>
+                                                            <p>Then I get a matching resource not found response</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="853900f818b9d57d16d87d9dbe730e601e1f7c86d9aa1e8563bc22886fe6b1f7">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello World with an invalid method returns a 405 method not allowed</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have no authorisation header</p>
+                                                            <p>When I make an invalid method call to the get hello world endpoint</p>
+                                                            <p>Then I get a method not allowed response</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="76b4de405ebd977795a6881b48e9f66f22f1b72a25cbbe28ed03d0951486a9e1">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello World endpoint without an accept header results in a 406 Not acceptable</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have no accept header</p>
+                                                            <p>When I make a call to the get hello world endpoint</p>
+                                                            <p>Then I get an unacceptable response due to a missing accept header</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="c086dc2a20672b9c8f1ea3850c5cf39cb123de1c15eb91818e5422d42b5fdf51">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello World endpoint without an unrecognized accept header results in a 406 Not acceptable</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have an invalid accept header</p>
+                                                            <p>When I make a call to the get hello world endpoint</p>
+                                                            <p>Then I get an unacceptable response due to an invalid accept header</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="f5a43d9f84ddeaad1377d6b46ef7d2e22026e381ee1d2821dc2284fee7343a82">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello Application endpoint with a invalid server token fails</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have a invalid server token</p>
+                                                            <p>When I make a call to the get hello application endpoint</p>
+                                                            <p>Then I get an unauthorised response due to invalid credentials</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="adc96b0030739ab09d73fb2cb976feed7597408735b0b41de56675ddea2ddaa8">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello Application endpoint without server token fails</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have no server token</p>
+                                                            <p>When I make a call to the get hello application endpoint</p>
+                                                            <p>Then I get an unauthorised response due to missing credentials</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="af4c731df18bdf0854bb32a8ed4b0c9287493552706a10d6ea837bddb9ca72e6">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello User endpoint with an invalid bearer token fails</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have an invalid bearer token</p>
+                                                            <p>When I make a call to the get hello user endpoint</p>
+                                                            <p>Then I get an unauthorised response due to invalid credentials</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="34765b83a41fa883042050e5fdbde98e1b9b41f51c1389712c7e663fb6bb2f78">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello User endpoint with an incorrect bearer token type fails</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have a valid server token</p>
+                                                            <p>When I make a call to the get hello user endpoint</p>
+                                                            <p>Then I get an unauthorised response due to an incorrect bearer token type</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="3b0a004030caf7a3137b2b5cda336e0a01f184ec75ee86076ba338cdf9786207">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello User endpoint with valid bearer token but wrong scope fails</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have a valid bearer token for scope &quot;read:individual-benefits&quot;</p>
+                                                            <p>When I make a call to the get hello user endpoint</p>
+                                                            <p>Then I get a forbidden response due to invalid scope</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="d32115aa8e470270ec3fb3b5bd1fdb5d24cce0870d1b05a40333206115a1de56">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling the Marriage Allowance API with no subscription</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have a valid JSON accept header for version &quot;2.0&quot;</p>
+                                                            <p>And I have a valid bearer token for scope &quot;read:marriage-allowance&quot;</p>
+                                                            <p>When I make a request to the get Marriage Allowance Status endpoint with UTR &quot;6116471786&quot;</p>
+                                                            <p>Then I get a resource forbidden response due to no API subscription</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="3d1a7a3edf0b7b71dbabec05abb9245af5216452cdfeb7424e75e379f30d47c3">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello Application endpoint with a blocked server token works</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have a valid server token for a blocked application</p>
+                                                            <p>When I make a call to the get hello application endpoint</p>
+                                                            <p>Then I get a resource forbidden response due to the application being blocked</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="4ec7501d30ed187d76c9996a6b1d2cce993e8388e5c9e778387be5d378f9db8d">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello User endpoint with valid bearer token using blocked application</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have a valid bearer token using a blocked application for scope &quot;hello&quot;</p>
+                                                            <p>When I make a call to the get hello user endpoint</p>
+                                                            <p>Then I get a resource forbidden response due to the application being blocked</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="cf93b34cb9815700fc8f0799b31c953ba1b4d702ef293b4a20a97beedca33e9f">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling the api-platform-test API post postcode endpoint with no JSON payload returns a 503</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have no JSON payload</p>
+                                                            <p>When I make a request to the post JSON endpoint</p>
+                                                            <p>Then I get a bad request response due to no JSON payload</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="b682f8f09f8e83fc276fe3fc8067af4cd487f0997ab7e9e5db2cc0a97739721b">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling the api-platform-test API post XML endpoint with no XML payload returns a 503</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have no XML payload</p>
+                                                            <p>When I make a request to the post XML endpoint</p>
+                                                            <p>Then I get a bad request response due to no XML payload</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="376258ace43ead54478a1a2b408b6c67d431dbc0bc4ee5265a65c45eebb909f1">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Unsupported media type response due to missing JSON content type header</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have a JSON payload with no content type header</p>
+                                                            <p>When I make a request to the post JSON endpoint</p>
+                                                            <p>Then I get an unsupported media type response</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="b8f2c2acc6c8aabcd3813e380901675a0ccb06db22b45439357b7d800dac5eba">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Unsupported media type response due to missing XML content type header</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have an XML payload with no content type header</p>
+                                                            <p>When I make a request to the post XML endpoint</p>
+                                                            <p>Then I get an XML unsupported media type response</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="3acb5fe96d7ce1b02f4eb3f7f361fe40e6fd4844dcaae8f394aeecfff3d7b5ee">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Bad request response with an invalid JSON payload</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have an invalid JSON payload</p>
+                                                            <p>When I make a request to the post JSON endpoint</p>
+                                                            <p>Then I get a bad request response due to invalid JSON</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="0437cfe3492426638cd8a7c18f32454b892022de6f47255181b528b0cd859266">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Bad request response with an invalid XML payload</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have an invalid XML payload</p>
+                                                            <p>When I make a request to the post XML endpoint</p>
+                                                            <p>Then I get a bad request response due to invalid XML</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="3dc611b415f24e38edd88e57ef0f977595a5b9cbf67647264604f1e92f1b26eb">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello Application with with a whitelisted IP returns a status 200</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have a true client IP header for a whitelisted IP</p>
+                                                            <p>And I have a valid server token for an IP whitelisted application</p>
+                                                            <p>When I make a call to the get hello application endpoint</p>
+                                                            <p>Then I get a successful response</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="10446665b50ad6045e1a6d0e5cc12c62a141be58259c948272c2edeaba7cc243">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Calling Hello Application with with an IP not whitelisted returns a 403 endpoint not available</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have a true client IP header for an IP not whitelisted</p>
+                                                            <p>And I have a valid server token for an IP whitelisted application</p>
+                                                            <p>When I make a call to the get hello application endpoint</p>
+                                                            <p>Then I get a resource forbidden response due to IP not whitelisted</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="3fb4310223b1e136bdd71ee51f7bf3a4a34391adb8566104e73ff289468769cc">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Generate a bearer token using an authorisation header and calling Hello User</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have a valid bearer token created with an authorisation header for scope &quot;hello&quot;</p>
+                                                            <p>When I make a call to the get hello user endpoint</p>
+                                                            <p>Then I get a successful response with the message Hello User</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="scenario-docs card" id="65eaeb0b22f95290b25324282be6e734c9b670253cc2f976be9de8664c4e41f0">
+                                                    <div class="scenario-docs card-header undefined" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="" title="View test results">Generate a bearer token using JSON payload and calling Hello User</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class="fas fa-pause"
+                                                                       title="No test has been implemented yet"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given I have a valid bearer token using a JSON payload for scope &quot;hello&quot;</p>
+                                                            <p>When I make a call to the get hello user endpoint</p>
+                                                            <p>Then I get a successful response with the message Hello User</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="results" class="tab-pane fade">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Scenario Results (including rows of test data)</th>
+                                                <th scope="col" colspan="2" class="automated-stats">
+                                                    Automated
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                                    <td class="aggregate-result-count"><i
+                                                                            class='fa fa-check-circle-o success-icon'></i>&nbsp;Passing
+                                                                    </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr>
+                                                                    <td class="aggregate-result-count"><i
+                                                                            class='fa fa-stop-circle-o pending-icon'></i>&nbsp;Pending
+                                                                    </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr>
+                                                                <td class="aggregate-result-count"><i
+                                                                        class='fa fa-ban ignored-icon'></i>&nbsp;Ignored
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr>
+                                                                <td class="aggregate-result-count"><i
+                                                                        class='fa fa-fast-forward skip-icon'></i>&nbsp;Skipped
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr>
+                                                                            <td colspan="3"><i
+                                                                                class='fa fa-times failure-icon'></i>&nbsp;<em>Unsuccessful</em></a>
+                                                                            </td>
+
+                                            </tr>
+
+                                            <tr>
+                                                                <td class="aggregate-result-count indented-error-category">
+                                                                    <i
+                                                                            class='fa fa-times-circle failure-icon'></i>&nbsp;Failed
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            <tr>
+                                                                <td class="aggregate-result-count indented-error-category">
+                                                                    <i
+                                                                            class='fa fa-exclamation-triangle error-icon'></i>&nbsp;Broken
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            <tr>
+                                                                <td class="aggregate-result-count indented-error-category">
+                                                                    <i
+                                                                            class='fa fa-chain-broken compromised-icon'></i>&nbsp;Compromised
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr class="summary-stats">
+                                                <td class="aggregate-result-count">Total</td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Execution Time</th>
+                                                        <th>Clock Time</th>
+                                                        <th>Fastest Test</th>
+                                                        <th>Slowest Test</th>
+                                                        <th>Average Execution Time</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>0ms</td>
+                                                        <td>0ms</td>
+                                                        <td>0ms</td>
+                                                        <td>0ms</td>
+                                                        <td>0ms</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h3><i class="fas fa-cogs"></i> Automated Tests</h3>
+
+                                            <table class="scenario-result-table table" id="scenario-results">
+                                                <thead>
+                                                <tr>
+                                                    <th class="test-name-column">Scenario</th>
+                                                    <th>Steps</th>
+                                                    <th>Start Time</th>
+                                                    <th>Duration</th>
+                                                    <th>Result</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello World with an invalid context returns a 404 matching resource not found
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello World with an invalid URI returns a 404 Invalid URI
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello World with an incorrect header version returns a 404 matching resource not found
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello World with an invalid method returns a 405 method not allowed
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello World endpoint without an accept header results in a 406 Not acceptable
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello World endpoint without an unrecognized accept header results in a 406 Not acceptable
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello Application endpoint with a invalid server token fails
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello Application endpoint without server token fails
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello User endpoint with an invalid bearer token fails
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello User endpoint with an incorrect bearer token type fails
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello User endpoint with valid bearer token but wrong scope fails
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling the Marriage Allowance API with no subscription
+                                                    </td>
+                                                    <td>4</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello Application endpoint with a blocked server token works
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello User endpoint with valid bearer token using blocked application
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling the api-platform-test API post postcode endpoint with no JSON payload returns a 503
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling the api-platform-test API post XML endpoint with no XML payload returns a 503
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Unsupported media type response due to missing JSON content type header
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Unsupported media type response due to missing XML content type header
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Bad request response with an invalid JSON payload
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Bad request response with an invalid XML payload
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello Application with with a whitelisted IP returns a status 200
+                                                    </td>
+                                                    <td>4</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Calling Hello Application with with an IP not whitelisted returns a 403 endpoint not available
+                                                    </td>
+                                                    <td>4</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Generate a bearer token using an authorisation header and calling Hello User
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result UNDEFINED">
+                                                    <td>
+                                                            Generate a bearer token using JSON payload and calling Hello User
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>
+                                                            <i class="fas fa-pause"
+                                                               title="No test has been implemented yet"></i>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h3><i class="fas fa-edit"></i> Manual Tests</h3>
+
+                                                No manual tests were recorded
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span class="version">Serenity BDD version 2.0.48</span>
+                    </div>
+                </div>
+            </div>
+</body>
+</html>

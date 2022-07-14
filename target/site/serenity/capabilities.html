@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Requirements</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<!--[if IE 7]>
+<!--<link rel="stylesheet" href="font-awesome/css/font-awesome-ie7.min.css">-->
+
+<link rel="stylesheet" href="fontawesome-free-5.7.2-web/css/all.min.css">
+<link rel="stylesheet" href="fontawesome-free-5.7.2-web/css/v4-shims.min.css">
+
+<!-- JQuery -->
+<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><link rel="stylesheet" href="chartist/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.css">
+<link rel="stylesheet" href="chartist/dist/chartist.min.css">
+<script src="chartist/dist/chartist.min.js"></script>
+<script src="chartist/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script><!-- Required Stylesheets -->
+<link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
+
+<!-- Required Javascript -->
+<script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/1.10.19/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.10.19/datatables.min.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="datatables/1.10.19/datatables.bootstrap4.min.js"></script>
+<link type="text/css" href="datatables/1.10.19/datatables.bootstrap4.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/core.css"/>
+<link rel="stylesheet" href="css/link.css"/>
+<link type="text/css" media="screen" href="css/screen.css" rel="Stylesheet"/><!-- JQuery-UI -->
+<link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
+<script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/1.10.19/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.10.19/datatables.min.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="datatables/1.10.19/datatables.bootstrap4.min.js"></script>
+<link type="text/css" href="datatables/1.10.19/datatables.bootstrap4.min.css" rel="stylesheet" />
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            var scenarioTable = $('.scenario-result-table').DataTable({
+
+                "order": [],
+                "language": {
+                    searchPlaceholder: "Filter",
+                    search: ""
+                }
+            });
+
+            $('.example-table table').DataTable({
+                searching: false,
+                ordering: false,
+                paging: false,
+                info: false
+            });
+
+            $('.example-table-in-scenario table').DataTable({
+                searching: false,
+                ordering: false,
+                paging: false,
+                info: false
+            });
+
+            $('#evidence-table').DataTable(
+                    {
+                        searching: false,
+                        ordering: false,
+                        paging: false,
+                        info: false
+                    }
+            );
+
+
+            $(".scenario-docs .card-body table").wrap("<div class='table-responsive'></div>");
+
+            $("#requirements-tabs").tabs();
+            $("#test-tabs").tabs();
+
+            var requirementsTree = [{"text":"Apis","type":"capability","href":"726d3fba395279c434abca95728bb35ae1148b70c41bb777f8241304802f963a.html","nodes":[{"text":"Individual Benefits API","type":"feature","href":"9f1e1cf4ab97eb7fbecfc9a3a360a7b3a2c06ca315d3a9a603e0c512fafcd9c2.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Individual Income API","type":"feature","href":"4d099f1d15d228d9238df13e03a735572322e72b71901f07fa4116a8d2bcae22.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"API Platform Test API","type":"feature","href":"f61ea14f0fb7cc7f119ad46d5107cbbcc74d1318a0ac0805c195901df32f09b9.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Hello World API","type":"feature","href":"9c5dc49bcd42195df3cd9001430dbd5cfb9113956cbd76b243d3a792f40bb031.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Multi-segment context API","type":"feature","href":"e6d995a40d538da7e5a0ad4600b6914b9e6a314892daaa6ffa353da544680420.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Push Pull Notifications API","type":"feature","href":"9d381ed3434a9ece93c1ec64f44fe912724b165ed9fe8f28a1149f6389d24f6e.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Push Pull Notifications Gateway","type":"feature","href":"3b24d97ed301791e8cd185e188b09ae73c49a54b0aab4517f7374eb42f69780a.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]}],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e7 features\u003c/span\u003e"]},{"text":"Devhub","type":"capability","href":"5917359a56a94941dedd99c42c8a9bf05ad59af5265234ebdc3f236cd9afe8cc.html","nodes":[{"text":"Developer Hub - 2 Step Verification","type":"feature","href":"349c2f6458a8003f2c7dcf0ade297b419bc71e9367bd5f5bc460955a0eb20d69.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Frontend - Content Security Policy","type":"feature","href":"471542e72bb418ff55794f23f956aae7f776b0bbf0a931b299f54067b28933d8.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Forgotten Password","type":"feature","href":"c6dae3ab6142499819112329e5053559eebba0af375f009662fb996559988fb3.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Add Application","type":"feature","href":"7f5de1d7956d275b4df6706a8c19ebc2973057f64ee9bbdeaefe30e13e440583.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - API Documentation","type":"feature","href":"6f5028e75661cfc08631d87c850baebd9397e6c64781b9631a58afa39bb966c7.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Change Password","type":"feature","href":"2e84f5b330b33cbad01ae739fdf249a2e575b898eb806176670051264daafe90.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Create Test Users","type":"feature","href":"d3b6eef0d00ff0848ff38346df89a24a38e16e44cb1d0ad0c3b6b3f85b491655.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Application Deletion","type":"feature","href":"108e7e13968a951b1b8cdc3585c37f26977079c47608ee554438b876216ea5f4.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Email Preferences","type":"feature","href":"949681cc90253a2fe2220e8a16f7202e066ca73beb81f22877676ce7fe44d9ca.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Empty Nest Pages","type":"feature","href":"0541f574f1731f5d024d4aee29cb2f87a76f271a2afa78937125d017f569f91d.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Footer Navigation","type":"feature","href":"68c31c0ccbf396e302d2b8c314c2de6490dc91112b4e12539f56a004f7fdb0af.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Get Production Credentials","type":"feature","href":"c71fb3ccf2a6ca21da95ba5795e9429d75a98ec55bedf4aadf2f23119cb5e56d.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Send a support request","type":"feature","href":"dad4f3ecb6b58ff125405e2ed2188b9ac1500f92744d1f98682d3d20755efa93.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"OAuth sign in for application suppressing IV and grant page","type":"feature","href":"adc83c6ccc59af9b377780ff1500ae75e081542c360a3fff246fb9cbf6a55b57.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Manage API Subscriptions","type":"feature","href":"d47f6649da0044d4eda1ba3715775c4bd96875699b13d81721fa8082273da387.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Manage Application Details","type":"feature","href":"34d0134a5ae6d137c6c332b11397a457c78b2cb60913fb4165a1dda140566e60.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Manage Credentials - Client Secrets","type":"feature","href":"b33c109aeec18a3638e2058839cdf8731ec212b079723416b533f072cf4d6a84.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - IP allow List","type":"feature","href":"958ef2381cf2a7f26ba17d75643644b00b97cc9449d91b2297758534c7238a61.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Manage Profile","type":"feature","href":"059271b2aac30c4e38fa11d7434e89fe76327df7ef9d565f302e6afbb473b135.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Manage Redirect URIs","type":"feature","href":"2b694483b6d35b846a7c45b1553c599558928b8bfd5adb1c2478690c9f0a9489.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Manage Team Members","type":"feature","href":"fc870783fa26d25bb7169929e64fa158b3ceffb5b29e5da7bb20bfdee119d88a.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Push Secret","type":"feature","href":"3f952de7abc58b46a05a87f7b787858b4e67ba8c85acb4a5a0f6132910818c61.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Register New Developer Hub User","type":"feature","href":"b7b06d959d957f759bea8a03d231fd246b14ef2afbb8ad2d85afcb817f4f13e2.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Sign In","type":"feature","href":"252b5b47e12df07ebf0eda30ae63c8a387e21f53ab8f0e0e22ba52fe908bab59.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027fa fa-check-circle-o success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e1 scenario\u003c/span\u003e"]},{"text":"Developer Hub - Sign Out Survey","type":"feature","href":"4ca0d427772f3d9839bf58345de4ae02c4d3da4f48e7835c64d60746469e6e19.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Manage Subscription Configurations","type":"feature","href":"34900cbb170a1ea91cba80727a03ced50411d652638753c310b41fce46ffa432.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Developer Hub - Top Navigation","type":"feature","href":"f268cb014d93b9f34cfdfaf9370e7547e0f13c1ff9c0aedd2063d56bef2f08e0.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]}],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e27 features\u003c/span\u003e"]},{"text":"Gatekeeper","type":"capability","href":"9b327cd0852d19da8a0b4f224f93d23fe5dadc53c6f4f206986159aa6957d3c9.html","nodes":[{"text":"Gatekeeper - Create Privileged Application","type":"feature","href":"c8aea993530f7c7d2c16d0d24b025cb13fb99163f528994f295068fef53e5e03.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Create ROPC Application","type":"feature","href":"a50179651943ecb5538c02e7545e91db22375f16695f6ff73ef5e02239695a07.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Applications Scope","type":"feature","href":"75e5968a6725c133f0f3415183087d65a7d13eea4a6c28d43b67c78156aafbaa.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Block Applications","type":"feature","href":"026b55ec70da85447cdbc5ad20be69ed85c13588701ad80077e442f6a9a6f1d5.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Emails","type":"feature","href":"fd247f4ca99c65de96aa3088abb0a0a49c1c0658acaf816b7b3c0bbdc69faeeb.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Filter Applications","type":"feature","href":"38690cf70fa331e6c33ac22cf4c5efc353ae9d9ca4e736eec8d3060871bf60b8.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Filter Developers","type":"feature","href":"ef25876e150dba3dadfaec70dbbfcfaccb822e95d853832fd015cdf73fa8e098.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Gateway ID","type":"feature","href":"1cbd57ca34ce44f9e91009bb619ac4ea902534fe06606ec097174eeb4e54bece.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Manage Application Grant Length","type":"feature","href":"e33cb8850b3090b0fe171c8e7f2092663244a832af5232c4de97d695b669c870.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Manage IP Allow List","type":"feature","href":"a6663cd5779010c5794c29d881549cb1e0ff105e76d331979e2a4a82216a311d.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Rate Limits","type":"feature","href":"c9e1267554993a0c48e21d99cde32adeb9e65c3e2c9f6ecfe58b4ad23f48964a.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Manage Subscription Configuration","type":"feature","href":"1beb497ef5906435b53668f54f7a63ea0757322bd0fd98fd608b73193d9553e6.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Manage Subscriptions","type":"feature","href":"e7e7c2d87615e4a96997d0abc53729110506dd91615d53fe6fcad020f60b423a.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Manage Team Members","type":"feature","href":"c8e129ced63edbb9daabfb0d05ca2e8864b9efbaa99a584d97e2b13a535426d3.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - User Roles","type":"feature","href":"aefcdeaa757d105e7bd515424fdba9549d90495f6f45c4a3c4aa5c19f09dd9fe.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - Developers Details","type":"feature","href":"d021a3348ce0de589a71b2d1ce1551dd73d1946776e1d6c3ab8b9b813fdfe1c4.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Gatekeeper - XML Organisations","type":"feature","href":"1b6e4bd2321db7b207c4723550cdc56f79cc09d76216709aeec593da3d0c74d0.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]}],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e17 features\u003c/span\u003e"]},{"text":"Platform","type":"capability","href":"421d6b1cb7b4dac9c18aaca888848422f95f3cf390c4bb7913ab8549276ae713.html","nodes":[{"text":"Multi Factor Authentication for user type Agent","type":"feature","href":"d0ce731dfa1772720931792b8f846007a9b60442d21db815f3054d428c74abe5.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Multi Factor Authentication for user type Individual","type":"feature","href":"038806b34592b2baf427c771888c28fa381831b2b39c2e8a690173d11932f9c0.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Multi Factor Authentication for user type Organisation","type":"feature","href":"55f0a883028ce59fd07f0d88231e6af2329a6e163df770a7052d14bfbb63b080.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Suppress Identity Verification","type":"feature","href":"3a6bd503faf79e990c73581c1d19258f089979c58c9982523a2e02085522f9ca.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Agent Services OAuth Flow - Agent can access API with Agent Services Account","type":"feature","href":"a19b1b4c1c88655ae4f99171e6d9205582edee17e50d45f5bac4699fcc301f9b.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"API Gateway Responses","type":"feature","href":"2d1696b077fdd3bde15d27a8b51abbb4a0d7274cc71e64d955e59f93beaf4573.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"API Publisher","type":"feature","href":"14379706d20fd57fdc2cab01c3e1cdc0f39743fbd39f0ea65fba90310c0cf57b.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"API Response Headers","type":"feature","href":"f4597ecff180abd070a30fe78771b5160054ff2eca685dd5c49176dd4183801d.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Auth Login Stub","type":"feature","href":"7eabc95e3c21d1f9252bceb67ae1b18e919acd615ea99c158957cbd28cea9cc1.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"DTD Attacks - Classic XXE Attacks","type":"feature","href":"288e60639efadb7549328f157aeb507fae580d4afa01b04d3d40e5c3ea1a9c3c.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Client Credentials","type":"feature","href":"c5d4db47ea5506bdfa5c94081ba40b63f49b8e7e7787d1b7c6e4012e95bd319a.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"DTD Attacks - Denial of Service Attacks","type":"feature","href":"101b0114fa89704ff976a514fecd2c3eb5a6e199d9e399066586fd9b626758d4.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Manage Authorised Applications","type":"feature","href":"8d2142663479a2a764eccd0a973c0d8694c202815d84c65091ca5261ef713765.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Non Repudiation Service","type":"feature","href":"f99a505ca3623f8e03a329795c054ca4143bcd76c6ac068db5027e448c39890d.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"OAuth Frontend Validation","type":"feature","href":"045b10136d6a9166834ebf763077960dbc5b17e35e95096b09391756c7f1f9ea.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Privileged Applications","type":"feature","href":"10a9c4f08b7a0d6db75e5eca286747f6c32075feef6a0aab57032d21cbe82964.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Refresh Token","type":"feature","href":"e51763364462ceeede2631621403b762f5830e2912442ac0b7213e18f211bc3a.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"Root Endpoints Testing","type":"feature","href":"cf9ef3e16957ef19b410592774f7d912c389a1887b19925ccb6d9101667618aa.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]},{"text":"ROPC Application","type":"feature","href":"3a1f3c615fed7c4bd4f7d18b8367dd67915d1c5a63e90cc2b8eaf59b7bb27200.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e",""]}],"selectable":false,"tags":["\u003ci class\u003d\u0027far fa-stop-circle pending-icon \u0027 title\u003d\u0027PENDING\u0027\u003e\u003c/i\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e19 features\u003c/span\u003e"]}];
+
+            $('#tree').treeview({
+                data: requirementsTree,
+                enableLinks: true,
+                showTags: true,
+                expandIcon: "glyphicon glyphicon-folder-close",
+                collapseIcon: "glyphicon glyphicon-folder-open",
+                emptyIcon: "glyphicon glyphicon-book"
+            });
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(".scenario-docs > div > p").html(function () {
+                var text = $(this).text().trim().split(" ");
+                var first = text.shift();
+                return (text.length > 0 ? "<strong>" + first + "</strong> " : first) + text.join(" ");
+            });
+        });
+    </script>
+</head>
+
+<body class="results-page">
+<div id="topheader">
+    <div id="topbanner">
+        <div id="logo"><a href="index.html"><img src="images/serenity-logo.png" border="0"/></a></div>
+        <div id="projectname-banner" style="float:right">
+            <span class="projectname"></span>
+        </div>
+    </div>
+</div>
+
+
+<div class="middlecontent">
+    <div id="contenttop">
+        <div class="middlebg">
+            <span class="breadcrumbs">
+            <a href='index.html'>Home</a> > <a href="capabilities.html">Requirements</a>
+
+
+
+            </span>
+        </div>
+        <div class="rightbg"></div>
+    </div>
+    <div class="clr"></div>
+
+    <!--/* starts second table*/-->
+
+<div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li >
+            <a href="index.html"><i class="fa fa-check-square-o"></i> Overall Test Results</a>
+        </li>
+        <li class="active">
+            <a href="#"><i class="fa fa-book"></i> Requirements</a>
+        </li>
+        <li >
+            <a href="7ea0a5e2d679b9deeda9910ae4a9bcd3a281e0d908303a9e16e486103e98880c.html"><i class="fa fa-comments-o"></i> Capabilities</a>
+        </li>
+        <li >
+            <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="fa fa-comments-o"></i> Features</a>
+        </li>
+    </ul>
+    <span class="date-and-time"><a href="build-info.html"><i class="fa fa-info-circle"></i></a> Report generated 10-01-2022 16:25</span>
+    <br style="clear:left"/>
+</div>
+
+    <div class="clr"></div>
+
+    <div id="beforetable"></div>
+    <div id="results-dashboard">
+        <div class="table">
+
+
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <!-- Requirements result tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#specs"><i class="fas fa-comments"></i> Specifications</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#results"><i class="fas fa-tachometer-alt"></i> Test Results</a>
+                        </li>
+                    </ul>
+
+                    <!-- Specifications and Results tabs -->
+                    <div class="card border">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div id="specs" class="tab-pane fade in active">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <h3>Requirements Overview</h3>
+
+                                            <div id="tree"></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="results" class="tab-pane fade">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+
+                                            <div style="width:300px;" class="chart-container automated-and-manual-results">
+                                                <div class="ct-chart ct-square"></div>
+                                            </div>
+                                            <script>
+
+                                                var labels = ['100%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
+                                                // Our series array that contains series objects or in this case series data arrays
+
+                                                var series = [{meta: 'Passing tests (automated)', value: 1}, {meta: 'Passing tests (manual)', value: 0}, {meta: 'Pending tests (automated)', value: 0}, {meta: 'Pending tests (manual)', value: 0}, {meta: 'Ignored tests (automated)', value: 0}, {meta: 'Ignored tests (manual)', value: 0}, {meta: 'Skipped tests (automated)', value: 0}, {meta: 'Skipped tests (manual)', value: 0}, {meta: 'Failing tests (automated)', value: 0}, {meta: 'Failing tests (manual)', value: 0}, {meta: 'Broken tests (automated)', value: 0}, {meta: 'Broken tests (manual)', value: 0}, {meta: 'Compromised tests (automated)', value: 0}, {meta: 'Compromised tests (manual)', value: 0}];
+
+                                                // As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
+                                                // as you saw in the previous example
+                                                var options = {
+                                                    width: 350,
+                                                    height: 300
+                                                };
+
+                                                $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                                                    new Chartist.Pie('.ct-chart', {
+                                                        series: series,
+                                                        labels: labels,
+                                                    }, {
+                                                        donut: true,
+                                                        donutWidth: 60,
+                                                        donutSolid: true,
+                                                        startAngle: 270,
+                                                        showLabel: true
+                                                    }, options);
+                                                });
+
+                                            </script>
+                                        </div>
+                                        <div class="col-sm-8">
+
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Scenario Results (including rows of test data)</th>
+                                                <th scope="col" colspan="2" class="automated-stats">
+                                                    Automated
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                                    <td class="aggregate-result-count">
+                                                                        <a href="01f5288b80adbd3af52a8ed68a4a616d3164f750229f80da1ef344382d948835.html"><i
+                                                                                class='fa fa-check-circle-o success-icon'></i>&nbsp;Passing</a>
+                                                                    </td>
+                                                <td class="automated-stats">1</td>
+                                                <td class="automated-stats">100%</td>
+                                            </tr>
+                                            <tr>
+                                                                    <td class="aggregate-result-count"><i
+                                                                            class='fa fa-stop-circle-o pending-icon'></i>&nbsp;Pending
+                                                                    </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr>
+                                                                <td class="aggregate-result-count"><i
+                                                                        class='fa fa-ban ignored-icon'></i>&nbsp;Ignored
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr>
+                                                                <td class="aggregate-result-count"><i
+                                                                        class='fa fa-fast-forward skip-icon'></i>&nbsp;Skipped
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr>
+                                                                            <td colspan="3"><i
+                                                                                class='fa fa-times failure-icon'></i>&nbsp;<em>Unsuccessful</em></a>
+                                                                            </td>
+
+                                            </tr>
+
+                                            <tr>
+                                                                <td class="aggregate-result-count indented-error-category">
+                                                                    <i
+                                                                            class='fa fa-times-circle failure-icon'></i>&nbsp;Failed
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            <tr>
+                                                                <td class="aggregate-result-count indented-error-category">
+                                                                    <i
+                                                                            class='fa fa-exclamation-triangle error-icon'></i>&nbsp;Broken
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            <tr>
+                                                                <td class="aggregate-result-count indented-error-category">
+                                                                    <i
+                                                                            class='fa fa-chain-broken compromised-icon'></i>&nbsp;Compromised
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr class="summary-stats">
+                                                <td class="aggregate-result-count">Total</td>
+                                                <td class="automated-stats">1</td>
+                                                <td class="automated-stats"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Execution Time</th>
+                                                        <th>Clock Time</th>
+                                                        <th>Fastest Test</th>
+                                                        <th>Slowest Test</th>
+                                                        <th>Average Execution Time</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>16s</td>
+                                                        <td>16ms</td>
+                                                        <td>16s</td>
+                                                        <td>16s</td>
+                                                        <td>16s</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h3><i class="fas fa-clipboard-check"></i> Functional Coverage</h3>
+
+
+
+<h4 class="requireent-type-heading">Capabilities</h4>
+
+<table class="scenario-result table" id="req-results-table">
+    <thead>
+        <tr>
+            <th class="requirement-name-column" width="60%">Capability</th>
+            <th>ID</th>
+            <th>Automated Tests</th>
+                <th>Manual Tests</th>
+            <th>Results</th>
+            <th>Coverage</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        <tr>
+
+
+            <td> 
+                <a href="726d3fba395279c434abca95728bb35ae1148b70c41bb777f8241304802f963a.html">Apis</a></span>
+            </td>
+            <td> 
+                
+            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>
+                <span class="status_icon"><i class='far fa-stop-circle pending-icon ' title='PENDING'></i></span>
+                <span style="display:none">2</span>
+            </td>
+
+            <td width="165px" style="padding:0px;">
+
+
+<table>
+    <tr>
+        <td width="40px" style="padding-top:4px;">
+            <div class="small" style="text-align:right;">0%</div>
+        </td>
+        <td style="min-width:12.5em;">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#30cb23;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#A2C4EC;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:darkgrey;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#EEE098;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#f8001f;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:darkorange;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:fuchsia;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+
+            <td> 
+                <a href="5917359a56a94941dedd99c42c8a9bf05ad59af5265234ebdc3f236cd9afe8cc.html">Devhub</a></span>
+            </td>
+            <td> 
+                
+            </td>
+            <td>1</td>
+            <td>0</td>
+            <td>
+                <span class="status_icon"><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></span>
+                <span style="display:none">1</span>
+            </td>
+
+            <td width="165px" style="padding:0px;">
+
+
+<table>
+    <tr>
+        <td width="40px" style="padding-top:4px;">
+            <div class="small" style="text-align:right;">100%</div>
+        </td>
+        <td style="min-width:12.5em;">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar"
+                     style="width: 100%; background-color:#30cb23;"
+                     aria-valuenow="1"
+                     aria-valuemin="0"
+                     aria-valuemax="1"
+                     title="  - Total tests: 1
+  - Passing tests: 1 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#A2C4EC;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="1"
+                     title="  - Total tests: 1
+  - Passing tests: 1 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:darkgrey;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="1"
+                     title="  - Total tests: 1
+  - Passing tests: 1 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#EEE098;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="1"
+                     title="  - Total tests: 1
+  - Passing tests: 1 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#f8001f;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="1"
+                     title="  - Total tests: 1
+  - Passing tests: 1 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:darkorange;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="1"
+                     title="  - Total tests: 1
+  - Passing tests: 1 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:fuchsia;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="1"
+                     title="  - Total tests: 1
+  - Passing tests: 1 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+
+            <td> 
+                <a href="9b327cd0852d19da8a0b4f224f93d23fe5dadc53c6f4f206986159aa6957d3c9.html">Gatekeeper</a></span>
+            </td>
+            <td> 
+                
+            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>
+                <span class="status_icon"><i class='far fa-stop-circle pending-icon ' title='PENDING'></i></span>
+                <span style="display:none">2</span>
+            </td>
+
+            <td width="165px" style="padding:0px;">
+
+
+<table>
+    <tr>
+        <td width="40px" style="padding-top:4px;">
+            <div class="small" style="text-align:right;">0%</div>
+        </td>
+        <td style="min-width:12.5em;">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#30cb23;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#A2C4EC;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:darkgrey;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#EEE098;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#f8001f;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:darkorange;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:fuchsia;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+
+            <td> 
+                <a href="421d6b1cb7b4dac9c18aaca888848422f95f3cf390c4bb7913ab8549276ae713.html">Platform</a></span>
+            </td>
+            <td> 
+                
+            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>
+                <span class="status_icon"><i class='far fa-stop-circle pending-icon ' title='PENDING'></i></span>
+                <span style="display:none">2</span>
+            </td>
+
+            <td width="165px" style="padding:0px;">
+
+
+<table>
+    <tr>
+        <td width="40px" style="padding-top:4px;">
+            <div class="small" style="text-align:right;">0%</div>
+        </td>
+        <td style="min-width:12.5em;">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#30cb23;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#A2C4EC;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:darkgrey;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#EEE098;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#f8001f;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:darkorange;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:fuchsia;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="0"
+                     title="  - Total tests: 0
+  - Passing tests: 0 (0%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h3><i class="fas fa-cogs"></i> Automated Tests</h3>
+
+                                            <table class="scenario-result-table table" id="scenario-results">
+                                                <thead>
+                                                <tr>
+                                                    <th>feature</th>
+                                                    <th class="test-name-column">Scenario</th>
+                                                    <th>Steps</th>
+                                                    <th>Start Time</th>
+                                                    <th>Duration</th>
+                                                    <th>Result</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="252b5b47e12df07ebf0eda30ae63c8a387e21f53ab8f0e0e22ba52fe908bab59.html">Developer Hub - Sign In</a>
+                                                    </td>
+                                                    <td>
+                                                            <a href="1d74b60a30164f259eb560ec29ecb4ed551ce38f818bbc33f2254427195a8aa1.html">User is able to successfully sign in</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:25:48</td>
+                                                    <td>00:16</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h3><i class="fas fa-edit"></i> Manual Tests</h3>
+
+                                                No manual tests were recorded
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span class="version">Serenity BDD version 2.0.48</span>
+                    </div>
+                </div>
+            </div>
+</body>
+</html>

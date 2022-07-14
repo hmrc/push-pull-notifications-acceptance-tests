@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="1" name="Gatekeeper - XML Organisations" skipped="0" tests="2" time="20.79" timestamp="2022-01-17 12:19:06"><testcase name="Gatekeeper user is able to view all XML organisations sorted by vendor ID"><failure message="Vendor ID sort order is not in numerical order." type="java.lang.AssertionError">Vendor ID sort order is not in numerical order.</failure><system-err>Vendor ID sort order is not in numerical order.
+steps.gatekeeper.xmlOrganisationsSteps.verifyVendorIdSortOrder(xmlOrganisationsSteps.java:99)
+✽.organisation results are sorted by vendor ID in numerical order(classpath:features/gatekeeper/xmlOrganisations.feature:11)
+</system-err></testcase><testcase name="Gatekeeper user is able to view all XML organisations sorted by name"/></testsuite>

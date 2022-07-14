@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="1" failures="0" name="Developer Hub - Empty Nest Pages" skipped="0" tests="1" time="78.48" timestamp="2022-03-31 10:51:24"><testcase name="A developer hub user cannot create a production application without first creating a sandbox one"><error message="Timed out after 30 seconds. Element not found&#10;For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html&#10;Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'&#10;System info: host: 'Imrans-MacBook-Pro.local', ip: 'fe80:0:0:0:807:e0ee:626d:4f9d%en0', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.16', java.version: '1.8.0_172'&#10;Driver info: driver.version: unknown&#10;For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html&#10;Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'&#10;System info: host: 'Imrans-MacBook-Pro.local', ip: 'fe80:0:0:0:807:e0ee:626d:4f9d%en0', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.16', java.version: '1.8.0_172'&#10;Driver info: driver.version: unknown" type="org.openqa.selenium.NoSuchElementException">Timed out after 30 seconds. Element not found
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'Imrans-MacBook-Pro.local', ip: 'fe80:0:0:0:807:e0ee:626d:4f9d%en0', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.16', java.version: '1.8.0_172'
+Driver info: driver.version: unknown
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'Imrans-MacBook-Pro.local', ip: 'fe80:0:0:0:807:e0ee:626d:4f9d%en0', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.16', java.version: '1.8.0_172'
+Driver info: driver.version: unknown</error><system-err>Timed out after 30 seconds. Element not found
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'Imrans-MacBook-Pro.local', ip: 'fe80:0:0:0:807:e0ee:626d:4f9d%en0', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.16', java.version: '1.8.0_172'
+Driver info: driver.version: unknown
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'Imrans-MacBook-Pro.local', ip: 'fe80:0:0:0:807:e0ee:626d:4f9d%en0', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.16', java.version: '1.8.0_172'
+Driver info: driver.version: unknown
+pages.devhub.SandboxEmptyNestPage.checkSandboxEmptyNest(SandboxEmptyNestPage.java:25)
+steps.devhub.AddApplicationSteps.iHaveNoOptionsToCreateAProductionApp(AddApplicationSteps.java:61)
+✽.I have no options to create a production application(classpath:features/devhub/emptyNestPages.feature:38)
+</system-err></testcase></testsuite>

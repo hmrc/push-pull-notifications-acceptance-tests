@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="1" name="Gatekeeper - XML Organisations" skipped="0" tests="1" time="22.51" timestamp="2022-03-07 01:51:11"><testcase name="Gatekeeper user is able to add and remove a new team member from an organisation"><failure message="&#10;Expected: is &quot;Manage team members - HMRC API Gatekeeper&quot;&#10;     but: was &quot;Add Team Member - HMRC API Gatekeeper&quot;" type="java.lang.AssertionError">
+Expected: is "Manage team members - HMRC API Gatekeeper"
+     but: was "Add Team Member - HMRC API Gatekeeper"</failure><system-err>
+Expected: is "Manage team members - HMRC API Gatekeeper"
+     but: was "Add Team Member - HMRC API Gatekeeper"
+steps.gatekeeper.xmlOrganisationsSteps.iCanAddANewTeamMemberWithEmailAddress(xmlOrganisationsSteps.java:155)
+✽.I can add a new team member with email address "joe.bloggs@digital.hmrc.gov.uk"(classpath:features/gatekeeper/xmlOrganisations.feature:116)
+</system-err></testcase></testsuite>

@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="0" name="Hello World API" skipped="0" tests="1" time="10.37" timestamp="2022-07-14 01:27:51"><testcase name="Calling Hello User endpoint with valid bearer token works"/></testsuite>
