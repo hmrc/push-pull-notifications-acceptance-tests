@@ -13,14 +13,9 @@ public class AuthLoginStubDefinitions extends CommonDefinitions {
     @Steps(shared = true)
     protected OauthApiSteps oauthApiSteps;
 
-    @Given("^I have a standard application$")
-    public void iHaveAStandardApplication() {
-    }
-
     @Given("^I have a valid bearer token for scope \"(.*)\"$")
     public void iHaveAValidBearerTokenForScope(String scope) {
         oauthApiSteps.generateAccessTokenUsingAccessCode(oauthApiSteps.generateAccessCode(scope));
         authTokenHelper.withBearerTokenOf(oauthApiSteps.bearerToken());
     }
 }
-
