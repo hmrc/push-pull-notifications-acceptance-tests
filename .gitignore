@@ -1,20 +1,24 @@
 !.gitignore
 !.gitattributes
 /.classpath
-tmp
 logs
+project/project
+project/target
+target
+lib_managed
+tmp
+.history
+dist
 /out
+/.project
+/RUNNING_PID
 /.settings
-*.DS_Store
+build/*
+project/*
+/.gradle
+/.DS_Store
 .DS_Store
 **/*.DS_Store
-/.DS_Store
-/.project
-project/*
-.history
-/RUNNING_PID
-build/*
-/.gradle
 /rerun
 
 # IDE files
@@ -25,3 +29,13 @@ build/*
 /.idea_modules
 eclipse
 .scala_dependencies
+
+
+
+
+
+
+
+
+
+
