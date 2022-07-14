@@ -2,9 +2,9 @@ package definitions;
 
 import io.cucumber.java.en.*;
 import net.thucydides.core.annotations.Steps;
-import pages.authloginstub.GrantAuthorityPage;
-import pages.authloginstub.LocalhostRedirectPage;
-import pages.authloginstub.StartAuthorityPage;
+import authloginstub.GrantAuthorityPage;
+import authloginstub.LocalhostRedirectPage;
+import authloginstub.StartAuthorityPage;
 import steps.apis.AuthTokenHelper;
 import steps.apis.CommonResponseSteps;
 import steps.apis.OauthApiSteps;

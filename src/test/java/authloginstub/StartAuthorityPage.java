@@ -1,4 +1,4 @@
-package pages.authloginstub;
+package authloginstub;
 
 import components.BasePage;
 import net.serenitybdd.core.annotations.findby.FindBy;
