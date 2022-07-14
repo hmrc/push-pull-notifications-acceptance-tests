@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="0" name="Gatekeeper - XML Organisations" skipped="0" tests="1" time="12.92" timestamp="2022-02-11 03:09:44"><testcase name="Gatekeeper user is unable to add an organisation with an incorrect email header"/></testsuite>

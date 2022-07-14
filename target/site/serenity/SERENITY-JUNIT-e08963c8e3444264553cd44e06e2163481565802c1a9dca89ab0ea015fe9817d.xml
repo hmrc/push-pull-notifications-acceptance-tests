@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="0" name="Gatekeeper - XML Organisations" skipped="0" tests="2" time="27.88" timestamp="2022-04-27 01:32:52"><testcase name="Gatekeeper user is able to add an organisation via a CSV upload"/><testcase name="Gatekeeper user is able to update an organisation via a CSV upload"/></testsuite>

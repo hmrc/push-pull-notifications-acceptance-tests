@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="0" name="Frontend - Content Security Policy" skipped="0" tests="1" time="15.72" timestamp="2022-06-14 12:34:24"><testcase name="Content security policy exists for the production mode oauth frontend"/></testsuite>

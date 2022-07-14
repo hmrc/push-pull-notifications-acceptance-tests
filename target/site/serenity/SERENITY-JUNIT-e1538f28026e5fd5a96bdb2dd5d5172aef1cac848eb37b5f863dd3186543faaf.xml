@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="1" name="Gatekeeper - XML Organisations" skipped="0" tests="1" time="15.0" timestamp="2022-03-09 11:45:17"><testcase name="Gatekeeper user is able to view the XML email preferences for a specific team member"><failure message="&#10;Expected: is &quot;Agent Authorisation hello&quot;&#10;     but: was &quot;Agent Authorisation Online&quot;" type="java.lang.AssertionError">
-Expected: is "Agent Authorisation hello"
-     but: was "Agent Authorisation Online"</failure><system-err>
-Expected: is "Agent Authorisation hello"
-     but: was "Agent Authorisation Online"
-steps.gatekeeper.xmlOrganisationsSteps.iCanViewTeamMemberXmlEmailPreferencesForOrganisationWithEmailAddress(xmlOrganisationsSteps.java:152)
-✽.I can view team member XML email preferences for organisation "Organisation Test 2" with email address "api.platform@digital.hmrc.gov.uk"(classpath:features/gatekeeper/xmlOrganisations.feature:100)
-</system-err></testcase></testsuite>

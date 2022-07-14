@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="0" name="Gatekeeper - XML Organisations" skipped="0" tests="1" time="20.22" timestamp="2022-03-10 11:54:33"><testcase name="Gatekeeper user is able to add a registered user to an organisation via a CSV upload"/></testsuite>

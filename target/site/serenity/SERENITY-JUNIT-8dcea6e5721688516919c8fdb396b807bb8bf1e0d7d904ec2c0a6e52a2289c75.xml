@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="1" name="Gatekeeper - XML Organisations" skipped="0" tests="2" time="25.84" timestamp="2022-03-10 10:06:36"><testcase name="Gatekeeper user is able to search for a specific organisation by name"/><testcase name="Gatekeeper user is able to view XML email preferences for a specific organisation"><failure message="&#10;Expected: is &quot;Agent Authorisation Online&quot;&#10;     but: was &quot;&quot;" type="java.lang.AssertionError">
-Expected: is "Agent Authorisation Online"
-     but: was ""</failure><system-err>
-Expected: is "Agent Authorisation Online"
-     but: was ""
-steps.gatekeeper.xmlOrganisationsSteps.iAmAbleToViewXmlEmailPreferencesForOrganisationWithName(xmlOrganisationsSteps.java:112)
-✽.I am able to view XML email preferences for organisation with name "Organisation Test 2"(classpath:features/gatekeeper/xmlOrganisations.feature:81)
-</system-err></testcase></testsuite>

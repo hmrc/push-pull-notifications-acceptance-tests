@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="0" name="Developer Hub - Empty Nest Pages" skipped="0" tests="1" time="44.62" timestamp="2022-03-31 11:34:25"><testcase name="A developer hub user with no production applications is shown the production empty nest page"/></testsuite>
