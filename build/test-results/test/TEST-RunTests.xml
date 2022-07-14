@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="RunTests" tests="0" skipped="0" failures="0" errors="0" timestamp="1970-01-01T00:00:00" hostname="Imrans-MacBook-Pro.local" time="0.0">
+  <properties/>
+  <system-out><![CDATA[
+1 Scenarios (?[32m1 passed?[0m)
+3 Steps (?[32m3 passed?[0m)
+0m17.550s
+
+
+]]></system-out>
+  <system-err><![CDATA[[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/apis/IndividualBenefits.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/apis/IndividualBenefits.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - 
+
+-------------------------------------------------------------------------------------
+     _______. _______ .______       _______ .__   __.  __  .___________.____    ____ 
+    /       ||   ____||   _  \     |   ____||  \ |  | |  | |           |\   \  /   / 
+   |   (----`|  |__   |  |_)  |    |  |__   |   \|  | |  | `---|  |----` \   \/   /  
+    \   \    |   __|  |      /     |   __|  |  . `  | |  |     |  |       \_    _/   
+.----)   |   |  |____ |  |\  \----.|  |____ |  |\   | |  |     |  |         |  |     
+|_______/    |_______|| _| `._____||_______||__| \__| |__|     |__|         |__|    
+                                                                                     
+ News and tutorials at http://www.serenity-bdd.info                                  
+ Documentation at https://wakaleo.gitbooks.io/the-serenity-book/content/             
+ Join the Serenity Community on Gitter: https://gitter.im/serenity-bdd/serenity-core 
+ Serenity BDD Support and Training at http://serenity-bdd.info/#/trainingandsupport  
+-------------------------------------------------------------------------------------
+
+[Test worker] INFO  - Test Suite Started: Individual Benefits API
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/apis/IndividualIncome.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/apis/IndividualIncome.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Individual Income API
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/apis/apiPlatformTest.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/apis/apiPlatformTest.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: API Platform Test API
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/apis/helloWorld.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/apis/helloWorld.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Hello World API
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/apis/multisegmentContextApi.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/apis/multisegmentContextApi.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Multi-segment context API
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/apis/pushPullNotificationsApi.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/apis/pushPullNotificationsApi.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Push Pull Notifications API
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/apis/pushPullNotificationsGateway.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/apis/pushPullNotificationsGateway.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Push Pull Notifications Gateway
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/2sv.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/2sv.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - 2 Step Verification
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/ContentSecurityPolicy.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/ContentSecurityPolicy.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Frontend - Content Security Policy
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/ForgottenPassword.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/ForgottenPassword.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Forgotten Password
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/addApplication.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/addApplication.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Add Application
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/apiDocumentation.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/apiDocumentation.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - API Documentation
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/changePassword.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/changePassword.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Change Password
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/createTestUser.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/createTestUser.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Create Test Users
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/deleteApplication.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/deleteApplication.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Application Deletion
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/emailPreferences.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/emailPreferences.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Email Preferences
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/emptyNestPages.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/emptyNestPages.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Empty Nest Pages
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/footerNavigation.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/footerNavigation.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Footer Navigation
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/getProductionCredentials.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/getProductionCredentials.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Get Production Credentials
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/getSupport.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/getSupport.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Send a support request
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/ivAndGrantPageSuppressedLogin.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/ivAndGrantPageSuppressedLogin.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: OAuth sign in for application suppressing IV and grant page
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/manageApiSubscriptions.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/manageApiSubscriptions.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Manage API Subscriptions
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/manageApplicationDetails.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/manageApplicationDetails.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Manage Application Details
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/manageCredentials.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/manageCredentials.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Manage Credentials - Client Secrets
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/manageIpAllowList.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/manageIpAllowList.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - IP allow List
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/manageProfile.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/manageProfile.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Manage Profile
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/manageRedirectUris.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/manageRedirectUris.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Manage Redirect URIs
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/manageTeamMembers.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/manageTeamMembers.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Manage Team Members
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/pushSecret.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/pushSecret.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Push Secret
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/registerDevHubUser.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/registerDevHubUser.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Register New Developer Hub User
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/signIn.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/signIn.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Sign In
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/signOutSurvey.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/signOutSurvey.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Sign Out Survey
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/subscriptionConfiguration.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/subscriptionConfiguration.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Manage Subscription Configurations
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/devhub/topNavigation.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/devhub/topNavigation.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Developer Hub - Top Navigation
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/addPrivilegedApplication.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/addPrivilegedApplication.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Create Privileged Application
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/addROPCApplication.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/addROPCApplication.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Create ROPC Application
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/applicationScope.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/applicationScope.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Applications Scope
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/blockApplication.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/blockApplication.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Block Applications
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/emails.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/emails.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Emails
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/filterApplication.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/filterApplication.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Filter Applications
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/filterDeveloper.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/filterDeveloper.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Filter Developers
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/gateWayId.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/gateWayId.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Gateway ID
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/manageGrantLengths.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/manageGrantLengths.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Manage Application Grant Length
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/manageIpAllowList.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/manageIpAllowList.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Manage IP Allow List
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/manageRateLimit.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/manageRateLimit.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Rate Limits
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/manageSubscriptionConfiguration.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/manageSubscriptionConfiguration.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Manage Subscription Configuration
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/manageSubscriptions.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/manageSubscriptions.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Manage Subscriptions
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/manageTeamMembers.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/manageTeamMembers.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Manage Team Members
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/userRoles.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/userRoles.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - User Roles
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/viewDeveloperDetails.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/viewDeveloperDetails.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - Developers Details
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/gatekeeper/xmlOrganisations.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/gatekeeper/xmlOrganisations.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Gatekeeper - XML Organisations
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/MfaAgent.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/MfaAgent.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Multi Factor Authentication for user type Agent
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/MfaIndividual.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/MfaIndividual.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Multi Factor Authentication for user type Individual
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/MfaOrganisation.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/MfaOrganisation.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Multi Factor Authentication for user type Organisation
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/SuppressedIv.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/SuppressedIv.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Suppress Identity Verification
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/agentServicesAccount.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/agentServicesAccount.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Agent Services OAuth Flow - Agent can access API with Agent Services Account
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/apiGatewayResponses.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/apiGatewayResponses.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: API Gateway Responses
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/apiPublisher.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/apiPublisher.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: API Publisher
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/apiResponseHeaders.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/apiResponseHeaders.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: API Response Headers
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/authLoginStub.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/authLoginStub.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Auth Login Stub
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/classicXxeAttacks.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/classicXxeAttacks.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: DTD Attacks - Classic XXE Attacks
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/clientCredentials.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/clientCredentials.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Client Credentials
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/denialOfServiceAttacks.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/denialOfServiceAttacks.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: DTD Attacks - Denial of Service Attacks
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/manageAuthorisedApplications.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/manageAuthorisedApplications.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Manage Authorised Applications
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/nonRepudiationService.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/nonRepudiationService.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Non Repudiation Service
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/oauthFrontendValidation.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/oauthFrontendValidation.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: OAuth Frontend Validation
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/privilegedApplication.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/privilegedApplication.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Privileged Applications
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/refreshToken.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/refreshToken.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Refresh Token
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/rootEndpoints.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/rootEndpoints.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: Root Endpoints Testing
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from classpath:features/platform/ropcApplication.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from classpath:features/platform/ropcApplication.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - Test Suite Started: ROPC Application
+]]></system-err>
+</testsuite>
