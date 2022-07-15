@@ -9,7 +9,6 @@ public class ContentTypeHeaderDefinitions {
     @Steps(shared = true)
     private ContentTypeHeaderHelper contentTypeHeaderHelper;
 
-
     @Given("^I have a valid JSON content type header$")
     public void iHaveAValidJsonContentTypeHeader() {
         contentTypeHeaderHelper.withJsonContentTypeHeader();
