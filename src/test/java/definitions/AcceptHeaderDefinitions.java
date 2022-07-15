@@ -4,7 +4,6 @@ import io.cucumber.java.en.Given;
 import net.thucydides.core.annotations.Steps;
 import steps.helpers.AcceptHeaderHelper;
 import steps.helpers.ContentTypeHeaderHelper;
-import steps.apis.TestApiSteps;
 
 public class AcceptHeaderDefinitions {
 

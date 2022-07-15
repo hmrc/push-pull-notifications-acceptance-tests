@@ -3,9 +3,6 @@ package definitions;
 import io.cucumber.java.en.Given;
 import net.thucydides.core.annotations.Steps;
 import steps.helpers.ContentTypeHeaderHelper;
-import steps.apis.TestApiSteps;
-
-import static io.restassured.http.ContentType.JSON;
 
 public class ContentTypeHeaderDefinitions {
 

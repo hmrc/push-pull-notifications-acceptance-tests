@@ -19,35 +19,6 @@ public class HelloApiSteps extends CommonApiSteps {
         );
     }
 
-    @Step
-    public void CallGetHelloWorldWithInvalidContext() {
-        response(
-                given()
-                        .spec(specification())
-                        .get(baseApiUrl() + "/xxxhello/world")
-                        .then()
-        );
-    }
-
-    @Step
-    public void incorrectCallGetHelloWorld() {
-        response(
-                given()
-                        .spec(specification())
-                        .get(baseApiUrl() + "/hello/XXXworld")
-                        .then()
-        );
-    }
-
-    @Step
-    public void invalidMethodCallGetHelloWorld() {
-        response(
-                given()
-                        .spec(specification())
-                        .head(baseApiUrl() + "/hello/world")
-                        .then()
-        );
-    }
 
     @Step
     public void callGetHelloApplication() {
