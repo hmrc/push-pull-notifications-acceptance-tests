@@ -13,9 +13,6 @@ public class AcceptHeaderDefinitions {
     @Steps(shared = true)
     private ContentTypeHeaderHelper contentTypeHeaderHelper;
 
-    @Steps(shared = true)
-    private TestApiSteps testApiSteps;
-
     @Given("^I have a valid JSON accept header$")
     public void iHaveAValidJsonAcceptHeader() {
         acceptHeaderHelper.withHmrcJsonAcceptHeader();

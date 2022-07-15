@@ -9,8 +9,6 @@ public class ContentTypeHeaderDefinitions {
     @Steps(shared = true)
     private ContentTypeHeaderHelper contentTypeHeaderHelper;
 
-    @Steps(shared = true)
-    private TestApiSteps testApiSteps;
 
     @Given("^I have a valid JSON content type header$")
     public void iHaveAValidJsonContentTypeHeader() {
