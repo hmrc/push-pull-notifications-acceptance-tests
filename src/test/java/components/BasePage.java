@@ -11,16 +11,7 @@ abstract public class BasePage extends PageObject {
         return getDriver().getTitle();
     }
 
-    public String getCurrentUrl() {
-        return getDriver().getCurrentUrl();
-    }
-
     protected String getDomain() {
         return config.baseUrl();
-    }
-
-    protected void goToDomain(String url) {
-        getDriver().manage().deleteAllCookies();
-        getDriver().get(getDomain() + url);
     }
 }
