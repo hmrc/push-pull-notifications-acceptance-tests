@@ -1,6 +1,7 @@
-package steps.apis;
+package steps.helpers;
 
 import io.restassured.authentication.ExplicitNoAuthScheme;
+import steps.apis.CommonApiSteps;
 
 import static io.restassured.RestAssured.oauth2;
 

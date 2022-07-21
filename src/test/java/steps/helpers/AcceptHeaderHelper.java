@@ -30,18 +30,8 @@ public class AcceptHeaderHelper extends CommonApiSteps {
     }
 
     @Step
-    public void withHmrcXmlAcceptHeader() {
-        withHmrcXmlAcceptHeader("1.0");
-    }
-
-    @Step
     public void withIncorrectAcceptHeaderVersion() {
         builder().setAccept("application/vnd.hmrc.99.0+json");
-    }
-
-    @Step
-    public void withHmrcXmlAcceptHeader(String version) {
-        builder().setAccept(String.format("application/vnd.hmrc.%s+xml", version));
     }
 
     @Step
@@ -54,8 +44,4 @@ public class AcceptHeaderHelper extends CommonApiSteps {
         builder().setNoAccept();
     }
 
-    @Step
-    public void withTrueClientIpHeader() {
-        builder().setNoAccept();
-    }
 }

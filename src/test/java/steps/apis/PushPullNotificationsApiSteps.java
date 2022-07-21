@@ -3,6 +3,9 @@ package steps.apis;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import net.thucydides.core.annotations.Step;
+import steps.payloads.BoxPayload;
+import steps.payloads.ClientManagedBoxPayload;
+import steps.payloads.InvalidBoxPayload;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

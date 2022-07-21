@@ -1,11 +1,11 @@
-package steps.apis;
+package steps.oauth;
 
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import io.vavr.collection.HashMap;
 import net.thucydides.core.annotations.Step;
-import org.apache.commons.lang3.Validate;
+import steps.oauth.AbstractOauthApiSteps;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,20 +30,8 @@ public class OauthApiSteps extends AbstractOauthApiSteps {
         ));
     }
 
-    private RequestSpecification blockedOauthRequestSpecification(String grantType) {
-        return oauthRequestSpecification(grantType, HashMap.of(
-                "client_id", config.blockedClientId(),
-                "client_secret", config.blockedClientSecret(),
-                "redirect_uri", config.blockedAuthRedirectUri()
-        ));
-    }
-
     private RequestSpecification commonOauthRequestSpecification(String grantType, String paramName, String paramValue) {
         return commonOauthRequestSpecification(grantType).formParam(paramName, paramValue);
-    }
-
-    private RequestSpecification blockedCommonOauthRequestSpecification(String grantType, String paramName, String paramValue) {
-        return blockedOauthRequestSpecification(grantType).formParam(paramName, paramValue);
     }
 
     private void extractTokens(ValidatableResponse response) {
@@ -63,117 +51,12 @@ public class OauthApiSteps extends AbstractOauthApiSteps {
     }
 
     @Step
-    public void generateAccessTokenUsingAccessCodeWithAnAuthHeader(String accessCode) {
-        RequestSpecification spec = commonOauthRequestSpecification("authorization_code", "code", accessCode)
-                .auth().oauth2("xyz123");
-        callOauthTokenEndpoint(spec);
-        assertLastOauthCallSucceeded();
-
-        oldAccessToken = null;
-        oldRefreshToken = null;
-        extractTokens(lastOauthResponse);
-    }
-
-
-
-
-    @Step
-    public void generateAccessTokenWithJsonPayloadUsingAccessCode(String accessCode) {
-        RequestSpecification spec = oauthRequestSpecificationWithJsonPayload(accessCode, config);
-        callOauthTokenEndpoint(spec);
-        assertLastOauthCallSucceeded();
-
-        oldAccessToken = null;
-        oldRefreshToken = null;
-        extractTokens(lastOauthResponse);
-    }
-
-
-
-    @Step
-    public void generateAccessTokenUsingAccessCodeBlockedApp(String accessCode) {
-        RequestSpecification spec = blockedCommonOauthRequestSpecification("authorization_code", "code", accessCode);
-        callOauthTokenEndpoint(spec);
-        assertLastOauthCallSucceeded();
-
-        oldAccessToken = null;
-        oldRefreshToken = null;
-        extractTokens(lastOauthResponse);
-    }
-
-    private void renewAccessTokenUsingRefreshToken(String refreshToken) {
-        refreshTokenSleep();
-        RequestSpecification spec = commonOauthRequestSpecification("refresh_token", "refresh_token", refreshToken);
-        callOauthTokenEndpoint(spec);
-    }
-
-    private void refreshTokenSleep() {
-        try {
-            Thread.sleep(600);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Step
-    public void attemptToRenewAccessTokenUsingUsedRefreshToken() {
-        renewAccessTokenUsingRefreshToken(oldRefreshToken);
-        assertLastOauthCallFailed(400, "invalid_grant", "refresh_token is invalid");
-    }
-
-    @Step
-    public String oldAccessToken() {
-        return Validate.notNull(oldAccessToken, "Old Bearer Token not generated - need to refresh first");
-    }
-
-    @Step
-    public void assertLastOauthCallFailedDueToInvalidRefreshToken() {
-        assertLastOauthCallFailed(400, "invalid_grant", "refresh_token is invalid");
-    }
-
-    @Step
     public String generateAccessCode(final String scope) {
         final Response signInResponse = signIn(config.clientId(), config.authRedirectUri(), scope, false);
         final String authId = startAuthJourney(signInResponse.getHeader("Location"));
         final Response grantAuthorityResponse = grantAuthority(signInResponse.cookie("mdtp"), authId);
         final String csrfToken = grantAuthorityResponse.getBody().htmlPath().getString("html.'**'.find {input -> input.@name == 'csrfToken'}.@value");
         return getAccessCode(grantAuthorityResponse.getCookie("mdtp"), authId, csrfToken);
-    }
-
-    @Step
-    public void generateAccessCodeForAnInvalidClientId() {
-        lastOauthResponse = signIn("InvalidClientID", config.authRedirectUri(), "hello", true).then();
-        assertLastOauthCallFailed(400, "invalid_request", "client_id is invalid");
-    }
-
-    @Step
-    public void generateAccessCodeForAnInvalidRedirectUri() {
-        lastOauthResponse = signIn(config.clientId(), "invalidRedirectUri", "hello", true).then();
-        assertLastOauthCallFailed(400, "invalid_request", "redirect_uri is invalid");
-    }
-
-    @Step
-    public void generateAccessCodeForAnInvalidScope() {
-        lastOauthResponse = signIn(config.clientId(), config.authRedirectUri(), "invalidScope", true).then();
-        assertLastOauthCallFailed(400, "invalid_scope", "scope is invalid");
-    }
-
-    @Step
-    public void generateAccessCodeForAPrivilegedApplication() {
-        lastOauthResponse = signIn(config.privilegedClientId(), config.authRedirectUri(), "invalidScope", true).then();
-        assertLastOauthCallFailed(400, "invalid_request", "application type is invalid");
-    }
-
-    @Step
-    public void generateAccessCodeForAnRopcApplication() {
-        lastOauthResponse = signIn(config.ropcClientId(), config.authRedirectUri(), "invalidScope", true).then();
-        assertLastOauthCallFailed(400, "invalid_request", "application type is invalid");
-    }
-
-    @Step
-    public void generateAccessCodeWithAClientSecret() {
-        lastOauthResponse = signIn(config.clientId(), config.authRedirectUri(), "invalidScope", true, config.clientSecret()).then();
-        assertLastOauthCallFailed(400, "invalid_request", "client_secret should NOT be present");
     }
 
     private Response signIn(final String clientId, final String redirectUri, final String scope, final boolean followRedirects) {
@@ -206,15 +89,6 @@ public class OauthApiSteps extends AbstractOauthApiSteps {
                 .formParam("enrolment[0].state", "Activated");
 
         return withProxy(spec).post(config.baseUrl() + "/auth-login-stub/gg-sign-in");
-    }
-
-    @Step
-    public String generateAccessCodeBlockedApp(final String scope) {
-        final Response signInResponse = signIn(config.blockedClientId(), config.blockedAuthRedirectUri(), scope, false);
-        final String authId = startAuthJourney(signInResponse.getHeader("Location"));
-        final Response grantAuthorityResponse = grantAuthority(signInResponse.cookie("mdtp"), authId);
-        final String csrfToken = grantAuthorityResponse.getBody().htmlPath().getString("html.'**'.find {input -> input.@name == 'csrfToken'}.@value");
-        return getAccessCode(grantAuthorityResponse.getCookie("mdtp"), authId, csrfToken);
     }
 
     private String startAuthJourney(final String location) {

@@ -2,8 +2,8 @@ package definitions;
 
 import io.cucumber.java.en.*;
 import net.thucydides.core.annotations.Steps;
-import steps.apis.AuthTokenHelper;
-import steps.apis.OauthApiSteps;
+import steps.helpers.AuthTokenHelper;
+import steps.oauth.OauthApiSteps;
 
 public class AuthLoginStubDefinitions extends CommonDefinitions {
 

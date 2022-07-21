@@ -4,11 +4,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
-import steps.apis.OauthApiSteps;
+import steps.oauth.OauthApiSteps;
 import steps.apis.PushPullNotificationsGatewaySteps;
 import steps.helpers.ContentTypeHeaderHelper;
-
-import static io.restassured.http.ContentType.JSON;
 
 public class PushPullNotificationsGatewayDefinitions extends CommonDefinitions {
 
