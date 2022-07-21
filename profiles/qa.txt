@@ -5,3 +5,4 @@ export AUTH_SERVER_TOKEN=4aa0107497a78ebdae997def4fbe30fd
 export BASE_URL=https://www.qa.tax.service.gov.uk
 export BASE_API_URL=https://api.qa.tax.service.gov.uk
 export BLOCKED_AUTH_SERVER_TOKEN=5342f365fc8975f8b8a529d98540bdad
+export PROXY_PORT=18888
