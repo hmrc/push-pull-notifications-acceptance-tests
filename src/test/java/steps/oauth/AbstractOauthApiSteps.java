@@ -1,4 +1,4 @@
-package steps.apis;
+package steps.oauth;
 
 import configuration.Configuration;
 import configuration.HasConfiguration;

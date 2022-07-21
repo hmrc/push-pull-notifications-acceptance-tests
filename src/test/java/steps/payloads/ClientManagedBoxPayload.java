@@ -1,4 +1,4 @@
-package steps.apis;
+package steps.payloads;
 
 public class ClientManagedBoxPayload {
     private String boxName;

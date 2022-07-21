@@ -1,8 +1,9 @@
-package steps.apis;
+package steps.oauth;
 
 import io.restassured.specification.RequestSpecification;
 import io.vavr.collection.HashMap;
 import net.thucydides.core.annotations.Step;
+import steps.oauth.AbstractOauthApiSteps;
 
 public class ClientCredentialsApiSteps extends AbstractOauthApiSteps {
 

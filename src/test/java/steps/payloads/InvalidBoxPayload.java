@@ -1,4 +1,4 @@
-package steps.apis;
+package steps.payloads;
 
 public class InvalidBoxPayload {
     private String invalidClientId;

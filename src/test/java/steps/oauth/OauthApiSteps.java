@@ -1,10 +1,11 @@
-package steps.apis;
+package steps.oauth;
 
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import io.vavr.collection.HashMap;
 import net.thucydides.core.annotations.Step;
+import steps.oauth.AbstractOauthApiSteps;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

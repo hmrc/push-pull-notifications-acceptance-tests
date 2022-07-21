@@ -1,4 +1,4 @@
-package steps.apis;
+package steps.payloads;
 
 public class BoxPayload {
     private String clientId;

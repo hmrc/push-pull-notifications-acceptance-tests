@@ -2,8 +2,8 @@ package definitions;
 
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
-import steps.apis.AuthTokenHelper;
-import steps.apis.ClientCredentialsApiSteps;
+import steps.helpers.AuthTokenHelper;
+import steps.oauth.ClientCredentialsApiSteps;
 
 public class ClientCredentialsApiDefinitions extends CommonDefinitions {
 
