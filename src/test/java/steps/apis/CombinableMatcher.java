@@ -21,10 +21,10 @@ public final class CombinableMatcher<T> extends BaseMatcher<T> {
         matchers.add(matcher);
     }
 
-    public CombinableMatcher and(Matcher matcher) {
-        matchers.add(matcher);
-        return this;
-    }
+//    public CombinableMatcher and(Matcher matcher) {
+//        matchers.add(matcher);
+//        return this;
+//    }
 
     @Override
     public boolean matches(Object item) {
@@ -50,7 +50,7 @@ public final class CombinableMatcher<T> extends BaseMatcher<T> {
         }
     }
 
-    public static <LHS> CombinableMatcher<LHS> all(Matcher<? super LHS> matcher) {
-        return new CombinableMatcher<LHS>(matcher);
-    }
+//    public static <LHS> CombinableMatcher<LHS> all(Matcher<? super LHS> matcher) {
+//        return new CombinableMatcher<LHS>(matcher);
+//    }
 }
