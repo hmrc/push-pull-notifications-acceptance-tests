@@ -23,8 +23,7 @@ public abstract class AbstractOauthApiSteps extends HasConfiguration {
         lastOauthResponse = spec
                 .when()
                 .post(oauthTokenUrl)
-                .then()
-        ;
+                .then();
     }
 
     private String accessToken;
