@@ -200,9 +200,12 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToSecrets(config.clientId());
     }
 
-    @When("^I make a request to the create client managed box endpoint with a new box name$")
+    @When("^I make a request to the external create client managed box endpoint with a new box name$")
     public void iMakeRequestToTheCreateClientManageBoxEndpoint() {
-        pushPullNotificationsApiSteps.iMakeACallToCreateClientManageBox(pushPullNotificationsApiSteps.getNewBoxName());
+        //TODO - Bring this back in later
+        //pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(pushPullNotificationsApiSteps.getNewBoxName());
+
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox("My First Client Managed Box");
     }
 
     @When("^I make a request to the validate client managed box endpoint for box ID \"([^\"]*)\"$")
@@ -449,6 +452,12 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @Then("^A new client managed box is successfully generated$")
     public void aNewClientManagedBoxIsSuccessfullyGenerated() {
         responseSteps.expectedHttpStatusCode(201);
+        pushPullNotificationsApiSteps.assertNewClientManagedBoxGenerated();
+    }
+
+    @Then("^the existing client managed box is successfully updated$")
+    public void theExistingClientManagedBoxIsSuccessfullyUpdated() {
+        responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.assertNewClientManagedBoxGenerated();
     }
 

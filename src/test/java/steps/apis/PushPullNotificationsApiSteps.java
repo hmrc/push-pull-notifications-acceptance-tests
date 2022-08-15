@@ -20,6 +20,8 @@ import static org.hamcrest.Matchers.*;
 public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
     private final String apiContext = "misc/push-pull-notification/box";
+
+    private final String cmbApiContext = "misc/push-pull-notification/cmb";
     private String authorizationKey;;
     private String userAgent;
     private String internalBearerToken;
@@ -237,18 +239,15 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     }
 
     @Step
-    public void iMakeACallToCreateClientManageBox(String boxName) {
-        builder().withNoProxy();
+    public void iMakeACallToExternalCreateClientManageBox(String boxName) {
 
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(new ClientManagedBoxPayload(boxName));
-
-        if (internalBearerToken != null) {
-            spec = spec.header("Authorization", internalBearerToken);
-        }
-
-        response(spec.put(format(PUSH_PULL_CREATE_CMB_BOX_URL)).then());
+        response(
+                given()
+                        .spec(specification())
+                        .body(new ClientManagedBoxPayload(boxName))
+                        .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
+                        .then().log().all()
+        );
     }
 
     @Step
