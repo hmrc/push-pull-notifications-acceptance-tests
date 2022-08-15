@@ -239,12 +239,13 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     }
 
     @Step
-    public void iMakeACallToExternalCreateClientManageBox(String boxName) {
+    public void iMakeACallToExternalCreateClientManageBox(String jsonPayload) {
 
         response(
                 given()
                         .spec(specification())
-                        .body(new ClientManagedBoxPayload(boxName))
+                        //.body(new ClientManagedBoxPayload(boxName))
+                        .body(jsonPayload)
                         .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
                         .then().log().all()
         );

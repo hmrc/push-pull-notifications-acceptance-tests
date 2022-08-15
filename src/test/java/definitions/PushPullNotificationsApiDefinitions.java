@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
+import steps.helpers.AcceptHeaderHelper;
 import steps.oauth.OauthApiSteps;
 import steps.apis.PushPullNotificationsApiSteps;
 import steps.helpers.ContentTypeHeaderHelper;
@@ -201,11 +202,21 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     }
 
     @When("^I make a request to the external create client managed box endpoint with a new box name$")
-    public void iMakeRequestToTheCreateClientManageBoxEndpoint() {
-        //TODO - Bring this back in later
-        //pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(pushPullNotificationsApiSteps.getNewBoxName());
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithANewBoxName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(pushPullNotificationsApiSteps.getNewBoxName());
+    }
 
+    @When("^I make a request to the external create client managed box endpoint with an existing box name$")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithAnExistingBoxName() {
         pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox("My First Client Managed Box");
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with an invalid box name field name$")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithAnInvalidBoxNameFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(format("{\"invalid\": \"newBoxNameTest1\"}"));
+
+        //pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(pushPullNotificationsApiSteps.getNewBoxName());
+        // {"boxName":"newBoxNameTest1"}
     }
 
     @When("^I make a request to the validate client managed box endpoint for box ID \"([^\"]*)\"$")
