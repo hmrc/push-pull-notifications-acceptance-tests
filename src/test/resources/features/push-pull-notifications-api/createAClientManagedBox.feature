@@ -16,7 +16,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
   Scenario: Calling the create client managed box endpoint with an existing box name updates the existing box
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
-    When I make a request to the external create client managed box endpoint with a new box name
+    When I make a request to the external create client managed box endpoint with an existing box name
     Then the existing client managed box is successfully updated
 
 

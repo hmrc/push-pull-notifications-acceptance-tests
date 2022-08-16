@@ -203,20 +203,18 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the external create client managed box endpoint with a new box name$")
     public void iMakeRequestToTheCreateClientManageBoxEndpointWithANewBoxName() {
-        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(pushPullNotificationsApiSteps.getNewBoxName());
+        //pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(pushPullNotificationsApiSteps.getNewBoxName());
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(format("{\"boxName\": \"%s\"}", pushPullNotificationsApiSteps.getNewBoxName()));
     }
 
     @When("^I make a request to the external create client managed box endpoint with an existing box name$")
     public void iMakeRequestToTheCreateClientManageBoxEndpointWithAnExistingBoxName() {
-        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox("My First Client Managed Box");
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox("{\"boxName\": \"My First Client Managed Box\"}");
     }
 
     @When("^I make a request to the external create client managed box endpoint with an invalid box name field name$")
     public void iMakeRequestToTheCreateClientManageBoxEndpointWithAnInvalidBoxNameFieldName() {
         pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(format("{\"invalid\": \"newBoxNameTest1\"}"));
-
-        //pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(pushPullNotificationsApiSteps.getNewBoxName());
-        // {"boxName":"newBoxNameTest1"}
     }
 
     @When("^I make a request to the external create client managed box endpoint with no box name field name$")

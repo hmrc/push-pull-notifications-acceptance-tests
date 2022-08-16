@@ -244,7 +244,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         response(
                 given()
                         .spec(specification())
-                        //.body(new ClientManagedBoxPayload(boxName))
                         .body(jsonPayload).log().all()
                         .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
                         .then().log().all()
