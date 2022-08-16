@@ -1,24 +1,27 @@
 @feature
-Feature: Push Pull Notifications API - Create A Client Managed Box
+Feature: Push Pull Notifications API - Delete A Client Managed Box
 
-  ### PUT - Create A Client Managed Box Endpoint - (API Gateway)
+  ### DELETE - Delete A Client Managed Box Endpoint - (API Gateway)
 
   ### Happy Path Scenarios
 
   @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
-  Scenario: Calling the create client managed box endpoint with a new box name creates a new box
+  Scenario: Calling the delete client managed box endpoint for a created CMB returns a status 204 no content response
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
     When I make a request to the external create client managed box endpoint with a new box name
     Then A new client managed box is successfully generated
     And I can delete the created client managed box by ID
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
-  Scenario: Calling the create client managed box endpoint with an existing box name updates the existing box
+
+  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran5
+  Scenario: Calling the delete client managed box endpoint with an ID that does not exist returns a 404 not found
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
-    When I make a request to the external create client managed box endpoint with an existing box name
-    Then the existing client managed box is successfully updated
+    When I make a call to the delete client managed box endpoint with ID "ccc1a3e7-2b73-475a-a14c-1428ab3b46bc"
+    Then I get a not found response due to box not found
+
+
 
 
   ### Accept Header Scenarios
@@ -90,37 +93,3 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
     Then I get an unauthorised response due to an invalid bearer token
   ### Expired tokens = 49511e91f510b62619d9bffa2639a507, ba97d13f6c1d420c117580977971fd2e
 
-
-  ### Request Body Scenarios
-
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
-  Scenario: Calling the create client managed box endpoint with an invalid request body (invalid box name field name) returns a 400 bad request
-    Given  I have a valid JSON accept header
-    And I have a valid JSON content type header
-    And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
-    When I make a request to the external create client managed box endpoint with an invalid box name field name
-    Then I get a bad request response due to an invalid request payload
-
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
-  Scenario: Calling the create client managed box endpoint with an invalid request body (no box name field name) returns a 400 bad request
-    Given  I have a valid JSON accept header
-    And I have a valid JSON content type header
-    And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
-    When I make a request to the external create client managed box endpoint with no box name field name
-    Then I get a bad request response due to an invalid request payload
-
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
-  Scenario: Calling the create client managed box endpoint with an invalid request body (no box name value) returns a 400 bad request
-    Given  I have a valid JSON accept header
-    And I have a valid JSON content type header
-    And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
-    When I make a request to the external create client managed box endpoint with no box name field value
-    Then I get a bad request response due to missing box name
-
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
-  Scenario: Calling the create client managed box endpoint with no request body returns a 400 bad request
-    Given  I have a valid JSON accept header
-    And I have a valid JSON content type header
-    And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
-    When I make a request to the external create client managed box endpoint with no request body
-    Then I get a bad request response due to an invalid request payload

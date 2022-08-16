@@ -37,6 +37,7 @@ public class HmrcRequestSpecBuilder extends HasConfiguration {
         if (needsDefaultHeader) {
             setAccept("application/vnd.hmrc.1.0+json");
         }
+
         if (needsProxy) {
             inner.setProxy(config.proxyPort());
         }

@@ -163,7 +163,7 @@ Feature: Push Pull Notifications API
     And I have a notification in status pending for a new box
     And I have a valid JSON content type header
     When I make a request to the external put acknowledge notifications endpoint for a box that does not exist
-    Then I get a not found response due to no matching box
+    Then I get a not found response due to box not found
 
   @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests
   Scenario: Calling the external put acknowledge notifications endpoint with an invalid payload (no notification ID) returns a 400 bad request
@@ -258,14 +258,14 @@ Feature: Push Pull Notifications API
     Then I get a bad request response due to invalid client ID query parameter
 
   @push-pull-notifications-api @ppns @api-platform @regression-tests
-  Scenario: Calling the bet box endpoint with no client ID value returns a 404 not found
+  Scenario: Calling the get box endpoint with no client ID value returns a 404 not found
     When I make a request to the Get Box endpoint with no client id parameter value
-    Then I get a not found response due to no matching box
+    Then I get a not found response due to box not found
 
   @push-pull-notifications-api @ppns @api-platform @regression-tests
-  Scenario: Calling the bet box endpoint with no box name value returns a 404 not found
+  Scenario: Calling the get box endpoint with no box name value returns a 404 not found
     When I make a request to the Get Box endpoint with no box name parameter value
-    Then I get a not found response due to no matching box
+    Then I get a not found response due to box not found
 
 
   ### (PUT) Validate Callback URL
@@ -286,7 +286,7 @@ Feature: Push Pull Notifications API
   Scenario: Calling the callback endpoint for a box that does not exist returns a 404 not found
     Given I have all valid request headers for PPNS
     When I make a request to the callback endpoint where no box exists
-    Then I get a not found response due to no matching box
+    Then I get a not found response due to box not found
 
   @push-pull-notifications-gateway @ppns @api-platform @regression-tests
   Scenario: Calling the validate callback endpoint with an invalid request body (invalid field names) returns a 400 bad request
@@ -316,7 +316,7 @@ Feature: Push Pull Notifications API
   Scenario: Calling the validate callback endpoint with a box that does not exist returns a 404 not found
     Given I have all valid request headers for PPNS
     When I make a request to the validate callback endpoint for a box that does not exist
-    Then I get a not found response due to no matching box
+    Then I get a not found response due to box not found
 
   @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests
   Scenario: Calling the validate callback endpoint with an invalid content type header returns a 415 unsupported media type
@@ -403,7 +403,7 @@ Feature: Push Pull Notifications API
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create notification endpoint with an valid UUID box that does not exist
-    Then I get a not found response due to no matching box
+    Then I get a not found response due to box not found
 
   @push-pull-notifications-api @ppns @api-platform @regression-tests
   Scenario: Calling the create notifications with a invalid UUID box that does not exist returns a 404 not found

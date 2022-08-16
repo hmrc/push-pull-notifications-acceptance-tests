@@ -1,5 +1,6 @@
 package definitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import steps.helpers.AuthTokenHelper;
@@ -17,5 +18,11 @@ public class ClientCredentialsApiDefinitions extends CommonDefinitions {
     public void iHaveAValidBearerTokenForScopeForMyStandardApplicationUsingClientCredentials(String scope) {
         clientCredentialsOauthApiSteps.successfullyGenerateAccessTokenForGivenScopeForStandardAppUsingClientCredentials(scope);
         authTokenHelper.withBearerTokenOf(clientCredentialsOauthApiSteps.bearerToken());
+    }
+
+    @When("^I have an expired client credentials bearer token for scope \"(.*)\" for my standard application$")
+    public void iHaveAnExpiredClientCredentialsBearerTokenForScopeForMyStandardApplication(String scope) {
+        clientCredentialsOauthApiSteps.successfullyGenerateAccessTokenForGivenScopeForStandardAppUsingClientCredentials(scope);
+        authTokenHelper.withBearerTokenOf("8e180a46591543e755df07ce4bfff2e9");
     }
 }

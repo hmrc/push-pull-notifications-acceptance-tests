@@ -1,11 +1,11 @@
 package definitions;
 
 import configuration.Configuration;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
-import steps.helpers.AcceptHeaderHelper;
 import steps.oauth.OauthApiSteps;
 import steps.apis.PushPullNotificationsApiSteps;
 import steps.helpers.ContentTypeHeaderHelper;
@@ -210,6 +210,22 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @When("^I make a request to the external create client managed box endpoint with an existing box name$")
     public void iMakeRequestToTheCreateClientManageBoxEndpointWithAnExistingBoxName() {
         pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox("{\"boxName\": \"My First Client Managed Box\"}");
+    }
+
+    @And("^I can delete the created client managed box by ID$")
+    public void iCanDeleteTheCreatedClientManagedBoxById() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithNewClientManagedBoxId();
+        responseSteps.expectedHttpStatusCode(204);
+    }
+
+    @When("^I make a call to the delete client managed box endpoint with ID \"([^\"]*)\"$")
+    public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithId(String clientManagedBoxId) {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId(clientManagedBoxId);
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with an expired client credentials bearer token$")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithAnExpired() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(format("{\"boxName\": \"%s\"}", pushPullNotificationsApiSteps.getNewBoxName()));
     }
 
     @When("^I make a request to the external create client managed box endpoint with an invalid box name field name$")
@@ -600,7 +616,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedJsonMessage("Authorisation failed");
     }
 
-    @Then("^I get a not found response due to no matching box$")
+    @Then("^I get a not found response due to box not found$")
     public void iGetANotFoundResponseDueToNoMatchingBox() {
         responseSteps.expectedHttpStatusCode(404);
         responseSteps.expectedJsonErrorCode("BOX_NOT_FOUND");

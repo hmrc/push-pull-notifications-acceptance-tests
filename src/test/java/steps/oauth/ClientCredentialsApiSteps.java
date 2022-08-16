@@ -1,5 +1,6 @@
 package steps.oauth;
 
+import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import io.vavr.collection.HashMap;
 import net.thucydides.core.annotations.Step;

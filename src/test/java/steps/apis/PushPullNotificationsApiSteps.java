@@ -4,7 +4,6 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import net.thucydides.core.annotations.Step;
 import steps.payloads.BoxPayload;
-import steps.payloads.ClientManagedBoxPayload;
 import steps.payloads.InvalidBoxPayload;
 
 import java.text.SimpleDateFormat;
@@ -244,9 +243,44 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         response(
                 given()
                         .spec(specification())
-                        .body(jsonPayload).log().all()
+                        .body(jsonPayload)
                         .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
                         .then().log().all()
+        );
+    }
+
+    @Step
+    public void iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(String jsonPayload) {
+
+        response(
+                given()
+                        .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
+                        .spec(specification())
+                        .body(jsonPayload)
+                        .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
+                        .then()
+        );
+    }
+
+    @Step
+    public void iMakeACallToExternalDeleteClientManageBoxWithNewClientManagedBoxId() {
+
+        response(
+                given()
+                        .spec(specification())
+                        .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + newClientManagedBoxId)
+                        .then()
+        );
+    }
+
+    @Step
+    public void iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId(String clientManagedBoxId) {
+
+        response(
+                given()
+                        .spec(specification())
+                        .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + clientManagedBoxId)
+                        .then()
         );
     }
 
@@ -317,6 +351,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     @Step
     public void assertNewClientManagedBoxGenerated() {
         newClientManagedBoxId = response().extract().path("boxId").toString();
+        response().body("boxId", is(newClientManagedBoxId));
     }
 
     public void asserValidateClientManagedBoxResponse(Boolean validValue) {
