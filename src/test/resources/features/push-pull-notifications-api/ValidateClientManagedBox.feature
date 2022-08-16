@@ -110,7 +110,7 @@ Feature: Push Pull Notifications API - Client Managed Boxes
     When I make a request to the validate client managed box endpoint with no client ID value
     Then I get a bad request response due to missing box ID or client ID
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests
+  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
   Scenario: Calling the validate client managed box endpoint with no request body returns a 400 bad request
     Given I have a valid user agent header
     And I have a valid JSON content type header

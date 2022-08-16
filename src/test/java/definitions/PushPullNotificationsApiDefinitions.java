@@ -219,6 +219,21 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         // {"boxName":"newBoxNameTest1"}
     }
 
+    @When("^I make a request to the external create client managed box endpoint with no box name field name$")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoBoxNameFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(format("{\"\": \"newBoxNameTest1\"}"));
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with no box name field value")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoBoxNameFieldValue() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(format("{\"boxName\": \"\"}"));
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with no request body")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoRequestBody() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox("");
+    }
+
     @When("^I make a request to the validate client managed box endpoint for box ID \"([^\"]*)\"$")
     public void iMakeRequestToTheValidateManageBoxEndpointForBoxId(String boxId) {
         pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"%s\",\"clientId\":\"9D3NPzbVh7yL09zUzTYO56c7Ciwt\"}", boxId));
@@ -261,8 +276,10 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the validate client managed box endpoint with no request body")
     public void iMakeRequestToTheValidateClientManagedBoxEndPointWithNoRequestBody() {
-        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBoxWithNoBody();
+        //pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBoxWithNoBody();
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox("");
     }
+
     @When("^I make a request to the validate callback endpoint with no request body")
     public void iMakeRequestToTheValidateCallBackEndpointWithNoRequestBody() {
         pushPullNotificationsApiSteps.iMakeACallTCallbackWithNoPayload("5fc1f8e5-8881-4863-8a8c-5c897bb5681");
@@ -549,6 +566,13 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedHttpStatusCode(400);
         responseSteps.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
         responseSteps.expectedJsonMessage("Expecting boxId and clientId in request body");
+    }
+
+    @Then("^I get a bad request response due to missing box name$")
+    public void iGetABadRequestResponseDueToAnInvalidRequestPayload() {
+        responseSteps.expectedHttpStatusCode(400);
+        responseSteps.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseSteps.expectedJsonMessage("Expecting boxName in request body");
     }
 
     @Then("^I get an unauthorised response due to an invalid bearer token$")
