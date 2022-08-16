@@ -427,6 +427,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @Then("^I get an invalid callback URL response$")
     public void iGetAValidationFailedResponse() {
+        //TODO - Move to common response definitions
         responseSteps.expectedHttpStatusCode(200);
         responseSteps.expectedJsonResponseBody("{\"successful\":false,\"errorMessage\":\"Invalid callback URL. Check the information you have provided is correct.\"}");
     }
@@ -460,11 +461,11 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.assertAllBoxes();
     }
 
-    @Then("^the correct box is successfully returned$")
-    public void theCorrectBoxIsSuccessfullyReturned() {
-        responseSteps.expectedHttpStatusCode(200);
-        pushPullNotificationsApiSteps.assertBoxExists();
-    }
+//    @Then("^the correct box is successfully returned$")
+//    public void theCorrectBoxIsSuccessfullyReturned() {
+//        responseSteps.expectedHttpStatusCode(200);
+//        pushPullNotificationsApiSteps.assertBoxExists();
+//    }
 
     @Then("^the new box is successfully returned$")
     public void theNewBoxIsSuccessfullyReturned() {
@@ -478,17 +479,16 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.assertBoxGenerated();
     }
 
-    @Then("^A box is successfully generated with no payload$")
-    public void aBoxIsSuccessfullyGeneratedWithNoPayload() {
-        responseSteps.expectedHttpStatusCode(200);
-        pushPullNotificationsApiSteps.assertBoxGeneratedWithNoPayload();
-    }
+//    @Then("^A box is successfully generated with no payload$")
+//    public void aBoxIsSuccessfullyGeneratedWithNoPayload() {
+//        responseSteps.expectedHttpStatusCode(200);
+//        pushPullNotificationsApiSteps.assertBoxGeneratedWithNoPayload();
+//    }
 
     @Then("^A new box is successfully generated$")
     public void aNewBoxIsSuccessfullyGenerated() {
         responseSteps.expectedHttpStatusCode(201);
         pushPullNotificationsApiSteps.assertNewBoxGenerated();
-
     }
 
     @Then("^A new client managed box is successfully generated$")
@@ -603,11 +603,11 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedJsonMessage("Client Id did not match");
     }
 
-    @Then("^I get a forbidden response due to an incorrect client ID used$")
+    @Then("^I get a forbidden response$")
     public void iGetAnUnauthorisedResponseDueToAnIncorrectClientIdUsed() {
         responseSteps.expectedHttpStatusCode(403);
         responseSteps.expectedJsonErrorCode("FORBIDDEN");
-        responseSteps.expectedJsonMessage("Access denied");
+        responseSteps.expectedJsonMessage("Access Denied");
     }
 
     private void iGetAForbiddenResponseDueToAuthorizationFailed() {
@@ -617,7 +617,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     }
 
     @Then("^I get a not found response due to box not found$")
-    public void iGetANotFoundResponseDueToNoMatchingBox() {
+    public void iGetANotFoundResponseDueToBoxNotFound() {
         responseSteps.expectedHttpStatusCode(404);
         responseSteps.expectedJsonErrorCode("BOX_NOT_FOUND");
         responseSteps.expectedJsonMessage("Box not found");

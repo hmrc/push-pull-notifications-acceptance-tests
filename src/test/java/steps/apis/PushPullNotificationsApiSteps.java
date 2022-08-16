@@ -278,9 +278,9 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
         response(
                 given()
-                        .spec(specification())
+                        .spec(specification()).log().all()
                         .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + clientManagedBoxId)
-                        .then()
+                        .then().log().all()
         );
     }
 
