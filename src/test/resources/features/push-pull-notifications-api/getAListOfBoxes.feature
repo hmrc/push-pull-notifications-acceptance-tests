@@ -5,7 +5,7 @@ Feature: Push Pull Notifications API - Get A List Of Boxes
 
   ### Happy Path Scenarios
 
-  @get-boxes @cmb @ppns-api @regression-tests
+  @get-boxes @cmb @push-pull-notifications-api @regression-tests
   Scenario: Calling the get client managed boxes endpoint works
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "read:ppns-boxes" for my standard application using client credentials
