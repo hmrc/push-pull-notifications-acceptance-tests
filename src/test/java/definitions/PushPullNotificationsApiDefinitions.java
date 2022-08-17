@@ -201,15 +201,44 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToSecrets(config.clientId());
     }
 
+    @When("^I make a request to the external get a list of boxes box endpoint$")
+    public void iMakeRequestToTheExternalGetAListOfBoxesEndpoint() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalGetAListOfdBoxes();
+    }
+
     @When("^I make a request to the external create client managed box endpoint with a new box name$")
-    public void iMakeRequestToTheCreateClientManageBoxEndpointWithANewBoxName() {
-        //pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(pushPullNotificationsApiSteps.getNewBoxName());
-        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(format("{\"boxName\": \"%s\"}", pushPullNotificationsApiSteps.getNewBoxName()));
+    public void iMakeRequestToTheExternalCreateClientManagedBoxEndpointWithANewBoxName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox(format("{\"boxName\": \"%s\"}", pushPullNotificationsApiSteps.getNewBoxName()));
     }
 
     @When("^I make a request to the external create client managed box endpoint with an existing box name$")
-    public void iMakeRequestToTheCreateClientManageBoxEndpointWithAnExistingBoxName() {
-        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox("{\"boxName\": \"My First Client Managed Box\"}");
+    public void iMakeRequestToTheExternalCreateClientManageBoxEndpointWithAnExistingBoxName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox("{\"boxName\": \"My First Client Managed Box\"}");
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with an expired client credentials bearer token$")
+    public void iMakeARequestToTheExternalCreateClientManageBoxEndpointWithAnExpiredClientCredentialsBearerToken() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(format("{\"boxName\": \"%s\"}", pushPullNotificationsApiSteps.getNewBoxName()));
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with an invalid box name field name$")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithAnInvalidBoxNameFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox(format("{\"invalid\": \"newBoxNameTest1\"}"));
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with no box name field name$")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoBoxNameFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox(format("{\"\": \"newBoxNameTest1\"}"));
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with no box name field value")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoBoxNameFieldValue() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox(format("{\"boxName\": \"\"}"));
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with no request body")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoRequestBody() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox("");
     }
 
     @And("^I can delete the created client managed box by ID$")
@@ -223,29 +252,9 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId(clientManagedBoxId);
     }
 
-    @When("^I make a request to the external create client managed box endpoint with an expired client credentials bearer token$")
-    public void iMakeRequestToTheCreateClientManageBoxEndpointWithAnExpired() {
-        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(format("{\"boxName\": \"%s\"}", pushPullNotificationsApiSteps.getNewBoxName()));
-    }
-
-    @When("^I make a request to the external create client managed box endpoint with an invalid box name field name$")
-    public void iMakeRequestToTheCreateClientManageBoxEndpointWithAnInvalidBoxNameFieldName() {
-        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(format("{\"invalid\": \"newBoxNameTest1\"}"));
-    }
-
-    @When("^I make a request to the external create client managed box endpoint with no box name field name$")
-    public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoBoxNameFieldName() {
-        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(format("{\"\": \"newBoxNameTest1\"}"));
-    }
-
-    @When("^I make a request to the external create client managed box endpoint with no box name field value")
-    public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoBoxNameFieldValue() {
-        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox(format("{\"boxName\": \"\"}"));
-    }
-
-    @When("^I make a request to the external create client managed box endpoint with no request body")
-    public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoRequestBody() {
-        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBox("");
+    @When("^I make a request to the external delete client managed box endpoint with an expired client credentials bearer token$")
+    public void iMakeRequestToTheCreateDeleteManageBoxEndpointWithAnExpired() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithExpiredBearerToken("a5e3203d-a57e-4787-ba72-2dbfc294455f");
     }
 
     @When("^I make a request to the validate client managed box endpoint for box ID \"([^\"]*)\"$")
@@ -594,6 +603,13 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedHttpStatusCode(401);
         responseSteps.expectedJsonErrorCode("UNAUTHORISED");
         responseSteps.expectedJsonMessage("Invalid bearer token");
+    }
+
+    @Then("^I get an unauthorised response due to invalid authentication information provided$")
+    public void iGetAnUnauthorisedResponseDueToAnInvalidAuthenticationInformationProfivded() {
+        responseSteps.expectedHttpStatusCode(401);
+        responseSteps.expectedJsonErrorCode("INVALID_CREDENTIALS");
+        responseSteps.expectedJsonMessage("Invalid Authentication information provided");
     }
 
     @Then("^I get an unauthorised response due to client ID mismatch$")

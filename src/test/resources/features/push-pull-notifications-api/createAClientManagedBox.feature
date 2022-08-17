@@ -5,7 +5,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
 
   ### Happy Path Scenarios
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with a new box name creates a new box
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
@@ -13,7 +13,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
     Then A new client managed box is successfully generated
     And I can delete the created client managed box by ID
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with an existing box name updates the existing box
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
@@ -23,7 +23,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
 
   ### Accept Header Scenarios
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran # This needs to be updated so a 406 is returned
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with an incorrect accept header version returns a matching resource not found response
     Given I have an incorrect accept header version
     And I have a valid JSON content type header
@@ -31,7 +31,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
     When I make a request to the external create client managed box endpoint with a new box name
     Then I get a matching resource not found response
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with an invalid accept header returns a status 406 unacceptable response
     Given I have an invalid accept header
     And I have a valid JSON content type header
@@ -39,8 +39,8 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
     When I make a request to the external create client managed box endpoint with a new box name
     Then I get an unacceptable response due to an invalid accept header
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
-  Scenario: Calling the validate client managed box endpoint with an no accept header returns a status 406 unacceptable response
+  @create-cmb @cmb @ppns-api @regression-tests
+  Scenario: Calling the create client managed box endpoint with no accept header returns a status 406 unacceptable response
     Given I have no accept header
     And I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
@@ -50,7 +50,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
 
   ### Content Type Header Scenarios
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with an invalid content type header returns a status 415 unsupported media type response
     Given I have a valid JSON accept header
     And I have an invalid content type header
@@ -58,7 +58,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
     When I make a request to the external create client managed box endpoint with a new box name
     Then I get an unsupported media type response
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with no content type header returns a status 415 unsupported media type response
     Given I have a valid JSON accept header
     And I have no content type header
@@ -69,31 +69,30 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
 
   ### Authorization Scenarios
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with an invalid bearer token - non client credentials token
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes"
     When I make a request to the external create client managed box endpoint with a new box name
     Then I get an unauthorised response due to an invalid bearer token
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran3
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with an expired bearer token
     Given I have a valid JSON content type header
     When I make a request to the external create client managed box endpoint with an expired client credentials bearer token
-    Then I get an unauthorised response due to an invalid bearer token
+    Then I get an unauthorised response due to invalid authentication information provided
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with an invalid scope returns a 401 unauthorised response
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "read:ppns-boxes"
     When I make a request to the external create client managed box endpoint with a new box name
     Then I get an unauthorised response due to an invalid bearer token
-  ### Expired tokens = 49511e91f510b62619d9bffa2639a507, ba97d13f6c1d420c117580977971fd2e
 
 
   ### Request Body Scenarios
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with an invalid request body (invalid box name field name) returns a 400 bad request
     Given  I have a valid JSON accept header
     And I have a valid JSON content type header
@@ -101,7 +100,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
     When I make a request to the external create client managed box endpoint with an invalid box name field name
     Then I get a bad request response due to an invalid request payload
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with an invalid request body (no box name field name) returns a 400 bad request
     Given  I have a valid JSON accept header
     And I have a valid JSON content type header
@@ -109,7 +108,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
     When I make a request to the external create client managed box endpoint with no box name field name
     Then I get a bad request response due to an invalid request payload
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with an invalid request body (no box name value) returns a 400 bad request
     Given  I have a valid JSON accept header
     And I have a valid JSON content type header
@@ -117,7 +116,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
     When I make a request to the external create client managed box endpoint with no box name field value
     Then I get a bad request response due to missing box name
 
-  @cmb @push-pull-notifications-api @ppns @api-platform @regression-tests @imran
+  @create-cmb @cmb @ppns-api @regression-tests
   Scenario: Calling the create client managed box endpoint with no request body returns a 400 bad request
     Given  I have a valid JSON accept header
     And I have a valid JSON content type header

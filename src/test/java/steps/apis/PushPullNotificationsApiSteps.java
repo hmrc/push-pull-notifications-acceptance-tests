@@ -238,14 +238,25 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     }
 
     @Step
-    public void iMakeACallToExternalCreateClientManageBox(String jsonPayload) {
+    public void iMakeACallToExternalGetAListOfdBoxes() {
+
+        response(
+                given()
+                        .spec(specification())
+                        .get(format("%s/%s/box", baseApiUrl(), cmbApiContext))
+                        .then().log().all()
+        );
+    }
+
+    @Step
+    public void iMakeACallToExternalCreateClientManagedBox(String jsonPayload) {
 
         response(
                 given()
                         .spec(specification())
                         .body(jsonPayload)
                         .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then().log().all()
+                        .then()
         );
     }
 
@@ -258,7 +269,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .spec(specification())
                         .body(jsonPayload)
                         .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then()
+                        .then().log().all()
         );
     }
 
@@ -278,6 +289,18 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
         response(
                 given()
+                        .spec(specification())
+                        .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + clientManagedBoxId)
+                        .then()
+        );
+    }
+
+    @Step
+    public void iMakeACallToExternalDeleteClientManageBoxWithExpiredBearerToken(String clientManagedBoxId) {
+
+        response(
+                given()
+                        .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
                         .spec(specification()).log().all()
                         .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + clientManagedBoxId)
                         .then().log().all()
