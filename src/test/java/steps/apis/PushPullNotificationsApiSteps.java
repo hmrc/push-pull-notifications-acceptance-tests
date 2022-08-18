@@ -426,7 +426,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     public void assertNewBoxExists() {
         response().body("boxId", is(newBoxId));
         response().body("boxName", is(newBoxName));
-        response().body("boxCreator.clientId", is("3ZdSQUrCrLEoyXFRjCgmj60qlfAa"));
+        response().body("boxCreator.clientId", is(config.clientId()));
     }
 
     @Step
