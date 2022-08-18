@@ -365,7 +365,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
     @Step
     public void assertBoxGenerated() {
-        response().body("boxId", is("5fc1f8e5-8881-4863-8a8c-5c897bb56815"));
+        response().body("boxId", is("de9aed9c-b319-49a4-99e9-a8a659fc0bf6"));
     }
 
     @Step
