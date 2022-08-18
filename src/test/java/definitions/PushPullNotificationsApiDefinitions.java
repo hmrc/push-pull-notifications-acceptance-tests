@@ -171,7 +171,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the validate callback endpoint with an incorrect URL$")
     public void iMakeRequestToTheValidateCallBackEndpointWithAnIncorrectUrl() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", (format("{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"%s\"}", config.callbackUrl())));
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://invalid.callbac.url\"}");
     }
 
     @When("^I make a request to the validate callback endpoint for a box that does not exist$")
