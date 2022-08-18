@@ -431,7 +431,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @Then("^I get a successful response with the correct secret returned$")
     public void iGetASuccessfulResponseWithTheCorrectSecretReturned() {
         responseSteps.expectedHttpStatusCode(200);
-        responseSteps.expectedJsonResponseBody("[{\"value\":\"65ec817b58dd70bb24db31116f9017ec74704917\"}]");
+        responseSteps.expectedJsonResponseBody("[{\"value\":\"FUHT3LOIF7EGOUP6OO7L3Q6GVNNJOZUM\"}]");
     }
 
     @Then("^I get an invalid callback URL response$")
