@@ -24,7 +24,7 @@ buildscript {
         maven { url 'https://nexus-build.tax.service.gov.uk/content/groups/mdtp-proxied-maven-repositories/' }
     }
     dependencies {
-        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.48")
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.3.12")
     }
 }
 
