@@ -1,5 +1,5 @@
 export AUTH_CLIENT_ID=1AgmuykNGEm84u4xMExNKgZB6uqd
-export AUTH_CLIENT_SECRET=61175049-e7f3-404a-a4fe-63d7842a99e1
+export AUTH_CLIENT_SECRET=81d32a8b-3b06-417f-b6e4-1e53a1a51f76
 export AUTH_REDIRECT_URI=http://localhost:9000
 export AUTH_SERVER_TOKEN=4aa0107497a78ebdae997def4fbe30fd
 export BASE_URL=https://www.qa.tax.service.gov.uk
