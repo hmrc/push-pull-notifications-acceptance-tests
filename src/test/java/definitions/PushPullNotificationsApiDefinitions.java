@@ -141,7 +141,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the callback endpoint using the new box$")
     public void iMakeARequestToTheCallbackEndpointUsingTheNewBox() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload(pushPullNotificationsApiSteps.getNewBoxId(), "{\"clientId\" : \"3ZdSQUrCrLEoyXFRjCgmj60qlfAa\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload(pushPullNotificationsApiSteps.getNewBoxId(), "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
     }
 
     @When("^I make a request to the callback endpoint where no box exists$")
