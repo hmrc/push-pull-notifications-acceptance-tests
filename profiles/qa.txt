@@ -6,5 +6,5 @@ export BASE_URL=https://www.qa.tax.service.gov.uk
 export BASE_API_URL=https://api.qa.tax.service.gov.uk
 export BLOCKED_AUTH_SERVER_TOKEN=5342f365fc8975f8b8a529d98540bdad
 export CMB_AUTH_CLIENT_ID=9D3NPzbVh7yL09zUzTYO56c7Ciwt
-export CMB_AUTH_CLIENT_SECRET=f950a8be-d327-415e-96fa-1efc2849fb2e
+export CMB_AUTH_CLIENT_SECRET=4b948c68-a3df-45a3-b06e-454c24e02752
 export PROXY_PORT=18888
