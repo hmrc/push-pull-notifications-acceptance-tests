@@ -6,10 +6,10 @@ Feature: Push Pull Notifications API
   @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests
   Scenario: PPNS end to end test
     Given I have all valid request headers for PPNS
-    When I make a new request to the create Box endpoint with Client ID "3ZdSQUrCrLEoyXFRjCgmj60qlfAa" and a new box name
+    When I make a new request to the create Box endpoint with Client ID "1AgmuykNGEm84u4xMExNKgZB6uqd" and a new box name
     Then A new box is successfully generated
     #Assert Box is Created
-    When I make a request to the Get Box endpoint with Client ID "3ZdSQUrCrLEoyXFRjCgmj60qlfAa" and new box name
+    When I make a request to the Get Box endpoint with Client ID "1AgmuykNGEm84u4xMExNKgZB6uqd" and new box name
     Then the new box is successfully returned
     #Set Callback URL
     When I make a request to the callback endpoint using the new box
@@ -180,7 +180,7 @@ Feature: Push Pull Notifications API
   Scenario: Calling the create box endpoint with an existing box works
     Given I have a valid user agent header
     And I have a valid JSON content type header
-    When I make a request to the create Box endpoint with Client ID "3ZdSQUrCrLEoyXFRjCgmj60qlfAa" and Box Name "API Platform Acceptance Test Box"
+    When I make a request to the create Box endpoint with Client ID "1AgmuykNGEm84u4xMExNKgZB6uqd" and Box Name "API Platform Acceptance Test Box"
     Then A box is successfully generated
 
   @push-pull-notifications-api @ppns @api-platform @regression-tests
@@ -215,28 +215,28 @@ Feature: Push Pull Notifications API
   Scenario: Calling the create box endpoint works with an invalid user agent header returns a 403 forbidden
     Given I have an invalid user agent header
     And I have a valid JSON content type header
-    When I make a request to the create Box endpoint with Client ID "3ZdSQUrCrLEoyXFRjCgmj60qlfAa" and Box Name "API Platform Acceptance Test Box"
+    When I make a request to the create Box endpoint with Client ID "1AgmuykNGEm84u4xMExNKgZB6uqd" and Box Name "API Platform Acceptance Test Box"
     Then I get a forbidden response due to an invalid agent header
 
   @push-pull-notifications-api @ppns @api-platform @regression-tests
   Scenario: Calling the create box endpoint works with no user agent header returns a 403 forbidden
     Given I have no user agent header
     And I have a valid JSON content type header
-    When I make a request to the create Box endpoint with Client ID "3ZdSQUrCrLEoyXFRjCgmj60qlfAa" and Box Name "API Platform Acceptance Test Box"
+    When I make a request to the create Box endpoint with Client ID "1AgmuykNGEm84u4xMExNKgZB6uqd" and Box Name "API Platform Acceptance Test Box"
     Then I get a forbidden response due to missing agent header
 
   @push-pull-notifications-api @ppns @api-platform @regression-tests
   Scenario: Calling the create box endpoint works with an invalid content type header returns a 415 unsupported media type
     Given I have a valid user agent header
     And I have an invalid content type header
-    When I make a request to the create Box endpoint with Client ID "3ZdSQUrCrLEoyXFRjCgmj60qlfAa" and Box Name "API Platform Acceptance Test Box"
+    When I make a request to the create Box endpoint with Client ID "1AgmuykNGEm84u4xMExNKgZB6uqd" and Box Name "API Platform Acceptance Test Box"
     Then I get an unsupported media type response
 
   @push-pull-notifications-api @ppns @api-platform @regression-tests
   Scenario: Calling the create box endpoint works with no content type header returns a 415 unsupported media type
     Given I have a valid user agent header
     And I have no content type header
-    When I make a request to the create Box endpoint with Client ID "3ZdSQUrCrLEoyXFRjCgmj60qlfAa" and Box Name "API Platform Acceptance Test Box"
+    When I make a request to the create Box endpoint with Client ID "1AgmuykNGEm84u4xMExNKgZB6uqd" and Box Name "API Platform Acceptance Test Box"
     Then I get an unsupported media type response
 
 
