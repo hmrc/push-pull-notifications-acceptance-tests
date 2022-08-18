@@ -139,12 +139,12 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the callback endpoint using the new box$")
     public void iMakeARequestToTheCallbackEndpointUsingTheNewBox() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload(pushPullNotificationsApiSteps.getNewBoxId(), (format("{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"%s\"}", config.callbackUrl())));
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload(pushPullNotificationsApiSteps.getNewBoxId(), (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
     }
 
     @When("^I make a request to the callback endpoint where no box exists$")
     public void iMakeARequestToTheCallbackEndpointWhereNoBoxExists() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWhereNoBoxExists(format("{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"%s\"}",config.callbackUrl()));
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWhereNoBoxExists(format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}",config.clientId(), config.callbackUrl()));
     }
 
     @When("^I make a request to the create notification endpoint with a valid JSON payload$")
@@ -166,17 +166,17 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the validate callback endpoint with a correct URL$")
     public void iMakeRequestToTheValidateCallBackEndpointWithACorrectUrl() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", (format("{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"%s\"}", config.callbackUrl())));
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
     }
 
     @When("^I make a request to the validate callback endpoint with an incorrect URL$")
     public void iMakeRequestToTheValidateCallBackEndpointWithAnIncorrectUrl() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://invalid.callbac.url\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"https://invalid.callbac.url\"}", config.clientId())));
     }
 
     @When("^I make a request to the validate callback endpoint for a box that does not exist$")
     public void iMakeRequestToTheValidateCallBackEndpointForABoxThatDoesNotExist() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196388", (format("{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"%s\"}", config.callbackUrl())));
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196388", (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
     }
 
     @When("^I make a request to the validate callback endpoint with a different client ID$")
@@ -186,7 +186,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the validate callback endpoint with invalid field names$")
     public void iMakeRequestToTheValidateCallBackEndpointWithInvalidFieldNames() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", (format("{\"invalidId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"invalidUrl\" : \"%s\"}", config.callbackUrl())));
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", (format("{\"invalidId\" : \"%s\", \"invalidUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
     }
 
     @When("^I make a request to the validate callback endpoint with no field values$")
