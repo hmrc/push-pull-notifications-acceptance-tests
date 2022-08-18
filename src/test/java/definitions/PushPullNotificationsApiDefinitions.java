@@ -494,6 +494,12 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 //        pushPullNotificationsApiSteps.assertBoxGeneratedWithNoPayload();
 //    }
 
+    @Then("^I get a successful response with default and CMBs displayed$")
+    public void iGetASuccessfulResponse() {
+        responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertListOfBoxes();
+    }
+
     @Then("^A new box is successfully generated$")
     public void aNewBoxIsSuccessfullyGenerated() {
         responseSteps.expectedHttpStatusCode(201);

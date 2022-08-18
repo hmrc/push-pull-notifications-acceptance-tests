@@ -20,6 +20,12 @@ public class ClientCredentialsApiDefinitions extends CommonDefinitions {
         authTokenHelper.withBearerTokenOf(clientCredentialsOauthApiSteps.bearerToken());
     }
 
+    @When("^I have a valid bearer token for scope \"(.*)\" for my CMB application using client credentials$")
+    public void iHaveAValidBearerTokenForScopeForMyCmbApplicationUsingClientCredentials(String scope) {
+        clientCredentialsOauthApiSteps.successfullyGenerateAccessTokenForGivenScopeForCmbAppUsingClientCredentials(scope);
+        authTokenHelper.withBearerTokenOf(clientCredentialsOauthApiSteps.bearerToken());
+    }
+
     @When("^I have an expired client credentials bearer token for scope \"(.*)\" for my standard application$")
     public void iHaveAnExpiredClientCredentialsBearerTokenForScopeForMyStandardApplication(String scope) {
         clientCredentialsOauthApiSteps.successfullyGenerateAccessTokenForGivenScopeForStandardAppUsingClientCredentials(scope);

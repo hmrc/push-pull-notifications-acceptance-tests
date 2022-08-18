@@ -50,6 +50,15 @@ public class Configuration {
         return required("AUTH_SERVER_TOKEN");
     }
 
+    public String cmbClientId() {
+        return required("CMB_AUTH_CLIENT_ID");
+    }
+
+    public String cmbClientSecret() {
+        return required("CMB_AUTH_CLIENT_SECRET");
+    }
+
+
     public String blockedAuthServerToken() {
         return required("BLOCKED_AUTH_SERVER_TOKEN");
     }

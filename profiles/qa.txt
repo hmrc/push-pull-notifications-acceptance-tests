@@ -1,8 +1,10 @@
-export AUTH_CLIENT_ID=3ZdSQUrCrLEoyXFRjCgmj60qlfAa
-export AUTH_CLIENT_SECRET=d25b9f1f-1c3d-4a08-8b75-0efe0153917e
+export AUTH_CLIENT_ID=xAOGUfbUvLZOZwXOA9PG2nmRMmE1
+export AUTH_CLIENT_SECRET=535bef82-81bb-45be-9007-c46c6b0053c9
 export AUTH_REDIRECT_URI=http://localhost:9000
 export AUTH_SERVER_TOKEN=4aa0107497a78ebdae997def4fbe30fd
 export BASE_URL=https://www.qa.tax.service.gov.uk
 export BASE_API_URL=https://api.qa.tax.service.gov.uk
 export BLOCKED_AUTH_SERVER_TOKEN=5342f365fc8975f8b8a529d98540bdad
+export CMB_AUTH_CLIENT_ID=9D3NPzbVh7yL09zUzTYO56c7Ciwt
+export CMB_AUTH_CLIENT_SECRET=f950a8be-d327-415e-96fa-1efc2849fb2e
 export PROXY_PORT=18888
