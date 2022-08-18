@@ -180,7 +180,7 @@ Feature: Push Pull Notifications API
   Scenario: Calling the create box endpoint with an existing box works
     Given I have a valid user agent header
     And I have a valid JSON content type header
-    When I make a request to the create Box endpoint with Client ID "1AgmuykNGEm84u4xMExNKgZB6uqd" and Box Name "API Platform Acceptance Test Box"
+    When I make a request to the create Box endpoint with Client ID "1AgmuykNGEm84u4xMExNKgZB6uqd" and Box Name "PPNS Acceptance Test Box"
     Then A box is successfully generated
 
   @push-pull-notifications-api @ppns @api-platform @regression-tests
