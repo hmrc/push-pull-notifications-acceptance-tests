@@ -1,7 +1,7 @@
 @feature
 Feature: Push Pull Notifications API - Create A Client Managed Box
 
-  ### PUT - Create A Client Managed Box Endpoint - (API Gateway)
+  ### [PUT] - Create A Client Managed Box Endpoint - (API Gateway)
 
   ### Happy Path Scenarios
 
