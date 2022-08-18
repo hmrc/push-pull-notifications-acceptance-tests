@@ -144,7 +144,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the callback endpoint where no box exists$")
     public void iMakeARequestToTheCallbackEndpointWhereNoBoxExists() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWhereNoBoxExists("{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWhereNoBoxExists(format("{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"%s\"}",config.callbackUrl()));
     }
 
     @When("^I make a request to the create notification endpoint with a valid JSON payload$")
@@ -166,27 +166,27 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the validate callback endpoint with a correct URL$")
     public void iMakeRequestToTheValidateCallBackEndpointWithACorrectUrl() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", (format("{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"%s\"}", config.callbackUrl())));
     }
 
     @When("^I make a request to the validate callback endpoint with an incorrect URL$")
     public void iMakeRequestToTheValidateCallBackEndpointWithAnIncorrectUrl() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/something\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", (format("{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"%s\"}", config.callbackUrl())));
     }
 
     @When("^I make a request to the validate callback endpoint for a box that does not exist$")
     public void iMakeRequestToTheValidateCallBackEndpointForABoxThatDoesNotExist() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196388", "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196388", (format("{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"%s\"}", config.callbackUrl())));
     }
 
     @When("^I make a request to the validate callback endpoint with a different client ID$")
     public void iMakeRequestToTheValidateCallBackEndpointWithADifferentClientId() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", "{\"clientId\" : \"DxSao_5J8fsj3bsgfyr7aWj9UcQa\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", (format("{\"clientId\" : \"DxSao_5J8fsj3bsgfyr7aWj9UcQa\", \"callbackUrl\" : \"%s\"}", config.callbackUrl())));
     }
 
     @When("^I make a request to the validate callback endpoint with invalid field names$")
     public void iMakeRequestToTheValidateCallBackEndpointWithInvalidFieldNames() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", "{\"invalidId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"invalidUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", (format("{\"invalidId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"invalidUrl\" : \"%s\"}", config.callbackUrl())));
     }
 
     @When("^I make a request to the validate callback endpoint with no field values$")
