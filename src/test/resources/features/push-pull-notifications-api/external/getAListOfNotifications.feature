@@ -35,7 +35,7 @@ Feature: Push Pull Notifications API - Get A List of Notifications
     When I make a request to the external get box notifications endpoint with an invalid toDate query parameter value
     Then I get an invalid request payload response due to an unparsable date value parameter provided
 
-  @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests @imran3
+  @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests
   Scenario: Calling the external get notifications endpoint with all valid query parameter value works
     Given I have a valid bearer token for scope "read:pull-notifications" for my standard application using client credentials
     When I make a request to the external get box notifications endpoint with all valid query parameter values

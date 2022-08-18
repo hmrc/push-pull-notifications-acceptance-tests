@@ -5,7 +5,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
 
   ### Happy Path Scenarios
 
-  @create-cmb @cmb @push-pull-notifications-api @regression-tests @imran
+  @create-cmb @cmb @push-pull-notifications-api @regression-tests
   Scenario: Calling the create client managed box endpoint with a new box name creates a new box
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
