@@ -168,17 +168,17 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the validate callback endpoint with a correct URL$")
     public void iMakeRequestToTheValidateCallBackEndpointWithACorrectUrl() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
     }
 
     @When("^I make a request to the validate callback endpoint with an incorrect URL$")
     public void iMakeRequestToTheValidateCallBackEndpointWithAnIncorrectUrl() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/something\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/something\"}");
     }
 
     @When("^I make a request to the validate callback endpoint for a box that does not exist$")
     public void iMakeRequestToTheValidateCallBackEndpointForABoxThatDoesNotExist() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e4", "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
     }
 
     @When("^I make a request to the validate callback endpoint with a different client ID$")
