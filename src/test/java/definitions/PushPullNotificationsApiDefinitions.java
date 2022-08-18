@@ -151,7 +151,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the create notification endpoint with a valid JSON payload$")
     public void iMakeRequestToTheCreateNotificationEndpointWithAValidJsonPayload() {
-        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("5fc1f8e5-8881-4863-8a8c-5c897bb56815", "{\"message\": \"jsonbody\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"message\": \"jsonbody\"}");
     }
 
     @When("^I make a request to the create notification endpoint with a valid JSON payload for the new box$")
@@ -315,12 +315,12 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the create notification endpoint with no XML payload$")
     public void iMakeRequestToTheCreateNotificationEndpointWithNoXmlPayload() {
-        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithXmlPayload("5fc1f8e5-8881-4863-8a8c-5c897bb56815", "");
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithXmlPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "");
     }
 
     @When("^I make a request to the create notification endpoint with an invalid XML payload$")
     public void iMakeRequestToTheCreateNotificationEndpointWithAInvalidXmlPayload() {
-        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithXmlPayload("5fc1f8e5-8881-4863-8a8c-5c897bb56815", "<foo>bar<");
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithXmlPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "<foo>bar<");
     }
 
     @When("^I make a request to the create notification endpoint with an valid UUID box that does not exist$")
@@ -335,12 +335,12 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the create notification endpoint with an invalid JSON payload$")
     public void iMakeRequestToTheCreateNotificationEndpointWithAnInvalidJsonPayload() {
-        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("5fc1f8e5-8881-4863-8a8c-5c897bb56815", "{\"message\": \"json");
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"message\": \"json");
     }
 
     @When("^I make a request to the create notification endpoint with no JSON payload$")
     public void iMakeRequestToTheCreateNotificationEndpointWithNoJsonPayload() {
-        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("5fc1f8e5-8881-4863-8a8c-5c897bb56815", "");
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "");
     }
 
     @Then("^I get a successful response with acknowledged notifications")
@@ -352,22 +352,22 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the external get box notifications endpoint with unknown query parameters$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithUnknownQuerryParameters() {
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("5fc1f8e5-8881-4863-8a8c-5c897bb56815", "unknown", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "unknown", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
     }
 
     @When("^I make a request to the external get box notifications endpoint with an invalid status query parameter value$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAnInvalidStatusQueryParameterValue() {
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("5fc1f8e5-8881-4863-8a8c-5c897bb56815", "status", "foobar", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "foobar", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
     }
 
     @When("^I make a request to the external get box notifications endpoint with an invalid fromDate query parameter value$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAnInvalidDateToQueryParameterValue() {
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("5fc1f8e5-8881-4863-8a8c-5c897bb56815", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000+123", "toDate", "2020-07-16T17:13:00.000");
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000+123", "toDate", "2020-07-16T17:13:00.000");
     }
 
     @When("^I make a request to the external get box notifications endpoint with an invalid toDate query parameter value$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAnInvalidToDateQueryParameterValue() {
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("5fc1f8e5-8881-4863-8a8c-5c897bb56815", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000+123");
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000+123");
     }
 
     @When("^I make a request to the external get box notifications endpoint for pending status notifications$")
@@ -399,7 +399,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the external get box notifications endpoint with all valid query parameter values$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAllValidQueryParameterValues() {
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("5fc1f8e5-8881-4863-8a8c-5c897bb56815", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
     }
 
     @When("^I make a request to the external get box notifications endpoint for the new box$")
