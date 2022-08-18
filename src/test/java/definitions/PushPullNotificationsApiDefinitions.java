@@ -183,7 +183,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the validate callback endpoint with a different client ID$")
     public void iMakeRequestToTheValidateCallBackEndpointWithADifferentClientId() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", "{\"clientId\" : \"DxSao_5J8fsj3bsgfyr7aWj9UcQa\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/something\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", "{\"clientId\" : \"DxSao_5J8fsj3bsgfyr7aWj9UcQa\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
     }
 
     @When("^I make a request to the validate callback endpoint with invalid field names$")
