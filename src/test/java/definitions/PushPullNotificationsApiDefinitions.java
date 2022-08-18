@@ -16,8 +16,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     protected Configuration config = new Configuration();
 
-    private String correctCallBackUrl = "https://api.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications";
-
     @Steps(shared = true)
     private OauthApiSteps oauthApiSteps;
 
@@ -141,7 +139,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the callback endpoint using the new box$")
     public void iMakeARequestToTheCallbackEndpointUsingTheNewBox() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload(pushPullNotificationsApiSteps.getNewBoxId(), "{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload(pushPullNotificationsApiSteps.getNewBoxId(), (format("{\"clientId\" : \"1AgmuykNGEm84u4xMExNKgZB6uqd\", \"callbackUrl\" : \"%s\"}", config.callbackUrl())));
     }
 
     @When("^I make a request to the callback endpoint where no box exists$")

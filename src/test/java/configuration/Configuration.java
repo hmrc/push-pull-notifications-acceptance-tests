@@ -50,6 +50,10 @@ public class Configuration {
         return required("AUTH_SERVER_TOKEN");
     }
 
+    public String callbackUrl() {
+        return required("CALLBACK_URL");
+    }
+
     public String cmbClientId() {
         return required("CMB_AUTH_CLIENT_ID");
     }
