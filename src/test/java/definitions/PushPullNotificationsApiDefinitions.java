@@ -199,9 +199,14 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToSecrets(config.clientId());
     }
 
-    @When("^I make a request to the external get a list of boxes box endpoint$")
+    @When("^I make a request to the external get a list of boxes endpoint$")
     public void iMakeRequestToTheExternalGetAListOfBoxesEndpoint() {
         pushPullNotificationsApiSteps.iMakeACallToExternalGetAListOfdBoxes();
+    }
+
+    @When("^I make a request to the external get a list of boxes endpoint with an expired client credentials bearer token$")
+    public void iMakeARequestToTheExternalGetAListOfBoxesEndpointWithAnExpiredClientCredentialsBearerToken() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalGetAListOfBoxesWithExpiredToken();
     }
 
     @When("^I make a request to the external create client managed box endpoint with a new box name$")
@@ -257,37 +262,37 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the validate client managed box endpoint for box ID \"([^\"]*)\"$")
     public void iMakeRequestToTheValidateManageBoxEndpointForBoxId(String boxId) {
-        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"%s\",\"clientId\":\"9D3NPzbVh7yL09zUzTYO56c7Ciwt\"}", boxId));
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"%s\",\"clientId\":\"%s\"}", config.cmbClientId(), boxId));
     }
 
     @When("^I make a request to the validate client managed box endpoint with an invalid box ID field name$")
     public void iMakeRequestToTheValidateClientManagedBoxEndPointWithAnInvalidBoxIdFieldName() {
-        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"invalid\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"invalid\":\"9D3NPzbVh7yL09zUzTYO56c7Ciwt\"}"));
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"invalid\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"clientId\":\"%s\"}", config.cmbClientId()));
     }
 
     @When("^I make a request to the validate client managed box endpoint with no box ID field name$")
     public void iMakeRequestToTheValidateClientManagedBoxEndPointWithNoBoxIdFieldName() {
-        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"invalid\":\"9D3NPzbVh7yL09zUzTYO56c7Ciwt\"}"));
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"clientId\":\"%s\"}", config.cmbClientId()));
     }
 
     @When("^I make a request to the validate client managed box endpoint with an invalid box ID value$")
     public void iMakeRequestToTheValidateClientManagedBoxEndPointWithAnInvalidBoxIdValue() {
-        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"invalid\",\"clientId\":\"9D3NPzbVh7yL09zUzTYO56c7Ciwt\"}"));
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"invalid\",\"clientId\":\"%s\"}", config.cmbClientId()));
     }
 
     @When("^I make a request to the validate client managed box endpoint with no box ID value")
     public void iMakeRequestToTheValidateClientManagedBoxEndPointWithNoBoxIdValue() {
-        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"\",\"clientId\":\"9D3NPzbVh7yL09zUzTYO56c7Ciwt\"}"));
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"\",\"clientId\":\"%s\"}", config.cmbClientId()));
     }
 
     @When("^I make a request to the validate client managed box endpoint with an invalid client ID field name$")
     public void iMakeRequestToTheValidateClientManagedBoxEndPointWithAnInvalidClientIdFieldName() {
-        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"invalid\":\"9D3NPzbVh7yL09zUzTYO56c7Ciwt\"}"));
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"invalid\":\"%s\"}", config.cmbClientId()));
     }
 
     @When("^I make a request to the validate client managed box endpoint with no client ID field name$")
     public void iMakeRequestToTheValidateClientManagedBoxEndPointWithNoClientIdFieldName() {
-        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"\":\"9D3NPzbVh7yL09zUzTYO56c7Ciwt\"}"));
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"\":\"%s\"}", config.cmbClientId()));
     }
 
     @When("^I make a request to the validate client managed box endpoint with no client ID value")
@@ -522,10 +527,10 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.assertNewClientManagedBoxGenerated();
     }
 
-    @Then("^I get a validate true response$")
-    public void iGetAValidateTrueResponse() {
+    @Then("^I get a validate \"([^\"]*)\" response$")
+    public void iGetAValidateTrueResponse(boolean response) {
         responseSteps.expectedHttpStatusCode(200);
-        pushPullNotificationsApiSteps.asserValidateClientManagedBoxResponse(true);
+        pushPullNotificationsApiSteps.asserValidateClientManagedBoxResponse(response);
     }
 
     @Then("^I get a validate false response$")

@@ -253,6 +253,18 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     }
 
     @Step
+    public void iMakeACallToExternalGetAListOfBoxesWithExpiredToken() {
+
+        response(
+                given()
+                        .header("Authorization", "Bearer 32b61a0150e231e38efeeb664c2a79a2")
+                        .spec(specification())
+                        .get(format("%s/%s/box", baseApiUrl(), cmbApiContext))
+                        .then().log().all()
+        );
+    }
+
+    @Step
     public void iMakeACallToExternalCreateClientManagedBox(String jsonPayload) {
 
         response(

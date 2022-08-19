@@ -8,14 +8,14 @@ Feature: Push Pull Notifications API - Client Managed Boxes
     Given  I have a valid JSON accept header
     And I have a valid JSON content type header
     When I make a request to the validate client managed box endpoint for box ID "a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"
-    Then I get a validate true response
+    Then I get a validate "true" response
 
   @validate-cmb @cmb @push-pull-notifications-api @regression-tests
   Scenario: Calling the validate client managed box endpoint with a non belonging box ID fails validation
     Given  I have a valid JSON accept header
     And I have a valid JSON content type header
     When I make a request to the validate client managed box endpoint for box ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
-    Then I get a validate false response
+    Then I get a validate "false" response
 
 
   ### POST - Validate Client Managed Box Endpoint - Accept Header Scenarios
