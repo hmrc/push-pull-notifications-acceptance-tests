@@ -59,15 +59,6 @@ test {
     } else {
         systemProperty('webdriver.driver', 'chrome')
     }
-
-    environment "APPLICATION_ID", System.getenv("APPLICATION_ID")
-    environment "AUTH_CLIENT_ID", System.getenv("AUTH_CLIENT_ID")
-    environment "AUTH_CLIENT_SECRET", System.getenv("AUTH_CLIENT_SECRET")
-    environment "AUTH_REDIRECT_URI", System.getenv("AUTH_REDIRECT_URI")
-    environment "AUTH_SERVER_TOKEN", System.getenv("AUTH_SERVER_TOKEN")
-    environment "BASE_API_URL", System.getenv("BASE_API_URL")
-    environment "BASE_URL", System.getenv("BASE_URL")
-    environment "PROXY_PORT", System.getenv("PROXY_PORT")
 }
 
 gradle.startParameter.continueOnFailure = true

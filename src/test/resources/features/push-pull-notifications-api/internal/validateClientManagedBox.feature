@@ -1,7 +1,9 @@
 @feature
 Feature: Push Pull Notifications API - Client Managed Boxes
 
-  ### POST - Validate Client Managed Box Endpoint - Happy Path Scenarios
+  ### [POST] Validate Client Managed Box Endpoint
+
+  ### Happy Path Scenarios
 
   @validate-cmb @cmb @push-pull-notifications-api @regression-tests
   Scenario: Calling the validate client managed box endpoint with a belonging box ID passes validation
