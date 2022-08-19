@@ -20,7 +20,7 @@ Feature: Push Pull Notifications API - Client Managed Boxes
 
   ### POST - Validate Client Managed Box Endpoint - Accept Header Scenarios
 
-  #@cmb @push-pull-notifications-api @ppns @api-platform @regression-tests  - Need to update scenario so the reponse here is 406 {"code":"ACCEPT_HEADER_INVALID","message":"The accept header is missing or invalid"}
+  @validate-cmb @cmb @push-pull-notifications-api @regression-tests @imran
   Scenario: Calling the validate client managed box endpoint with an incorrect accept header version returns a matching resource not found response
     Given I have an incorrect accept header version
     And I have a valid JSON content type header
