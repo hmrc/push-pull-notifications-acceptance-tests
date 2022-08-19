@@ -64,25 +64,22 @@ Feature: Push Pull Notifications API - Delete A Client Managed Box
 
   ### Authorization Scenarios
 
-  @delete-cmb @cmb @push-pull-notifications-api @regression-tests @imran
+  @delete-cmb @cmb @push-pull-notifications-api @regression-tests
   Scenario: Calling the delete client managed box endpoint with an invalid bearer token - non client credentials token
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes"
     When I make a call to the delete client managed box endpoint with ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
     Then I get an unauthorised response due to an invalid bearer token
 
-  @delete-cmb @cmb @push-pull-notifications-api @regression-tests @imran
+  @delete-cmb @cmb @push-pull-notifications-api @regression-tests
   Scenario: Calling the delete client managed box endpoint with an expired bearer token
     Given I have a valid JSON content type header
     When I make a request to the external delete client managed box endpoint with an expired client credentials bearer token
     Then I get an unauthorised response due to invalid authentication information provided
 
-  @delete-cmb @cmb @push-pull-notifications-api @regression-tests @imran
+  @delete-cmb @cmb @push-pull-notifications-api @regression-tests
   Scenario: Calling the delete client managed box endpoint with an invalid scope returns a 401 unauthorised response
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "read:ppns-boxes"
     When I make a call to the delete client managed box endpoint with ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
     Then I get an unauthorised response due to an invalid bearer token
-
-
-  ### Expired token = 32b61a0150e231e38efeeb664c2a79a2

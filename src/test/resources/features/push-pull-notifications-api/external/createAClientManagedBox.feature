@@ -76,7 +76,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
     When I make a request to the external create client managed box endpoint with a new box name
     Then I get an unauthorised response due to an invalid bearer token
 
-  @create-cmb @cmb @push-pull-notifications-api @regression-tests
+  @create-cmb @cmb @push-pull-notifications-api @regression-tests #(Expired token = 32b61a0150e231e38efeeb664c2a79a2)
   Scenario: Calling the create client managed box endpoint with an expired bearer token
     Given I have a valid JSON content type header
     When I make a request to the external create client managed box endpoint with an expired client credentials bearer token

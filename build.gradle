@@ -10,8 +10,6 @@ task wrapper(type: Wrapper) {
 }
 
 repositories {
-//  mavenCentral()
-//  jcenter()
     mavenLocal()
     maven { url 'https://nexus-build.tax.service.gov.uk/content/groups/mdtp-proxied-maven-repositories/' }
 
@@ -19,8 +17,6 @@ repositories {
 
 buildscript {
     repositories {
-//    mavenCentral()
-//    jcenter()
         maven { url 'https://nexus-build.tax.service.gov.uk/content/groups/mdtp-proxied-maven-repositories/' }
     }
     dependencies {
