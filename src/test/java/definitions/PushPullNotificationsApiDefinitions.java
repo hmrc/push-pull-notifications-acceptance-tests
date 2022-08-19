@@ -262,7 +262,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the validate client managed box endpoint for box ID \"([^\"]*)\"$")
     public void iMakeRequestToTheValidateManageBoxEndpointForBoxId(String boxId) {
-        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"%s\",\"clientId\":\"%s\"}", config.cmbClientId(), boxId));
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"%s\",\"clientId\":\"%s\"}",boxId, config.cmbClientId()));
     }
 
     @When("^I make a request to the validate client managed box endpoint with an invalid box ID field name$")
