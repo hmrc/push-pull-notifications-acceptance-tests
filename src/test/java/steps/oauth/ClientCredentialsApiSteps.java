@@ -13,6 +13,10 @@ public class ClientCredentialsApiSteps extends AbstractOauthApiSteps {
     private final String cmbApplicationClientId = config.cmbClientId();
     private final String cmbApplicationClientSecret = config.cmbClientSecret();
 
+    private final String noBoxesApplicationClientId = config.noBoxesClientId();
+
+    private final String noBoxesApplicationClientSecret = config.noBoxesClientSecret();
+
     private RequestSpecification standardOauthRequestSpecificationForGivenScopeUsingClientCredentials(String grantType, String clientId, String clientSecret, String scope) {
         return oauthRequestSpecification(grantType,
                 HashMap.of(
@@ -37,6 +41,14 @@ public class ClientCredentialsApiSteps extends AbstractOauthApiSteps {
     @Step
     public void successfullyGenerateAccessTokenForGivenScopeForCmbAppUsingClientCredentials(String scope) {
         RequestSpecification spec = standardOauthRequestSpecificationForGivenScopeUsingClientCredentials(cmbApplicationClientId, cmbApplicationClientSecret, scope);
+        callOauthTokenEndpoint(spec);
+        assertLastOauthCallSucceeded();
+        extractToken(lastOauthResponse);
+    }
+
+    @Step
+    public void successfullyGenerateAccessTokenForGivenScopeForNoBoxesAppUsingClientCredentials(String scope) {
+        RequestSpecification spec = standardOauthRequestSpecificationForGivenScopeUsingClientCredentials(noBoxesApplicationClientId, noBoxesApplicationClientSecret, scope);
         callOauthTokenEndpoint(spec);
         assertLastOauthCallSucceeded();
         extractToken(lastOauthResponse);

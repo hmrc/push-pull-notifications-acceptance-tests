@@ -492,10 +492,16 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 //        pushPullNotificationsApiSteps.assertBoxGeneratedWithNoPayload();
 //    }
 
-    @Then("^I get a successful response with default and CMBs displayed$")
-    public void iGetASuccessfulResponse() {
+    @Then("^I get a successful response with default and client managed boxes displayed$")
+    public void iGetASuccessfulResponseWithDefaultAndClientManagedBoxesDisplayed() {
         responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.assertListOfBoxes();
+    }
+
+    @Then("^I get a successful response with no boxes displayed$")
+    public void iGetASuccessfulResponseWithNoBoxesDisplayed() {
+        responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertNoBoxes();
     }
 
     @Then("^A new box is successfully generated$")

@@ -8,4 +8,6 @@ export BLOCKED_AUTH_SERVER_TOKEN=5342f365fc8975f8b8a529d98540bdad
 export CALLBACK_URL=https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications
 export CMB_AUTH_CLIENT_ID=9D3NPzbVh7yL09zUzTYO56c7Ciwt
 export CMB_AUTH_CLIENT_SECRET=4b948c68-a3df-45a3-b06e-454c24e02752
+export NO_BOXES_AUTH_CLIENT_ID=yrGGAiKaKFHF5IBN4KdWGEoMIaza
+export NO_BOXES_AUTH_CLIENT_SECRET=1b61b794-d4ec-4569-ad30-a59659fed69c
 export PROXY_PORT=18888

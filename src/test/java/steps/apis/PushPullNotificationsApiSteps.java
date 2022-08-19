@@ -12,9 +12,11 @@ import java.util.Date;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.collection.IsIn.oneOf;
 
@@ -382,21 +384,28 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     @Step
     public void assertListOfBoxes() {
         //Assert Client Managed Box
+        response().body("boxId", is("a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"));
         response().body("boxName", hasItem(("My First Client Managed Box")));
         response().body("clientManaged", hasItem((true)));
         response().body("subscriber.subscribedDateTime", hasItem(("2022-06-28T16:04:44.193+0000")));
 
         //Assert Default Box
+        response().body("boxId", is("e0284be5-9102-4af9-8575-529a45808239"));
         response().body("boxName", hasItem(("DEFAULT")));
         response().body("subscriber.subscribedDateTime", hasItem(("2022-08-18T13:19:25.312+0000")));
         response().body("clientManaged", hasItem((false)));
 
         //Assert Common Fields & Values Present for both default and CMBs
-        response().body("boxId", everyItem(is(notNullValue())));
         response().body("boxCreator.clientId", everyItem(is(config.cmbClientId())));
         response().body("applicationId", everyItem(is("93a3c5da-a731-4d8b-b180-5463e49da76b")));
-        response().body("subscriber.callBackUrl", everyItem(is("https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications"))); //needs to be every item
+        response().body("subscriber.callBackUrl", everyItem(is(format("%s", config.callbackUrl()))));
         response().body("subscriber.subscriptionType", everyItem(is("API_PUSH_SUBSCRIBER")));
+    }
+
+    @Step
+    public void assertNoBoxes() {
+        String results = response().extract().path("").toString();
+        assertThat(results, equalTo(("[]")));
     }
 
     public void asserValidateClientManagedBoxResponse(Boolean validValue) {

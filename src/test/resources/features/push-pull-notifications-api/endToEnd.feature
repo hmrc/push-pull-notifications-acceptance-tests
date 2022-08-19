@@ -1,5 +1,5 @@
 @feature
-Feature: Push Pull Notifications API
+Feature: Push Pull Notifications API - End To End Journey
 
   ### End to end scenario - Includes internal and external endpoints
 
