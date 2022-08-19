@@ -384,18 +384,20 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     @Step
     public void assertListOfBoxes() {
         //Assert Client Managed Box
-        response().body("boxId", is("a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"));
+        response().body("boxId", hasItem("a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"));
         response().body("boxName", hasItem(("My First Client Managed Box")));
-        response().body("clientManaged", hasItem((true)));
         response().body("subscriber.subscribedDateTime", hasItem(("2022-06-28T16:04:44.193+0000")));
+        response().body("clientManaged", hasItem((true)));
+
 
         //Assert Default Box
-        response().body("boxId", is("e0284be5-9102-4af9-8575-529a45808239"));
+        response().body("boxId", hasItem("e0284be5-9102-4af9-8575-529a45808239"));
         response().body("boxName", hasItem(("DEFAULT")));
         response().body("subscriber.subscribedDateTime", hasItem(("2022-08-18T13:19:25.312+0000")));
         response().body("clientManaged", hasItem((false)));
 
         //Assert Common Fields & Values Present for both default and CMBs
+
         response().body("boxCreator.clientId", everyItem(is(config.cmbClientId())));
         response().body("applicationId", everyItem(is("93a3c5da-a731-4d8b-b180-5463e49da76b")));
         response().body("subscriber.callBackUrl", everyItem(is(format("%s", config.callbackUrl()))));
