@@ -3,13 +3,13 @@ Feature: Push Pull Notifications API - Validate Callback URL
 
   ### [PUT] Validate Callback URL
 
-  @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests
+  @validate-callback @push-pull-notifications-api @regression-tests
   Scenario: Calling the validate callback endpoint with a correct URL passes validation
     Given I have all valid request headers for PPNS
     When I make a request to the validate callback endpoint with a correct URL
     Then I get a successful response with a successful true response message
 
-  @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests
+  @validate-callback @push-pull-notifications-api @regression-tests
   Scenario: Calling the validate callback endpoint with an incorrect URL fails validation
     Given I have all valid request headers for PPNS
     When I make a request to the validate callback endpoint with an incorrect URL
@@ -39,40 +39,40 @@ Feature: Push Pull Notifications API - Validate Callback URL
     When I make a request to the validate callback endpoint with no request body
     Then I get a bad request response due to an invalid request payload
 
-  @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests
+  @validate-callback @push-pull-notifications-api @regression-tests
   Scenario: Calling the validate callback endpoint with an invalid client ID returns a 401 Unauthorsied
     Given I have all valid request headers for PPNS
     When I make a request to the validate callback endpoint with a different client ID
     Then I get an unauthorised response due to client ID mismatch
 
-  @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests
+  @validate-callback @push-pull-notifications-api @regression-tests
   Scenario: Calling the validate callback endpoint with a box that does not exist returns a 404 not found
     Given I have all valid request headers for PPNS
     When I make a request to the validate callback endpoint for a box that does not exist
     Then I get a not found response due to box not found
 
-  @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests
+  @validate-callback @push-pull-notifications-api @regression-tests
   Scenario: Calling the validate callback endpoint with an invalid content type header returns a 415 unsupported media type
     Given I have a valid user agent header
     And I have an invalid content type header
     When I make a request to the validate callback endpoint with a correct URL
     Then I get an unsupported media type response
 
-  @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests
+  @validate-callback @push-pull-notifications-api @regression-tests
   Scenario: Calling the validate callback endpoint with no content type header returns a 415 unsupported media type
     Given I have a valid user agent header
     And I have no content type header
     When I make a request to the validate callback endpoint with a correct URL
     Then I get an unsupported media type response
 
-  @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests
+  @validate-callback @push-pull-notifications-api @regression-tests
   Scenario: Calling the validate callback endpoint with an invalid agent header returns a 403 forbidden
     Given I have an invalid user agent header
     And I have a valid JSON content type header
     When I make a request to the validate callback endpoint with a correct URL
     Then I get a forbidden response due to an invalid agent header
 
-  @push-pull-notifications-api @ppns @external-endpoint @api-platform @regression-tests
+  @validate-callback @push-pull-notifications-api @regression-tests
   Scenario: Calling the validate callback endpoint with no agent header returns 403 forbidden
     Given I have no user agent header
     And I have a valid JSON content type header
