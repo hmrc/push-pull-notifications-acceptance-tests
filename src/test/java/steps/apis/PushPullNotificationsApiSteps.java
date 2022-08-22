@@ -248,7 +248,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                 given()
                         .spec(specification())
                         .get(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then().log().all()
+                        .then()
         );
     }
 
@@ -260,7 +260,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .header("Authorization", "Bearer 32b61a0150e231e38efeeb664c2a79a2")
                         .spec(specification())
                         .get(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then().log().all()
+                        .then()
         );
     }
 
@@ -285,7 +285,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .spec(specification())
                         .body(jsonPayload)
                         .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then().log().all()
+                        .then()
         );
     }
 
@@ -317,9 +317,9 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         response(
                 given()
                         .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
-                        .spec(specification()).log().all()
+                        .spec(specification())
                         .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + clientManagedBoxId)
-                        .then().log().all()
+                        .then()
         );
     }
 
