@@ -4,7 +4,6 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import net.thucydides.core.annotations.Step;
 import steps.payloads.BoxPayload;
-import steps.payloads.ClientManagedBoxPayload;
 import steps.payloads.InvalidBoxPayload;
 
 import java.text.SimpleDateFormat;
@@ -13,13 +12,19 @@ import java.util.Date;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.collection.IsIn.oneOf;
 
 public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
     private final String apiContext = "misc/push-pull-notification/box";
+
+    private final String cmbApiContext = "misc/push-pull-notification/cmb";
     private String authorizationKey;;
     private String userAgent;
     private String internalBearerToken;
@@ -237,18 +242,85 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     }
 
     @Step
-    public void iMakeACallToCreateClientManageBox(String boxName) {
-        builder().withNoProxy();
+    public void iMakeACallToExternalGetAListOfdBoxes() {
 
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(new ClientManagedBoxPayload(boxName));
+        response(
+                given()
+                        .spec(specification())
+                        .get(format("%s/%s/box", baseApiUrl(), cmbApiContext))
+                        .then()
+        );
+    }
 
-        if (internalBearerToken != null) {
-            spec = spec.header("Authorization", internalBearerToken);
-        }
+    @Step
+    public void iMakeACallToExternalGetAListOfBoxesWithExpiredToken() {
 
-        response(spec.put(format(PUSH_PULL_CREATE_CMB_BOX_URL)).then());
+        response(
+                given()
+                        .header("Authorization", "Bearer 32b61a0150e231e38efeeb664c2a79a2")
+                        .spec(specification())
+                        .get(format("%s/%s/box", baseApiUrl(), cmbApiContext))
+                        .then()
+        );
+    }
+
+    @Step
+    public void iMakeACallToExternalCreateClientManagedBox(String jsonPayload) {
+
+        response(
+                given()
+                        .spec(specification())
+                        .body(jsonPayload)
+                        .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
+                        .then()
+        );
+    }
+
+    @Step
+    public void iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(String jsonPayload) {
+
+        response(
+                given()
+                        .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
+                        .spec(specification())
+                        .body(jsonPayload)
+                        .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
+                        .then()
+        );
+    }
+
+    @Step
+    public void iMakeACallToExternalDeleteClientManageBoxWithNewClientManagedBoxId() {
+
+        response(
+                given()
+                        .spec(specification())
+                        .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + newClientManagedBoxId)
+                        .then()
+        );
+    }
+
+    @Step
+    public void iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId(String clientManagedBoxId) {
+
+        response(
+                given()
+                        .spec(specification())
+                        .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + clientManagedBoxId)
+                        .then()
+        );
+    }
+
+    @Step
+    public void iMakeACallToExternalDeleteClientManageBoxWithExpiredBearerToken(String clientManagedBoxId) {
+
+        response(
+                given()
+                        .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
+                        .spec(specification())
+                        .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + clientManagedBoxId)
+                        .then()
+        );
     }
 
     @Step
@@ -307,7 +379,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
     @Step
     public void assertBoxGenerated() {
-        response().body("boxId", is("5fc1f8e5-8881-4863-8a8c-5c897bb56815"));
+        response().body("boxId", is("de9aed9c-b319-49a4-99e9-a8a659fc0bf6"));
     }
 
     @Step
@@ -318,6 +390,36 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     @Step
     public void assertNewClientManagedBoxGenerated() {
         newClientManagedBoxId = response().extract().path("boxId").toString();
+        response().body("boxId", is(newClientManagedBoxId));
+    }
+
+    @Step
+    public void assertListOfBoxes() {
+        //Assert Client Managed Box
+        response().body("boxId", hasItem("a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"));
+        response().body("boxName", hasItem(("My First Client Managed Box")));
+        response().body("subscriber.subscribedDateTime", hasItem(("2022-06-28T16:04:44.193+0000")));
+        response().body("clientManaged", hasItem((true)));
+
+
+        //Assert Default Box
+        response().body("boxId", hasItem("e0284be5-9102-4af9-8575-529a45808239"));
+        response().body("boxName", hasItem(("DEFAULT")));
+        response().body("subscriber.subscribedDateTime", hasItem(("2022-08-18T13:19:25.312+0000")));
+        response().body("clientManaged", hasItem((false)));
+
+        //Assert Common Fields & Values Present for both default and CMBs
+
+        response().body("boxCreator.clientId", everyItem(is(config.cmbClientId())));
+        response().body("applicationId", everyItem(is("93a3c5da-a731-4d8b-b180-5463e49da76b")));
+        response().body("subscriber.callBackUrl", everyItem(is(format("%s", config.callbackUrl()))));
+        response().body("subscriber.subscriptionType", everyItem(is("API_PUSH_SUBSCRIBER")));
+    }
+
+    @Step
+    public void assertNoBoxes() {
+        String results = response().extract().path("").toString();
+        assertThat(results, equalTo(("[]")));
     }
 
     public void asserValidateClientManagedBoxResponse(Boolean validValue) {
@@ -347,7 +449,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     public void assertNewBoxExists() {
         response().body("boxId", is(newBoxId));
         response().body("boxName", is(newBoxName));
-        response().body("boxCreator.clientId", is("3ZdSQUrCrLEoyXFRjCgmj60qlfAa"));
+        response().body("boxCreator.clientId", is(config.clientId()));
     }
 
     @Step

@@ -50,6 +50,27 @@ public class Configuration {
         return required("AUTH_SERVER_TOKEN");
     }
 
+    public String callbackUrl() {
+        return required("CALLBACK_URL");
+    }
+
+    public String cmbClientId() {
+        return required("CMB_AUTH_CLIENT_ID");
+    }
+
+    public String cmbClientSecret() {
+        return required("CMB_AUTH_CLIENT_SECRET");
+    }
+
+    public String noBoxesClientId() {
+        return required("NO_BOXES_AUTH_CLIENT_ID");
+    }
+
+    public String noBoxesClientSecret() {
+        return required("NO_BOXES_AUTH_CLIENT_SECRET");
+    }
+
+
     public String blockedAuthServerToken() {
         return required("BLOCKED_AUTH_SERVER_TOKEN");
     }
