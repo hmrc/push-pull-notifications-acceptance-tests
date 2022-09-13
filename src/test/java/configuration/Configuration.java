@@ -1,7 +1,7 @@
 package configuration;
 
+import net.thucydides.core.environment.SystemEnvironmentVariables;
 import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
 import org.apache.commons.lang3.Validate;
 
 public class Configuration {

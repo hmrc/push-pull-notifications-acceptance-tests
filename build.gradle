@@ -1,43 +1,40 @@
-apply plugin: 'java'
-apply plugin: 'net.serenity-bdd.aggregator'
-
-sourceCompatibility = 1.8
-version = 1.0
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.10.2'
-    distributionUrl = distributionUrl.replace("bin", "all")
-}
+defaultTasks 'clean', 'test', 'aggregate'
 
 repositories {
-    mavenLocal()
-    maven { url 'https://nexus-build.tax.service.gov.uk/content/groups/mdtp-proxied-maven-repositories/' }
+    mavenCentral()
+//    mavenLocal()
+//    maven { url 'https://nexus-build.tax.service.gov.uk/content/groups/mdtp-proxied-maven-repositories/' }
 
 }
 
 buildscript {
+    apply from: "./properties.gradle"
     repositories {
-        maven { url 'https://nexus-build.tax.service.gov.uk/content/groups/mdtp-proxied-maven-repositories/' }
+        maven { url "https://plugins.gradle.org/m2/" }
+//        maven { url 'https://nexus-build.tax.service.gov.uk/content/groups/mdtp-proxied-maven-repositories/' }
     }
     dependencies {
-        classpath("net.serenity-bdd:serenity-gradle-plugin:2.3.12")
+        classpath "net.serenity-bdd:serenity-gradle-plugin:${serenityCoreVersion}"
     }
 }
 
+apply from: "./properties.gradle"
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 dependencies {
-    testCompile group: 'com.google.guava', name: 'guava', version: '25.1-jre'
-    testCompile group: 'net.lightbody.bmp', name: 'browsermob-core', version: '2.1.5'
-    testCompile group: 'net.serenity-bdd', name: 'serenity-core', version: '2.3.12'
-    testCompile group: 'net.serenity-bdd', name: 'serenity-junit', version: '2.3.12'
-    testCompile group: 'net.serenity-bdd', name: 'serenity-rest-assured', version: '2.3.12'
-    testCompile group: 'net.serenity-bdd', name: 'serenity-cucumber6', version: '2.3.12'
-    testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: '2.2'
-    testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: '2.2'
-    testCompile group: 'uk.gov.hmrc', name: 'totp-generator_2.11', version: '0.19.0'
-    testCompile 'org.assertj:assertj-core:1.7.0'
-    testCompile 'org.slf4j:slf4j-simple:1.7.7'
-    testCompile('org.seleniumhq.selenium:selenium-java:3.141.59') { force = true }
-    testCompile('org.seleniumhq.selenium:selenium-api:3.141.59') { force = true }
+    implementation "ch.qos.logback:logback-classic:${logbackVersion}"
+
+    testImplementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}",
+            "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-rest-assured:${serenityCoreVersion}",
+            "junit:junit:${junitVersion}",
+            "org.assertj:assertj-core:${assertJVersion}"
 }
 
 test {
@@ -57,4 +54,13 @@ test {
     }
 }
 
+serenity {
+    // Specify the root package of any JUnit acceptance tests to appear in the Serenity report
+    testRoot = ""
+    // Specify the root directory of any Cucumber feature files
+    requirementsDir = "src/test/resources/features"
+}
+
 gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)

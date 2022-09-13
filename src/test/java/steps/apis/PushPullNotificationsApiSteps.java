@@ -12,28 +12,12 @@ import java.util.Date;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.collection.IsIn.oneOf;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.hasItems;
 
 public class PushPullNotificationsApiSteps extends CommonApiSteps {
-
-    private final String apiContext = "misc/push-pull-notification/box";
-
-    private final String cmbApiContext = "misc/push-pull-notification/cmb";
-    private String authorizationKey;;
-    private String userAgent;
-    private String internalBearerToken;
-    private String clientId;
-    private String boxName;
-    private String newBoxId;
-    private String newClientManagedBoxId;
-    private String notificationId;
-    private String newBoxName = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
     //private static final String BASE_URL = "http://localhost:6701";
     private static final String BASE_URL = "https://push-pull-notifications-api.protected.mdtp";
@@ -46,6 +30,17 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     private static final String PUSH_PULL_SECRETS_URL = "%s/client/%s/secrets";
     private static final String PUSH_PULL_CREATE_CMB_BOX_URL = format("%s/cmb/box", BASE_URL);
     private static final String PUSH_PULL_VALIDATE_CMB_BOX_URL = format("%s/cmb/validate", BASE_URL);
+    private final String apiContext = "misc/push-pull-notification/box";
+    private final String cmbApiContext = "misc/push-pull-notification/cmb";
+    private String authorizationKey;
+    private String userAgent;
+    private String internalBearerToken;
+    private String clientId;
+    private String boxName;
+    private String newBoxId;
+    private String newClientManagedBoxId;
+    private String notificationId;
+    private final String newBoxName = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
     public String getNewBoxName() {
         return newBoxName;

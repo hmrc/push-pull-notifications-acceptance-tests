@@ -11,10 +11,9 @@ import steps.helpers.RequestHelper;
 public class CommonApiSteps extends HasConfiguration {
 
     @Steps(shared = true)
-    private RequestHelper requestHelper;
-
-    @Steps(shared = true)
     protected CommonResponseSteps commonResponseSteps;
+    @Steps(shared = true)
+    private RequestHelper requestHelper;
 
     //
     // Helper methods to save indirection to steps

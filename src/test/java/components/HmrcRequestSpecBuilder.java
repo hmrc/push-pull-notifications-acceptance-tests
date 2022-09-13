@@ -6,16 +6,13 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import net.thucydides.core.annotations.Step;
-import org.mockito.internal.matchers.Null;
 
-import java.io.File;
 import java.io.IOException;
-
-import static io.restassured.http.ContentType.JSON;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Wraps a RequestSpecBuilder in order to allow for defaulting without explicit Cucumber steps.

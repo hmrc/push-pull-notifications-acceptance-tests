@@ -5,9 +5,10 @@ import configuration.HasConfiguration;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
-import io.vavr.collection.Map;
 import net.thucydides.core.annotations.Step;
 import org.apache.commons.lang3.Validate;
+
+import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -17,6 +18,7 @@ import static org.hamcrest.CoreMatchers.not;
 public abstract class AbstractOauthApiSteps extends HasConfiguration {
 
     protected ValidatableResponse lastOauthResponse;
+    private String accessToken;
 
     protected final void callOauthTokenEndpoint(RequestSpecification spec) {
         String oauthTokenUrl = String.format("%s/oauth/token", baseApiUrl());
@@ -26,13 +28,11 @@ public abstract class AbstractOauthApiSteps extends HasConfiguration {
                 .then();
     }
 
-    private String accessToken;
-
     protected final void extractToken(ValidatableResponse response) {
         accessToken = response.extract().path("access_token").toString();
     }
 
-    protected final RequestSpecification oauthRequestSpecification(String grantType, Map<String, String> params) {
+    protected final RequestSpecification oauthRequestSpecification(String grantType, HashMap<String, String> params) {
         RequestSpecification base = given()
                 .contentType(ContentType.URLENC)
                 .accept("application/vnd.hmrc.1.0+json")
@@ -43,20 +43,20 @@ public abstract class AbstractOauthApiSteps extends HasConfiguration {
         }
 
         // Add all parameters to the request specification
-        return
-                params.foldRight(base,
-                        (paramKV, requestSpec) -> requestSpec.formParam(paramKV._1, paramKV._2)
-                );
+        for (String key : params.keySet()) {
+            base.formParam(key, params.get(key));
+        }
+        return base;
     }
 
     final RequestSpecification oauthRequestSpecificationWithJsonPayload(String accessCode, Configuration config) {
         final String payload = String.format("{" +
-                        "  \"grant_type\": \"authorization_code\"," +
-                        "  \"code\": \"%s\"," +
-                        "  \"client_id\": \"%s\"," +
-                        "  \"client_secret\": \"%s\"," +
-                        "  \"redirect_uri\": \"%s\"" +
-                        "}", accessCode, config.clientId(), config.clientSecret(), config.authRedirectUri());
+                "  \"grant_type\": \"authorization_code\"," +
+                "  \"code\": \"%s\"," +
+                "  \"client_id\": \"%s\"," +
+                "  \"client_secret\": \"%s\"," +
+                "  \"redirect_uri\": \"%s\"" +
+                "}", accessCode, config.clientId(), config.clientSecret(), config.authRedirectUri());
         final RequestSpecification requestSpecification = given()
                 .contentType(JSON)
                 .accept("application/vnd.hmrc.1.0+json")

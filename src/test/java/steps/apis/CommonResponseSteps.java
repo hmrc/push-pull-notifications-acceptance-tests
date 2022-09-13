@@ -5,15 +5,18 @@ import io.restassured.response.ValidatableResponse;
 import net.thucydides.core.annotations.Step;
 import org.hamcrest.Matcher;
 
-import static io.restassured.http.ContentType.*;
+import static io.restassured.http.ContentType.JSON;
+import static io.restassured.http.ContentType.XML;
 import static org.hamcrest.CoreMatchers.is;
 
 public class CommonResponseSteps {
 
     private ValidatableResponse response;
+
     public void response(ValidatableResponse response) {
         this.response = response;
     }
+
     public ValidatableResponse response() {
         return response;
     }
