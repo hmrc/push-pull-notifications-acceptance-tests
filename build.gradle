@@ -34,7 +34,8 @@ dependencies {
             "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}",
             "net.serenity-bdd:serenity-rest-assured:${serenityCoreVersion}",
             "junit:junit:${junitVersion}",
-            "org.assertj:assertj-core:${assertJVersion}"
+            "org.assertj:assertj-core:${assertJVersion}",
+            "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.4"
 }
 
 test {
