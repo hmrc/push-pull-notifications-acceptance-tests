@@ -1,6 +1,5 @@
 package definitions;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import steps.helpers.AuthTokenHelper;

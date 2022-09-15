@@ -3,10 +3,9 @@ package steps.oauth;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
-import io.vavr.collection.HashMap;
 import net.thucydides.core.annotations.Step;
-import steps.oauth.AbstractOauthApiSteps;
 
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,11 +22,11 @@ public class OauthApiSteps extends AbstractOauthApiSteps {
     private String oldRefreshToken;
 
     private RequestSpecification commonOauthRequestSpecification(String grantType) {
-        return oauthRequestSpecification(grantType, HashMap.of(
-                "client_id", config.clientId(),
-                "client_secret", config.clientSecret(),
-                "redirect_uri", config.authRedirectUri()
-        ));
+        HashMap<String, String> credentials = new HashMap<>();
+        credentials.put("client_id", config.clientId());
+        credentials.put("client_secret", config.clientSecret());
+        credentials.put("redirect_uri", config.authRedirectUri());
+        return oauthRequestSpecification(grantType, credentials);
     }
 
     private RequestSpecification commonOauthRequestSpecification(String grantType, String paramName, String paramValue) {

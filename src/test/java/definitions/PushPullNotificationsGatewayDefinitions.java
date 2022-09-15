@@ -4,20 +4,18 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
-import steps.oauth.OauthApiSteps;
 import steps.apis.PushPullNotificationsGatewaySteps;
 import steps.helpers.ContentTypeHeaderHelper;
+import steps.oauth.OauthApiSteps;
 
 public class PushPullNotificationsGatewayDefinitions extends CommonDefinitions {
 
-    @Steps(shared = true)
-    private OauthApiSteps oauthApiSteps;
-
-    @Steps
-    private PushPullNotificationsGatewaySteps pushPullNotificationsGatewaySteps;
-
     @Steps
     ContentTypeHeaderHelper contentTypeHeaderHelper;
+    @Steps(shared = true)
+    private OauthApiSteps oauthApiSteps;
+    @Steps
+    private PushPullNotificationsGatewaySteps pushPullNotificationsGatewaySteps;
 
     @Given("^I have a valid authorization key for PPNS gateway$")
     public void iHaveAValidAuthorizationKeyForPPNSGateway() {
@@ -33,7 +31,7 @@ public class PushPullNotificationsGatewayDefinitions extends CommonDefinitions {
     @Given("^I have no authorization key for PPNS gateway$")
     public void iHaveNoAuthorizationKeyForPPNSGateway() {
         pushPullNotificationsGatewaySteps.withAuthorizationKey("");
-        contentTypeHeaderHelper.withJsonContentTypeHeader();;
+        contentTypeHeaderHelper.withJsonContentTypeHeader();
     }
 
     @Given("^I have a valid user agent header for PPNS gateway$")

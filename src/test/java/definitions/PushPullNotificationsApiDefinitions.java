@@ -6,24 +6,21 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
-import steps.oauth.OauthApiSteps;
 import steps.apis.PushPullNotificationsApiSteps;
 import steps.helpers.ContentTypeHeaderHelper;
+import steps.oauth.OauthApiSteps;
 
 import static java.lang.String.format;
 
 public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     protected Configuration config = new Configuration();
-
-    @Steps(shared = true)
-    private OauthApiSteps oauthApiSteps;
-
-    @Steps
-    private PushPullNotificationsApiSteps pushPullNotificationsApiSteps;
-
     @Steps
     ContentTypeHeaderHelper contentTypeHeaderHelper;
+    @Steps(shared = true)
+    private OauthApiSteps oauthApiSteps;
+    @Steps
+    private PushPullNotificationsApiSteps pushPullNotificationsApiSteps;
 
     @Given("^I have a valid user agent header$")
     public void iHaveAValidUserAgentHeader() {
@@ -49,6 +46,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     public void iHaveAnInvalidAuthorizationKeyForThePpnsApi() {
         pushPullNotificationsApiSteps.withAuthorizationKey("invalidioPe1z6PwXQp4IKwtXkCQWbsPlauGCk9C0sUcFPMIWBhMEaxzs");
     }
+
     @Given("^I have all valid request headers for PPNS$")
     public void iHaveAllValidRequestHeadersForPpns() {
         pushPullNotificationsApiSteps.withUserAgent("api-subscription-fields");
@@ -144,7 +142,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the callback endpoint where no box exists$")
     public void iMakeARequestToTheCallbackEndpointWhereNoBoxExists() {
-        pushPullNotificationsApiSteps.iMakeACallToCallbackWhereNoBoxExists(format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}",config.clientId(), config.callbackUrl()));
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWhereNoBoxExists(format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}", config.clientId(), config.callbackUrl()));
     }
 
     @When("^I make a request to the create notification endpoint with a valid JSON payload$")
@@ -262,7 +260,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the validate client managed box endpoint for box ID \"([^\"]*)\"$")
     public void iMakeRequestToTheValidateManageBoxEndpointForBoxId(String boxId) {
-        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"%s\",\"clientId\":\"%s\"}",boxId, config.cmbClientId()));
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"%s\",\"clientId\":\"%s\"}", boxId, config.cmbClientId()));
     }
 
     @When("^I make a request to the validate client managed box endpoint with an invalid box ID field name$")

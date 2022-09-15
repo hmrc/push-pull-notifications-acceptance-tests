@@ -7,11 +7,10 @@ import static io.restassured.RestAssured.given;
 
 public class PushPullNotificationsGatewaySteps extends CommonApiSteps {
 
-    private String authorizationKey;
-    private String userAgent;
-
     //private static final String PUSH_PULL_GATEWAY_NOTIFY_URL = "http://localhost:6702";
     private static final String PUSH_PULL_GATEWAY_NOTIFY_URL = "https://push-pull-notifications-gateway.public.mdtp";
+    private String authorizationKey;
+    private String userAgent;
 
     public void iMakeACallToNotifyWithPayload(String jsonPayload) {
         RequestSpecification spec = given()
@@ -41,7 +40,7 @@ public class PushPullNotificationsGatewaySteps extends CommonApiSteps {
             spec = spec.header("User-Agent", userAgent);
         }
 
-        response(spec.post((PUSH_PULL_GATEWAY_NOTIFY_URL + "/notify" )).then());
+        response(spec.post((PUSH_PULL_GATEWAY_NOTIFY_URL + "/notify")).then());
     }
 
     public void iMakeACallToValidateCallbackUrlWithPayload(String jsonPayload) {
@@ -72,7 +71,7 @@ public class PushPullNotificationsGatewaySteps extends CommonApiSteps {
             spec = spec.header("User-Agent", userAgent);
         }
 
-        response(spec.post((PUSH_PULL_GATEWAY_NOTIFY_URL + "/validate-callback" )).then());
+        response(spec.post((PUSH_PULL_GATEWAY_NOTIFY_URL + "/validate-callback")).then());
     }
 
     @Step
