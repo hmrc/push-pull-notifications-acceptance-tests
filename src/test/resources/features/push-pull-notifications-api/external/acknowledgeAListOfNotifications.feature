@@ -5,7 +5,14 @@ Feature: Push Pull Notifications API - Acknowledge A List Of Notifications
 
   ### Happy Path Scenarios
 
-  @acknowledge-notifications @push-pull-notifications-api @regression-tests
+  ## Do we want to add a test for attempting to acknowledge notifications for a box that does not belong to us.
+
+  # Currently this returns a 401, but if we want it to be consistent with the get list of notifications end point it should be a 403 - Forbidden / Acess Denied. Scenario Template:
+  # The error sscenario table suggests in this instance it should be a 403, so we should maybe fix this as part of another ticket
+
+  # Another thing to note is that we did not have 401s included in the error scenarios table so I dont think we should include 401s for the endpoints
+
+  @acknowledge-notifications @push-pull-notifications-api @regression-tests @imran
   Scenario: Calling the external put acknowledge notifications endpoint works
     Given I have all valid request headers for PPNS
     And I have a valid bearer token for scope "read:pull-notifications write:notifications" for my standard application using client credentials
