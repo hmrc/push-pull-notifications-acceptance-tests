@@ -162,33 +162,33 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         aNotificationsIsSuccessfullyGenerated();
     }
 
-    @When("^I make a request to the validate callback endpoint with a correct URL$")
-    public void iMakeRequestToTheValidateCallBackEndpointWithACorrectUrl() {
+    @When("^I make a request to the callback endpoint with a correct URL$")
+    public void iMakeRequestToTheCallBackEndpointWithACorrectUrl() {
         pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
     }
 
-    @When("^I make a request to the validate callback endpoint with an incorrect URL$")
-    public void iMakeRequestToTheValidateCallBackEndpointWithAnIncorrectUrl() {
+    @When("^I make a request to the callback endpoint with an incorrect URL$")
+    public void iMakeRequestToTheCallBackEndpointWithAnIncorrectUrl() {
         pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"https://invalid.callbac.url\"}", config.clientId())));
     }
 
-    @When("^I make a request to the validate callback endpoint for a box that does not exist$")
-    public void iMakeRequestToTheValidateCallBackEndpointForABoxThatDoesNotExist() {
+    @When("^I make a request to the callback endpoint for a box that does not exist$")
+    public void iMakeRequestToTheCallBackEndpointForABoxThatDoesNotExist() {
         pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196388", (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
     }
 
-    @When("^I make a request to the validate callback endpoint with a different client ID$")
-    public void iMakeRequestToTheValidateCallBackEndpointWithADifferentClientId() {
+    @When("^I make a request to the callback endpoint with a different client ID$")
+    public void iMakeRequestToTheCallBackEndpointWithADifferentClientId() {
         pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", (format("{\"clientId\" : \"DxSao_5J8fsj3bsgfyr7aWj9UcQa\", \"callbackUrl\" : \"%s\"}", config.callbackUrl())));
     }
 
-    @When("^I make a request to the validate callback endpoint with invalid field names$")
+    @When("^I make a request to the callback endpoint with invalid field names$")
     public void iMakeRequestToTheValidateCallBackEndpointWithInvalidFieldNames() {
         pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", (format("{\"invalidId\" : \"%s\", \"invalidUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
     }
 
-    @When("^I make a request to the validate callback endpoint with no field values$")
-    public void iMakeRequestToTheValidateCallBackEndpointWithNoFieldValues() {
+    @When("^I make a request to the callback endpoint with no field values$")
+    public void iMakeRequestToTheCallBackEndpointWithNoFieldValues() {
         pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", "{\"clientId\" : \"\", \"callbackUrl\" : \"\"}");
     }
 
@@ -304,8 +304,8 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox("");
     }
 
-    @When("^I make a request to the validate callback endpoint with no request body")
-    public void iMakeRequestToTheValidateCallBackEndpointWithNoRequestBody() {
+    @When("^I make a request to the callback endpoint with no request body")
+    public void iMakeRequestToTheCallBackEndpointWithNoRequestBody() {
         pushPullNotificationsApiSteps.iMakeACallTCallbackWithNoPayload("5fc1f8e5-8881-4863-8a8c-5c897bb5681");
     }
 
