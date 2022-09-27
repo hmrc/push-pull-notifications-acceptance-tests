@@ -491,7 +491,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         response(
                 given()
                         .spec(specification())
-                        .body(format("{\"notificationIds\": [\"%s\"]}", notificationId)).log().all()
+                        .body(format("{\"notificationIds\": [\"%s\"]}", notificationId))
                         .put(format("%s/%s/%s/notifications/acknowledge", baseApiUrl(), apiContext, boxId))
                         .then().log().all()
         );
