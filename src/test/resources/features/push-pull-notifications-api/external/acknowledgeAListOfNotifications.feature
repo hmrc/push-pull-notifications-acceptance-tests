@@ -5,12 +5,13 @@ Feature: Push Pull Notifications API - Acknowledge A List Of Notifications
 
   ### Happy Path Scenarios
 
-  ## Do we want to add a test for attempting to acknowledge notifications for a box that does not belong to us.
+  # Add a test for attempting to acknowledge notifications for a box that does not belong to us.
 
-  # Currently this returns a 401, but if we want it to be consistent with the get list of notifications end point it should be a 403 - Forbidden / Acess Denied. Scenario Template:
-  # The error sscenario table suggests in this instance it should be a 403, so we should maybe fix this as part of another ticket
+  # Another difference I just observed is we get 403's Forbidden when trying to access boxes that don't belong to us on the existing endpoints
+  # whereas for the delete client managed box we return a 404. We could make this both to 403s if we wanted?
 
-  # Another thing to note is that we did not have 401s included in the error scenarios table so I dont think we should include 401s for the endpoints
+  # We return 403s for boxes that are default boxes for delete client managed boxes
+
 
   @acknowledge-notifications @push-pull-notifications-api @regression-tests @imran
   Scenario: Calling the external put acknowledge notifications endpoint works
