@@ -3,6 +3,8 @@ Feature: Push Pull Notifications API - Get Boxes
 
   ### [GET] Get Boxes Endpoint
 
+  ### Happy Path Scenarios
+
   @get-box @push-pull-notifications-api @regression-tests
   Scenario: Calling the get box endpoint with no query parameters returns all PPNS boxes
     When I make a request to the Get Box endpoint with no query parameters

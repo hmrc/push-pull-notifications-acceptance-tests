@@ -20,7 +20,7 @@ Feature: Push Pull Notifications API - Get A List Of Boxes
     Then I get a successful response with no boxes displayed
 
 
-    ### Accept Header Scenarios
+  ### Accept Header Scenarios
 
   @get-boxes @cmb @push-pull-notifications-api @regression-tests
   Scenario: Calling the get a list of boxes endpoint with an incorrect accept header version returns a matching resource not found response

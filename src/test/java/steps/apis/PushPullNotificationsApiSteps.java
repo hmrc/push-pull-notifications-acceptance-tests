@@ -207,7 +207,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .spec(specification())
                         .get(PUSH_PULL_BOX_URL);
 
-        response(r.then().log().all());
+        response(r.then());
     }
 
     @Step
@@ -219,7 +219,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .spec(specification())
                         .get(PUSH_PULL_BOX_URL + "?" + clientIdParameterName + "=" + clientIdValue + "&" + boxNameParameterName + "=" + boxNameValue);
 
-        response(r.then().log().all());
+        response(r.then());
     }
 
     @Step
@@ -491,7 +491,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .spec(specification())
                         .body(format("{\"notificationIds\": [\"%s\"]}", notificationId))
                         .put(format("%s/%s/%s/notifications/acknowledge", baseApiUrl(), apiContext, boxId))
-                        .then()
+                        .then().log().all()
         );
 
     }

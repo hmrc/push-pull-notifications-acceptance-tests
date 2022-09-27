@@ -3,6 +3,8 @@ Feature: Push Pull Notifications API - Get Secret
 
   ### [GET] Get Secret Endpoint
 
+  ### Happy Path Scenarios
+
   @get-secret @push-pull-notifications-api @regression-tests
   Scenario: Calling the secret endpoint with a valid authorization key works
     Given  I have a valid authorization key for the PPNS API
