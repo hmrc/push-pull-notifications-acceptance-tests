@@ -207,7 +207,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .spec(specification())
                         .get(PUSH_PULL_BOX_URL);
 
-        //IMRAN-MARKER
         response(r.then());
     }
 
@@ -220,7 +219,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .spec(specification())
                         .get(PUSH_PULL_BOX_URL + "?" + clientIdParameterName + "=" + clientIdValue + "&" + boxNameParameterName + "=" + boxNameValue);
 
-        //IMRAN-MARKER
         response(r.then());
     }
 
