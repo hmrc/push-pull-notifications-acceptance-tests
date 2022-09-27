@@ -2,7 +2,7 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
-                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+                %date{ISO8601} thread=[%thread] level=[%level] logger=[%logger] message=[%message] %replace(exception=[%xException]){'^exception=\[\]$',''}%n
             </pattern>
         </encoder>
     </appender>
@@ -15,4 +15,20 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
+</configuration>
+
+
+
+
+        <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+
+    </encoder>
+</appender>
+
+<root level="INFO">
+    <appender-ref ref="STDOUT"/>
+</root>
 </configuration>
