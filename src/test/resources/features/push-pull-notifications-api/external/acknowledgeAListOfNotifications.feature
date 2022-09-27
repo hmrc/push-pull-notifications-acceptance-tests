@@ -7,12 +7,6 @@ Feature: Push Pull Notifications API - Acknowledge A List Of Notifications
 
   # Add a test for attempting to acknowledge notifications for a box that does not belong to us.
 
-  # Another difference I just observed is we get 403's Forbidden when trying to access boxes that don't belong to us on the existing endpoints
-  # whereas for the delete client managed box we return a 404. We could make this both to 403s if we wanted?
-
-  # We return 403s for boxes that are default boxes for delete client managed boxes
-
-
   @acknowledge-notifications @push-pull-notifications-api @regression-tests @imran
   Scenario: Calling the external put acknowledge notifications endpoint works
     Given I have all valid request headers for PPNS
