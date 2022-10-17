@@ -21,7 +21,7 @@ Feature: Push Pull Notifications API - Delete A Client Managed Box
     Then I get a not found response due to box not found
 
   @delete-cmb @cmb @push-pull-notifications-api @regression-tests
-  Scenario: Calling the delete client managed box endpoint with an ID that belongs to another client ID 404 not found response
+  Scenario: Calling the delete client managed box endpoint with an ID that belongs to another client ID 403 forbidden response
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
     When I make a call to the delete client managed box endpoint with ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
