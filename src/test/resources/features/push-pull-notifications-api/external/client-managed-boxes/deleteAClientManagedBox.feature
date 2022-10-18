@@ -80,6 +80,6 @@ Feature: Push Pull Notifications API - Delete A Client Managed Box
   @delete-cmb @cmb @push-pull-notifications-api @regression-tests
   Scenario: Calling the delete client managed box endpoint with an invalid scope returns a 401 unauthorised response
     Given I have a valid JSON content type header
-    And I have a valid bearer token for scope "read:ppns-boxes"
+    And I have a valid bearer token for scope "read:ppns-boxes" for my standard application using client credentials
     When I make a call to the delete client managed box endpoint with ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
-    Then I get an unauthorised response due to an invalid bearer token
+    Then I get a forbidden response due to invalid scope
