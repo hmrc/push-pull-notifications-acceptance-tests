@@ -633,7 +633,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     }
 
     @Then("^I get a forbidden response$")
-    public void iGetAnUnauthorisedResponseDueToAnIncorrectClientIdUsed() {
+    public void iGetAForbiddenResponse() {
         responseSteps.expectedHttpStatusCode(403);
         responseSteps.expectedJsonErrorCode("FORBIDDEN");
         responseSteps.expectedJsonMessage("Access Denied");
