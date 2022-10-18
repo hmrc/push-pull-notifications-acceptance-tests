@@ -83,7 +83,7 @@ Feature: Push Pull Notifications API - Create A Client Managed Box
     Then I get an unauthorised response due to invalid authentication information provided
 
   @create-cmb @cmb @push-pull-notifications-api @regression-tests
-  Scenario: Calling the create client managed box endpoint with an invalid scope returns a 401 unauthorised response
+  Scenario: Calling the create client managed box endpoint with an invalid scope returns a 403 forbidden response
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "read:ppns-boxes" for my standard application using client credentials
     When I make a request to the external create client managed box endpoint with a new box name
