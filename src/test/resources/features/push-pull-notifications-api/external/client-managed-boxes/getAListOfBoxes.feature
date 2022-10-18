@@ -60,7 +60,7 @@ Feature: Push Pull Notifications API - Get A List Of Boxes
     Then I get an unauthorised response due to invalid authentication information provided
 
   @get-boxes @cmb @push-pull-notifications-api @regression-tests
-  Scenario: Calling the get a list of boxes endpoint with an invalid scope returns a 401 unauthorised response
+  Scenario: Calling the get a list of boxes endpoint with an invalid scope returns a 403 forbidden response
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my standard application using client credentials
     When I make a request to the external get a list of boxes endpoint
