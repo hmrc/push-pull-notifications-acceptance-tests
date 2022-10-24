@@ -34,7 +34,7 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
     Then I get a validate callback URL false response
 
   @delete-cmb @cmb @push-pull-notifications-api @regression-tests
-  Scenario: Calling the update client managed box endpoint with an ID that belongs to another client ID returns a 403 forbidden response
+  Scenario: Calling the update client managed box endpoint with a box ID that belongs to another client ID returns a 403 forbidden response
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
     When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
