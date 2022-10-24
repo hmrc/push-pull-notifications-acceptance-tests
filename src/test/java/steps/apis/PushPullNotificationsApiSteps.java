@@ -243,7 +243,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                 given()
                         .spec(specification())
                         .get(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then()
+                        .then().log().all()
         );
     }
 
@@ -268,6 +268,18 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .body(jsonPayload)
                         .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
                         .then()
+        );
+    }
+
+    @Step
+    public void iMakeACallToExternalUpdateClientManagedBoxWithBoxId(String jsonPayload, String boxId) {
+
+        response(
+                given()
+                        .spec(specification())
+                        .body(jsonPayload)
+                        .put(format("%s/%s/box/" + boxId + "/callback", baseApiUrl(), cmbApiContext))
+                        .then().log().all()
         );
     }
 
@@ -417,14 +429,12 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         //Assert Client Managed Box
         response().body("boxId", hasItem("a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"));
         response().body("boxName", hasItem(("My First Client Managed Box")));
-        response().body("subscriber.subscribedDateTime", hasItem(("2022-10-24T12:29:33.987+0000")));
         response().body("clientManaged", hasItem((true)));
 
 
         //Assert Default Box
         response().body("boxId", hasItem("e0284be5-9102-4af9-8575-529a45808239"));
         response().body("boxName", hasItem(("DEFAULT")));
-        response().body("subscriber.subscribedDateTime", hasItem(("2022-08-18T13:19:25.312+0000")));
         response().body("clientManaged", hasItem((false)));
 
         //Assert Common Fields & Values Present for both default and CMBs
@@ -432,6 +442,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         response().body("boxCreator.clientId", everyItem(is(config.cmbClientId())));
         response().body("applicationId", everyItem(is("93a3c5da-a731-4d8b-b180-5463e49da76b")));
         response().body("subscriber.callBackUrl", everyItem(is(format("%s", config.callbackUrl()))));
+        response().body("subscriber.subscribedDateTime", everyItem(is(notNullValue())));
         response().body("subscriber.subscriptionType", everyItem(is("API_PUSH_SUBSCRIBER")));
     }
 

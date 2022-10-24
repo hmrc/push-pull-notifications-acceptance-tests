@@ -230,6 +230,13 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBox(format("{\"callbackUrl\": \"https://example.com\"}"));
     }
 
+    @When("^I make a request to the external update client managed box endpoint with a valid callback URL for box ID \"([^\"]*)\"$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithAValidCallbackUrlForBoxId(String boxId) {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"callbackUrl\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"), boxId);
+    }
+
+
+
     @When("^I make a request to the external create client managed box endpoint with an expired client credentials bearer token$")
     public void iMakeARequestToTheExternalCreateClientManageBoxEndpointWithAnExpiredClientCredentialsBearerToken() {
         pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(format("{\"boxName\": \"%s\"}", pushPullNotificationsApiSteps.getNewBoxName()));
