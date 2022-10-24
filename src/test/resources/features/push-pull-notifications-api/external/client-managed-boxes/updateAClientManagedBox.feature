@@ -9,14 +9,28 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
   Scenario: Calling the update client managed box endpoint with a valid callback URL updates the CMB successfully
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a request to the external update client managed box endpoint with a valid callback URL
+    When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"
     Then I get a validate callback URL true response
 
   @update-cmb @cmb @push-pull-notifications-api @regression-tests
-  Scenario: Calling the update client managed box endpoint with a valid callback URL updates the CMB successfully
+  Scenario: Calling the update client managed box endpoint with an invalid callback URL fails validation
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a request to the external update client managed box endpoint with an invalid callback URL
+    When I make a request to the external update client managed box endpoint with an invalid callback URL for box ID "a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"
+    Then I get a validate callback URL false response
+
+  @delete-cmb @cmb @push-pull-notifications-api @regression-tests
+  Scenario: Calling the update client managed box endpoint for a default box with a valid callback URL updates the CMB successfully
+    Given I have a valid JSON content type header
+    And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
+    When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "8b753a82-dc41-4d26-b29c-b80f85e880c1"
+    Then I get a validate callback URL true response
+
+  @update-cmb @cmb @push-pull-notifications-api @regression-tests
+  Scenario: Calling the update client managed box endpoint for a default box with an invalid callback URL fails validation
+    Given I have a valid JSON content type header
+    And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
+    When I make a request to the external update client managed box endpoint with an invalid callback URL for box ID "8b753a82-dc41-4d26-b29c-b80f85e880c1"
     Then I get a validate callback URL false response
 
   @delete-cmb @cmb @push-pull-notifications-api @regression-tests
@@ -24,13 +38,6 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
     When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
-    Then I get a forbidden response
-
-  #@delete-cmb @cmb @push-pull-notifications-api @regression-tests @imran
-  Scenario: Calling the update client managed box endpoint for a default box returns a 403 forbidden response
-    Given I have a valid JSON content type header
-    And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "8b753a82-dc41-4d26-b29c-b80f85e880c1"
     Then I get a forbidden response
 
 
@@ -41,7 +48,7 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
     Given I have an incorrect accept header version
     And I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a request to the external update client managed box endpoint with a valid callback URL
+    When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"
     Then I get a matching resource not found response
 
   @update-cmb @cmb @push-pull-notifications-api @regression-tests
@@ -49,7 +56,7 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
     Given I have an invalid accept header
     And I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a request to the external update client managed box endpoint with a valid callback URL
+    When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"
     Then I get an unacceptable response due to an invalid accept header
 
   @update-cmb @cmb @push-pull-notifications-api @regression-tests
@@ -57,7 +64,7 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
     Given I have no accept header
     And I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a request to the external update client managed box endpoint with a valid callback URL
+    When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"
     Then I get an unacceptable response due to an invalid accept header
 
 
@@ -68,7 +75,7 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
     Given I have a valid JSON accept header
     And I have an invalid content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a request to the external update client managed box endpoint with a valid callback URL
+    When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"
     Then I get an unsupported media type response
 
   @update-cmb @cmb @push-pull-notifications-api @regression-tests
@@ -76,7 +83,7 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
     Given I have a valid JSON accept header
     And I have no content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a request to the external update client managed box endpoint with a valid callback URL
+    When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"
     Then I get an unsupported media type response
 
 
@@ -86,7 +93,7 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
   Scenario: Calling the update client managed box endpoint with an invalid bearer token - non client credentials token
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes"
-    When I make a request to the external update client managed box endpoint with a valid callback URL
+    When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"
     Then I get an unauthorised response due to an invalid bearer token
 
   @update-cmb @cmb @push-pull-notifications-api @regression-tests #(Expired token = 32b61a0150e231e38efeeb664c2a79a2)
@@ -99,7 +106,7 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
   Scenario: Calling the create client managed box endpoint with an invalid scope returns a 403 forbidden response
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "read:ppns-boxes" for my CMB application using client credentials
-    When I make a request to the external update client managed box endpoint with a valid callback URL
+    When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"
     Then I get a forbidden response due to invalid scope
 
 

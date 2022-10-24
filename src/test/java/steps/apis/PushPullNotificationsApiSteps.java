@@ -279,18 +279,17 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .spec(specification())
                         .body(jsonPayload)
                         .put(format("%s/%s/box/" + boxId + "/callback", baseApiUrl(), cmbApiContext))
-                        .then().log().all()
+                        .then()
         );
     }
 
     @Step
-    public void iMakeACallToExternalUpdateClientManagedBox(String jsonPayload) {
+    public void iMakeACallToExternalUpdateClientManagedBoxWithBoxIdAndNoPayload(String boxId) {
 
         response(
                 given()
                         .spec(specification())
-                        .body(jsonPayload)
-                        .put(format("%s/%s/box/a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f/callback", baseApiUrl(), cmbApiContext))
+                        .put(format("%s/%s/box/" + boxId + "/callback", baseApiUrl(), cmbApiContext))
                         .then().log().all()
         );
     }
