@@ -417,7 +417,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         //Assert Client Managed Box
         response().body("boxId", hasItem("a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"));
         response().body("boxName", hasItem(("My First Client Managed Box")));
-        response().body("subscriber.subscribedDateTime", hasItem(("2022-06-28T16:04:44.193+0000")));
+        response().body("subscriber.subscribedDateTime", hasItem(("2022-10-24T12:29:33.987+0000")));
         response().body("clientManaged", hasItem((true)));
 
 
