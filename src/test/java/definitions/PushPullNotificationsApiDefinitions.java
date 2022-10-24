@@ -15,10 +15,13 @@ import static java.lang.String.format;
 public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     protected Configuration config = new Configuration();
+
     @Steps
     ContentTypeHeaderHelper contentTypeHeaderHelper;
-    @Steps(shared = true)
-    private OauthApiSteps oauthApiSteps;
+
+//    @Steps(shared = true)
+//    private OauthApiSteps oauthApiSteps;
+//
     @Steps
     private PushPullNotificationsApiSteps pushPullNotificationsApiSteps;
 
@@ -217,9 +220,24 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox("{\"boxName\": \"My First Client Managed Box\"}");
     }
 
+    @When("^I make a request to the external update client managed box endpoint with a valid callback URL$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithAValidCallbackUrl() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBox(format("{\"callbackUrl\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"));
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with an invalid callback URL$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithAnInvalidCallbackUrl() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBox(format("{\"callbackUrl\": \"https://example.com\"}"));
+    }
+
     @When("^I make a request to the external create client managed box endpoint with an expired client credentials bearer token$")
     public void iMakeARequestToTheExternalCreateClientManageBoxEndpointWithAnExpiredClientCredentialsBearerToken() {
         pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(format("{\"boxName\": \"%s\"}", pushPullNotificationsApiSteps.getNewBoxName()));
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with an expired client credentials bearer token$")
+    public void iMakeARequestToTheExternalUpdateClientManageBoxEndpointWithAnExpiredClientCredentialsBearerToken() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManageBoxWithExpiredBearerToken(format("{\"callbackUrl\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"));
     }
 
     @When("^I make a request to the external create client managed box endpoint with an invalid box name field name$")
@@ -240,6 +258,26 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @When("^I make a request to the external create client managed box endpoint with no request body")
     public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoRequestBody() {
         pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox("");
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with an invalid callback URL field name$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithAnInvalidCallbackUrlFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBox(format("{\"invalid\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"));
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with no callback URL field name$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithNNoCallbackUrlFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBox(format("{\"\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"));
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with no callback URL value$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithNNoCallbackUrlValue() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBox(format("{\"callbackUrl\": \"}"));
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with no request body$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithNNoRequestBody() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBox("");
     }
 
     @And("^I can delete the created client managed box by ID$")
@@ -531,6 +569,18 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.asserValidateClientManagedBoxResponse(response);
     }
 
+    @Then("^I get a validate callback URL true response$")
+    public void iGetAValidateCallbackUrlTrueResponse() {
+        responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertValidateCallbackUrlResponse(true);
+    }
+
+    @Then("^I get a validate callback URL false response$")
+    public void iGetAValidateCallbackUrlFalseResponse() {
+        responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertInvalidCallbackUrlResponse(false);
+    }
+
     @Then("^I get a validate false response$")
     public void iGetAValidateFalseResponse() {
         responseSteps.expectedHttpStatusCode(200);
@@ -605,7 +655,14 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     }
 
     @Then("^I get a bad request response due to missing box name$")
-    public void iGetABadRequestResponseDueToAnInvalidRequestPayload() {
+    public void iGetABadRequestResponseDueToMissingBoxName() {
+        responseSteps.expectedHttpStatusCode(400);
+        responseSteps.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseSteps.expectedJsonMessage("Expecting boxName in request body");
+    }
+
+    @Then("^I get a bad request response due to missing callback URL$")
+    public void iGetABadRequestResponseDueToMissingCallbackUrl() {
         responseSteps.expectedHttpStatusCode(400);
         responseSteps.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
         responseSteps.expectedJsonMessage("Expecting boxName in request body");

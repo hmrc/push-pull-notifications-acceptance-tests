@@ -272,7 +272,31 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     }
 
     @Step
+    public void iMakeACallToExternalUpdateClientManagedBox(String jsonPayload) {
+
+        response(
+                given()
+                        .spec(specification())
+                        .body(jsonPayload)
+                        .put(format("%s/%s/box/a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f/callback", baseApiUrl(), cmbApiContext))
+                        .then().log().all()
+        );
+    }
+
+    @Step
     public void iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(String jsonPayload) {
+
+        response(
+                given()
+                        .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
+                        .spec(specification())
+                        .body(jsonPayload)
+                        .put(format("%s/%s/box/a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f/callback", baseApiUrl(), cmbApiContext))
+                        .then()
+        );
+    }
+
+    public void iMakeACallToExternalUpdateClientManageBoxWithExpiredBearerToken(String jsonPayload) {
 
         response(
                 given()
@@ -417,8 +441,20 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         assertThat(results, equalTo(("[]")));
     }
 
+    @Step
     public void asserValidateClientManagedBoxResponse(Boolean validValue) {
         response().body("valid", is(validValue));
+    }
+
+    @Step
+    public void assertValidateCallbackUrlResponse(Boolean value) {
+        response().body("successful", is(value));
+    }
+
+    @Step
+    public void assertInvalidCallbackUrlResponse(Boolean value) {
+        assertValidateCallbackUrlResponse(value);
+        response().body("errorMessage", is("Invalid callback URL. Check the information you have provided is correct."));
     }
 
     @Step
