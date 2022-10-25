@@ -290,7 +290,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                 given()
                         .spec(specification())
                         .put(format("%s/%s/box/" + boxId + "/callback", baseApiUrl(), cmbApiContext))
-                        .then().log().all()
+                        .then()
         );
     }
 
