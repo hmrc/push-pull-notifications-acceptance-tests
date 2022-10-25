@@ -45,6 +45,14 @@ Feature: Push Pull Notifications API - Get A List of Notifications
     When I make a request to the external get box notifications endpoint with an invalid toDate query parameter value
     Then I get an invalid request payload response due to an unparsable date value parameter provided
 
+  @get-notifications @push-pull-notifications-api @regression-tests
+  Scenario: Calling the external get notifications endpoint with a box ID that belongs to another client ID returns a 403 forbidden response
+    Given I have all valid request headers for PPNS
+    And I have a valid bearer token for scope "read:pull-notifications" for my standard application using client credentials
+    #And I make a request to the create notifications endpoint to generate a pending notification for an unsubscribed box
+    When I make a request to the external get box notifications endpoint with a box ID that belongs to another client ID
+    Then I get a forbidden response
+
 
   ### Accept Header Scenarios
 

@@ -31,9 +31,8 @@ Feature: Push Pull Notifications API - Acknowledge A List Of Notifications
     And I have a valid bearer token for scope "read:pull-notifications write:notifications" for my standard application using client credentials
     And I have a notification in status pending for a new box
     And I have a valid JSON content type header
-    When I make a request to the external put acknowledge notifications endpoint with a box id that belongs to another client ID
+    When I make a request to the external put acknowledge notifications endpoint with a box ID that belongs to another client ID
     Then I get a forbidden response
-
 
 
   ### Accept Header Scenarios

@@ -419,6 +419,11 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING");
     }
 
+    @When("^I make a request to the external get box notifications endpoint with a box ID that belongs to another client ID$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForWithANonBelongingBoxId() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter("a5e3203d-a57e-4787-ba72-2dbfc294455f", "status", "PENDING");
+    }
+
     @When("^I have a notification in status pending for a new box$")
     public void iHaveANotificationInStatusPendingForANewBox() {
         iMakeRequestToTheCreateNotificationEndpointForAnUnsubscribedBox();
@@ -441,7 +446,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("177dcc2d-fb79-4ef8-b450-d442532b4a99");
     }
 
-    @When("^I make a request to the external put acknowledge notifications endpoint with a box id that belongs to another client ID$")
+    @When("^I make a request to the external put acknowledge notifications endpoint with a box ID that belongs to another client ID$")
     public void iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointWithANonBelongingId() {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("a5e3203d-a57e-4787-ba72-2dbfc294455f");
     }
