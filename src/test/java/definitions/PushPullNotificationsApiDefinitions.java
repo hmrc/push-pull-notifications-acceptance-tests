@@ -441,6 +441,11 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("177dcc2d-fb79-4ef8-b450-d442532b4a99");
     }
 
+    @When("^I make a request to the external put acknowledge notifications endpoint with a box id that belongs to another client ID$")
+    public void iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointWithANonBelongingId() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("a5e3203d-a57e-4787-ba72-2dbfc294455f");
+    }
+
     @When("^I make a request to the external get box notifications endpoint with all valid query parameter values$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAllValidQueryParameterValues() {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
