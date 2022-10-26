@@ -19,9 +19,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @Steps
     ContentTypeHeaderHelper contentTypeHeaderHelper;
 
-//    @Steps(shared = true)
-//    private OauthApiSteps oauthApiSteps;
-//
     @Steps
     private PushPullNotificationsApiSteps pushPullNotificationsApiSteps;
 
@@ -219,11 +216,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     public void iMakeRequestToTheExternalCreateClientManageBoxEndpointWithAnExistingBoxName() {
         pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox("{\"boxName\": \"My First Client Managed Box\"}");
     }
-
-//    @When("^I make a request to the external update client managed box endpoint with a valid callback URL$")
-//    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithAValidCallbackUrl() {
-//        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBox(format("{\"callbackUrl\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"));
-//    }
 
     @When("^I make a request to the external update client managed box endpoint with an invalid callback URL for box ID \"([^\"]*)\"$")
     public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithAnInvalidCallbackUrlForBoxId(String boxId) {

@@ -7,20 +7,16 @@ import steps.payloads.BoxPayload;
 import steps.payloads.InvalidBoxPayload;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.stream.IntStream;
 
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
-import static jdk.nashorn.internal.objects.NativeArray.forEach;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.collection.IsIn.oneOf;
-import static org.junit.Assert.assertTrue;
 
 public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
