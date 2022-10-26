@@ -7,15 +7,20 @@ import steps.payloads.BoxPayload;
 import steps.payloads.InvalidBoxPayload;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.stream.IntStream;
 
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
+import static jdk.nashorn.internal.objects.NativeArray.forEach;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.collection.IsIn.oneOf;
+import static org.junit.Assert.assertTrue;
 
 public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
@@ -243,7 +248,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                 given()
                         .spec(specification())
                         .get(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then().log().all()
+                        .then()
         );
     }
 
@@ -430,19 +435,17 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         response().body("boxName", hasItem(("My First Client Managed Box")));
         response().body("clientManaged", hasItem((true)));
 
-
         //Assert Default Box
         response().body("boxId", hasItem("e0284be5-9102-4af9-8575-529a45808239"));
         response().body("boxName", hasItem(("DEFAULT")));
         response().body("clientManaged", hasItem((false)));
 
         //Assert Common Fields & Values Present for both default and CMBs
-
         response().body("boxCreator.clientId", everyItem(is(config.cmbClientId())));
         response().body("applicationId", everyItem(is("93a3c5da-a731-4d8b-b180-5463e49da76b")));
-        response().body("subscriber.callBackUrl", everyItem(is(format("%s", config.callbackUrl()))));
+        response().body("subscriber.callBackUrl", everyItem(is(oneOf(config.callbackUrl(), ""))));
         response().body("subscriber.subscribedDateTime", everyItem(is(notNullValue())));
-        response().body("subscriber.subscriptionType", everyItem(is("API_PUSH_SUBSCRIBER")));
+        response().body("subscriber.subscriptionType", everyItem(is(oneOf("API_PUSH_SUBSCRIBER", "API_PULL_SUBSCRIBER"))));
     }
 
     @Step
