@@ -279,12 +279,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithNNoCallbackUrlFieldName() {
         pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"), "2eb7c0a-4571-44ad-9cbc-8d5143c0af7f");
     }
-
-    @When("^I make a request to the external update client managed box endpoint with no callback URL value$")
-    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithNNoCallbackUrlValue(String boxId) {
-        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"callbackUrl\": \"}"), "2eb7c0a-4571-44ad-9cbc-8d5143c0af7f");
-    }
-
     @When("^I make a request to the external update client managed box endpoint with no request body$")
     public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithNNoRequestBody() {
         pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxIdAndNoPayload("a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f");
