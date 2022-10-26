@@ -287,9 +287,19 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedHttpStatusCode(204);
     }
 
-    @When("^I make a call to the delete client managed box endpoint with ID \"([^\"]*)\"$")
-    public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithId(String clientManagedBoxId) {
-        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId(clientManagedBoxId);
+    @When("^I make a call to the delete client managed box endpoint with a box ID that does not exist$")
+    public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithABoxIdThatDoesNotExist() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("ccc1a3e7-2b73-475a-a14c-1428ab3b46bc");
+    }
+
+    @When("^I make a call to the delete client managed box endpoint with a non ownership box ID")
+    public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithANonOwnershipBoxId() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("a5e3203d-a57e-4787-ba72-2dbfc294455f");
+    }
+
+    @When("^I make a call to the delete client managed box endpoint with a default box ID")
+    public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithADefaultBoxId() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3");
     }
 
     @When("^I make a request to the external delete client managed box endpoint with an expired client credentials bearer token$")

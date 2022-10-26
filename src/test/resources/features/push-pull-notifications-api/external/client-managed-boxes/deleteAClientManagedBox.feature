@@ -17,21 +17,21 @@ Feature: Push Pull Notifications API - Delete A Client Managed Box
   Scenario: Calling the delete client managed box endpoint with an ID that does not exist returns a 404 not found response
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a call to the delete client managed box endpoint with ID "ccc1a3e7-2b73-475a-a14c-1428ab3b46bc"
+    When I make a call to the delete client managed box endpoint with a box ID that does not exist
     Then I get a not found response due to box not found
 
   @delete-cmb @cmb @push-pull-notifications-api @regression-tests
-  Scenario: Calling the delete client managed box endpoint with a box ID that belongs to another client ID returns a 403 forbidden response
+  Scenario: Calling the delete client managed box endpoint with a non ownership box ID returns a 403 forbidden response
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a call to the delete client managed box endpoint with ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
+    When I make a call to the delete client managed box endpoint with a non ownership box ID
     Then I get a forbidden response
 
   @delete-cmb @cmb @push-pull-notifications-api @regression-tests
   Scenario: Calling the delete client managed box endpoint with a default box ID returns a 403 forbidden response
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a call to the delete client managed box endpoint with ID "046ceee5-e43f-4159-b5ce-8df5f2b9d1e3"
+    When I make a call to the delete client managed box endpoint with a default box ID
     Then I get a forbidden response
 
 
@@ -42,7 +42,7 @@ Feature: Push Pull Notifications API - Delete A Client Managed Box
     Given I have an incorrect accept header version
     And I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a call to the delete client managed box endpoint with ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
+    When I make a request to the external create client managed box endpoint with a new box name
     Then I get a matching resource not found response
 
   @delete-cmb @cmb @push-pull-notifications-api @regression-tests
@@ -50,7 +50,7 @@ Feature: Push Pull Notifications API - Delete A Client Managed Box
     Given I have an invalid accept header
     And I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a call to the delete client managed box endpoint with ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
+    When I make a request to the external create client managed box endpoint with a new box name
     Then I get an unacceptable response due to an invalid accept header
 
   @delete-cmb @cmb @push-pull-notifications-api @regression-tests
@@ -58,7 +58,7 @@ Feature: Push Pull Notifications API - Delete A Client Managed Box
     Given I have no accept header
     And I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a call to the delete client managed box endpoint with ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
+    When I make a request to the external create client managed box endpoint with a new box name
     Then I get an unacceptable response due to an invalid accept header
 
 
@@ -68,7 +68,7 @@ Feature: Push Pull Notifications API - Delete A Client Managed Box
   Scenario: Calling the delete client managed box endpoint with an invalid bearer token - non client credentials token
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes"
-    When I make a call to the delete client managed box endpoint with ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
+    When I make a request to the external create client managed box endpoint with a new box name
     Then I get an unauthorised response due to an invalid bearer token
 
   @delete-cmb @cmb @push-pull-notifications-api @regression-tests
@@ -81,5 +81,5 @@ Feature: Push Pull Notifications API - Delete A Client Managed Box
   Scenario: Calling the delete client managed box endpoint with an invalid scope returns a 403 forbidden response
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "read:ppns-boxes" for my CMB application using client credentials
-    When I make a call to the delete client managed box endpoint with ID "a5e3203d-a57e-4787-ba72-2dbfc294455f"
+    When I make a request to the external create client managed box endpoint with a new box name
     Then I get a forbidden response due to invalid scope
