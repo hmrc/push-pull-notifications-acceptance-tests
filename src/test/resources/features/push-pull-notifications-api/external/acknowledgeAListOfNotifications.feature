@@ -43,15 +43,22 @@ Feature: Push Pull Notifications API - Acknowledge A List Of Notifications
     When I make a request to the external put acknowledge notifications endpoint
     Then I get an unacceptable response due to an invalid accept header
 
-  #@acknowledge-notifications @push-pull-notifications-api @regression-tests #test not working because un-set accept header
-  #Scenario: Calling the external put acknowledge notifications endpoint with no accept header returns a 406 Not Acceptable
-    #Given I have all valid request headers for PPNS
-    #And I have a valid bearer token for scope "read:pull-notifications write:notifications" for my standard application using client credentials
-    #And I have a notification in status pending for a new box
-    #And I have no accept header
-    #And I have the new valid content type header
-    #When I make a request to the external put acknowledge notifications endpoint
-    #Then I get an unacceptable response due to a missing accept header
+  @acknowledge-notifications @push-pull-notifications-api @regression-tests @imran #test not working because un-set accept header
+  Scenario: Calling the external put acknowledge notifications endpoint with no accept header returns a 406 Not Acceptable
+    Given I have all valid request headers for PPNS
+    And I have a valid bearer token for scope "read:pull-notifications write:notifications" for my standard application using client credentials
+    And I have a notification in status pending for a new box
+    And I have no accept header
+    When I make a request to the external put acknowledge notifications endpoint
+    Then I get an unacceptable response due to a missing accept header
+
+  @acknowledge-notifications @push-pull-notifications-api @regression-tests @imran2 #test not working because un-set accept header
+  Scenario: Calling the external put acknowledge notifications endpoint with no accept header returns a 406 Not Acceptable
+    Given I have no accept header
+    And I have a valid JSON content type header
+    And I have a valid bearer token for scope "read:pull-notifications write:notifications" for my standard application using client credentials
+    When I make a request to the external put acknowledge notifications endpoint
+    Then I get an unacceptable response due to a missing accept header
 
 
   ### Content Type Header Scenarios
