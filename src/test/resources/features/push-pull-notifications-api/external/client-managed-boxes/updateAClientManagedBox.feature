@@ -13,6 +13,13 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
     Then I get a validate callback URL true response
 
   @update-cmb @cmb @push-pull-notifications-api @regression-tests
+  Scenario: Calling the update client managed box endpoint with a no callback URL updates the CMB successfully
+    Given I have a valid JSON content type header
+    And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
+    When I make a request to the external update client managed box endpoint with no callback URL for box ID "a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"
+    Then I get a validate callback URL true response
+
+  @update-cmb @cmb @push-pull-notifications-api @regression-tests
   Scenario: Calling the update client managed box endpoint with an invalid callback URL fails validation
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
