@@ -16,7 +16,7 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
   Scenario: Calling the update client managed box endpoint with a no callback URL updates the CMB successfully
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a request to the external update client managed box endpoint with no callback URL for box ID "a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"
+    When I make a request to the external update client managed box endpoint with no callback URL for box ID "43755189-038a-4e14-8cc8-b377b0dbb349"
     Then I get a validate callback URL true response
 
   @update-cmb @cmb @push-pull-notifications-api @regression-tests
@@ -30,14 +30,14 @@ Feature: Push Pull Notifications API - Update A Client Managed Box With A Callba
   Scenario: Calling the update client managed box endpoint for a default box with a valid callback URL updates the CMB successfully
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "8b753a82-dc41-4d26-b29c-b80f85e880c1"
+    When I make a request to the external update client managed box endpoint with a valid callback URL for box ID "e0284be5-9102-4af9-8575-529a45808239"
     Then I get a validate callback URL true response
 
   @update-cmb @cmb @push-pull-notifications-api @regression-tests
   Scenario: Calling the update client managed box endpoint for a default box with an invalid callback URL fails validation
     Given I have a valid JSON content type header
     And I have a valid bearer token for scope "write:ppns-boxes" for my CMB application using client credentials
-    When I make a request to the external update client managed box endpoint with an invalid callback URL for box ID "8b753a82-dc41-4d26-b29c-b80f85e880c1"
+    When I make a request to the external update client managed box endpoint with an invalid callback URL for box ID "e0284be5-9102-4af9-8575-529a45808239"
     Then I get a validate callback URL false response
 
   @delete-cmb @cmb @push-pull-notifications-api @regression-tests
