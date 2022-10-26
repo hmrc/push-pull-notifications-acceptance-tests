@@ -16,6 +16,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.collection.IsIn.oneOf;
 
 public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
@@ -272,7 +273,42 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     }
 
     @Step
+    public void iMakeACallToExternalUpdateClientManagedBoxWithBoxId(String jsonPayload, String boxId) {
+
+        response(
+                given()
+                        .spec(specification())
+                        .body(jsonPayload)
+                        .put(format("%s/%s/box/" + boxId + "/callback", baseApiUrl(), cmbApiContext))
+                        .then()
+        );
+    }
+
+    @Step
+    public void iMakeACallToExternalUpdateClientManagedBoxWithBoxIdAndNoPayload(String boxId) {
+
+        response(
+                given()
+                        .spec(specification())
+                        .put(format("%s/%s/box/" + boxId + "/callback", baseApiUrl(), cmbApiContext))
+                        .then()
+        );
+    }
+
+    @Step
     public void iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(String jsonPayload) {
+
+        response(
+                given()
+                        .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
+                        .spec(specification())
+                        .body(jsonPayload)
+                        .put(format("%s/%s/box/a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f/callback", baseApiUrl(), cmbApiContext))
+                        .then()
+        );
+    }
+
+    public void iMakeACallToExternalUpdateClientManageBoxWithExpiredBearerToken(String jsonPayload) {
 
         response(
                 given()
@@ -393,22 +429,19 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         //Assert Client Managed Box
         response().body("boxId", hasItem("a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"));
         response().body("boxName", hasItem(("My First Client Managed Box")));
-        response().body("subscriber.subscribedDateTime", hasItem(("2022-06-28T16:04:44.193+0000")));
         response().body("clientManaged", hasItem((true)));
-
 
         //Assert Default Box
         response().body("boxId", hasItem("e0284be5-9102-4af9-8575-529a45808239"));
         response().body("boxName", hasItem(("DEFAULT")));
-        response().body("subscriber.subscribedDateTime", hasItem(("2022-08-18T13:19:25.312+0000")));
         response().body("clientManaged", hasItem((false)));
 
         //Assert Common Fields & Values Present for both default and CMBs
-
         response().body("boxCreator.clientId", everyItem(is(config.cmbClientId())));
         response().body("applicationId", everyItem(is("93a3c5da-a731-4d8b-b180-5463e49da76b")));
-        response().body("subscriber.callBackUrl", everyItem(is(format("%s", config.callbackUrl()))));
-        response().body("subscriber.subscriptionType", everyItem(is("API_PUSH_SUBSCRIBER")));
+        response().body("subscriber.callBackUrl", everyItem(is(oneOf(config.callbackUrl(), ""))));
+        response().body("subscriber.subscribedDateTime", everyItem(is(notNullValue())));
+        response().body("subscriber.subscriptionType", everyItem(is(oneOf("API_PUSH_SUBSCRIBER", "API_PULL_SUBSCRIBER"))));
     }
 
     @Step
@@ -417,8 +450,20 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         assertThat(results, equalTo(("[]")));
     }
 
+    @Step
     public void asserValidateClientManagedBoxResponse(Boolean validValue) {
         response().body("valid", is(validValue));
+    }
+
+    @Step
+    public void assertValidateCallbackUrlResponse(Boolean value) {
+        response().body("successful", is(value));
+    }
+
+    @Step
+    public void assertInvalidCallbackUrlResponse(Boolean value) {
+        assertValidateCallbackUrlResponse(value);
+        response().body("errorMessage", is("Invalid callback URL. Check the information you have provided is correct."));
     }
 
     @Step

@@ -15,10 +15,10 @@ import static java.lang.String.format;
 public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     protected Configuration config = new Configuration();
+
     @Steps
     ContentTypeHeaderHelper contentTypeHeaderHelper;
-    @Steps(shared = true)
-    private OauthApiSteps oauthApiSteps;
+
     @Steps
     private PushPullNotificationsApiSteps pushPullNotificationsApiSteps;
 
@@ -217,9 +217,34 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox("{\"boxName\": \"My First Client Managed Box\"}");
     }
 
+    @When("^I make a request to the external update client managed box endpoint with an invalid callback URL for box ID \"([^\"]*)\"$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithAnInvalidCallbackUrlForBoxId(String boxId) {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"callbackUrl\": \"https://example.com\"}"), boxId);
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with a valid callback URL for box ID \"([^\"]*)\"$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithAValidCallbackUrlForBoxId(String boxId) {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"callbackUrl\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"), boxId);
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with no callback URL for box ID \"([^\"]*)\"$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithNoCallbackUrlForBoxId(String boxId) {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"callbackUrl\": \"\"}"), boxId);
+    }
+
+    @When("^I update my callback to a valid URL \"([^\"]*)\"$")
+    public void iUpdateMyCallbackToAValidUrl(String boxId) {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"callbackUrl\": \"\"}"), boxId);
+    }
+
     @When("^I make a request to the external create client managed box endpoint with an expired client credentials bearer token$")
     public void iMakeARequestToTheExternalCreateClientManageBoxEndpointWithAnExpiredClientCredentialsBearerToken() {
         pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(format("{\"boxName\": \"%s\"}", pushPullNotificationsApiSteps.getNewBoxName()));
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with an expired client credentials bearer token$")
+    public void iMakeARequestToTheExternalUpdateClientManageBoxEndpointWithAnExpiredClientCredentialsBearerToken() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManageBoxWithExpiredBearerToken(format("{\"callbackUrl\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"));
     }
 
     @When("^I make a request to the external create client managed box endpoint with an invalid box name field name$")
@@ -242,15 +267,39 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox("");
     }
 
+    @When("^I make a request to the external update client managed box endpoint with an invalid callback URL field name$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithAnInvalidCallbackUrlFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"invalid\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"), "2eb7c0a-4571-44ad-9cbc-8d5143c0af7f");
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with no callback URL field name$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithNNoCallbackUrlFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"), "2eb7c0a-4571-44ad-9cbc-8d5143c0af7f");
+    }
+    @When("^I make a request to the external update client managed box endpoint with no request body$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithNNoRequestBody() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxIdAndNoPayload("a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f");
+    }
+
     @And("^I can delete the created client managed box by ID$")
     public void iCanDeleteTheCreatedClientManagedBoxById() {
         pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithNewClientManagedBoxId();
         responseSteps.expectedHttpStatusCode(204);
     }
 
-    @When("^I make a call to the delete client managed box endpoint with ID \"([^\"]*)\"$")
-    public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithId(String clientManagedBoxId) {
-        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId(clientManagedBoxId);
+    @When("^I make a call to the delete client managed box endpoint with a box ID that does not exist$")
+    public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithABoxIdThatDoesNotExist() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("ccc1a3e7-2b73-475a-a14c-1428ab3b46bc");
+    }
+
+    @When("^I make a call to the delete client managed box endpoint with a non ownership box ID")
+    public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithANonOwnershipBoxId() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("a5e3203d-a57e-4787-ba72-2dbfc294455f");
+    }
+
+    @When("^I make a call to the delete client managed box endpoint with a default box ID")
+    public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithADefaultBoxId() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3");
     }
 
     @When("^I make a request to the external delete client managed box endpoint with an expired client credentials bearer token$")
@@ -376,6 +425,11 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING");
     }
 
+    @When("^I make a request to the external get box notifications endpoint with a box ID that belongs to another client ID$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForWithANonBelongingBoxId() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter("a5e3203d-a57e-4787-ba72-2dbfc294455f", "status", "PENDING");
+    }
+
     @When("^I have a notification in status pending for a new box$")
     public void iHaveANotificationInStatusPendingForANewBox() {
         iMakeRequestToTheCreateNotificationEndpointForAnUnsubscribedBox();
@@ -396,6 +450,11 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @When("^I make a request to the external put acknowledge notifications endpoint for a box that does not exist$")
     public void iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointForABoxThatDoesNotExist() {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("177dcc2d-fb79-4ef8-b450-d442532b4a99");
+    }
+
+    @When("^I make a request to the external put acknowledge notifications endpoint with a box ID that belongs to another client ID$")
+    public void iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointWithANonBelongingId() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("a5e3203d-a57e-4787-ba72-2dbfc294455f");
     }
 
     @When("^I make a request to the external get box notifications endpoint with all valid query parameter values$")
@@ -531,6 +590,18 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.asserValidateClientManagedBoxResponse(response);
     }
 
+    @Then("^I get a validate callback URL true response$")
+    public void iGetAValidateCallbackUrlTrueResponse() {
+        responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertValidateCallbackUrlResponse(true);
+    }
+
+    @Then("^I get a validate callback URL false response$")
+    public void iGetAValidateCallbackUrlFalseResponse() {
+        responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertInvalidCallbackUrlResponse(false);
+    }
+
     @Then("^I get a validate false response$")
     public void iGetAValidateFalseResponse() {
         responseSteps.expectedHttpStatusCode(200);
@@ -605,7 +676,14 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     }
 
     @Then("^I get a bad request response due to missing box name$")
-    public void iGetABadRequestResponseDueToAnInvalidRequestPayload() {
+    public void iGetABadRequestResponseDueToMissingBoxName() {
+        responseSteps.expectedHttpStatusCode(400);
+        responseSteps.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseSteps.expectedJsonMessage("Expecting boxName in request body");
+    }
+
+    @Then("^I get a bad request response due to missing callback URL$")
+    public void iGetABadRequestResponseDueToMissingCallbackUrl() {
         responseSteps.expectedHttpStatusCode(400);
         responseSteps.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
         responseSteps.expectedJsonMessage("Expecting boxName in request body");

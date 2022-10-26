@@ -5,8 +5,6 @@ Feature: Push Pull Notifications API - Acknowledge A List Of Notifications
 
   ### Happy Path Scenarios
 
-  # Add a test for attempting to acknowledge notifications for a box that does not belong to us.
-
   @acknowledge-notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the external put acknowledge notifications endpoint works
     Given I have all valid request headers for PPNS
@@ -25,6 +23,15 @@ Feature: Push Pull Notifications API - Acknowledge A List Of Notifications
     When I make a request to the external put acknowledge notifications endpoint for a box that does not exist
     Then I get a not found response due to box not found
 
+  #@acknowledge-notifications @push-pull-notifications-api @regression-tests - Reinstate after fix #APID-618
+  Scenario: Calling the external put acknowledge notifications endpoint with a non ownership box ID returns a 403 forbidden response
+    Given I have all valid request headers for PPNS
+    And I have a valid bearer token for scope "read:pull-notifications write:notifications" for my standard application using client credentials
+    And I have a notification in status pending for a new box
+    And I have a valid JSON content type header
+    When I make a request to the external put acknowledge notifications endpoint with a box ID that belongs to another client ID
+    Then I get a forbidden response
+
 
   ### Accept Header Scenarios
 
@@ -36,15 +43,13 @@ Feature: Push Pull Notifications API - Acknowledge A List Of Notifications
     When I make a request to the external put acknowledge notifications endpoint
     Then I get an unacceptable response due to an invalid accept header
 
-  #@acknowledge-notifications @push-pull-notifications-api @regression-tests #test not working because un-set accept header
-  #Scenario: Calling the external put acknowledge notifications endpoint with no accept header returns a 406 Not Acceptable
-    #Given I have all valid request headers for PPNS
-    #And I have a valid bearer token for scope "read:pull-notifications write:notifications" for my standard application using client credentials
-    #And I have a notification in status pending for a new box
-    #And I have no accept header
-    #And I have the new valid content type header
-    #When I make a request to the external put acknowledge notifications endpoint
-    #Then I get an unacceptable response due to a missing accept header
+  @acknowledge-notifications @push-pull-notifications-api @regression-tests
+  Scenario: Calling the external put acknowledge notifications endpoint with no accept header returns a 406 Not Acceptable
+    Given I have no accept header
+    And I have a valid JSON content type header
+    And I have a valid bearer token for scope "write:notifications" for my standard application using client credentials
+    When I make a request to the external put acknowledge notifications endpoint
+    Then I get an unacceptable response due to a missing accept header
 
 
   ### Content Type Header Scenarios
@@ -59,7 +64,7 @@ Feature: Push Pull Notifications API - Acknowledge A List Of Notifications
   @acknowledge-notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the external put acknowledge notifications endpoint with no content type header returns a 415 unsupported media type
     Given I have no content type header
-    And I have a valid bearer token for scope "write:notifications" for my standard application using client credentials
+    And I have a valid bearer token for scope "read:pull-notifications write:notifications" for my standard application using client credentials
     When I make a request to the external put acknowledge notifications endpoint
     Then I get an unsupported media type response version two
 
