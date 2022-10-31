@@ -714,7 +714,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     public void iGetAForbiddenResponse() {
         responseSteps.expectedHttpStatusCode(403);
         responseSteps.expectedJsonErrorCode("FORBIDDEN");
-        responseSteps.expectedJsonMessage("Access Denied");
+        responseSteps.expectedJsonMessage("Access denied");
     }
 
     private void iGetAForbiddenResponseDueToAuthorizationFailed() {
