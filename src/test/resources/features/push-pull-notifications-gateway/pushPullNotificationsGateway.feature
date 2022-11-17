@@ -3,7 +3,7 @@ Feature: Push Pull Notifications Gateway
 
   ### [POST] - Notify Endpoint
 
-  @push-notifications @push-pull-notifications-gateway @regression-tests
+  @push-notifications @push-pull-notifications-gateway @regression-tests @imran
   Scenario: Calling the push notifications endpoint works
     Given  I have all valid request headers for PPNS gateway
     When I make a request to the notify endpoint with a valid payload

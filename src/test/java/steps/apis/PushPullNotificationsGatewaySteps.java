@@ -15,7 +15,7 @@ public class PushPullNotificationsGatewaySteps extends CommonApiSteps {
     public void iMakeACallToNotifyWithPayload(String jsonPayload) {
         RequestSpecification spec = given()
                 .spec(specification())
-                .body(jsonPayload);
+                .body(jsonPayload).log().all();
 
         if (authorizationKey != null) {
             spec = spec.header("Authorization", authorizationKey);
@@ -25,7 +25,7 @@ public class PushPullNotificationsGatewaySteps extends CommonApiSteps {
             spec = spec.header("User-Agent", userAgent);
         }
 
-        response(spec.post((PUSH_PULL_GATEWAY_NOTIFY_URL + "/notify")).then());
+        response(spec.post((PUSH_PULL_GATEWAY_NOTIFY_URL + "/notify")).then().log().all());
     }
 
     public void iMakeACallToNotifyWithNoPayload() {
