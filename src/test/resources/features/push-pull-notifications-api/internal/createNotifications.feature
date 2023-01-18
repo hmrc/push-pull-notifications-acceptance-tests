@@ -99,14 +99,14 @@ Feature: Push Pull Notifications API - Create Notifications
     Then I get a bad request response due to content type not supported or message syntax invalid
 
   @create-notifications @push-pull-notifications-api @regression-tests
-  Scenario: Calling the create notifications endpoint with a valid XML content type header and JSON request body returns a 404 bad request
+  Scenario: Calling the create notifications endpoint with a valid XML content type header and JSON request body returns a 400 bad request
     Given I have a valid user agent header
     And I have a valid XML content type header
     When I make a request to the create notification endpoint with a valid JSON payload
     Then I get a bad request response due to content type not supported or message syntax invalid
 
   @create-notifications @push-pull-notifications-api @regression-tests
-  Scenario: Calling the create notifications with a valid JSON content type header and XML request body returns a 404 bad request
+  Scenario: Calling the create notifications with a valid JSON content type header and XML request body returns a 400 bad request
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create notification endpoint with a valid XML payload

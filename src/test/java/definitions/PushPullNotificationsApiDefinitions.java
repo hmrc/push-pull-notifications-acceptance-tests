@@ -205,6 +205,22 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "}");
     }
 
+    @When("^I make a request to the create wrapped notification endpoint with an invalid JSON payload$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnInvalidJsonPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no JSON payload$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoJsonPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "");
+    }
+
     @When("^I make a request to the callback endpoint with a correct URL$")
     public void iMakeRequestToTheCallBackEndpointWithACorrectUrl() {
         pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
