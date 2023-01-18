@@ -41,30 +41,30 @@ Feature: Push Pull Notifications API - Create Wrapped Notifications
     Given I have a valid user agent header
     And I have an invalid content type header
     When I make a request to the create wrapped notification endpoint with a valid JSON payload
-    Then I get an unsupported media type response due to content type not supported
+    Then I get an unsupported media type response version two
 
   @create-notifications @push-pull-notifications-api @regression-tests @wrapped
   Scenario: Calling the create notifications endpoint with no content type header returns a 415 unsupported media type
     Given I have a valid user agent header
     And I have no content type header
     When I make a request to the create wrapped notification endpoint with a valid JSON payload
-    Then I get an unsupported media type response due to content type not supported
+    Then I get an unsupported media type response version two
 
 
   ### Authorization Scenarios
 
-  @create-notifications @push-pull-notifications-api @regression-tests
-  Scenario: Calling the create notifications endpoint with an invalid agent header returns a 403 forbidden
+  @create-notifications @push-pull-notifications-api @regression-tests @wrapped
+  Scenario: Calling the create wrapped notifications endpoint with an invalid agent header returns a 403 forbidden
     Given I have an invalid user agent header
     And I have a valid JSON content type header
-    When I make a request to the create notification endpoint with a valid JSON payload
+    When I make a request to the create wrapped notification endpoint with a valid JSON payload
     Then I get a forbidden response due to an invalid agent header
 
-  @create-notifications @push-pull-notifications-api @regression-tests
+  @create-notifications @push-pull-notifications-api @regression-tests @wrapped
   Scenario: Calling the create notifications endpoint with no agent header returns a 403 forbidden
     Given I have no user agent header
     And I have a valid JSON content type header
-    When I make a request to the create notification endpoint with a valid JSON payload
+    When I make a request to the create wrapped notification endpoint with a valid JSON payload
     Then I get a forbidden response due to missing agent header
 
 
