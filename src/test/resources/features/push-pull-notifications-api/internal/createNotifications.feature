@@ -5,8 +5,8 @@ Feature: Push Pull Notifications API - Create Notifications
 
   ### Happy Path Scenarios
 
-  @create-notifications @push-pull-notifications-api @regression-tests @imran
-  Scenario: Calling the create notifications endpoint with a valid XML request body works
+  @create-notifications @push-pull-notifications-api @regression-tests
+  Scenario: Calling the create notifications endpoint with a valid JSON request body works
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create notification endpoint with a valid JSON payload
