@@ -30,7 +30,7 @@ Feature: Push Pull Notifications API - Create Wrapped Notifications
   Scenario: Calling the create notifications with an invalid UUID returns a 404 not found
     Given I have a valid user agent header
     And I have a valid JSON content type header
-    When I make a request to the create notification endpoint with an invalid UUID
+    When I make a request to the create wrapped notification endpoint with an invalid UUID
     Then I get a bad request response due to the box ID not being a valid UUID
 
 
