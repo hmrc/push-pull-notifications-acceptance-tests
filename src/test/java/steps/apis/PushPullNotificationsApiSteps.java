@@ -187,21 +187,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         response(spec.post(PUSH_PULL_NOTIFICATIONS_NO_BOX_URL).then());
     }
 
-    @Step
-    public void iMakeACallToCreateWrappedNotificationsWithInvalidUuid(String jsonPayload) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonPayload);
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.post(PUSH_PULL_WRAPPED_NOTIFICATIONS_URL_INVALID_UUID).then());
-    }
-
 
     @Step
     public void iMakeACallToCreateNotificationsWithInvalidUuid(String jsonPayload) {
@@ -245,6 +230,21 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         }
 
         response(spec.post(PUSH_PULL_WRAPPED_NOTIFICATIONS_NO_BOX_URL).then());
+    }
+
+    @Step
+    public void iMakeACallToCreateWrappedNotificationsWithInvalidUuid(String jsonPayload) {
+        builder().withNoProxy();
+
+        RequestSpecification spec = given()
+                .spec(specification())
+                .body(jsonPayload);
+
+        if (userAgent != null) {
+            spec = spec.header("User-Agent", userAgent);
+        }
+
+        response(spec.post(PUSH_PULL_WRAPPED_NOTIFICATIONS_URL_INVALID_UUID).then());
     }
 
     @Step

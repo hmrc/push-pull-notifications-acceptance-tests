@@ -423,7 +423,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the create notification endpoint with an invalid UUID$")
     public void iMakeRequestToTheCreateNotificationEndpointWithAInvalidUuidBoxThatDoesNotExist() {
-        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithInvalidUuid("{\"message\": \"jsonbody\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithInvalidUuid("{\"message\": \"jsonbody\"}");
     }
 
     @When("^I make a request to the create notification endpoint with an invalid JSON payload$")

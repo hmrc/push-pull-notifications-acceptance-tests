@@ -27,36 +27,27 @@ Feature: Push Pull Notifications API - Create Wrapped Notifications
     Then I get a not found response due to box not found
 
   @create-notifications @push-pull-notifications-api @regression-tests @wrapped
-  Scenario: Calling the create notifications with an invalid UUID returns a 404 not found
+  Scenario: Calling the create wrapped notifications with an invalid UUID returns a 400 bad request
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create wrapped notification endpoint with an invalid UUID
     Then I get a bad request response due to the box ID not being a valid UUID
 
 
-
-
-    #############################
-
-
-
-
-
-
   ### Content Type Header Scenarios
 
-  @create-notifications @push-pull-notifications-api @regression-tests
-  Scenario: Calling the create notifications endpoint with an invalid content type header returns a 415 unsupported media type
+  @create-notifications @push-pull-notifications-api @regression-tests @wrapped
+  Scenario: Calling the create wrapped notifications endpoint with an invalid content type header returns a 415 unsupported media type
     Given I have a valid user agent header
     And I have an invalid content type header
-    When I make a request to the create notification endpoint with a valid JSON payload
+    When I make a request to the create wrapped notification endpoint with a valid JSON payload
     Then I get an unsupported media type response due to content type not supported
 
-  @create-notifications @push-pull-notifications-api @regression-tests
+  @create-notifications @push-pull-notifications-api @regression-tests @wrapped
   Scenario: Calling the create notifications endpoint with no content type header returns a 415 unsupported media type
     Given I have a valid user agent header
     And I have no content type header
-    When I make a request to the create notification endpoint with a valid JSON payload
+    When I make a request to the create wrapped notification endpoint with a valid JSON payload
     Then I get an unsupported media type response due to content type not supported
 
 
