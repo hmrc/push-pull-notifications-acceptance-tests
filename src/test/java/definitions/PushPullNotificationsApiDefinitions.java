@@ -173,6 +173,17 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "}");
     }
 
+    @When("^I make a request to the create wrapped notification endpoint with an invalid message version$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnInvalidMessaageVerssion() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"2\"\n" +
+                "}");
+    }
+
     @When("^I make a request to the callback endpoint with a correct URL$")
     public void iMakeRequestToTheCallBackEndpointWithACorrectUrl() {
         pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
@@ -700,6 +711,13 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedJsonMessage("Expecting boxName in request body");
     }
 
+    @Then("^I get a bad request response due to message version invalid")
+    public void iGetABadRequestResponseDueToMesssageVersionInvalid() {
+        responseSteps.expectedHttpStatusCode(400);
+        responseSteps.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseSteps.expectedJsonMessage("Message version is invalid");
+    }
+
     @Then("^I get an unauthorised response due to an invalid bearer token$")
     public void iGetAnUnauthorisedResponseDueToAnInvalidBearerToken() {
         responseSteps.expectedHttpStatusCode(401);
@@ -740,4 +758,5 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedJsonErrorCode("BOX_NOT_FOUND");
         responseSteps.expectedJsonMessage("Box not found");
     }
+
 }
