@@ -170,7 +170,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "        \"contentType\": \"application/json\"\n" +
                 "    },\n" +
                 "    \"version\": \"1\"\n" +
-                "}' ");
+                "}");
     }
 
     @When("^I make a request to the callback endpoint with a correct URL$")
