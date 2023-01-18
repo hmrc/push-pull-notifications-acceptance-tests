@@ -20,17 +20,17 @@ Feature: Push Pull Notifications API - Create Notifications
     Then A notifications is successfully generated
 
   @create-notifications @push-pull-notifications-api @regression-tests
-  Scenario: Calling the create notifications with a valid UUID box that does not exist returns a 404 not found
+  Scenario: Calling the create notifications with a box that does not exist returns a 404 not found
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create notification endpoint with an valid UUID box that does not exist
     Then I get a not found response due to box not found
 
   @create-notifications @push-pull-notifications-api @regression-tests
-  Scenario: Calling the create notifications with a invalid UUID box that does not exist returns a 404 not found
+  Scenario: Calling the create notifications with ann invalid UUID returns a 400 bad request
     Given I have a valid user agent header
     And I have a valid JSON content type header
-    When I make a request to the create notification endpoint with an invalid UUID box that does not exist
+    When I make a request to the create notification endpoint with an invalid UUID
     Then I get a bad request response due to the box ID not being a valid UUID
 
 

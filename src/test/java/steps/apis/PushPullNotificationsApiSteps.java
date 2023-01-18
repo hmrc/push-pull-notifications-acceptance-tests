@@ -27,9 +27,11 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     private static final String PUSH_PULL_CALLBACK_NO_BOX_URL = format("%s/box/046ceee5-e43f-4159-b5ce-8df5f2b9d999/callback", BASE_URL);
     private static final String PUSH_PULL_NOTIFICATIONS_URL = "%s/box/%s/notifications";
     private static final String PUSH_PULL_NOTIFICATIONS_NO_BOX_URL = format("%s/box/07787f13-dcae-4168-8685-c00a33b86999/notifications", BASE_URL);
-    private static final String PUSH_PULL_NOTIFICATIONS_NO_BOX_URL_INVALID_UUID = format("%s/box/foobar/notifications", BASE_URL);
-
+    private static final String PUSH_PULL_NOTIFICATIONS_URL_INVALID_UUID = format("%s/box/foobar/notifications", BASE_URL);
     private static final String PUSH_PULL_WRAPPED_NOTIFICATIONS_URL = "%s/box/%s/wrapped-notifications";
+    private static final String PUSH_PULL_WRAPPED_NOTIFICATIONS_NO_BOX_URL = format("%s/box/07787f13-dcae-4168-8685-c00a33b86999/wrapped-notifications", BASE_URL);
+
+    private static final String PUSH_PULL_WRAPPED_NOTIFICATIONS_URL_INVALID_UUID = format("%s/box/foobar/notifications", BASE_URL);
     private static final String PUSH_PULL_SECRETS_URL = "%s/client/%s/secrets";
     private static final String PUSH_PULL_CREATE_CMB_BOX_URL = format("%s/cmb/box", BASE_URL);
     private static final String PUSH_PULL_VALIDATE_CMB_BOX_URL = format("%s/cmb/validate", BASE_URL);
@@ -187,7 +189,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     }
 
     @Step
-    public void iMakeACallToCreateNotificationsWhereNoBoxExistsWithInValidUuid(String jsonPayload) {
+    public void iMakeACallToCreateNotificationsWhereNoBoxExistsWithInvalidUuid(String jsonPayload) {
         builder().withNoProxy();
 
         RequestSpecification spec = given()
@@ -198,7 +200,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
             spec = spec.header("User-Agent", userAgent);
         }
 
-        response(spec.post(PUSH_PULL_NOTIFICATIONS_NO_BOX_URL_INVALID_UUID).then());
+        response(spec.post(PUSH_PULL_NOTIFICATIONS_URL_INVALID_UUID).then());
     }
 
     @Step
@@ -214,6 +216,20 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         }
 
         response(spec.post(format(PUSH_PULL_WRAPPED_NOTIFICATIONS_URL, BASE_URL, boxId)).then().log().all());
+    }
+
+    public void iMakeACallToCreateWrappedNotificationsWhereNoBoxExists(String jsonPayload) {
+        builder().withNoProxy();
+
+        RequestSpecification spec = given()
+                .spec(specification())
+                .body(jsonPayload);
+
+        if (userAgent != null) {
+            spec = spec.header("User-Agent", userAgent);
+        }
+
+        response(spec.post(PUSH_PULL_WRAPPED_NOTIFICATIONS_NO_BOX_URL).then());
     }
 
     @Step

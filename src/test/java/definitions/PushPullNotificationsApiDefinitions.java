@@ -8,7 +8,6 @@ import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import steps.apis.PushPullNotificationsApiSteps;
 import steps.helpers.ContentTypeHeaderHelper;
-import steps.oauth.OauthApiSteps;
 
 import static java.lang.String.format;
 
@@ -171,6 +170,11 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "    },\n" +
                 "    \"version\": \"1\"\n" +
                 "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with a box that does not exist$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithABoxThatDoesNotExist() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWhereNoBoxExists("{\"message\": \"jsonbody\"}");
     }
 
     @When("^I make a request to the create wrapped notification endpoint with an invalid message version$")
@@ -400,9 +404,9 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWhereNoBoxExists("{\"message\": \"jsonbody\"}");
     }
 
-    @When("^I make a request to the create notification endpoint with an invalid UUID box that does not exist$")
-    public void iMakeRequestToTheCreateNotificationEndpointWithAInvalidUuidboxThatDoesNotExist() {
-        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWhereNoBoxExistsWithInValidUuid("{\"message\": \"jsonbody\"}");
+    @When("^I make a request to the create notification endpoint with an invalid UUID$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAInvalidUuidBoxThatDoesNotExist() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWhereNoBoxExistsWithInvalidUuid("{\"message\": \"jsonbody\"}");
     }
 
     @When("^I make a request to the create notification endpoint with an invalid JSON payload$")
