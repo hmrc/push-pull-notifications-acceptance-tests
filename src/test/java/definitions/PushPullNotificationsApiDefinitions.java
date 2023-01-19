@@ -216,6 +216,47 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "");
     }
 
+    @When("^I make a request to the create wrapped notification endpoint with no notification field name$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoNotificationFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no notification field vale$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoNotificationFieldValue() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": ,\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no version field name$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithANoVersionFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no version field vale$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoVersionFieldValue() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"\"\n" +
+                "}");
+    }
+
     @When("^I make a request to the create wrapped notification endpoint with no JSON payload$")
     public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoJsonPayload() {
         pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "");
