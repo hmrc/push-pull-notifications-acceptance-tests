@@ -8,7 +8,6 @@ import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import steps.apis.PushPullNotificationsApiSteps;
 import steps.helpers.ContentTypeHeaderHelper;
-import steps.oauth.OauthApiSteps;
 
 import static java.lang.String.format;
 
@@ -160,6 +159,118 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         iCreateANewBox();
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(pushPullNotificationsApiSteps.getNewBoxId(), "{\"message\" : \"jsonbody\"}");
         aNotificationsIsSuccessfullyGenerated();
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with a valid JSON payload$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAValidJsonPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with an invalid message version$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnInvalidMessageVersion() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"2\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with a box that does not exist$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithABoxThatDoesNotExist() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWhereNoBoxExists("{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with an invalid UUID$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnInvalidUuid() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithInvalidUuid("{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with an invalid JSON payload$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnInvalidJsonPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no notification field name$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoNotificationFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with an invalid notification content type header$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnInvalidNotificationContentTypeHeader() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/xml\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no notification field vale$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoNotificationFieldValue() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": ,\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no version field name$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithANoVersionFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no version field vale$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoVersionFieldValue() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no JSON payload$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoJsonPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "");
     }
 
     @When("^I make a request to the callback endpoint with a correct URL$")
@@ -378,9 +489,9 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWhereNoBoxExists("{\"message\": \"jsonbody\"}");
     }
 
-    @When("^I make a request to the create notification endpoint with an invalid UUID box that does not exist$")
-    public void iMakeRequestToTheCreateNotificationEndpointWithAInvalidUuidboxThatDoesNotExist() {
-        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWhereNoBoxExistsWithInValidUuid("{\"message\": \"jsonbody\"}");
+    @When("^I make a request to the create notification endpoint with an invalid UUID$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAInvalidUuidBoxThatDoesNotExist() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithInvalidUuid("{\"message\": \"jsonbody\"}");
     }
 
     @When("^I make a request to the create notification endpoint with an invalid JSON payload$")
@@ -689,6 +800,13 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedJsonMessage("Expecting boxName in request body");
     }
 
+    @Then("^I get a bad request response due to message version invalid")
+    public void iGetABadRequestResponseDueToMesssageVersionInvalid() {
+        responseSteps.expectedHttpStatusCode(400);
+        responseSteps.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseSteps.expectedJsonMessage("Message version is invalid");
+    }
+
     @Then("^I get an unauthorised response due to an invalid bearer token$")
     public void iGetAnUnauthorisedResponseDueToAnInvalidBearerToken() {
         responseSteps.expectedHttpStatusCode(401);
@@ -729,4 +847,5 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedJsonErrorCode("BOX_NOT_FOUND");
         responseSteps.expectedJsonMessage("Box not found");
     }
+
 }
