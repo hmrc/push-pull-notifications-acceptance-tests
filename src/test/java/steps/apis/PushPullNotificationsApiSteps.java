@@ -457,6 +457,13 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     }
 
     @Step
+    public void assertNotificationWithConfirmationUrlCreated() {
+        response().body("notificationId", is(notNullValue()));
+        response().body("confirmationId", is(notNullValue()));
+        notificationId = response().extract().path("notificationId").toString();
+    }
+
+    @Step
     public void assertBoxGenerated() {
         response().body("boxId", is("de9aed9c-b319-49a4-99e9-a8a659fc0bf6"));
     }

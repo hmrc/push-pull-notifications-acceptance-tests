@@ -172,6 +172,17 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "}");
     }
 
+    @When("^I make a request to the create wrapped notification endpoint with a confirmation URL$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAConfirmationUrl() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
     @When("^I make a request to the create wrapped notification endpoint with an invalid message version$")
     public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnInvalidMessageVersion() {
         pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
@@ -723,6 +734,12 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     public void aNotificationsIsSuccessfullyGenerated() {
         responseSteps.expectedHttpStatusCode(201);
         pushPullNotificationsApiSteps.assertNotificationCreated();
+    }
+
+    @Then("^A notification with a confirmation URL is successfully generated$")
+    public void aNotificationWithAConfirmationUrlIsSuccessfullyGenerated() {
+        responseSteps.expectedHttpStatusCode(201);
+        pushPullNotificationsApiSteps.assertNotificationWithConfirmationUrlCreated();
     }
 
     @Then("^I get a bad request response due to the box ID not being a valid UUID$")
