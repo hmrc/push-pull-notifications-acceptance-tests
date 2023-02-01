@@ -168,7 +168,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
                 "        \"contentType\": \"application/json\"\n" +
                 "    },\n" +
-                "    \"confirmationUrl\": \"http://example.com\"\n" +
                 "    \"version\": \"1\"\n" +
                 "}");
     }
@@ -180,6 +179,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
                 "        \"contentType\": \"application/json\"\n" +
                 "    },\n" +
+                "    \"confirmationUrl\": \"http://example.com\"\n" +
                 "    \"version\": \"1\"\n" +
                 "}");
     }
