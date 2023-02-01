@@ -16,7 +16,7 @@ Feature: Push Pull Notifications API - End To End Journey
     Then I can set a callback url
     #Create a Notification in JSON
     When I make a request to the create notification endpoint with a valid JSON payload for the new box
-    Then A notifications is successfully generated
+    Then A notification is successfully generated
     #Call the External Notifications endpoint and assert details
     When I have a valid bearer token for scope "read:pull-notifications" for my standard application using client credentials
     And I make a request to the external get box notifications endpoint for the new box
