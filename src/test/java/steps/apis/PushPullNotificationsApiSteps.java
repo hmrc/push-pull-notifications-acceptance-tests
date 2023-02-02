@@ -423,7 +423,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         response(spec.post(format(PUSH_PULL_VALIDATE_CMB_BOX_URL)).then());
     }
 
-
     @Step
     public void withAuthorizationKey(final String authorizationKey) {
         this.authorizationKey = authorizationKey;
@@ -556,7 +555,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .get(format("%s/%s/%s/notifications", baseApiUrl(), apiContext, boxId))
                         .then()
         );
-
     }
 
     @Step
@@ -566,9 +564,8 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                 given()
                         .spec(specification())
                         .get(format("%s/%s/%s/notifications?%s=%s&%s=%s&%s=%s", baseApiUrl(), apiContext, boxId, statusQueryParam, statusQueryValue, fromDateQueryParam, fromDateQueryValue, toDateQueryParam, toDateQueryValue))
-                        .then().log().all()
+                        .then()
         );
-
     }
 
     @Step
@@ -580,7 +577,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .get(format("%s/%s/%s/notifications?%s=%s", baseApiUrl(), apiContext, boxId, statusQueryParam, statusQueryValue))
                         .then()
         );
-
     }
 
     @Step
@@ -593,7 +589,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .put(format("%s/%s/%s/notifications/acknowledge", baseApiUrl(), apiContext, boxId))
                         .then()
         );
-
     }
 
     @Step
