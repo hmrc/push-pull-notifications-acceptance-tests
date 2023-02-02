@@ -209,13 +209,13 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
         RequestSpecification spec = given()
                 .spec(specification())
-                .body(jsonPayload).log().all();
+                .body(jsonPayload);
 
         if (userAgent != null) {
             spec = spec.header("User-Agent", userAgent);
         }
 
-        response(spec.post(format(PUSH_PULL_WRAPPED_NOTIFICATIONS_URL, BASE_URL, boxId)).then().log().all());
+        response(spec.post(format(PUSH_PULL_WRAPPED_NOTIFICATIONS_URL, BASE_URL, boxId)).then());
     }
 
     public void iMakeACallToCreateWrappedNotificationsWhereNoBoxExists(String jsonPayload) {
