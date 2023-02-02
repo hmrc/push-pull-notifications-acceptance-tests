@@ -10,14 +10,14 @@ Feature: Push Pull Notifications API - Create Notifications
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create notification endpoint with a valid JSON payload
-    Then A notifications is successfully generated
+    Then A notification is successfully generated
 
   @create-notifications @notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the create notifications endpoint with a valid XML request body works
     Given I have a valid user agent header
     And I have a valid XML content type header
     When I make a request to the create notification endpoint with a valid XML payload
-    Then A notifications is successfully generated
+    Then A notification is successfully generated
 
   @create-notifications @notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the create notifications with a box that does not exist returns a 404 not found

@@ -423,7 +423,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         response(spec.post(format(PUSH_PULL_VALIDATE_CMB_BOX_URL)).then());
     }
 
-
     @Step
     public void withAuthorizationKey(final String authorizationKey) {
         this.authorizationKey = authorizationKey;
@@ -453,6 +452,13 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     @Step
     public void assertNotificationCreated() {
         response().body("notificationId", is(notNullValue()));
+        notificationId = response().extract().path("notificationId").toString();
+    }
+
+    @Step
+    public void assertNotificationWithConfirmationUrlCreated() {
+        response().body("notificationId", is(notNullValue()));
+        response().body("confirmationId", is(notNullValue()));
         notificationId = response().extract().path("notificationId").toString();
     }
 
@@ -549,7 +555,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .get(format("%s/%s/%s/notifications", baseApiUrl(), apiContext, boxId))
                         .then()
         );
-
     }
 
     @Step
@@ -561,7 +566,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .get(format("%s/%s/%s/notifications?%s=%s&%s=%s&%s=%s", baseApiUrl(), apiContext, boxId, statusQueryParam, statusQueryValue, fromDateQueryParam, fromDateQueryValue, toDateQueryParam, toDateQueryValue))
                         .then()
         );
-
     }
 
     @Step
@@ -573,7 +577,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .get(format("%s/%s/%s/notifications?%s=%s", baseApiUrl(), apiContext, boxId, statusQueryParam, statusQueryValue))
                         .then()
         );
-
     }
 
     @Step
@@ -586,7 +589,6 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
                         .put(format("%s/%s/%s/notifications/acknowledge", baseApiUrl(), apiContext, boxId))
                         .then()
         );
-
     }
 
     @Step
