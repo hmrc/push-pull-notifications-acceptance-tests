@@ -595,6 +595,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @When("^I make a request to the external get box notifications endpoint with all valid query parameter values$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAllValidQueryParameterValues() {
         //pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
+        System.out.println("***** NEW BOX ID IS ******:  " + pushPullNotificationsApiSteps.getNewBoxId());
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
     }
 
