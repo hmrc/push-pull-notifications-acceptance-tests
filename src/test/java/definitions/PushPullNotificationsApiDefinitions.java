@@ -608,13 +608,13 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     private String generateCurrentDate() {
         LocalDateTime date = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
         return date.format(formatter);
     }
 
     private String generateFutureDate() {
         LocalDateTime date = LocalDateTime.now().plusDays(1);
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
         //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmssSSS");
         return date.format(formatter);
     }
