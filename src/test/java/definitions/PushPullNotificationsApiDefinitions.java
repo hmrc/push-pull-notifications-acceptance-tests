@@ -599,14 +599,23 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAllValidQueryParameterValues() {
         //pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
         System.out.println("***** NEW BOX ID IS ******:  " + pushPullNotificationsApiSteps.getNewBoxId());
-        String fromDateValue = generateTodaysDate();
-        System.out.println("***** TIME CAPTURED IS ******:  " + fromDateValue);
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING", "fromDate", "2023-02-09T17:08:53.786+0000", "toDate", fromDateValue);
+        String fromDateValue = generateCurrentDate();
+        System.out.println("***** TIME CAPTURED FOR FROM DATE IS ******:  " + fromDateValue);
+        String toDateValue = generateCurrentDate();
+        System.out.println("***** TIME CAPTURED FOR TO DATE IS ******:  " + fromDateValue);
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING", "fromDate", toDateValue, "toDate", fromDateValue);
     }
 
-    private String generateTodaysDate() {
+    private String generateCurrentDate() {
         LocalDateTime date = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmssSSS");
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        return date.format(formatter);
+    }
+
+    private String generateFutureDate() {
+        LocalDateTime date = LocalDateTime.now().plusDays(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmssSSS");
         return date.format(formatter);
     }
 
