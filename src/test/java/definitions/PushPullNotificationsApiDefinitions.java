@@ -597,25 +597,9 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the external get box notifications endpoint with all valid query parameter values$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAllValidQueryParameterValues() {
-        //pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
-        System.out.println("***** NEW BOX ID IS ******:  " + pushPullNotificationsApiSteps.getNewBoxId());
         String fromDateValue = generateCurrentDate();
-        System.out.println("***** TIME CAPTURED FOR FROM DATE IS ******:  " + fromDateValue);
         String toDateValue = generateFutureDate();
-        System.out.println("***** TIME CAPTURED FOR TO DATE IS ******:  " + toDateValue);
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING", "fromDate", fromDateValue, "toDate", toDateValue);
-    }
-
-    private String generateCurrentDate() {
-        LocalDateTime date = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-        return date.format(formatter);
-    }
-
-    private String generateFutureDate() {
-        LocalDateTime date = LocalDateTime.now().plusDays(1);
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-        return date.format(formatter);
     }
 
     @When("^I make a request to the external get box notifications endpoint for the new box$")
@@ -687,12 +671,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.assertAllBoxes();
     }
 
-//    @Then("^the correct box is successfully returned$")
-//    public void theCorrectBoxIsSuccessfullyReturned() {
-//        responseSteps.expectedHttpStatusCode(200);
-//        pushPullNotificationsApiSteps.assertBoxExists();
-//    }
-
     @Then("^the new box is successfully returned$")
     public void theNewBoxIsSuccessfullyReturned() {
         responseSteps.expectedHttpStatusCode(200);
@@ -704,12 +682,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.assertBoxGenerated();
     }
-
-//    @Then("^A box is successfully generated with no payload$")
-//    public void aBoxIsSuccessfullyGeneratedWithNoPayload() {
-//        responseSteps.expectedHttpStatusCode(200);
-//        pushPullNotificationsApiSteps.assertBoxGeneratedWithNoPayload();
-//    }
 
     @Then("^I get a successful response with default and client managed boxes displayed$")
     public void iGetASuccessfulResponseWithDefaultAndClientManagedBoxesDisplayed() {
@@ -898,6 +870,18 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedHttpStatusCode(404);
         responseSteps.expectedJsonErrorCode("BOX_NOT_FOUND");
         responseSteps.expectedJsonMessage("Box not found");
+    }
+
+    private String generateCurrentDate() {
+        LocalDateTime date = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        return date.format(formatter);
+    }
+
+    private String generateFutureDate() {
+        LocalDateTime date = LocalDateTime.now().plusDays(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        return date.format(formatter);
     }
 
 }

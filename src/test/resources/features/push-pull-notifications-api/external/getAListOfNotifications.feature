@@ -13,7 +13,7 @@ Feature: Push Pull Notifications API - Get A List of Notifications
     When I make a request to the external get box notifications endpoint for pending status notifications
     Then I get a successful response with pending notifications
 
-  @get-notifications @push-pull-notifications-api @regression-tests @imran
+  @get-notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the external get notifications endpoint with all valid query parameter value works
     Given I have all valid request headers for PPNS
     When  I make a request to the create notifications endpoint to generate a pending notification for an unsubscribed box
