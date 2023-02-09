@@ -9,6 +9,9 @@ import net.thucydides.core.annotations.Steps;
 import steps.apis.PushPullNotificationsApiSteps;
 import steps.helpers.ContentTypeHeaderHelper;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static java.lang.String.format;
 
 public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
@@ -596,7 +599,15 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAllValidQueryParameterValues() {
         //pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
         System.out.println("***** NEW BOX ID IS ******:  " + pushPullNotificationsApiSteps.getNewBoxId());
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
+        String fromDateValue = generateTodaysDate();
+        System.out.println("***** TIME CAPTURED IS ******:  " + fromDateValue);
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING", "fromDate", "2023-02-09T17:08:53.786+0000", "toDate", fromDateValue);
+    }
+
+    private String generateTodaysDate() {
+        LocalDateTime date = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmssSSS");
+        return date.format(formatter);
     }
 
     @When("^I make a request to the external get box notifications endpoint for the new box$")
