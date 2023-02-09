@@ -615,7 +615,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     private String generateFutureDate() {
         LocalDateTime date = LocalDateTime.now().plusDays(1);
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmssSSS");
         return date.format(formatter);
     }
 
@@ -667,6 +666,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @Then("^I get a successful response with the correct notification details$")
     public void iGetASuccessfulResponseWithTheCorrectClientDetails() {
         responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForPendingStatusAndDateParameters();
     }
 
     @Then("^I get a successful response with pending notifications")
