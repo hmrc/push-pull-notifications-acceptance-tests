@@ -602,7 +602,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         String fromDateValue = generateCurrentDate();
         System.out.println("***** TIME CAPTURED FOR FROM DATE IS ******:  " + fromDateValue);
         String toDateValue = generateFutureDate();
-        System.out.println("***** TIME CAPTURED FOR TO DATE IS ******:  " + fromDateValue);
+        System.out.println("***** TIME CAPTURED FOR TO DATE IS ******:  " + toDateValue);
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING", "fromDate", fromDateValue, "toDate", toDateValue);
     }
 
