@@ -44,7 +44,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     private String newBoxId;
     private String newClientManagedBoxId;
     private String notificationId;
-    private final String newBoxName = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+    private final String newBoxName = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new Date());
 
     public String getNewBoxName() {
         return newBoxName;
