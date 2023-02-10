@@ -537,11 +537,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         contentTypeHeaderHelper.withJsonContentTypeHeader();
         iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointForTheNewBox();
         iGetASuccessfulResponseWithNotificationsNowAcknowledged();
-
-
-
-
-        ////////////////////////////////////
     }
 
     @When("^I make a request to the external get box notifications endpoint with unknown query parameters$")
