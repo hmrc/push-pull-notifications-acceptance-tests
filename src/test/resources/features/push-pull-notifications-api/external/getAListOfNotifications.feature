@@ -21,12 +21,12 @@ Feature: Push Pull Notifications API - Get A List of Notifications
     When I make a request to the external get box notifications endpoint for acknowledged status notifications
     Then I get a successful response with acknowledged notifications
 
-  @get-notifications @push-pull-notifications-api @regression-tests
+  @get-notifications @push-pull-notifications-api @regression-tests @imran3
   Scenario: Calling the external get notifications endpoint with all valid query parameter values for pending notifications works
     Given I have all valid request headers for PPNS
     And  I make a request to the create notifications endpoint to generate a pending notification for an unsubscribed box
     And I have a valid bearer token for scope "read:pull-notifications" for my standard application using client credentials
-    When I make a request to the external get box notifications endpoint with all valid query parameter values
+    When I make a request to the external get box notifications endpoint for "PENDING" notifications with valid date query parameter values
     Then I get a successful response with the correct notification details
 
     #####
