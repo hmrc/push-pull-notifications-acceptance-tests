@@ -769,7 +769,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @Then("^A notification is successfully generated$")
     public void aNotificationsIsSuccessfullyGenerated() {
-        responseSteps.expectedHttpStatusCode(201);
+        responseSteps.expectedHttpStatusCode(201) ;
         pushPullNotificationsApiSteps.assertNotificationCreated();
     }
 
