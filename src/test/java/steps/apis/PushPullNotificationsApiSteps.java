@@ -60,13 +60,13 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
         RequestSpecification spec = given()
                 .spec(specification())
-                .body(new BoxPayload(clientId, boxName)).log().all();
+                .body(new BoxPayload(clientId, boxName));
 
         if (userAgent != null) {
             spec = spec.header("User-Agent", userAgent);
         }
 
-        response(spec.put(PUSH_PULL_BOX_URL).then().log().all());
+        response(spec.put(PUSH_PULL_BOX_URL).then());
     }
 
     @Step
@@ -562,9 +562,9 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
         response(
                 given()
-                        .spec(specification()).log().all()
+                        .spec(specification())
                         .get(format("%s/%s/%s/notifications?%s=%s&%s=%s&%s=%s", baseApiUrl(), apiContext, boxId, statusQueryParam, statusQueryValue, fromDateQueryParam, fromDateQueryValue, toDateQueryParam, toDateQueryValue))
-                        .then().log().all()
+                        .then()
         );
     }
 
