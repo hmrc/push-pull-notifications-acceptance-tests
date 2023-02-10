@@ -60,13 +60,13 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
         RequestSpecification spec = given()
                 .spec(specification())
-                .body(new BoxPayload(clientId, boxName));
+                .body(new BoxPayload(clientId, boxName)).log().all();
 
         if (userAgent != null) {
             spec = spec.header("User-Agent", userAgent);
         }
 
-        response(spec.put(PUSH_PULL_BOX_URL).then());
+        response(spec.put(PUSH_PULL_BOX_URL).then().log().all());
     }
 
     @Step
@@ -146,15 +146,15 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     public void iMakeACallToCreateNotificationsWithJsonPayload(String boxId, String jsonPayload) {
         builder().withNoProxy();
 
-        RequestSpecification spec = given().log().all()
+        RequestSpecification spec = given()
                 .spec(specification())
-                .body(jsonPayload).log().all();
+                .body(jsonPayload);
 
         if (userAgent != null) {
             spec = spec.header("User-Agent", userAgent);
         }
 
-        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then().log().all());
+        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then());
     }
 
     @Step
