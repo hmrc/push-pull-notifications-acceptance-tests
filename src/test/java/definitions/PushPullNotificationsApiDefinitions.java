@@ -9,6 +9,9 @@ import net.thucydides.core.annotations.Steps;
 import steps.apis.PushPullNotificationsApiSteps;
 import steps.helpers.ContentTypeHeaderHelper;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static java.lang.String.format;
 
 public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
@@ -528,11 +531,12 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "");
     }
 
-    @Then("^I get a successful response with acknowledged notifications")
-    public void iGetASuccessfulResponseWithAcknowledgedNotifications() {
-        responseSteps.expectedHttpStatusCode(204);
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "ACKNOWLEDGED");
-        pushPullNotificationsApiSteps.hasAcknowledgedStatusNotifications();
+    @Given("^I have a generated notification in an acknowledged status$")
+    public void iHaveAGeneratedNotificationInAnAckowledgedStatus() {
+        iHaveANotificationInStatusPendingForANewBox();
+        contentTypeHeaderHelper.withJsonContentTypeHeader();
+        iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointForTheNewBox();
+        iGetASuccessfulResponseWithNotificationsNowAcknowledged();
     }
 
     @When("^I make a request to the external get box notifications endpoint with unknown query parameters$")
@@ -555,9 +559,19 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000+123");
     }
 
+    @When("^I make a request to the external get box notifications endpoint$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpoint() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotifications("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING");
+    }
+
     @When("^I make a request to the external get box notifications endpoint for pending status notifications$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForPendingStatusNotifications() {
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING");
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotifications(pushPullNotificationsApiSteps.getNewBoxId());
+    }
+
+    @When("^I make a request to the external get box notifications endpoint for acknowledged status notifications$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForAcknowledgedStatusNotifications() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "ACKNOWLEDGED");
     }
 
     @When("^I make a request to the external get box notifications endpoint with a box ID that belongs to another client ID$")
@@ -592,9 +606,11 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("a5e3203d-a57e-4787-ba72-2dbfc294455f");
     }
 
-    @When("^I make a request to the external get box notifications endpoint with all valid query parameter values$")
-    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAllValidQueryParameterValues() {
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
+    @When("^I make a request to the external get box notifications endpoint for \"(.*)\" notifications with valid date query parameter values$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForNotificationsWithValidDateQueryParameterValues(String statusValue) {
+        String fromDateValue = generateCurrentDate();
+        String toDateValue = generateFutureDate();
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(pushPullNotificationsApiSteps.getNewBoxId(), "status", statusValue, "fromDate", fromDateValue, "toDate", toDateValue);
     }
 
     @When("^I make a request to the external get box notifications endpoint for the new box$")
@@ -643,14 +659,34 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     }
 
     @Then("^I get a successful response with the correct notification details$")
-    public void iGetASuccessfulResponseWithTheCorrectClientDetails() {
+    public void iGetASuccessfulResponseWithTheCorrectNotificationDetails() {
         responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForPendingStatusAndDateParameters();
+    }
+
+    @Then("^I get a successful response with the correct acknowledged notification details$")
+    public void iGetASuccessfulResponseWithTheCorrectAcknowledgedNotificationDetails() {
+        responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForAcknowledgedStatusAndDateParameters();
     }
 
     @Then("^I get a successful response with pending notifications")
     public void iGetASuccessfulResponseWithPendingNotifications() {
         responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.hasPendingStatusNotifications();
+    }
+
+    @Then("^I get a successful response with acknowledged notifications")
+    public void iGetASuccessfulResponseWithAcknowledgedNotifications() {
+        responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasAcknowledgedStatusNotifications();
+    }
+
+    @Then("^I get a successful response with notifications now acknowledged")
+    public void iGetASuccessfulResponseWithNotificationsNowAcknowledged() {
+        responseSteps.expectedHttpStatusCode(204);
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "ACKNOWLEDGED");
+        pushPullNotificationsApiSteps.hasAcknowledgedStatusNotifications();
     }
 
     @Then("^I can set a callback url$")
@@ -665,12 +701,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.assertAllBoxes();
     }
 
-//    @Then("^the correct box is successfully returned$")
-//    public void theCorrectBoxIsSuccessfullyReturned() {
-//        responseSteps.expectedHttpStatusCode(200);
-//        pushPullNotificationsApiSteps.assertBoxExists();
-//    }
-
     @Then("^the new box is successfully returned$")
     public void theNewBoxIsSuccessfullyReturned() {
         responseSteps.expectedHttpStatusCode(200);
@@ -682,12 +712,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.assertBoxGenerated();
     }
-
-//    @Then("^A box is successfully generated with no payload$")
-//    public void aBoxIsSuccessfullyGeneratedWithNoPayload() {
-//        responseSteps.expectedHttpStatusCode(200);
-//        pushPullNotificationsApiSteps.assertBoxGeneratedWithNoPayload();
-//    }
 
     @Then("^I get a successful response with default and client managed boxes displayed$")
     public void iGetASuccessfulResponseWithDefaultAndClientManagedBoxesDisplayed() {
@@ -745,7 +769,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @Then("^A notification is successfully generated$")
     public void aNotificationsIsSuccessfullyGenerated() {
-        responseSteps.expectedHttpStatusCode(201);
+        responseSteps.expectedHttpStatusCode(201) ;
         pushPullNotificationsApiSteps.assertNotificationCreated();
     }
 
@@ -878,4 +902,15 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedJsonMessage("Box not found");
     }
 
+    private String generateCurrentDate() {
+        LocalDateTime date = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        return date.format(formatter);
+    }
+
+    private String generateFutureDate() {
+        LocalDateTime date = LocalDateTime.now().plusDays(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        return date.format(formatter);
+    }
 }

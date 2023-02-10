@@ -44,7 +44,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     private String newBoxId;
     private String newClientManagedBoxId;
     private String notificationId;
-    private final String newBoxName = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+    private final String newBoxName = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new Date());
 
     public String getNewBoxName() {
         return newBoxName;
@@ -569,6 +569,17 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     }
 
     @Step
+    public void iMakeACallToTheExternalGetBoxNotifications(String boxId, String statusQueryParam, String statusQueryValue) {
+
+        response(
+                given()
+                        .spec(specification())
+                        .get(format("%s/%s/%s/notifications", baseApiUrl(), apiContext, boxId))
+                        .then()
+        );
+    }
+
+    @Step
     public void iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(String boxId, String statusQueryParam, String statusQueryValue) {
 
         response(
@@ -604,6 +615,24 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     public void hasPendingStatusNotifications() {
         response().body("notificationId", hasItem((notificationId)));
         response().body("status", everyItem(is("PENDING")));
+    }
+
+    @Step
+    public void hasCorrectNotificationDetailsForPendingStatusAndDateParameters() {
+        response().body("notificationId", is(singletonList(notificationId)));
+        response().body("boxId", is(singletonList(newBoxId)));
+        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
+        response().body("status", is(singletonList("PENDING")));
+        response().body("createdDateTime", is(notNullValue()));
+    }
+
+    @Step
+    public void hasCorrectNotificationDetailsForAcknowledgedStatusAndDateParameters() {
+        response().body("notificationId", is(singletonList(notificationId)));
+        response().body("boxId", is(singletonList(newBoxId)));
+        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
+        response().body("status", is(singletonList("ACKNOWLEDGED")));
+        response().body("createdDateTime", is(notNullValue()));
     }
 
     public void hasAcknowledgedStatusNotifications() {
