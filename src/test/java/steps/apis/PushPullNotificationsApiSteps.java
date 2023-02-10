@@ -569,6 +569,17 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     }
 
     @Step
+    public void iMakeACallToTheExternalGetBoxNotifications(String boxId, String statusQueryParam, String statusQueryValue) {
+
+        response(
+                given()
+                        .spec(specification())
+                        .get(format("%s/%s/%s/notifications", baseApiUrl(), apiContext, boxId))
+                        .then()
+        );
+    }
+
+    @Step
     public void iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(String boxId, String statusQueryParam, String statusQueryValue) {
 
         response(
