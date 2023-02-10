@@ -35,7 +35,7 @@ Feature: Push Pull Notifications API - Get A List of Notifications
     Given I have all valid request headers for PPNS
     And I have a valid bearer token for scope "read:pull-notifications write:notifications" for my standard application using client credentials
     And I have a generated notification in an acknowledged status
-    When I make a request to the external get box notifications endpoint with all valid query parameter values
+    When I make a request to the external get box notifications endpoint for "ACKNOWLEDGED" notifications with valid date query parameter values
     Then I get a successful response with the correct acknowledged notification details
 
     #####

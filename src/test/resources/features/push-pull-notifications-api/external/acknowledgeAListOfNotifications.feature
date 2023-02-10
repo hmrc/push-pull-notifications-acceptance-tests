@@ -12,7 +12,7 @@ Feature: Push Pull Notifications API - Acknowledge A List Of Notifications
     And I have a notification in status pending for a new box
     And I have a valid JSON content type header
     When I make a request to the external put acknowledge notifications endpoint for the new box
-    Then I get a successful response with acknowledged notifications
+    Then I get a successful response with notifications now acknowledged
 
   @acknowledge-notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the external put acknowledge notifications endpoint for a non existing box returns 404 not found
