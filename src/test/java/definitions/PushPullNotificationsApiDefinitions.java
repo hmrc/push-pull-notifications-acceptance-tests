@@ -664,9 +664,15 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     }
 
     @Then("^I get a successful response with the correct notification details$")
-    public void iGetASuccessfulResponseWithTheCorrectClientDetails() {
+    public void iGetASuccessfulResponseWithTheCorrectNotificationDetails() {
         responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForPendingStatusAndDateParameters();
+    }
+
+    @Then("^I get a successful response with the correct acknowledged notification details$")
+    public void iGetASuccessfulResponseWithTheCorrectAcknowledgedNotificationDetails() {
+        responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForAcknowledgedStatusAndDateParameters();
     }
 
     @Then("^I get a successful response with pending notifications")
@@ -912,5 +918,4 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
         return date.format(formatter);
     }
-
 }

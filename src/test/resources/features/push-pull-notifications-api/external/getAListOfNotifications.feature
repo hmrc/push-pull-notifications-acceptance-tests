@@ -22,12 +22,23 @@ Feature: Push Pull Notifications API - Get A List of Notifications
     Then I get a successful response with acknowledged notifications
 
   @get-notifications @push-pull-notifications-api @regression-tests
-  Scenario: Calling the external get notifications endpoint with all valid query parameter value works
+  Scenario: Calling the external get notifications endpoint with all valid query parameter values for pending notifications works
     Given I have all valid request headers for PPNS
     And  I make a request to the create notifications endpoint to generate a pending notification for an unsubscribed box
     And I have a valid bearer token for scope "read:pull-notifications" for my standard application using client credentials
     When I make a request to the external get box notifications endpoint with all valid query parameter values
     Then I get a successful response with the correct notification details
+
+    #####
+  @get-notifications @push-pull-notifications-api @regression-tests @imran3
+  Scenario: Calling the external get notifications endpoint with all valid query parameter values for acknowledged notifications works
+    Given I have all valid request headers for PPNS
+    And I have a valid bearer token for scope "read:pull-notifications write:notifications" for my standard application using client credentials
+    And I have a generated notification in an acknowledged status
+    When I make a request to the external get box notifications endpoint with all valid query parameter values
+    Then I get a successful response with the correct acknowledged notification details
+
+    #####
 
   @get-notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the external get notifications endpoint with an unknown query parameter returns a 400 bad request

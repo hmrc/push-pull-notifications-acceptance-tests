@@ -626,6 +626,15 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         response().body("createdDateTime", is(notNullValue()));
     }
 
+    @Step
+    public void hasCorrectNotificationDetailsForAcknowledgedStatusAndDateParameters() {
+        response().body("notificationId", is(singletonList(notificationId)));
+        response().body("boxId", is(singletonList(newBoxId)));
+        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
+        response().body("status", is(singletonList("PENDING")));
+        response().body("createdDateTime", is(notNullValue()));
+    }
+
     public void hasAcknowledgedStatusNotifications() {
         response().body("notificationId", hasItems((notificationId)));
         response().body("status", everyItem(is("ACKNOWLEDGED")));
