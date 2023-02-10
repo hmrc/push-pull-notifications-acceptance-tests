@@ -562,9 +562,9 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
         response(
                 given()
-                        .spec(specification())
+                        .spec(specification()).log().all()
                         .get(format("%s/%s/%s/notifications?%s=%s&%s=%s&%s=%s", baseApiUrl(), apiContext, boxId, statusQueryParam, statusQueryValue, fromDateQueryParam, fromDateQueryValue, toDateQueryParam, toDateQueryValue))
-                        .then()
+                        .then().log().all()
         );
     }
 

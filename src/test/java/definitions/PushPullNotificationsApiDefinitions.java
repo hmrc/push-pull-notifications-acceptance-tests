@@ -623,7 +623,9 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @When("^I make a request to the external get box notifications endpoint for \"(.*)\" notifications with valid date query parameter values$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForNotificationsWithValidDateQueryParameterValues(String statusValue) {
         String fromDateValue = generateCurrentDate();
+        System.out.println("FROM DATE IS **************: " + fromDateValue);
         String toDateValue = generateFutureDate();
+        System.out.println("TO DATE IS **************: " + fromDateValue);
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(pushPullNotificationsApiSteps.getNewBoxId(), "status", statusValue, "fromDate", fromDateValue, "toDate", toDateValue);
     }
 
