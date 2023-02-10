@@ -536,7 +536,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         iHaveANotificationInStatusPendingForANewBox();
         contentTypeHeaderHelper.withJsonContentTypeHeader();
         iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointForTheNewBox();
-        iGetASuccessfulResponseWithAcknowledgedNotifications();
+        iGetASuccessfulResponseWithNotificationsNowAcknowledged();
 
 
 
@@ -679,6 +679,13 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     public void iGetASuccessfulResponseWithAcknowledgedNotifications() {
         responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.hasPendingStatusNotifications();
+    }
+
+    @Then("^I get a successful response with notifications now acknowledged")
+    public void iGetASuccessfulResponseWithNotificationsNowAcknowledged() {
+        responseSteps.expectedHttpStatusCode(204);
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "ACKNOWLEDGED");
+        pushPullNotificationsApiSteps.hasAcknowledgedStatusNotifications();
     }
 
     @Then("^I can set a callback url$")
