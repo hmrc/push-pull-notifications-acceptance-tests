@@ -631,7 +631,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         response().body("notificationId", is(singletonList(notificationId)));
         response().body("boxId", is(singletonList(newBoxId)));
         response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
-        response().body("status", is(singletonList("PENDING")));
+        response().body("status", is(singletonList("ACKNOWLEDGED")));
         response().body("createdDateTime", is(notNullValue()));
     }
 
