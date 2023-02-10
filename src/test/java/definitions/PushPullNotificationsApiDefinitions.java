@@ -678,7 +678,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @Then("^I get a successful response with acknowledged notifications")
     public void iGetASuccessfulResponseWithAcknowledgedNotifications() {
         responseSteps.expectedHttpStatusCode(200);
-        pushPullNotificationsApiSteps.hasPendingStatusNotifications();
+        pushPullNotificationsApiSteps.hasAcknowledgedStatusNotifications();
     }
 
     @Then("^I get a successful response with notifications now acknowledged")
