@@ -531,11 +531,17 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "");
     }
 
-    @Then("^I get a successful response with acknowledged notifications")
-    public void iGetASuccessfulResponseWithAcknowledgedNotifications() {
-        responseSteps.expectedHttpStatusCode(204);
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "ACKNOWLEDGED");
-        pushPullNotificationsApiSteps.hasAcknowledgedStatusNotifications();
+    @Given("^I have a generated notification in an acknowledged status$")
+    public void iHaveAGeneratedNotificationInAnAckowledgedStatus() {
+        iHaveANotificationInStatusPendingForANewBox();
+        contentTypeHeaderHelper.withJsonContentTypeHeader();
+        iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointForTheNewBox();
+        iGetASuccessfulResponseWithAcknowledgedNotifications();
+
+
+
+
+        ////////////////////////////////////
     }
 
     @When("^I make a request to the external get box notifications endpoint with unknown query parameters$")
@@ -558,9 +564,19 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000+123");
     }
 
+    @When("^I make a request to the external get box notifications endpoint$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpoint() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING");
+    }
+
     @When("^I make a request to the external get box notifications endpoint for pending status notifications$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForPendingStatusNotifications() {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING");
+    }
+
+    @When("^I make a request to the external get box notifications endpoint for acknowledged status notifications$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForAcknowledgedStatusNotifications() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "ACKNOWLEDGED");
     }
 
     @When("^I make a request to the external get box notifications endpoint with a box ID that belongs to another client ID$")
@@ -655,6 +671,12 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @Then("^I get a successful response with pending notifications")
     public void iGetASuccessfulResponseWithPendingNotifications() {
+        responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasPendingStatusNotifications();
+    }
+
+    @Then("^I get a successful response with acknowledged notifications")
+    public void iGetASuccessfulResponseWithAcknowledgedNotifications() {
         responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.hasPendingStatusNotifications();
     }
