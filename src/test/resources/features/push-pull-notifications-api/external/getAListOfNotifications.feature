@@ -5,9 +5,6 @@ Feature: Push Pull Notifications API - Get A List of Notifications
 
   ### Happy Path Scenarios
 
-   # Add Test Acknowledged Notifications
-  # Add Test for both Pending and Acknowledged Notifications
-
   @get-notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the external get notifications endpoint for pending status notifications works
     Given I have all valid request headers for PPNS
@@ -16,27 +13,13 @@ Feature: Push Pull Notifications API - Get A List of Notifications
     When I make a request to the external get box notifications endpoint for pending status notifications
     Then I get a successful response with pending notifications
 
-    #############################################################
-
-  @get-notifications @push-pull-notifications-api @regression-tests @imran2
+  @get-notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the external get notifications endpoint for acknowledged status notifications works
     Given I have all valid request headers for PPNS
     And I have a valid bearer token for scope "read:pull-notifications write:notifications" for my standard application using client credentials
     And I have a generated notification in an acknowledged status
     When I make a request to the external get box notifications endpoint for acknowledged status notifications
     Then I get a successful response with acknowledged notifications
-
-
-
-
-  @get-notifications @push-pull-notifications-api @regression-tests
-  Scenario: Calling the external get notifications endpoint for all status notifications works
-
-
-
-
-    ##############################################################
-
 
   @get-notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the external get notifications endpoint with all valid query parameter value works
@@ -84,34 +67,34 @@ Feature: Push Pull Notifications API - Get A List of Notifications
   Scenario: Calling the external get notifications endpoint with an incorrect accept header version
     Given I have an incorrect accept header version
     And I have a valid bearer token for scope "read:pull-notifications" for my standard application using client credentials
-    When I make a request to the external get box notifications endpoint with all valid query parameter values
+    When I make a request to the external get box notifications endpoint
     Then I get a matching resource not found response
 
-  @get-notifications @push-pull-notifications-api @regression-tests @imran
+  @get-notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the external get notifications endpoint with an invalid accept header
     Given I have an invalid accept header
     And I have a valid bearer token for scope "read:pull-notifications" for my standard application using client credentials
-    When I make a request to the external get box notifications endpoint with all valid query parameter values
+    When I make a request to the external get box notifications endpoint
     Then I get an unacceptable response due to an invalid accept header
 
   @get-notifications @push-pull-notifications-api @regression-tests @imran
   Scenario: Calling the external get notifications endpoint with a missing accept header
     Given I have no accept header
     And I have a valid bearer token for scope "read:pull-notifications" for my standard application using client credentials
-    When I make a request to the external get box notifications endpoint with all valid query parameter values
+    When I make a request to the external get box notifications endpoint
     Then I get an unacceptable response due to a missing accept header
 
 
   ### Authorization Scenarios
 
-  @get-notifications @push-pull-notifications-api @regression-tests
+  @get-notifications @push-pull-notifications-api @regression-tests @imran
   Scenario: Calling the external get notifications endpoint with an invalid scope
     Given I have a valid bearer token for scope "write:notifications" for my standard application using client credentials
-    When I make a request to the external get box notifications endpoint with all valid query parameter values
+    When I make a request to the external get box notifications endpoint
     Then I get a forbidden response due to invalid scope
 
-  @get-notifications @push-pull-notifications-api @regression-tests
+  @get-notifications @push-pull-notifications-api @regression-tests @imran
   Scenario: Calling the external get notifications endpoint with a non client credentials token
     Given I have a valid bearer token for scope "read:pull-notifications"
-    When I make a request to the external get box notifications endpoint with all valid query parameter values
+    When I make a request to the external get box notifications endpoint
     Then I get an unauthorised response due to an invalid bearer token

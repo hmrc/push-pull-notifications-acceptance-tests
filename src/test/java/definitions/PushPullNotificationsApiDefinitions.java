@@ -566,7 +566,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the external get box notifications endpoint$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpoint() {
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotifications(pushPullNotificationsApiSteps.getNewBoxId(), "status", "PENDING");
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotifications("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING");
     }
 
     @When("^I make a request to the external get box notifications endpoint for pending status notifications$")
