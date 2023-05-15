@@ -19,6 +19,7 @@ function usage() {
 # Defaults
 data_file=qa.txt
 web_driver=chrome
+retry=false
 
 # Parse CLI arguments
 while getopts 'hro:t:p:d:' OPTION; do
@@ -56,8 +57,19 @@ source profiles/$data_file
 
 gradlew_return_code=0
 
+# If remote, set up selenium grid connection, if not just use specified web driver
+web_driver_params="-Dwebdriver.driver=${web_driver}"
+if [ "$web_driver" == "remote" ]; then
+  web_driver_params="${web_driver_params} -Dwebdriver.remote.url=http://localhost:4444/wd/hub -Dwebdriver.remote.driver=chrome"
+fi
+
+echo "== Using web_driver: '${web_driver}' =="
+echo "== Using data_file: '${data_file}' =="
+echo "== Using tag: '${tag}' =="
+echo "== Using retry: '${retry}' =="
+
 ./gradlew clean test aggregate \
-		-Dwebdriver.driver="${web_driver}" \
+		$web_driver_params \
 		-DbaseUrl="${BASE_URL}" \
 		-Dcucumber.filter.tags="${tag}" \
 		--info \
@@ -66,8 +78,11 @@ gradlew_return_code=0
 if [[ "$retry" == "true" && "$gradlew_return_code" != "0" ]]; then
   echo "== Retrying failed tests =="
   ./gradlew clean test aggregate \
-      -Dwebdriver.driver="${web_driver}" \
+      $web_driver_params \
       -DbaseUrl="${BASE_URL}" \
       -Dcucumber.features="@rerun/failed_scenarios.txt" \
-      --info
+      --info \
+     || gradlew_return_code=$?
 fi
+
+exit $gradlew_return_code
