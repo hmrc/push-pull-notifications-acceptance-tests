@@ -1,65 +1,49 @@
-defaultTasks 'clean', 'test', 'aggregate'
+plugins {
+    id 'java'
+    id 'idea'
+    id "net.serenity-bdd.serenity-gradle-plugin" version "3.6.7"
+}
+
+defaultTasks 'clean','test','aggregate'
 
 repositories {
+    mavenLocal()
     mavenCentral()
-//    mavenLocal()
-//    maven { url 'https://nexus-build.tax.service.gov.uk/content/groups/mdtp-proxied-maven-repositories/' }
-
+    maven { url 'https://nexus-build.tax.service.gov.uk/content/groups/mdtp-proxied-maven-repositories/' }
 }
 
-buildscript {
-    apply from: "./properties.gradle"
-    repositories {
-        maven { url "https://plugins.gradle.org/m2/" }
-//        maven { url 'https://nexus-build.tax.service.gov.uk/content/groups/mdtp-proxied-maven-repositories/' }
-    }
-    dependencies {
-        classpath "net.serenity-bdd:serenity-gradle-plugin:${serenityCoreVersion}"
-    }
+wrapper {
+    gradleVersion = '7.5.1'
 }
 
-apply from: "./properties.gradle"
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+ext {
+    serenityCoreVersion = '3.6.7'
+    junitVersion = '5.8.2'
+    logbackVersion = '1.2.10'
+    slf4jVersion = '2.0.6'
+}
 
 dependencies {
-    implementation "ch.qos.logback:logback-classic:${logbackVersion}"
-
-    testImplementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
-            "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}",
+    testImplementation"net.serenity-bdd:serenity-core:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-junit5:${serenityCoreVersion}",
             "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-cucumber:${serenityCoreVersion}",
             "net.serenity-bdd:serenity-rest-assured:${serenityCoreVersion}",
-            "junit:junit:${junitVersion}",
-            "org.assertj:assertj-core:${assertJVersion}",
+            "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
+            "ch.qos.logback:logback-core:${logbackVersion}",
+            "org.slf4j:slf4j-simple:${slf4jVersion}",
             "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.4"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 }
 
 test {
-    systemProperty "cucumber.filter.tags", System.properties.getProperty("cucumber.filter.tags")
-    systemProperty "cucumber.features", System.properties.getProperty("cucumber.features")
-    systemProperty "chrome.switches", System.properties.getProperty("chrome.switches")
-    systemProperty "webdriver.base.url", (System.properties.getProperty('baseUrl') != "") ? System.properties.getProperty('baseUrl') : "https://www.qa.tax.service.gov.uk"
-
-    if (System.getProperty('webdriver.driver') == 'remote') {
-        systemProperty('webdriver.driver', 'remote')
-        systemProperty('webdriver.remote.url', 'http://localhost:4444/wd/hub')
-        systemProperty('webdriver.remote.driver', 'chrome')
-    } else if (System.getProperty('webdriver.driver') != null) {
-        systemProperty('webdriver.driver', System.getProperty('webdriver.driver'))
-    } else {
-        systemProperty('webdriver.driver', 'chrome')
-    }
-}
-
-serenity {
-    // Specify the root package of any JUnit acceptance tests to appear in the Serenity report
-    testRoot = ""
-    // Specify the root directory of any Cucumber feature files
-    requirementsDir = "src/test/resources/features"
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
 }
 
 gradle.startParameter.continueOnFailure = true
