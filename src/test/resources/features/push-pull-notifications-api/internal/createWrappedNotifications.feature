@@ -19,6 +19,8 @@ Feature: Push Pull Notifications API - Create Wrapped Notifications
     When I make a request to the create wrapped notification endpoint with a confirmation URL
     Then A notification with a confirmation URL is successfully generated
 
+  #THIS TEST IS NOW BEHAVING CORECTLY ACCORDING TO NEW LOGIC
+  #THE END STATUS CODE SHOULD NOW BE A 400 BAD REQUEST
   @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the create wrapped notifications endpoint with an empty string confirmation URL returns a successful 201 response
     Given I have a valid user agent header

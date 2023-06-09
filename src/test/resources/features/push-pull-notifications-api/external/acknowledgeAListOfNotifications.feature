@@ -23,7 +23,7 @@ Feature: Push Pull Notifications API - Acknowledge A List Of Notifications
     When I make a request to the external put acknowledge notifications endpoint for a box that does not exist
     Then I get a not found response due to box not found
 
-  @acknowledge-notifications @push-pull-notifications-api @regression-tests
+  @acknowledge-notifications @push-pull-notifications-api @regression-tests @imran
   Scenario: Calling the external put acknowledge notifications endpoint with a non ownership box ID returns a 403 forbidden response
     Given I have all valid request headers for PPNS
     And I have a valid bearer token for scope "read:pull-notifications write:notifications" for my standard application using client credentials

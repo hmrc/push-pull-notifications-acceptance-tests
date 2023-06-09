@@ -603,7 +603,9 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the external put acknowledge notifications endpoint with a box ID that belongs to another client ID$")
     public void iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointWithANonBelongingId() {
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("a5e3203d-a57e-4787-ba72-2dbfc294455f");
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("8d30f243-1fcb-44cc-aa4c-9479cffa7eb0");
+        //pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("a5e3203d-a57e-4787-ba72-2dbfc294455f");
+        //OLD BOX ID CAN BE DELETED
     }
 
     @When("^I make a request to the external get box notifications endpoint for \"(.*)\" notifications with valid date query parameter values$")
