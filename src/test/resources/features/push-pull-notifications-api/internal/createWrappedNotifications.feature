@@ -22,10 +22,17 @@ Feature: Push Pull Notifications API - Create Wrapped Notifications
   #THIS TEST IS NOW BEHAVING CORECTLY ACCORDING TO NEW LOGIC
   #THE END STATUS CODE SHOULD NOW BE A 400 BAD REQUEST
   @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests @imran2
-  Scenario: Calling the create wrapped notifications endpoint with an empty string confirmation URL returns a successful 201 response
+  Scenario: Calling the create wrapped notifications endpoint with an empty string confirmation URL returns a 400 bad request
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create wrapped notification endpoint with an empty string confirmation URL
+    Then I get a bad request response due to an invalid request payload
+
+  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests @imran2
+  Scenario: Calling the create wrapped notifications endpoint with an invalid confirmation URL returns a 400 bad request
+    Given I have a valid user agent header
+    And I have a valid JSON content type header
+    When I make a request to the create wrapped notification endpoint with an invalid confirmation URL
     Then I get a bad request response due to an invalid request payload
 
   @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests
