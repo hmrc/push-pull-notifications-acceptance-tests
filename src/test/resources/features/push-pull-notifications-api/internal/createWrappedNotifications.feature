@@ -19,16 +19,28 @@ Feature: Push Pull Notifications API - Create Wrapped Notifications
     When I make a request to the create wrapped notification endpoint with a confirmation URL
     Then A notification with a confirmation URL is successfully generated
 
-  #THIS TEST IS NOW BEHAVING CORECTLY ACCORDING TO NEW LOGIC
-  #THE END STATUS CODE SHOULD NOW BE A 400 BAD REQUEST
-  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests @imran2
+
+    #########################################
+
+  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests @imran
+  Scenario: Calling the create wrapped notifications endpoint with an optional private header returns a successful 201 response
+    Given I have a valid user agent header
+    And I have a valid JSON content type header
+    When I make a request to the create wrapped notification endpoint with an optional private header
+    Then A notification with a confirmation URL is successfully generated
+
+
+   ##########################################
+
+
+  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the create wrapped notifications endpoint with an empty string confirmation URL returns a 400 bad request
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create wrapped notification endpoint with an empty string confirmation URL
     Then I get a bad request response due to an invalid request payload
 
-  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests @imran2
+  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the create wrapped notifications endpoint with an invalid confirmation URL returns a 400 bad request
     Given I have a valid user agent header
     And I have a valid JSON content type header

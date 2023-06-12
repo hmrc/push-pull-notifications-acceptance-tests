@@ -187,6 +187,23 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "}");
     }
 
+    @When("^I make a request to the create wrapped notification endpoint with an optional private header$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnOptionalPrivateHeader() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "      \"body\":\"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "      \"contentType\":\"application/json\"\n" +
+                "   },\n" +
+                "   \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
+                "   \"version\":\"1\",\n" +
+                "   \"privateHeaders\":[\n" +
+                "      {\n" +
+                "         \"name\":\"foo\",\n" +
+                "         \"value\":\"fooValue\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}");
+    }
+
     @When("^I make a request to the create wrapped notification endpoint with an empty string confirmation URL$")
     public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnEmptyStringConfirmationUrl() {
         pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
@@ -194,7 +211,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
                 "        \"contentType\": \"application/json\"\n" +
                 "    },\n" +
-                "    \"confirmationUrl\": \"\",\n" +
+                "    \"confirmationUrl\": \"example.com\",\n" +
                 "    \"version\": \"1\"\n" +
                 "}");
     }
