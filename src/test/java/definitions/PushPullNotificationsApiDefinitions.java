@@ -432,7 +432,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a call to the delete client managed box endpoint with a non ownership box ID")
     public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithANonOwnershipBoxId() {
-        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("1e163398-2c83-405d-a11b-bfa671013800");
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("5589dd9a-40e9-4dec-bbe3-9d83f5102a2a");
     }
 
     @When("^I make a call to the delete client managed box endpoint with a default box ID")
