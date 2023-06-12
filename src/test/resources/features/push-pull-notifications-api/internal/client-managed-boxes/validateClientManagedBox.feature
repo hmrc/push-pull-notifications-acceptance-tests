@@ -16,7 +16,7 @@ Feature: Push Pull Notifications API - Client Managed Boxes
   Scenario: Calling the validate client managed box endpoint with a non belonging box ID fails validation
     Given  I have a valid JSON accept header
     And I have a valid JSON content type header
-    When I make a request to the validate client managed box endpoint for box ID "f745a020-95d6-45fc-a99c-237025ae6d8e"
+    When I make a request to the validate client managed box endpoint for box ID "1e163398-2c83-405d-a11b-bfa671013800"
     Then I get a validate "false" response
 
 

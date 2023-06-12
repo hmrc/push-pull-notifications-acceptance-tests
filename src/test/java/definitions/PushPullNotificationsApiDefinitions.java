@@ -432,7 +432,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a call to the delete client managed box endpoint with a non ownership box ID")
     public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithANonOwnershipBoxId() {
-        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("f745a020-95d6-45fc-a99c-237025ae6d8e");
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("1e163398-2c83-405d-a11b-bfa671013800");
     }
 
     @When("^I make a call to the delete client managed box endpoint with a default box ID")
@@ -576,7 +576,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the external get box notifications endpoint with a box ID that belongs to another client ID$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForWithANonBelongingBoxId() {
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter("yrGGAiKaKFHF5IBN4KdWGEoMIaza", "status", "PENDING");
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter("1e163398-2c83-405d-a11b-bfa671013800", "status", "PENDING");
     }
 
     @When("^I have a notification in status pending for a new box$")
@@ -603,7 +603,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the external put acknowledge notifications endpoint with a box ID that belongs to another client ID$")
     public void iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointWithANonBelongingId() {
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("f745a020-95d6-45fc-a99c-237025ae6d8e");
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("1e163398-2c83-405d-a11b-bfa671013800");
         //pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("a5e3203d-a57e-4787-ba72-2dbfc294455f");
         //OLD BOX ID CAN BE DELETED
     }
