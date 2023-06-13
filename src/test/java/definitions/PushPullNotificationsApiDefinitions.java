@@ -164,8 +164,8 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         aNotificationsIsSuccessfullyGenerated();
     }
 
-    @When("^I make a request to the create wrapped notification endpoint with a valid JSON payload$")
-    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAValidJsonPayload() {
+    @When("^I make a request to the create wrapped notification endpoint without a confirmation URL$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithoutAConfirmationUrl() {
         pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
                 "    \"notification\": {\n" +
                 "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
@@ -187,7 +187,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "}");
     }
 
-    @When("^I make a request to the create wrapped notification endpoint with an optional private header$")
+    @When("^I make a request to the create wrapped notification endpoint with optional private headers$")
     public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnOptionalPrivateHeader() {
         pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
                 "   \"notification\":{\n" +
@@ -200,6 +200,78 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "      {\n" +
                 "         \"name\":\"foo\",\n" +
                 "         \"value\":\"fooValue\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo2\",\n" +
+                "         \"value\":\"fooValue2\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo3\",\n" +
+                "         \"value\":\"fooValue4\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo4\",\n" +
+                "         \"value\":\"fooValue4\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo5\",\n" +
+                "         \"value\":\"fooValue5\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with an empty optional private header$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnEmptyOptionalPrivateHeader() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "   \"notification\":{\n" +
+                "      \"body\":\"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "      \"contentType\":\"application/json\"\n" +
+                "   },\n" +
+                "   \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
+                "   \"version\":\"1\",\n" +
+                "   \"privateHeaders\":[\n" +
+                "      {\n" +
+                "         \"name\":\"\",\n" +
+                "         \"value\":\"\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with more than 5 optional private headers$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithMoreThanFiveOptionalPrivateHeader() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "   \"notification\":{\n" +
+                "      \"body\":\"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "      \"contentType\":\"application/json\"\n" +
+                "   },\n" +
+                "   \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
+                "   \"version\":\"1\",\n" +
+                "   \"privateHeaders\":[\n" +
+                "      {\n" +
+                "         \"name\":\"foo\",\n" +
+                "         \"value\":\"fooValue\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo2\",\n" +
+                "         \"value\":\"fooValue2\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo3\",\n" +
+                "         \"value\":\"fooValue4\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo4\",\n" +
+                "         \"value\":\"fooValue4\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo5\",\n" +
+                "         \"value\":\"fooValue5\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo6\",\n" +
+                "         \"value\":\"fooValue7\"\n" +
                 "      }\n" +
                 "   ]\n" +
                 "}");
