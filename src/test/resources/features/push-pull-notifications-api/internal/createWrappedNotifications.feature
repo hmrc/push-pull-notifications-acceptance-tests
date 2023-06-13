@@ -26,21 +26,21 @@ Feature: Push Pull Notifications API - Create Wrapped Notifications
     When I make a request to the create wrapped notification endpoint without a confirmation URL
     Then A notification is successfully generated
 
-  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests @imran
+  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the create wrapped notifications endpoint with optional private headers returns a successful 201 response
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create wrapped notification endpoint with optional private headers
     Then A notification with a confirmation URL is successfully generated
 
-  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests @imran
+  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the create wrapped notifications endpoint with an empty optional private header returns a successful 201 response
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create wrapped notification endpoint with an empty optional private header
     Then A notification with a confirmation URL is successfully generated
 
-  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests @imran
+  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the create wrapped notifications endpoint with more than 5 private header returns 400 bad request
     Given I have a valid user agent header
     And I have a valid JSON content type header
@@ -168,10 +168,6 @@ Feature: Push Pull Notifications API - Create Wrapped Notifications
     When I make a request to the create wrapped notification endpoint with no version field vale
     Then I get a bad request response due to message version invalid
 
-
-
-  ##########################################
-
   @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests
   Scenario: Calling the create wrapped notifications endpoint with an invalid request body (no private header name field) returns a 400 bad request
     Given I have a valid user agent header
@@ -185,9 +181,3 @@ Feature: Push Pull Notifications API - Create Wrapped Notifications
     And I have a valid JSON content type header
     When I make a request to the create wrapped notification endpoint with no private header value field
     Then I get a bad request response due to an invalid request payload
-
-
-
-
-
-

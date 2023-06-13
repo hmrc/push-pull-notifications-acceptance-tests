@@ -218,8 +218,8 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "         \"value\":\"fooValue2\"\n" +
                 "      },\n" +
                 "      {\n" +
-                "         \"name\":\"foo3\",\n" +
-                "         \"value\":\"fooValue4\"\n" +
+                "         \"name\":\"\",\n" +
+                "         \"value\":\"\"\n" +
                 "      },\n" +
                 "      {\n" +
                 "         \"name\":\"foo4\",\n" +
