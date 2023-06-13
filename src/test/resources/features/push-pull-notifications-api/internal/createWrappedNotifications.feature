@@ -37,7 +37,6 @@ Feature: Push Pull Notifications API - Create Wrapped Notifications
     When I make a request to the create wrapped notification endpoint with optional private headers
     Then A notification with a confirmation URL is successfully generated
 
-
   @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests @imran
   Scenario: Calling the create wrapped notifications endpoint with an empty optional private header returns a successful 201 response
     Given I have a valid user agent header
@@ -46,18 +45,11 @@ Feature: Push Pull Notifications API - Create Wrapped Notifications
     Then A notification with a confirmation URL is successfully generated
 
   @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests @imran
-  Scenario: Calling the create wrapped notifications endpoint with 5 private header returns 400 bad request
-    Given I have a valid user agent header
-    And I have a valid JSON content type header
-    When I make a request to the create wrapped notification endpoint with 5 optional private headers
-    Then A notification with a confirmation URL is successfully generated
-
-  @create-wrapped-notifications @notifications @push-pull-notifications-api @regression-tests @imran
   Scenario: Calling the create wrapped notifications endpoint with more than 5 private header returns 400 bad request
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create wrapped notification endpoint with more than 5 optional private headers
-    Then A notification with a confirmation URL is successfully generated
+    Then I get a bad request response due to request contains more than 5 headers
 
 
    ##########################################

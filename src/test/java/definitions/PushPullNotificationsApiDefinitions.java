@@ -251,40 +251,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "}");
     }
 
-    @When("^I make a request to the create wrapped notification endpoint with 5 optional private headers$")
-    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithFiveOptionalPrivateHeader() {
-        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
-                "   \"notification\":{\n" +
-                "      \"body\":\"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
-                "      \"contentType\":\"application/json\"\n" +
-                "   },\n" +
-                "   \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
-                "   \"version\":\"1\",\n" +
-                "   \"privateHeaders\":[\n" +
-                "      {\n" +
-                "         \"name\":\"foo\",\n" +
-                "         \"value\":\"fooValue\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "         \"name\":\"foo2\",\n" +
-                "         \"value\":\"fooValue2\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "         \"name\":\"foo3\",\n" +
-                "         \"value\":\"fooValue4\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "         \"name\":\"foo4\",\n" +
-                "         \"value\":\"fooValue4\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "         \"name\":\"foo5\",\n" +
-                "         \"value\":\"fooValue5\"\n" +
-                "      }\n" +
-                "   ]\n" +
-                "}");
-    }
-
     @When("^I make a request to the create wrapped notification endpoint with more than 5 optional private headers$")
     public void iMakeRequestToTheCreateWrappedNotificationEndpointWithMoreThanFiveOptionalPrivateHeader() {
         pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
