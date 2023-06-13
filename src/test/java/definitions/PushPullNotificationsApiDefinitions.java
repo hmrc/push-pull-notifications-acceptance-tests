@@ -409,6 +409,42 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "}");
     }
 
+    @When("^I make a request to the create wrapped notification endpoint with no private header name field$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithPrivateHeaderNameField() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "   \"notification\":{\n" +
+                "      \"body\":\"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "      \"contentType\":\"application/json\"\n" +
+                "   },\n" +
+                "   \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
+                "   \"version\":\"1\",\n" +
+                "   \"privateHeaders\":[\n" +
+                "      {\n" +
+                "         \"\":\"foo\",\n" +
+                "         \"value\":\"fooValue\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no private header value field$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithPrivateHeaderValueField() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "   \"notification\":{\n" +
+                "      \"body\":\"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "      \"contentType\":\"application/json\"\n" +
+                "   },\n" +
+                "   \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
+                "   \"version\":\"1\",\n" +
+                "   \"privateHeaders\":[\n" +
+                "      {\n" +
+                "         \"name\":\"foo\",\n" +
+                "         \"\":\"fooValue\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}");
+    }
+
     @When("^I make a request to the create wrapped notification endpoint with no JSON payload$")
     public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoJsonPayload() {
         pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "");

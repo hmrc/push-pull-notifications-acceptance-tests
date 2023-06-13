@@ -13,7 +13,7 @@ public class CommonResponseDefinitions extends CommonDefinitions {
     @Then("^I get a bad request response due to request contains more than 5 headers$")
     public void iGetABadRequestResponseDueToRequestContainsMoreThan5Headers() {
         iGetAnInvalidRequestPayloadResponse();
-        responseSteps.expectedJsonMessage("Request contains more then 5 private headers");
+        responseSteps.expectedJsonMessage("Request contains more than 5 private headers");
     }
 
     @Then("^I get a bad request response due to invalid or unknown query parameters$")
