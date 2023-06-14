@@ -210,12 +210,12 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
                 "   \"version\":\"1\",\n" +
                 "   \"privateHeaders\":[\n" +
                 "      {\n" +
-                "         \"name\":\"foo\",\n" +
-                "         \"value\":\"fooValue\"\n" +
+                "         \"name\":\"fooDuplicate\",\n" +
+                "         \"value\":\"fooValueDuplicate\"\n" +
                 "      },\n" +
                 "      {\n" +
-                "         \"name\":\"foo2\",\n" +
-                "         \"value\":\"fooValue2\"\n" +
+                "         \"name\":\"fooDuplicate\",\n" +
+                "         \"value\":\"fooValueDuplicate\"\n" +
                 "      },\n" +
                 "      {\n" +
                 "         \"name\":\"\",\n" +
