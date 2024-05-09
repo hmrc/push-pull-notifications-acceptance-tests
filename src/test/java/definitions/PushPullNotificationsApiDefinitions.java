@@ -767,8 +767,9 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the external get box notifications endpoint for the new box$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForTheNewBox() {
+        //Thread.Sleep Included to allow enough time for the notification to be processed to acknowledged
         try {
-            Thread.sleep(10000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
