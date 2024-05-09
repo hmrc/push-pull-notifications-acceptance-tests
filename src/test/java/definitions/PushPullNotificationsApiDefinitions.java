@@ -806,6 +806,11 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @Then("^I get a successful response with the correct notification details for the new box$")
     public void iGetASuccessfulResponseWithTheCorrectClientDetailsForTheNewBox() {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForTheNewBox();
     }
