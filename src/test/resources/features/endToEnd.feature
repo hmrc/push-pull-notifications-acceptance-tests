@@ -1,7 +1,7 @@
 @feature
 Feature: Push Pull Notifications API - End To End Journey
 
-  ### End to end scenario - Includes internal and external endpoints
+  ### End to end scenario - Includes protected and public endpoints
 
   @end-to-end @push-pull-notifications-api @regression-tests
   Scenario: PPNS end to end test

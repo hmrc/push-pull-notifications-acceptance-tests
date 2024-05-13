@@ -1,7 +1,7 @@
 @feature
 Feature: Push Pull Notifications API - Update A Client Managed Box With A Callback URL
 
-  ### [PUT] Update A Client Managed Box With A Callback URL Endpoint - (API Gateway)
+  ### [PUT] Update A Client Managed Box With A Callback URL Endpoint
 
   ### Happy Path Scenarios
 

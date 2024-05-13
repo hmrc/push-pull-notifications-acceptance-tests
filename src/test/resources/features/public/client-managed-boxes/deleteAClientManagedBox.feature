@@ -1,7 +1,7 @@
 @feature
 Feature: Push Pull Notifications API - Delete A Client Managed Box
 
-  ### [DELETE] Delete A Client Managed Box Endpoint - (API Gateway)
+  ### [DELETE] Delete A Client Managed Box Endpoint
 
   ### Happy Path Scenarios
 

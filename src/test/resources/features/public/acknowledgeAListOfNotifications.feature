@@ -1,7 +1,7 @@
 @feature @lewis
 Feature: Push Pull Notifications API - Acknowledge A List Of Notifications
 
-  ### [PUT] Acknowledge A List Of Notifications - (API Gateway)
+  ### [PUT] Acknowledge A List Of Notifications
 
   ### Happy Path Scenarios
 

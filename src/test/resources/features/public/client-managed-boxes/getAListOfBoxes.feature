@@ -1,7 +1,7 @@
 @feature
 Feature: Push Pull Notifications API - Get A List Of Boxes
 
-  ### [GET] Get A List of Boxes Endpoint - (API Gateway)
+  ### [GET] Get A List of Boxes Endpoint
 
   ### Happy Path Scenarios
 

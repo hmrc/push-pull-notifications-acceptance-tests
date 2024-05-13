@@ -1,7 +1,7 @@
 @feature
 Feature: Push Pull Notifications API - Get A List of Notifications
 
-  ### [GET] Get A List of Notifications  - (API Gateway)
+  ### [GET] Get A List of Notifications
 
   ### Happy Path Scenarios
 
