@@ -471,7 +471,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     }
 
     @When("^I make a request to the callback endpoint with invalid field names$")
-    public void iMakeRequestToTheValidateCallBackEndpointWithInvalidFieldNames() {
+    public void iMakeRequestToTheCallBackEndpointWithInvalidFieldNames() {
         pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", (format("{\"invalidId\" : \"%s\", \"invalidUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
     }
 

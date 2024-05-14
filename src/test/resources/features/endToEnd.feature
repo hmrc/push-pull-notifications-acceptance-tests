@@ -1,9 +1,9 @@
 @feature
 Feature: Push Pull Notifications API - End To End Journey
 
-  ### End to end scenario - Includes internal and external endpoints
+  ### End to end scenario - Includes protected and public endpoints
 
-  @end-to-end @push-pull-notifications-api @regression-tests
+  @end-to-end @regression-tests
   Scenario: PPNS end to end test
     Given I have all valid request headers for PPNS
     When I make a new request to the create Box endpoint with Client ID "1AgmuykNGEm84u4xMExNKgZB6uqd" and a new box name
