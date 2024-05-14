@@ -162,9 +162,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     @When("^I make a request to the create notification endpoint with a valid JSON payload file for the new box$")
     public void iMakeRequestToTheCreateNotificationEndpointWithAValidJsonPayloadFileForTheNewBox() {
-//        String location = "messages/10kb.json";
-//        File jsonDataPayload = new File(location);
-        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(pushPullNotificationsApiSteps.getNewBoxId(), "{\"message\" : \"jsonbody\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayloadFile(pushPullNotificationsApiSteps.getNewBoxId());
     }
 
     @When("^I make a request to the create notifications endpoint to generate a pending notification for an unsubscribed box$")
