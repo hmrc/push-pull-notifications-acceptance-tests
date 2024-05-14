@@ -159,12 +159,12 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     }
 
     @Step
-    public void iMakeACallToCreateNotificationsWithJsonPayloadFile(String boxId, File jsonDataPayload) {
+    public void iMakeACallToCreateNotificationsWithJsonPayloadFile(String boxId, String jsonPayload) {
         builder().withNoProxy();
 
         RequestSpecification spec = given()
                 .spec(specification()
-                        .body(jsonDataPayload).log().all());
+                        .body(jsonPayload).log().all());
 
         if (userAgent != null) {
             spec = spec.header("User-Agent", userAgent);
