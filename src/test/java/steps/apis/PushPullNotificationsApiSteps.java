@@ -162,18 +162,18 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     public void iMakeACallToCreateNotificationsWithJsonPayloadFile(String boxId) {
         builder().withNoProxy();
 
-        String location = "messages/500kb.json";
+        String location = "messages/1mb.json";
         File jsonDataPayload = new File(location);
 
         RequestSpecification spec = given()
-                .spec(specification()).log().all()
-                .body(jsonDataPayload).log().all();
+                .spec(specification())
+                .body(jsonDataPayload);
 
         if (userAgent != null) {
             spec = spec.header("User-Agent", userAgent);
         }
 
-        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then().log().all());
+        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then());
     }
 
     @Step
