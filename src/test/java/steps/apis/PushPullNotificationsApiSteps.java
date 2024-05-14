@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.Step;
 import steps.payloads.BoxPayload;
 import steps.payloads.InvalidBoxPayload;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -155,6 +156,21 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         }
 
         response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then());
+    }
+
+    @Step
+    public void iMakeACallToCreateNotificationsWithJsonPayloadFile(String boxId, File jsonDataPayload) {
+        builder().withNoProxy();
+
+        RequestSpecification spec = given()
+                .spec(specification()
+                        .body(jsonDataPayload).log().all());
+
+        if (userAgent != null) {
+            spec = spec.header("User-Agent", userAgent);
+        }
+
+        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then().log().all());
     }
 
     @Step
@@ -551,9 +567,9 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
         response(
                 given()
-                        .spec(specification())
+                        .spec(specification()).log().all()
                         .get(format("%s/%s/%s/notifications", baseApiUrl(), apiContext, boxId))
-                        .then()
+                        .then().log().all()
         );
     }
 

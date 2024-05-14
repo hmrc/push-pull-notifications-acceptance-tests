@@ -9,6 +9,7 @@ import net.thucydides.core.annotations.Steps;
 import steps.apis.PushPullNotificationsApiSteps;
 import steps.helpers.ContentTypeHeaderHelper;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -155,6 +156,15 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @When("^I make a request to the create notification endpoint with a valid JSON payload for the new box$")
     public void iMakeRequestToTheCreateNotificationEndpointWithAValidJsonPayloadForTheNewBox() {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(pushPullNotificationsApiSteps.getNewBoxId(), "{\"message\" : \"jsonbody\"}");
+    }
+
+    /// NEW METHOD TO TAKE FILE
+
+    @When("^I make a request to the create notification endpoint with a valid JSON payload file for the new box$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAValidJsonPayloadFileForTheNewBox() {
+        String location = "messages/10kb.json";
+        File jsonDataPayload = new File(location);
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayloadFile(pushPullNotificationsApiSteps.getNewBoxId(), jsonDataPayload);
     }
 
     @When("^I make a request to the create notifications endpoint to generate a pending notification for an unsubscribed box$")
