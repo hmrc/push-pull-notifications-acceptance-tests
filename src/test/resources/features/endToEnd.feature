@@ -1,5 +1,5 @@
 @feature
-Feature: Push Pull Notifications API - End To End Journey
+Feature: Push Pull Notifications API - End To End Journeys
 
   ### End to end scenario - Includes protected and public endpoints
 
