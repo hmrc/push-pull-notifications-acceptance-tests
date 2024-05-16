@@ -148,14 +148,14 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
         builder().withNoProxy();
 
         RequestSpecification spec = given()
-                .spec(specification()).log().all()
-                .body(jsonPayload).log().all();
+                .spec(specification())
+                .body(jsonPayload);
 
         if (userAgent != null) {
             spec = spec.header("User-Agent", userAgent);
         }
 
-        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then().log().all());
+        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then());
     }
 
     @Step

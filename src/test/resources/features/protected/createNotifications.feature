@@ -19,12 +19,12 @@ Feature: Push Pull Notifications API - Create Notifications
     When I make a request to the create notification endpoint with a valid XML payload
     Then A notification is successfully generated
 
-  @create-notifications @notifications @regression-tests @imran
+  @create-notifications @notifications @regression-tests
   Scenario: Calling the create notifications endpoint with a message exceeding the allowed maximum size
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create notification endpoint with a message exceeding the max size
-    Then I get a content too large response
+    Then I get a request entity too large response
 
   @create-notifications @notifications @regression-tests
   Scenario: Calling the create notifications endpoint with a box that does not exist returns a 404 not found

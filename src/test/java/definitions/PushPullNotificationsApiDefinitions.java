@@ -1067,8 +1067,8 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedJsonMessage("Box not found");
     }
 
-    @Then("^I get a content too large response$")
-    public void iGetAContentTooLargeResponse() {
+    @Then("^I get a request entity too large response$")
+    public void iGetARequestEntityTooLargeResponse() {
         responseSteps.expectedHttpStatusCode(413);
         responseSteps.expectedJsonErrorCode("UNKNOWN_ERROR");
         responseSteps.expectedJsonMessage("Request Entity Too Large");
