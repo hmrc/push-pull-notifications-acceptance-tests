@@ -160,8 +160,8 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
 
     /// NEW METHOD TO TAKE FILE
 
-    @When("^I make a request to the create notification endpoint with a valid JSON payload file for the new box$")
-    public void iMakeRequestToTheCreateNotificationEndpointWithAValidJsonPayloadFileForTheNewBox() {
+    @When("^I make a request to the create notification endpoint with a valid max size JSON payload for the new box$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAValidMaxSizeJsonPayloadForTheNewBox() {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayloadFile(pushPullNotificationsApiSteps.getNewBoxId());
     }
 
@@ -679,6 +679,11 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithInvalidUuid("{\"message\": \"jsonbody\"}");
     }
 
+    @When("^I make a request to the create notification endpoint with a message exceeding the max size$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAMessageExceedingTheMaxSize() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayloadFileTooLarge("3b8e4dd3-a029-4301-a912-1220f3196387");
+    }
+
     @When("^I make a request to the create notification endpoint with an invalid JSON payload$")
     public void iMakeRequestToTheCreateNotificationEndpointWithAnInvalidJsonPayload() {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"message\": \"json");
@@ -1058,6 +1063,13 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @Then("^I get a not found response due to box not found$")
     public void iGetANotFoundResponseDueToBoxNotFound() {
         responseSteps.expectedHttpStatusCode(404);
+        responseSteps.expectedJsonErrorCode("BOX_NOT_FOUND");
+        responseSteps.expectedJsonMessage("Box not found");
+    }
+
+    @Then("^I get a content too large response$")
+    public void iGetAContentTooLargeResponse() {
+        responseSteps.expectedHttpStatusCode(413);
         responseSteps.expectedJsonErrorCode("BOX_NOT_FOUND");
         responseSteps.expectedJsonMessage("Box not found");
     }
