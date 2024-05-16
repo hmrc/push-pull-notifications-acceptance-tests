@@ -1071,7 +1071,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     public void iGetAContentTooLargeResponse() {
         responseSteps.expectedHttpStatusCode(413);
         responseSteps.expectedJsonErrorCode("UNKNOWN_ERROR");
-        responseSteps.expectedJsonMessage("Box not found");
+        responseSteps.expectedJsonMessage("Request Entity Too Large");
     }
 
     private String generateCurrentDate() {
