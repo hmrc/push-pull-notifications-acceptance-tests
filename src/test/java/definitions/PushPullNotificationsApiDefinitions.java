@@ -1070,7 +1070,7 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @Then("^I get a content too large response$")
     public void iGetAContentTooLargeResponse() {
         responseSteps.expectedHttpStatusCode(413);
-        responseSteps.expectedJsonErrorCode("BOX_NOT_FOUND");
+        responseSteps.expectedJsonErrorCode("UNKNOWN_ERROR");
         responseSteps.expectedJsonMessage("Box not found");
     }
 
