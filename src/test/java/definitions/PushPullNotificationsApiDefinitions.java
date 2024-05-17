@@ -9,6 +9,7 @@ import net.thucydides.core.annotations.Steps;
 import steps.apis.PushPullNotificationsApiSteps;
 import steps.helpers.ContentTypeHeaderHelper;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -155,6 +156,13 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     @When("^I make a request to the create notification endpoint with a valid JSON payload for the new box$")
     public void iMakeRequestToTheCreateNotificationEndpointWithAValidJsonPayloadForTheNewBox() {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(pushPullNotificationsApiSteps.getNewBoxId(), "{\"message\" : \"jsonbody\"}");
+    }
+
+    /// NEW METHOD TO TAKE FILE
+
+    @When("^I make a request to the create notification endpoint with a valid max size JSON payload for the new box$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAValidMaxSizeJsonPayloadForTheNewBox() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayloadFile(pushPullNotificationsApiSteps.getNewBoxId());
     }
 
     @When("^I make a request to the create notifications endpoint to generate a pending notification for an unsubscribed box$")
@@ -671,6 +679,11 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithInvalidUuid("{\"message\": \"jsonbody\"}");
     }
 
+    @When("^I make a request to the create notification endpoint with a message exceeding the max size$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAMessageExceedingTheMaxSize() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayloadFileTooLarge("3b8e4dd3-a029-4301-a912-1220f3196387");
+    }
+
     @When("^I make a request to the create notification endpoint with an invalid JSON payload$")
     public void iMakeRequestToTheCreateNotificationEndpointWithAnInvalidJsonPayload() {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"message\": \"json");
@@ -1052,6 +1065,13 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedHttpStatusCode(404);
         responseSteps.expectedJsonErrorCode("BOX_NOT_FOUND");
         responseSteps.expectedJsonMessage("Box not found");
+    }
+
+    @Then("^I get a request entity too large response$")
+    public void iGetARequestEntityTooLargeResponse() {
+        responseSteps.expectedHttpStatusCode(413);
+        responseSteps.expectedJsonErrorCode("UNKNOWN_ERROR");
+        responseSteps.expectedJsonMessage("Request Entity Too Large");
     }
 
     private String generateCurrentDate() {

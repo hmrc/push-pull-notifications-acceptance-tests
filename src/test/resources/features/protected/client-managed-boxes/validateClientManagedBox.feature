@@ -1,5 +1,5 @@
 @feature
-Feature: Push Pull Notifications API - Client Managed Boxes
+Feature: Push Pull Notifications API - Validate Client Managed Boxes
 
   ### [POST] Validate Client Managed Box Endpoint
 
