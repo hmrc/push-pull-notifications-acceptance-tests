@@ -643,7 +643,16 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     public void hasCorrectNotificationDetailsForTheNewBox() {
         response().body("notificationId", is(singletonList(notificationId)));
         response().body("boxId", is(singletonList(newBoxId)));
-        //response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
+        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
+        response().body("status", is(singletonList("ACKNOWLEDGED")));
+        response().body("createdDateTime", is(notNullValue()));
+    }
+
+    @Step
+    public void hasCorrectMaxSizeNotificationDetailsForTheNewBox() {
+        response().body("notificationId", is(singletonList(notificationId)));
+        response().body("boxId", is(singletonList(newBoxId)));
+        response().body("message", is(notNullValue()));
         response().body("status", is(singletonList("ACKNOWLEDGED")));
         response().body("createdDateTime", is(notNullValue()));
     }

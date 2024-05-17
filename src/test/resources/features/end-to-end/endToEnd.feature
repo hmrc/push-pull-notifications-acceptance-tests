@@ -39,4 +39,4 @@ Feature: Push Pull Notifications API - End To End Journeys
     #Call the External Notifications endpoint and assert details
     When I have a valid bearer token for scope "read:pull-notifications" for my standard application using client credentials
     And I make a request to the external get box notifications endpoint for the new box
-    Then I get a successful response with the correct notification details for the new box
+    Then I get a successful response with the correct max size notification details for the new box

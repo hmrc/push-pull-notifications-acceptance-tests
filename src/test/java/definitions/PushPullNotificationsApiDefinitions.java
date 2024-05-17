@@ -9,7 +9,6 @@ import net.thucydides.core.annotations.Steps;
 import steps.apis.PushPullNotificationsApiSteps;
 import steps.helpers.ContentTypeHeaderHelper;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -818,9 +817,15 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     }
 
     @Then("^I get a successful response with the correct notification details for the new box$")
-    public void iGetASuccessfulResponseWithTheCorrectClientDetailsForTheNewBox() {
+    public void iGetASuccessfulResponseWithTheCorrectNotificationDetailsForTheNewBox() {
         responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForTheNewBox();
+    }
+
+    @Then("^I get a successful response with the correct max size notification details for the new box$")
+    public void iGetASuccessfulResponseWithTheCorrectMaxSIzeNotificationDetailsForTheNewBox() {
+        responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasCorrectMaxSizeNotificationDetailsForTheNewBox();
     }
 
     @Then("^I get a successful response with the correct notification details$")
