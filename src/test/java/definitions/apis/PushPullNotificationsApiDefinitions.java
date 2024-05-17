@@ -798,8 +798,7 @@ public class PushPullNotificationsApiDefinitions extends ResponseDefinitions {
     }
 
 
-    // OK - 2XX
-
+    // OK - 2XXs
     @Then("^A box is successfully generated$")
     public void aBoxIsSuccessfullyGenerated() {
         responseSteps.expectedHttpStatusCode(200);
