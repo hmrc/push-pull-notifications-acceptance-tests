@@ -9,6 +9,7 @@ import net.thucydides.core.annotations.Steps;
 import steps.apis.PushPullNotificationsApiSteps;
 import steps.helpers.ContentTypeHeaderHelper;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -782,11 +783,19 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotifications(pushPullNotificationsApiSteps.getNewBoxId());
     }
 
-    //START FROM HERE - 2XX
+    @Then("^I get a forbidden response due to an invalid or missing authorization key$")
+    public void iGetAForbiddenResponseDueToAnInvalidorMissingAuthorizationKey() {
+        iGetAForbiddenResponseDueToAuthorizationFailed();
+    }
 
-    @Then("^I get a successful response$")
-    public void iGetASuccessfulResponse() {
-        responseSteps.expectedHttpStatusCode(200);
+    @Then("^I get a forbidden response due to an invalid agent header$")
+    public void iGetAForbiddenResponseDueToAnInvalidAgentHeader() {
+        iGetAForbiddenResponseDueToAuthorizationFailed();
+    }
+
+    @Then("^I get a forbidden response due to missing agent header$")
+    public void iGetAForbiddenResponseDueToMissingAgentHeader() {
+        iGetAForbiddenResponseDueToAuthorizationFailed();
     }
 
     @Then("^I get a successful response with a successful true response message$")
@@ -820,6 +829,12 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForPendingStatusAndDateParameters();
     }
 
+    @Then("^I get a successful response with the correct acknowledged notification details$")
+    public void iGetASuccessfulResponseWithTheCorrectAcknowledgedNotificationDetails() {
+        responseSteps.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForAcknowledgedStatusAndDateParameters();
+    }
+
     @Then("^I get a successful response with pending notifications")
     public void iGetASuccessfulResponseWithPendingNotifications() {
         responseSteps.expectedHttpStatusCode(200);
@@ -839,34 +854,16 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.hasAcknowledgedStatusNotifications();
     }
 
-    @Then("^I get a successful response with the correct acknowledged notification details$")
-    public void iGetASuccessfulResponseWithTheCorrectAcknowledgedNotificationDetails() {
-        responseSteps.expectedHttpStatusCode(200);
-        pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForAcknowledgedStatusAndDateParameters();
-    }
-
     @Then("^I can set a callback url$")
     public void iCanSetACallbackUrl() {
         responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.assertCallbackUrlUpdated();
     }
 
-    @Then("^A box is successfully generated$")
-    public void aBoxIsSuccessfullyGenerated() {
+    @Then("^I get a successful response where all boxes are returned$")
+    public void iGetASuccessfulResponseWhereAllBoxesAreReturned() {
         responseSteps.expectedHttpStatusCode(200);
-        pushPullNotificationsApiSteps.assertBoxGenerated();
-    }
-
-    @Then("^A new box is successfully generated$")
-    public void aNewBoxIsSuccessfullyGenerated() {
-        responseSteps.expectedHttpStatusCode(201);
-        pushPullNotificationsApiSteps.assertNewBoxGenerated();
-    }
-
-    @Then("^A new client managed box is successfully generated$")
-    public void aNewClientManagedBoxIsSuccessfullyGenerated() {
-        responseSteps.expectedHttpStatusCode(201);
-        pushPullNotificationsApiSteps.assertNewClientManagedBoxGenerated();
+        pushPullNotificationsApiSteps.assertAllBoxes();
     }
 
     @Then("^the new box is successfully returned$")
@@ -875,10 +872,10 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         pushPullNotificationsApiSteps.assertNewBoxExists();
     }
 
-    @Then("^I get a successful response where all boxes are returned$")
-    public void iGetASuccessfulResponseWhereAllBoxesAreReturned() {
+    @Then("^A box is successfully generated$")
+    public void aBoxIsSuccessfullyGenerated() {
         responseSteps.expectedHttpStatusCode(200);
-        pushPullNotificationsApiSteps.assertAllBoxes();
+        pushPullNotificationsApiSteps.assertBoxGenerated();
     }
 
     @Then("^I get a successful response with default and client managed boxes displayed$")
@@ -891,6 +888,18 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     public void iGetASuccessfulResponseWithNoBoxesDisplayed() {
         responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.assertNoBoxes();
+    }
+
+    @Then("^A new box is successfully generated$")
+    public void aNewBoxIsSuccessfullyGenerated() {
+        responseSteps.expectedHttpStatusCode(201);
+        pushPullNotificationsApiSteps.assertNewBoxGenerated();
+    }
+
+    @Then("^A new client managed box is successfully generated$")
+    public void aNewClientManagedBoxIsSuccessfullyGenerated() {
+        responseSteps.expectedHttpStatusCode(201);
+        pushPullNotificationsApiSteps.assertNewClientManagedBoxGenerated();
     }
 
     @Then("^the existing client managed box is successfully updated$")
@@ -933,25 +942,6 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
     public void aNotificationWithAConfirmationUrlIsSuccessfullyGenerated() {
         responseSteps.expectedHttpStatusCode(201);
         pushPullNotificationsApiSteps.assertNotificationWithConfirmationUrlCreated();
-    }
-
-    //BAD REQUESTS - 400
-
-    @Then("^I get a standard bad request response")
-    public void iGetAStandardBadRequestResponse() {
-        responseSteps.expectedHttpStatusCode(400);
-    }
-
-    @Then("^I get a bad request response due to an invalid request payload$")
-    public void iGetABadRequestResponseDueToAnInvalidRequestPayload() {
-        iGetAnInvalidRequestPayloadResponse();
-        responseSteps.expectedJsonMessage("JSON body is invalid against expected format");
-    }
-
-    @Then("^I get a bad request response due to invalid or unknown query parameters$")
-    public void iGetABadRequestResponseDueToInvalidOrUnknownQueryParameters() {
-        iGetAnInvalidRequestPayloadResponse();
-        responseSteps.expectedJsonMessage("Invalid / Unknown query parameter provided");
     }
 
     @Then("^I get a bad request response due to the box ID not being a valid UUID$")
@@ -1029,20 +1019,12 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedJsonMessage("Expecting boxName in request body");
     }
 
-    @Then("^I get a bad request response due to request contains more than 5 headers$")
-    public void iGetABadRequestResponseDueToRequestContainsMoreThan5Headers() {
-        iGetAnInvalidRequestPayloadResponse();
-        responseSteps.expectedJsonMessage("Request contains more than 5 private headers");
-    }
-
     @Then("^I get a bad request response due to message version invalid")
-    public void iGetABadRequestResponseDueToMessageVersionInvalid() {
+    public void iGetABadRequestResponseDueToMesssageVersionInvalid() {
         responseSteps.expectedHttpStatusCode(400);
         responseSteps.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
         responseSteps.expectedJsonMessage("Message version is invalid");
     }
-
-    //UNAUTHORISED - 401
 
     @Then("^I get an unauthorised response due to an invalid bearer token$")
     public void iGetAnUnauthorisedResponseDueToAnInvalidBearerToken() {
@@ -1065,101 +1047,11 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedJsonMessage("Client Id did not match");
     }
 
-    //FORBIDDEN - 403
-
     @Then("^I get a forbidden response$")
     public void iGetAForbiddenResponse() {
         responseSteps.expectedHttpStatusCode(403);
         responseSteps.expectedJsonErrorCode("FORBIDDEN");
         responseSteps.expectedJsonMessage("Access denied");
-    }
-
-    @Then("^I get a forbidden response due to an invalid or missing authorization key$")
-    public void iGetAForbiddenResponseDueToAnInvalidorMissingAuthorizationKey() {
-        iGetAForbiddenResponseDueToAuthorizationFailed();
-    }
-
-    @Then("^I get a forbidden response due to an invalid agent header$")
-    public void iGetAForbiddenResponseDueToAnInvalidAgentHeader() {
-        iGetAForbiddenResponseDueToAuthorizationFailed();
-    }
-
-    @Then("^I get a forbidden response due to missing agent header$")
-    public void iGetAForbiddenResponseDueToMissingAgentHeader() {
-        iGetAForbiddenResponseDueToAuthorizationFailed();
-    }
-
-    @Then("^I get a forbidden response due to invalid scope$")
-    public void iGetAForbiddenResponseDueToInvalidResponse() {
-        iGetAForbiddenResponse("INVALID_SCOPE");
-        responseSteps.expectedJsonMessage("Can not access the required resource. Ensure this token has all the required scopes.");
-    }
-
-    // NOT FOUND - 404
-
-    @Then("^I get a matching resource not found response$")
-    public void iGetAMatchingResourceNotFoundResponse() {
-        iGetNotFoundResponse("MATCHING_RESOURCE_NOT_FOUND");
-        responseSteps.expectedJsonMessage("A resource with the name in the request can not be found in the API");
-    }
-
-    // MISSING ACCEPT HEADERS - 406
-
-    @Then("^I get an unacceptable response due to a missing accept header$")
-    public void iGetAnUnacceptableResponseDueToAMissingAcceptHeader() {
-        iGetAnAcceptHeaderInvalidResponse();
-    }
-
-    @Then("^I get an unacceptable response due to an invalid accept header$")
-    public void iGetANotAcceptableResponseDueToAnInavlidAcceptHeader() {
-        iGetAnAcceptHeaderInvalidResponse();
-    }
-
-    // REQUEST ENTITY TOO LARGE - 413
-
-
-    @Then("^I get a request entity too large response$")
-    public void iGetARequestEntityTooLargeResponse() {
-        responseSteps.expectedHttpStatusCode(413);
-        responseSteps.expectedJsonErrorCode("UNKNOWN_ERROR");
-        responseSteps.expectedJsonMessage("Request Entity Too Large");
-    }
-
-    // UNSUPPORTED MEDIA TYPE - 415
-
-    @Then("^I get an unsupported media type response$")
-    public void iGetAnUnsupportedMediaTypeResponse() {
-        responseSteps.expectedHttpStatusCode(415);
-        responseSteps.expectedJsonMessage("Expecting text/json or application/json body");
-    }
-
-    @Then("^I get an unsupported media type response version two$")
-    public void iGetAnUnsupportedMediaTypeResponseVersionTwo() {
-        responseSteps.expectedHttpStatusCode(415);
-        responseSteps.expectedJsonErrorCode("BAD_REQUEST");
-        responseSteps.expectedJsonMessage("Expecting text/json or application/json body");
-    }
-
-    @Then("^I get an unsupported media type response due to content type not supported$")
-    public void iGetAnUnsupportedMediaTypeResponseDueToContentTypeNoSupported() {
-        responseSteps.expectedHttpStatusCode(415);
-        responseSteps.expectedJsonErrorCode("BAD_REQUEST");
-        responseSteps.expectedJsonMessage("Content Type not Supported");
-    }
-
-    @Then("^I get the JSON message \"([^\"]*)\"$")
-    public void iGetTheJsonMessage(final String jsonMessage) {
-        responseSteps.expectedJsonMessage(jsonMessage);
-    }
-
-    private void iGetAnInvalidRequestPayloadResponse() {
-        responseSteps.expectedHttpStatusCode(400);
-        responseSteps.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
-    }
-
-    private void iGetAForbiddenResponse(String expectedErrorCode) {
-        responseSteps.expectedHttpStatusCode(403);
-        responseSteps.expectedJsonErrorCode(expectedErrorCode);
     }
 
     private void iGetAForbiddenResponseDueToAuthorizationFailed() {
@@ -1168,15 +1060,18 @@ public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
         responseSteps.expectedJsonMessage("Authorisation failed");
     }
 
-    private void iGetNotFoundResponse(String expectedErrorCode) {
+    @Then("^I get a not found response due to box not found$")
+    public void iGetANotFoundResponseDueToBoxNotFound() {
         responseSteps.expectedHttpStatusCode(404);
-        responseSteps.expectedJsonErrorCode(expectedErrorCode);
+        responseSteps.expectedJsonErrorCode("BOX_NOT_FOUND");
+        responseSteps.expectedJsonMessage("Box not found");
     }
 
-    private void iGetAnAcceptHeaderInvalidResponse() {
-        responseSteps.expectedHttpStatusCode(406);
-        responseSteps.expectedJsonErrorCode("ACCEPT_HEADER_INVALID");
-        responseSteps.expectedJsonMessage("The accept header is missing or invalid");
+    @Then("^I get a request entity too large response$")
+    public void iGetARequestEntityTooLargeResponse() {
+        responseSteps.expectedHttpStatusCode(413);
+        responseSteps.expectedJsonErrorCode("UNKNOWN_ERROR");
+        responseSteps.expectedJsonMessage("Request Entity Too Large");
     }
 
     private String generateCurrentDate() {
