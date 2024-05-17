@@ -1,8 +1,8 @@
 package definitions;
 
-import io.cucumber.java.en.Then;
+public class CommonResponseDefinitions extends ResponseDefinitions {
 
-public class CommonResponseDefinitions extends CommonDefinitions {
-
-
+//delete this class,
+// 1. rename common response definitions to response definitions,
+// 2. make pushPullNotificationsApiDefinitions extend CommonDefinitions
 }

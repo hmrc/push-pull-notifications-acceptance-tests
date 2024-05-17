@@ -11,7 +11,7 @@ import steps.helpers.RequestHelper;
 public class CommonApiSteps extends HasConfiguration {
 
     @Steps(shared = true)
-    protected CommonResponseSteps commonResponseSteps;
+    protected ResponseSteps responseSteps;
     @Steps(shared = true)
     private RequestHelper requestHelper;
 
@@ -19,11 +19,11 @@ public class CommonApiSteps extends HasConfiguration {
     // Helper methods to save indirection to steps
     //
     public void response(ValidatableResponse response) {
-        commonResponseSteps.response(response);
+        responseSteps.response(response);
     }
 
     public ValidatableResponse response() {
-        return Validate.notNull(commonResponseSteps.response(), "The response is not assigned");
+        return Validate.notNull(responseSteps.response(), "The response is not assigned");
     }
 
     public RequestSpecification specification() {

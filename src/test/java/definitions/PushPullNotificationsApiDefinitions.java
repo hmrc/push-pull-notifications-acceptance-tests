@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 
 import static java.lang.String.format;
 
-public class PushPullNotificationsApiDefinitions extends CommonDefinitions {
+public class PushPullNotificationsApiDefinitions extends ResponseDefinitions {
 
     protected Configuration config = new Configuration();
 
