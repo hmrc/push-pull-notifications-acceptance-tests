@@ -1,4 +1,4 @@
-package definitions;
+package definitions.apis;
 
 public class CommonResponseDefinitions extends ResponseDefinitions {
 

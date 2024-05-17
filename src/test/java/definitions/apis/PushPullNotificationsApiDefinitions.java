@@ -1,4 +1,4 @@
-package definitions;
+package definitions.apis;
 
 import configuration.Configuration;
 import io.cucumber.java.en.And;

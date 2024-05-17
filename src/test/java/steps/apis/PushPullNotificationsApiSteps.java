@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.collection.IsIn.oneOf;
 
-public class PushPullNotificationsApiSteps extends CommonApiSteps {
+public class PushPullNotificationsApiSteps extends ApiSteps {
 
     //private static final String BASE_URL = "http://localhost:6701";
     private static final String BASE_URL = "https://push-pull-notifications-api.protected.mdtp";

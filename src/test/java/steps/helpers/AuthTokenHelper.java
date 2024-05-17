@@ -1,11 +1,11 @@
 package steps.helpers;
 
 import io.restassured.authentication.ExplicitNoAuthScheme;
-import steps.apis.CommonApiSteps;
+import steps.apis.ApiSteps;
 
 import static io.restassured.RestAssured.oauth2;
 
-public class AuthTokenHelper extends CommonApiSteps {
+public class AuthTokenHelper extends ApiSteps {
 
     private static final String INVALID_SERVER_TOKEN = "axyz123";
 

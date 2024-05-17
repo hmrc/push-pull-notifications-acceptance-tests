@@ -1,5 +1,6 @@
-package definitions;
+package definitions.oauth;
 
+import definitions.apis.ResponseDefinitions;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import steps.helpers.AuthTokenHelper;

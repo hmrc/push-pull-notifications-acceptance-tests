@@ -1,4 +1,4 @@
-package definitions;
+package definitions.apis;
 
 import net.thucydides.core.annotations.Steps;
 import steps.apis.ResponseSteps;

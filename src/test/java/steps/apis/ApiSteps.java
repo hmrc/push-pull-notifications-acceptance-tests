@@ -8,7 +8,7 @@ import net.thucydides.core.annotations.Steps;
 import org.apache.commons.lang3.Validate;
 import steps.helpers.RequestHelper;
 
-public class CommonApiSteps extends HasConfiguration {
+public class ApiSteps extends HasConfiguration {
 
     @Steps(shared = true)
     protected ResponseSteps responseSteps;
