@@ -65,6 +65,5 @@ public class ResponseSteps {
     public void expectedJsonResponseBody(String expectedResponseBody) {
         expectedContentType(JSON);
         response.body(is(expectedResponseBody));
-
     }
 }

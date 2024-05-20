@@ -157,8 +157,6 @@ public class PushPullNotificationsApiDefinitions extends ResponseDefinitions {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(pushPullNotificationsApiSteps.getNewBoxId(), "{\"message\" : \"jsonbody\"}");
     }
 
-    /// NEW METHOD TO TAKE FILE
-
     @When("^I make a request to the create notification endpoint with a valid max size JSON payload for the new box$")
     public void iMakeRequestToTheCreateNotificationEndpointWithAValidMaxSizeJsonPayloadForTheNewBox() {
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayloadFile(pushPullNotificationsApiSteps.getNewBoxId());
@@ -583,17 +581,17 @@ public class PushPullNotificationsApiDefinitions extends ResponseDefinitions {
     }
 
     @When("^I make a call to the delete client managed box endpoint with a box ID that does not exist$")
-    public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithABoxIdThatDoesNotExist() {
+    public void iMakeACallToTheDeleteClientManagedBoxEndpointWithABoxIdThatDoesNotExist() {
         pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("ccc1a3e7-2b73-475a-a14c-1428ab3b46bc");
     }
 
     @When("^I make a call to the delete client managed box endpoint with a non ownership box ID")
-    public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithANonOwnershipBoxId() {
+    public void iMakeACallToTheDeleteClientManagedBoxEndpointWithANonOwnershipBoxId() {
         pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("5589dd9a-40e9-4dec-bbe3-9d83f5102a2a");
     }
 
     @When("^I make a call to the delete client managed box endpoint with a default box ID")
-    public void iMakeACalltoTheDeleteClientManagedBoxEndpointWithADefaultBoxId() {
+    public void iMakeACallToTheDeleteClientManagedBoxEndpointWithADefaultBoxId() {
         pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3");
     }
 
@@ -644,7 +642,6 @@ public class PushPullNotificationsApiDefinitions extends ResponseDefinitions {
 
     @When("^I make a request to the validate client managed box endpoint with no request body")
     public void iMakeRequestToTheValidateClientManagedBoxEndPointWithNoRequestBody() {
-        //pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBoxWithNoBody();
         pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox("");
     }
 
@@ -694,7 +691,7 @@ public class PushPullNotificationsApiDefinitions extends ResponseDefinitions {
     }
 
     @Given("^I have a generated notification in an acknowledged status$")
-    public void iHaveAGeneratedNotificationInAnAckowledgedStatus() {
+    public void iHaveAGeneratedNotificationInAnAcknowledgedStatus() {
         iHaveANotificationInStatusPendingForANewBox();
         contentTypeHeaderHelper.withJsonContentTypeHeader();
         iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointForTheNewBox();
@@ -766,8 +763,6 @@ public class PushPullNotificationsApiDefinitions extends ResponseDefinitions {
     @When("^I make a request to the external put acknowledge notifications endpoint with a box ID that belongs to another client ID$")
     public void iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointWithANonBelongingId() {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("1e163398-2c83-405d-a11b-bfa671013800");
-        //pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("a5e3203d-a57e-4787-ba72-2dbfc294455f");
-        //OLD BOX ID CAN BE DELETED
     }
 
     @When("^I make a request to the external get box notifications endpoint for \"(.*)\" notifications with valid date query parameter values$")
@@ -796,7 +791,6 @@ public class PushPullNotificationsApiDefinitions extends ResponseDefinitions {
     public void iGetAForbiddenResponseDueToMissingAgentHeader() {
         iGetAForbiddenResponseDueToAuthorizationFailed();
     }
-
 
     // OK - 2XXs
     @Then("^I get a successful response$")
@@ -917,12 +911,6 @@ public class PushPullNotificationsApiDefinitions extends ResponseDefinitions {
         responseSteps.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.assertInvalidCallbackUrlResponse(false);
     }
-
-//    @Then("^I get a validate false response$")
-//    public void iGetAValidateFalseResponse() {
-//        responseSteps.expectedHttpStatusCode(200);
-//        pushPullNotificationsApiSteps.asserValidateClientManagedBoxResponse(false);
-//    }
 
     @Then("^A new box is successfully generated$")
     public void aNewBoxIsSuccessfullyGenerated() {
@@ -1169,26 +1157,6 @@ public class PushPullNotificationsApiDefinitions extends ResponseDefinitions {
         return date.format(formatter);
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-
     @Then("^I get the JSON message \"([^\"]*)\"$")
     public void iGetTheJsonMessage(final String jsonMessage) {
         responseSteps.expectedJsonMessage(jsonMessage);
@@ -1214,6 +1182,4 @@ public class PushPullNotificationsApiDefinitions extends ResponseDefinitions {
         responseSteps.expectedJsonErrorCode("ACCEPT_HEADER_INVALID");
         responseSteps.expectedJsonMessage("The accept header is missing or invalid");
     }
-
-
 }

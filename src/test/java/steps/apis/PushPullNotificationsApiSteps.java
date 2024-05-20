@@ -192,7 +192,7 @@ public class PushPullNotificationsApiSteps extends ApiSteps {
             spec = spec.header("User-Agent", userAgent);
         }
 
-        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then().log().all());
+        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then());
     }
 
     @Step
