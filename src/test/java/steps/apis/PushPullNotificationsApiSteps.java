@@ -180,7 +180,8 @@ public class PushPullNotificationsApiSteps extends ApiSteps {
     public void iMakeACallToCreateNotificationsWithJsonPayloadFileTooLarge(String boxId) {
         builder().withNoProxy();
 
-        String location = "notifications/3Mb.json";
+        //notifications.maxSize configured to 2.1 MB in QA
+        String location = "notifications/Over2Mb.json";
         File jsonDataPayload = new File(location);
 
         RequestSpecification spec = given()
