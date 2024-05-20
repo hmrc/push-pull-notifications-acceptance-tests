@@ -1,11 +1,11 @@
 package steps.helpers;
 
 import net.thucydides.core.annotations.Step;
-import steps.apis.CommonApiSteps;
+import steps.apis.ApiSteps;
 
 import static io.restassured.http.ContentType.JSON;
 
-public class ContentTypeHeaderHelper extends CommonApiSteps {
+public class ContentTypeHeaderHelper extends ApiSteps {
 
     @Step
     public void withJsonContentTypeHeader() {

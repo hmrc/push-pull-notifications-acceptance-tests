@@ -9,7 +9,7 @@ import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.ContentType.XML;
 import static org.hamcrest.CoreMatchers.is;
 
-public class CommonResponseSteps {
+public class ResponseSteps {
 
     private ValidatableResponse response;
 
@@ -65,6 +65,5 @@ public class CommonResponseSteps {
     public void expectedJsonResponseBody(String expectedResponseBody) {
         expectedContentType(JSON);
         response.body(is(expectedResponseBody));
-
     }
 }

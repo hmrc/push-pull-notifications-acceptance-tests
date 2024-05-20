@@ -1,9 +1,9 @@
 package steps.helpers;
 
 import net.thucydides.core.annotations.Step;
-import steps.apis.CommonApiSteps;
+import steps.apis.ApiSteps;
 
-public class AcceptHeaderHelper extends CommonApiSteps {
+public class AcceptHeaderHelper extends ApiSteps {
 
     @Step
     public void withHmrcJsonAcceptHeader() {

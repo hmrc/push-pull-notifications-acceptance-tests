@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.collection.IsIn.oneOf;
 
-public class PushPullNotificationsApiSteps extends CommonApiSteps {
+public class PushPullNotificationsApiSteps extends ApiSteps {
 
     //private static final String BASE_URL = "http://localhost:6701";
     private static final String BASE_URL = "https://push-pull-notifications-api.protected.mdtp";
@@ -180,6 +180,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
     public void iMakeACallToCreateNotificationsWithJsonPayloadFileTooLarge(String boxId) {
         builder().withNoProxy();
 
+        //notifications.maxSize configured to 2.1 MB in QA
         String location = "notifications/Over2Mb.json";
         File jsonDataPayload = new File(location);
 
@@ -191,7 +192,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
             spec = spec.header("User-Agent", userAgent);
         }
 
-        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then().log().all());
+        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then());
     }
 
     @Step
@@ -588,7 +589,7 @@ public class PushPullNotificationsApiSteps extends CommonApiSteps {
 
         response(
                 given()
-                        .spec(specification()).log().all()
+                        .spec(specification())
                         .get(format("%s/%s/%s/notifications", baseApiUrl(), apiContext, boxId))
                         .then()
         );

@@ -1,11 +1,12 @@
-package definitions;
+package definitions.oauth;
 
+import definitions.apis.ResponseDefinitions;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import steps.helpers.AuthTokenHelper;
 import steps.oauth.ClientCredentialsApiSteps;
 
-public class ClientCredentialsApiDefinitions extends CommonDefinitions {
+public class ClientCredentialsApiDefinitions extends ResponseDefinitions {
 
     @Steps(shared = true)
     ClientCredentialsApiSteps clientCredentialsOauthApiSteps;

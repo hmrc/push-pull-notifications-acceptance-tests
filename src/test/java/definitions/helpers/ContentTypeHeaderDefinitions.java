@@ -1,4 +1,4 @@
-package definitions;
+package definitions.helpers;
 
 import io.cucumber.java.en.Given;
 import net.thucydides.core.annotations.Steps;
