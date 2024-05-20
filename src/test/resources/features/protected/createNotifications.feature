@@ -19,7 +19,7 @@ Feature: Push Pull Notifications API - Create Notifications
     When I make a request to the create notification endpoint with a valid XML payload
     Then A notification is successfully generated
 
- # @create-notifications @notifications @regression-tests
+ @create-notifications @notifications @regression-tests
   Scenario: Calling the create notifications endpoint with a message exceeding the allowed maximum size
     Given I have a valid user agent header
     And I have a valid JSON content type header
