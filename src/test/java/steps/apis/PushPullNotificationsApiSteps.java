@@ -181,7 +181,7 @@ public class PushPullNotificationsApiSteps extends ApiSteps {
         builder().withNoProxy();
 
         //notifications.maxSize configured to 2.1 MB in QA
-        String location = "notifications/200Kb.json";
+        String location = "notifications/3Mb.json";
         File jsonDataPayload = new File(location);
 
         RequestSpecification spec = given()
