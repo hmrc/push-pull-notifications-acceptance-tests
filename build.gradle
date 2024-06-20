@@ -1,7 +1,6 @@
 plugins {
     id 'java'
-    id 'idea'
-    id "net.serenity-bdd.serenity-gradle-plugin" version "3.6.7"
+    id "net.serenity-bdd.serenity-gradle-plugin" version "4.0.46"
 }
 
 defaultTasks 'clean','test','aggregate'
@@ -13,32 +12,25 @@ repositories {
 }
 
 wrapper {
-    gradleVersion = '7.5.1'
+    gradleVersion = '8.6'
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_16
+    targetCompatibility = JavaVersion.VERSION_16
 }
 
 ext {
-    serenityCoreVersion = '3.6.7'
-    junitVersion = '5.8.2'
-    logbackVersion = '1.2.10'
-    slf4jVersion = '2.0.6'
+    serenity_version = '4.0.48'
 }
 
 dependencies {
-    testImplementation"net.serenity-bdd:serenity-core:${serenityCoreVersion}",
-            "net.serenity-bdd:serenity-junit5:${serenityCoreVersion}",
-            "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}",
-            "net.serenity-bdd:serenity-cucumber:${serenityCoreVersion}",
-            "net.serenity-bdd:serenity-rest-assured:${serenityCoreVersion}",
-            "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
-            "ch.qos.logback:logback-core:${logbackVersion}",
-            "org.slf4j:slf4j-simple:${slf4jVersion}",
-            "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.4"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    // Dependencies from the Cucumber Starter Project https://github.com/serenity-bdd/serenity-cucumber-starter
+    testImplementation "net.serenity-bdd:serenity-core:${serenity_version}"
+    testImplementation "net.serenity-bdd:serenity-cucumber:${serenity_version}"
+    testImplementation "net.serenity-bdd:serenity-rest-assured:${serenity_version}"
+    testImplementation "org.junit.vintage:junit-vintage-engine:5.10.1"
+    testImplementation "org.slf4j:slf4j-simple:2.0.9"
 }
 
 test {
