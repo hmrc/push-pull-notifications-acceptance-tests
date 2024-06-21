@@ -48,56 +48,56 @@ public class Configuration {
     }
 
     public String baseUrl() {
-        return required("BASE_URL", "Tests require a BASE_URL - e.g.https://www.qa.tax.service.gov.uk");
+        return required("baseUrl", "tests require a baseUrl - e.g.https://www.qa.tax.service.gov.uk");
     }
 
     public String baseApiUrl() {
-        return required("BASE_API_URL", "Tests require a BASE_API_URL to call APIs - e.g. https://api.qa.tax.service.gov.uk");
+        return required("baseApiUrl", "tests require a baseApiUrl to call apis - e.g. https://api.qa.tax.service.gov.uk");
     }
 
     public String clientId() {
-        return required("AUTH_CLIENT_ID");
+        return required("authClientId");
     }
 
     public String clientSecret() {
-        return required("AUTH_CLIENT_SECRET");
+        return required("authClientSecret");
     }
 
     public String authRedirectUri() {
-        return required("AUTH_REDIRECT_URI");
+        return required("authRedirectUri");
     }
 
     public String authServerToken() {
-        return required("AUTH_SERVER_TOKEN");
+        return required("authServerToken");
     }
 
     public String callbackUrl() {
-        return required("CALLBACK_URL");
+        return required("callbackUrl");
     }
 
     public String cmbClientId() {
-        return required("CMB_AUTH_CLIENT_ID");
+        return required("cmbAuthClientId");
     }
 
     public String cmbClientSecret() {
-        return required("CMB_AUTH_CLIENT_SECRET");
+        return required("cmbAuthClientSecret");
     }
 
     public String noBoxesClientId() {
-        return required("NO_BOXES_AUTH_CLIENT_ID");
+        return required("noBoxesAuthClientId");
     }
 
     public String noBoxesClientSecret() {
-        return required("NO_BOXES_AUTH_CLIENT_SECRET");
+        return required("noBoxesAuthClientSecret");
     }
 
 
     public String blockedAuthServerToken() {
-        return required("BLOCKED_AUTH_SERVER_TOKEN");
+        return required("blockedAuthServerToken");
     }
 
     public int proxyPort() {
-        return Integer.valueOf(required("PROXY_PORT"));
+        return Integer.valueOf(required("proxyPort"));
     }
 
 }
