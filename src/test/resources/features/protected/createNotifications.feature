@@ -31,11 +31,71 @@ Feature: Push Pull Notifications API - Create Notifications
   ########################################################################################################
 
   @create-notifications @notifications @regression-tests @imran
-  Scenario: Calling the create notifications endpoint with a message exceeding the allowed maximum size
+  Scenario: Calling the create notifications endpoint with a message exceeding the allowed maximum size 1
     Given I have a valid user agent header
     And I have a valid JSON content type header
     When I make a request to the create notification endpoint with a message exceeding the max size
     Then A notification is successfully generated
+
+  @create-notifications @notifications @regression-tests @imran
+  Scenario: Calling the create notifications endpoint with a message exceeding the allowed maximum size 2
+    Given I have a valid user agent header
+    And I have a valid JSON content type header
+    When I make a request to the create notification endpoint with a message exceeding the max size
+    Then A notification is successfully generated
+
+  @create-notifications @notifications @regression-tests @imran
+  Scenario: Calling the create notifications endpoint with a message exceeding the allowed maximum size 3
+    Given I have a valid user agent header
+    And I have a valid JSON content type header
+    When I make a request to the create notification endpoint with a message exceeding the max size
+    Then A notification is successfully generated
+
+  @create-notifications @notifications @regression-tests @imran
+  Scenario: Calling the create notifications endpoint with a message exceeding the allowed maximum size 4
+    Given I have a valid user agent header
+    And I have a valid JSON content type header
+    When I make a request to the create notification endpoint with a message exceeding the max size
+    Then A notification is successfully generated
+
+  @create-notifications @notifications @regression-tests @imran
+  Scenario: Calling the create notifications endpoint with a message exceeding the allowed maximum size 5
+    Given I have a valid user agent header
+    And I have a valid JSON content type header
+    When I make a request to the create notification endpoint with a message exceeding the max size
+    Then A notification is successfully generated
+
+  @create-notifications @notifications @regression-tests @imran
+  Scenario: Calling the create notifications endpoint with a message exceeding the allowed maximum size 6
+    Given I have a valid user agent header
+    And I have a valid JSON content type header
+    When I make a request to the create notification endpoint with a message exceeding the max size
+    Then A notification is successfully generated
+
+  @create-notifications @notifications @regression-tests @imran
+  Scenario: Calling the create notifications endpoint with a message exceeding the allowed maximum size 7
+    Given I have a valid user agent header
+    And I have a valid JSON content type header
+    When I make a request to the create notification endpoint with a message exceeding the max size
+    Then A notification is successfully generated
+
+  @create-notifications @notifications @regression-tests @imran
+  Scenario: Calling the create notifications endpoint with a message exceeding the allowed maximum size 8
+    Given I have a valid user agent header
+    And I have a valid JSON content type header
+    When I make a request to the create notification endpoint with a message exceeding the max size
+    Then A notification is successfully generated
+
+  @create-notifications @notifications @regression-tests @imran
+  Scenario: Calling the create notifications endpoint with a message exceeding the allowed maximum size 9
+    Given I have a valid user agent header
+    And I have a valid JSON content type header
+    When I make a request to the create notification endpoint with a message exceeding the max size
+    Then A notification is successfully generated
+
+
+
+
 
   ########################################################################################################
   ########################################################################################################
