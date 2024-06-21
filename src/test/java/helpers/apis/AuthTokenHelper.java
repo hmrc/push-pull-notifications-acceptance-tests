@@ -1,7 +1,7 @@
 package helpers.apis;
 
-import io.restassured.authentication.ExplicitNoAuthScheme;
 import apis.common.CommonApi;
+import io.restassured.authentication.ExplicitNoAuthScheme;
 
 import static io.restassured.RestAssured.oauth2;
 

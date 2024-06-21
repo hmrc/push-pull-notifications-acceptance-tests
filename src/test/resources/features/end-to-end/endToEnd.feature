@@ -3,7 +3,7 @@ Feature: Push Pull Notifications API - End To End Journeys
 
   ### End to end scenario - Includes protected and public endpoints
 
-  @end-to-end @regression-tests @this
+  @end-to-end @regression-tests
   Scenario: PPNS end to end test
     #Create Box
     Given I have all valid request headers for PPNS

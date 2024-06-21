@@ -1,9 +1,9 @@
 package steps.http;
 
 import helpers.apis.AcceptHeaderHelper;
+import helpers.apis.ContentTypeHeaderHelper;
 import io.cucumber.java.en.Given;
 import net.serenitybdd.annotations.Steps;
-import helpers.apis.ContentTypeHeaderHelper;
 
 public class AcceptHeaderSteps {
 

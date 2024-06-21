@@ -1,9 +1,9 @@
 package steps.apis;
 
-import io.cucumber.java.en.Given;
-import net.serenitybdd.annotations.Steps;
 import helpers.apis.AuthTokenHelper;
 import helpers.apis.OauthHelper;
+import io.cucumber.java.en.Given;
+import net.serenitybdd.annotations.Steps;
 
 public class AuthLoginStubSteps extends ResponseSteps {
 

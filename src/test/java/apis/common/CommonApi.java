@@ -1,13 +1,13 @@
 package apis.common;
 
-import helpers.apis.ResponseHelper;
 import helpers.apis.HmrcRequestSpecBuilder;
-import utilities.configuration.HasConfiguration;
+import helpers.apis.RequestHelper;
+import helpers.apis.ResponseHelper;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.annotations.Steps;
 import org.apache.commons.lang3.Validate;
-import helpers.apis.RequestHelper;
+import utilities.configuration.HasConfiguration;
 
 public class CommonApi extends HasConfiguration {
 

@@ -1,13 +1,13 @@
 package steps.apis;
 
 import apis.PushPullNotificationsCommonApi;
-import utilities.configuration.Configuration;
+import helpers.apis.ContentTypeHeaderHelper;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.annotations.Steps;
-import helpers.apis.ContentTypeHeaderHelper;
+import utilities.configuration.Configuration;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,7 +1,7 @@
 package helpers.apis;
 
-import net.serenitybdd.annotations.Step;
 import apis.common.CommonApi;
+import net.serenitybdd.annotations.Step;
 
 public class AcceptHeaderHelper extends CommonApi {
 

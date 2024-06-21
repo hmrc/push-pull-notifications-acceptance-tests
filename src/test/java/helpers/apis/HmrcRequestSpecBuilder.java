@@ -1,11 +1,11 @@
 package helpers.apis;
 
-import utilities.configuration.HasConfiguration;
 import io.restassured.authentication.AuthenticationScheme;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.annotations.Step;
+import utilities.configuration.HasConfiguration;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,11 +1,11 @@
 package apis;
 
 import apis.common.CommonApi;
+import helpers.payloads.BoxPayload;
+import helpers.payloads.InvalidBoxPayload;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.annotations.Step;
-import helpers.payloads.BoxPayload;
-import helpers.payloads.InvalidBoxPayload;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

@@ -1,12 +1,12 @@
 package helpers.apis;
 
-import utilities.configuration.Configuration;
-import utilities.configuration.HasConfiguration;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.annotations.Step;
 import org.apache.commons.lang3.Validate;
+import utilities.configuration.Configuration;
+import utilities.configuration.HasConfiguration;
 
 import java.util.HashMap;
 

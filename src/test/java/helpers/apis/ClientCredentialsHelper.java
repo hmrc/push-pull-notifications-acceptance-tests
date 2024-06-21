@@ -1,6 +1,5 @@
 package helpers.apis;
 
-import helpers.apis.AbstractOauthHelper;
 import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.annotations.Step;
 

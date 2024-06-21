@@ -1,9 +1,9 @@
 package steps.apis;
 
-import io.cucumber.java.en.When;
-import net.serenitybdd.annotations.Steps;
 import helpers.apis.AuthTokenHelper;
 import helpers.apis.ClientCredentialsHelper;
+import io.cucumber.java.en.When;
+import net.serenitybdd.annotations.Steps;
 
 public class ClientCredentialsApiSteps extends ResponseSteps {
 
