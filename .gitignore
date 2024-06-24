@@ -1,7 +1,5 @@
 /.classpath
 logs
-project/project
-project/target
 target
 lib_managed
 tmp
@@ -12,7 +10,6 @@ dist
 /RUNNING_PID
 /.settings
 build/*
-project/*
 /.gradle
 /.DS_Store
 .DS_Store

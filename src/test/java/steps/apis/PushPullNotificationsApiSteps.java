@@ -1,689 +1,1191 @@
 package steps.apis;
 
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import net.thucydides.core.annotations.Step;
-import steps.payloads.BoxPayload;
-import steps.payloads.InvalidBoxPayload;
+import apis.PushPullNotificationsCommonApi;
+import helpers.apis.ContentTypeHeaderHelper;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import net.serenitybdd.annotations.Steps;
+import utilities.configuration.Configuration;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
-import static java.util.Collections.singletonList;
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.everyItem;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.collection.IsIn.oneOf;
 
-public class PushPullNotificationsApiSteps extends ApiSteps {
+public class PushPullNotificationsApiSteps extends ResponseSteps {
 
-    //private static final String BASE_URL = "http://localhost:6701";
-    private static final String BASE_URL = "https://push-pull-notifications-api.protected.mdtp";
-    private static final String PUSH_PULL_BOX_URL = format("%s/box", BASE_URL);
-    private static final String PUSH_PULL_CALLBACK_URL = "%s/box/%s/callback";
-    private static final String PUSH_PULL_CALLBACK_NO_BOX_URL = format("%s/box/046ceee5-e43f-4159-b5ce-8df5f2b9d999/callback", BASE_URL);
-    private static final String PUSH_PULL_NOTIFICATIONS_URL = "%s/box/%s/notifications";
-    private static final String PUSH_PULL_NOTIFICATIONS_NO_BOX_URL = format("%s/box/07787f13-dcae-4168-8685-c00a33b86999/notifications", BASE_URL);
-    private static final String PUSH_PULL_NOTIFICATIONS_URL_INVALID_UUID = format("%s/box/foobar/notifications", BASE_URL);
-    private static final String PUSH_PULL_WRAPPED_NOTIFICATIONS_URL = "%s/box/%s/wrapped-notifications";
-    private static final String PUSH_PULL_WRAPPED_NOTIFICATIONS_NO_BOX_URL = format("%s/box/07787f13-dcae-4168-8685-c00a33b86999/wrapped-notifications", BASE_URL);
-    private static final String PUSH_PULL_WRAPPED_NOTIFICATIONS_URL_INVALID_UUID = format("%s/box/foobar/wrapped-notifications", BASE_URL);
-    private static final String PUSH_PULL_SECRETS_URL = "%s/client/%s/secrets";
-    private static final String PUSH_PULL_CREATE_CMB_BOX_URL = format("%s/cmb/box", BASE_URL);
-    private static final String PUSH_PULL_VALIDATE_CMB_BOX_URL = format("%s/cmb/validate", BASE_URL);
-    private final String apiContext = "misc/push-pull-notification/box";
-    private final String cmbApiContext = "misc/push-pull-notification/cmb";
-    private String authorizationKey;
-    private String userAgent;
-    private String internalBearerToken;
-    private String clientId;
-    private String boxName;
-    private String newBoxId;
-    private String newClientManagedBoxId;
-    private String notificationId;
-    private final String newBoxName = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new Date());
+    protected Configuration config = new Configuration();
 
-    public String getNewBoxName() {
-        return newBoxName;
+    @Steps
+    ContentTypeHeaderHelper contentTypeHeaderHelper;
+
+    @Steps
+    private PushPullNotificationsCommonApi pushPullNotificationsApiSteps;
+
+    @Given("^I have a valid user agent header$")
+    public void iHaveAValidUserAgentHeader() {
+        pushPullNotificationsApiSteps.withUserAgent("api-subscription-fields");
     }
 
-    public String getNewBoxId() {
-        return newBoxId;
+    @Given("^I have no user agent header$")
+    public void iHaveNoUserAgentHeader() {
+        pushPullNotificationsApiSteps.withUserAgent(null);
     }
 
-    @Step
-    public void iMakeACallToCreateBoxWithPayload(String clientId, String boxName) {
-        builder().withNoProxy();
+    @Given("^I have an invalid user agent header$")
+    public void iHaveAnInvalidUserAgentHeader() {
+        pushPullNotificationsApiSteps.withUserAgent("invalid-user-agent");
+    }
 
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(new BoxPayload(clientId, boxName));
+    @Given("^I have a valid authorization key for the PPNS API$")
+    public void iHaveAValidAuthorizationKeyForThePpnsApi() {
+        pushPullNotificationsApiSteps.withAuthorizationKey("ioPe1z6PwXQp4IKwtXkCQWbsPlauGCk9C0sUcFPMIWBhMEaxzs");
+    }
 
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
+    @Given("^I have an invalid authorization key for the PPNS API$")
+    public void iHaveAnInvalidAuthorizationKeyForThePpnsApi() {
+        pushPullNotificationsApiSteps.withAuthorizationKey("invalidioPe1z6PwXQp4IKwtXkCQWbsPlauGCk9C0sUcFPMIWBhMEaxzs");
+    }
+
+    @Given("^I have all valid request headers for PPNS$")
+    public void iHaveAllValidRequestHeadersForPpns() {
+        pushPullNotificationsApiSteps.withUserAgent("api-subscription-fields");
+        contentTypeHeaderHelper.withJsonContentTypeHeader();
+    }
+
+    @Given("^I have an internal bearer token for PPNS$")
+    public void iHaveAnInternalBearerTokenForPpns() {
+        pushPullNotificationsApiSteps.withInternalBearerToken("Bearer 8KNIXbr3VVsSEP0CJKYPynWeMRG5IrHXNHppsY/3OKA+4PJP9PbkQ6kgTBrom4tdBD02kYrbhwqvg7/mefvhEXmgvPev3/0IgCltgX7qcblHn6mNR/qo5D+3h3nd5qmqbsb358N7s6FANUqAU7OFaDROyzjO1o+vQQUn3sDJdJL/f7Ox2YRht7vJBTxJtTKf");
+    }
+
+    @Given("^I have valid query parameters$")
+    public void iHaveValidQueryParameters() {
+        pushPullNotificationsApiSteps.withValidQueryParameters("myClientIs6", "someBoxName6");
+    }
+
+    @When("^I make a request to the Get Box endpoint with no query parameters$")
+    public void iMakeRequestToTheGetBoxEndpointWithNoQueryParameters() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithNoQueryParameters();
+    }
+
+    @When("^I make a request to the Get Box endpoint with Client ID \"([^\"]*)\" and Box Name \"([^\"]*)\"$")
+    public void iMakeRequestToGetBoxEndpoint(String clientId, String boxName) {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithQueryParameters("clientId", "boxName", clientId, boxName);
+    }
+
+    @When("^I make a request to the Get Box endpoint with Client ID \"([^\"]*)\" and new box name$")
+    public void iMakeRequestToGetBoxEndpoint(String clientId) {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithQueryParameters("clientId", clientId, "boxName", pushPullNotificationsApiSteps.getNewBoxName());
+    }
+
+    @When("^I make a request to the Get Box endpoint with an invalid clientId query parameter name$")
+    public void iMakeRequestToTheGetBoxEndpointWithAnInvalidClientIdQueryParameterName() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithQueryParameters("invalidClientId", config.clientId(),
+                "boxName", "API Platform Acceptance Test Box");
+    }
+
+    @When("^I make a request to the Get Box endpoint with an invalid boxName query parameter name$")
+    public void iMakeRequestToTheGetBoxEndpointWithAnInvalidStatusQueryParameterName() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithQueryParameters("clientId", config.clientId(),
+                "invalidBoxName", "API Platform Acceptance Test Box");
+    }
+
+    @When("^I make a request to the Get Box endpoint with no client id parameter value$")
+    public void iMakeRequestToTheGetBoxEndpointWithNoQueryParameterNames() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithQueryParameters("clientId", "",
+                "boxName", "API Platform Acceptance Test Box");
+    }
+
+    @When("^I make a request to the Get Box endpoint with no box name parameter value$")
+    public void iMakeRequestToTheGetBoxEndpointWithNoBoxNameParameterValue() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithQueryParameters("clientId", config.clientId(),
+                "boxName", "");
+    }
+
+    @When("^I make a request to the create Box endpoint with Client ID \"([^\"]*)\" and Box Name \"([^\"]*)\"$")
+    public void iMakeRequestToTheCreateBoxEndpoint(String clientId, String boxName) {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithPayload(clientId, boxName);
+    }
+
+    @When("^I make a new request to the create Box endpoint with Client ID \"([^\"]*)\" and a new box name$")
+    public void iMakeRequestToTheCreateBoxEndpoint(String clientId) {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithPayload(clientId, pushPullNotificationsApiSteps.getNewBoxName());
+    }
+
+    @When("^I create a new box$")
+    public void iCreateANewBox() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithPayload(config.clientId(), pushPullNotificationsApiSteps.getNewBoxName());
+        aNewBoxIsSuccessfullyGenerated();
+        iMakeRequestToGetBoxEndpoint(config.clientId());
+        theNewBoxIsSuccessfullyReturned();
+    }
+
+    @When("^I make a request to the create box endpoint with invalid field names$")
+    public void iMakeRequestToTheCreateBoxEndpointWithAnInvalidFieldNames() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithInvalidBody(config.clientId(), "API Platform Acceptance Test Box");
+    }
+
+    @When("^I make a request to the create box endpoint with no field names and values$")
+    public void iMakeRequestToTheCreateBoxEndpointWithNoFieldNamesAndValues() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithInvalidBody("", "");
+    }
+
+    @When("^I make a request to the create box endpoint with no request body")
+    public void iMakeRequestToTheCreateBoxEndpointWithNoRequestBody() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateBoxWithNoBody();
+    }
+
+    @When("^I make a request to the callback endpoint using the new box$")
+    public void iMakeARequestToTheCallbackEndpointUsingTheNewBox() {
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload(pushPullNotificationsApiSteps.getNewBoxId(), (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
+    }
+
+    @When("^I make a request to the callback endpoint where no box exists$")
+    public void iMakeARequestToTheCallbackEndpointWhereNoBoxExists() {
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWhereNoBoxExists(format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}", config.clientId(), config.callbackUrl()));
+    }
+
+    @When("^I make a request to the create notification endpoint with a valid JSON payload$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAValidJsonPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"message\": \"jsonbody\"}");
+    }
+
+    @When("^I make a request to the create notification endpoint with a valid JSON payload for the new box$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAValidJsonPayloadForTheNewBox() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(pushPullNotificationsApiSteps.getNewBoxId(), "{\"message\" : \"jsonbody\"}");
+    }
+
+    @When("^I make a request to the create notification endpoint with a valid max size JSON payload for the new box$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAValidMaxSizeJsonPayloadForTheNewBox() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayloadFile(pushPullNotificationsApiSteps.getNewBoxId());
+    }
+
+    @When("^I make a request to the create notifications endpoint to generate a pending notification for an unsubscribed box$")
+    public void iMakeRequestToTheCreateNotificationEndpointForAnUnsubscribedBox() {
+        iCreateANewBox();
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(pushPullNotificationsApiSteps.getNewBoxId(), "{\"message\" : \"jsonbody\"}");
+        aNotificationsIsSuccessfullyGenerated();
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with a JSON notification$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAJsonNotification() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "        \"notification\": {\n" +
+                "            \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "            \"contentType\": \"application/json\"\n" +
+                "        },\n" +
+                "        \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
+                "        \"version\": \"1\"\n" +
+                "    }");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with a XML notification$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAXMLNotification() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "        \"notification\": {\n" +
+                "            \"body\": \"<someXml>foo bar</someXml>\",\n" +
+                "            \"contentType\": \"application/xml\"\n" +
+                "        },\n" +
+                "        \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
+                "        \"version\": \"1\"\n" +
+                "    }");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint without a confirmation URL$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithoutAConfirmationUrl() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with optional private headers$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnOptionalPrivateHeader() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "   \"notification\":{\n" +
+                "      \"body\":\"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "      \"contentType\":\"application/json\"\n" +
+                "   },\n" +
+                "   \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
+                "   \"version\":\"1\",\n" +
+                "   \"privateHeaders\":[\n" +
+                "      {\n" +
+                "         \"name\":\"fooDuplicate\",\n" +
+                "         \"value\":\"fooValueDuplicate\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"fooDuplicate\",\n" +
+                "         \"value\":\"fooValueDuplicate\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"\",\n" +
+                "         \"value\":\"\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo4\",\n" +
+                "         \"value\":\"fooValue4\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo5\",\n" +
+                "         \"value\":\"fooValue5\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with an empty optional private header$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnEmptyOptionalPrivateHeader() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "   \"notification\":{\n" +
+                "      \"body\":\"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "      \"contentType\":\"application/json\"\n" +
+                "   },\n" +
+                "   \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
+                "   \"version\":\"1\",\n" +
+                "   \"privateHeaders\":[\n" +
+                "      {\n" +
+                "         \"name\":\"\",\n" +
+                "         \"value\":\"\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with more than 5 optional private headers$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithMoreThanFiveOptionalPrivateHeader() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "   \"notification\":{\n" +
+                "      \"body\":\"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "      \"contentType\":\"application/json\"\n" +
+                "   },\n" +
+                "   \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
+                "   \"version\":\"1\",\n" +
+                "   \"privateHeaders\":[\n" +
+                "      {\n" +
+                "         \"name\":\"foo\",\n" +
+                "         \"value\":\"fooValue\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo2\",\n" +
+                "         \"value\":\"fooValue2\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo3\",\n" +
+                "         \"value\":\"fooValue4\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo4\",\n" +
+                "         \"value\":\"fooValue4\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo5\",\n" +
+                "         \"value\":\"fooValue5\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"name\":\"foo6\",\n" +
+                "         \"value\":\"fooValue6\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with an empty string confirmation URL$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnEmptyStringConfirmationUrl() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"confirmationUrl\": \"example.com\",\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with an invalid confirmation URL$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnInvalidConfirmationUrl() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"confirmationUrl\": \"\",\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with an invalid message version$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnInvalidMessageVersion() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"2\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with a box that does not exist$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithABoxThatDoesNotExist() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWhereNoBoxExists("{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with an invalid UUID$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnInvalidUuid() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithInvalidUuid("{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with an invalid JSON payload$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnInvalidJsonPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no notification field name$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoNotificationFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with an invalid notification content type header$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAnInvalidNotificationContentTypeHeader() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/xml\"\n" +
+                "    },\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no notification field vale$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoNotificationFieldValue() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": ,\n" +
+                "    \"version\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no version field name$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithANoVersionFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"\": \"1\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no version field vale$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoVersionFieldValue() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "    \"notification\": {\n" +
+                "        \"body\": \"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "        \"contentType\": \"application/json\"\n" +
+                "    },\n" +
+                "    \"version\": \"\"\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no private header name field$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithPrivateHeaderNameField() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "   \"notification\":{\n" +
+                "      \"body\":\"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "      \"contentType\":\"application/json\"\n" +
+                "   },\n" +
+                "   \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
+                "   \"version\":\"1\",\n" +
+                "   \"privateHeaders\":[\n" +
+                "      {\n" +
+                "         \"\":\"foo\",\n" +
+                "         \"value\":\"fooValue\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no private header value field$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithPrivateHeaderValueField() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\n" +
+                "   \"notification\":{\n" +
+                "      \"body\":\"{\\\"foo\\\":\\\"bar\\\"}\",\n" +
+                "      \"contentType\":\"application/json\"\n" +
+                "   },\n" +
+                "   \"confirmationUrl\":\"https://api-platform-test.protected.mdtp/destination/notifications\",\n" +
+                "   \"version\":\"1\",\n" +
+                "   \"privateHeaders\":[\n" +
+                "      {\n" +
+                "         \"name\":\"foo\",\n" +
+                "         \"\":\"fooValue\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}");
+    }
+
+    @When("^I make a request to the create wrapped notification endpoint with no JSON payload$")
+    public void iMakeRequestToTheCreateWrappedNotificationEndpointWithNoJsonPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateWrappedNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "");
+    }
+
+    @When("^I make a request to the callback endpoint with a correct URL$")
+    public void iMakeRequestToTheCallBackEndpointWithACorrectUrl() {
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
+    }
+
+    @When("^I make a request to the callback endpoint with an incorrect URL$")
+    public void iMakeRequestToTheCallBackEndpointWithAnIncorrectUrl() {
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196387", (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"https://invalid.callbac.url\"}", config.clientId())));
+    }
+
+    @When("^I make a request to the callback endpoint for a box that does not exist$")
+    public void iMakeRequestToTheCallBackEndpointForABoxThatDoesNotExist() {
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("3b8e4dd3-a029-4301-a912-1220f3196388", (format("{\"clientId\" : \"%s\", \"callbackUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
+    }
+
+    @When("^I make a request to the callback endpoint with a different client ID$")
+    public void iMakeRequestToTheCallBackEndpointWithADifferentClientId() {
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", (format("{\"clientId\" : \"DxSao_5J8fsj3bsgfyr7aWj9UcQa\", \"callbackUrl\" : \"%s\"}", config.callbackUrl())));
+    }
+
+    @When("^I make a request to the callback endpoint with invalid field names$")
+    public void iMakeRequestToTheCallBackEndpointWithInvalidFieldNames() {
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", (format("{\"invalidId\" : \"%s\", \"invalidUrl\" : \"%s\"}", config.clientId(), config.callbackUrl())));
+    }
+
+    @When("^I make a request to the callback endpoint with no field values$")
+    public void iMakeRequestToTheCallBackEndpointWithNoFieldValues() {
+        pushPullNotificationsApiSteps.iMakeACallToCallbackWithPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", "{\"clientId\" : \"\", \"callbackUrl\" : \"\"}");
+    }
+
+    @When("^I make a request to the secrets endpoint$")
+    public void iMakeRequestToTheSecretsEndpoint() {
+        pushPullNotificationsApiSteps.iMakeACallToSecrets(config.clientId());
+    }
+
+    @When("^I make a request to the external get a list of boxes endpoint$")
+    public void iMakeRequestToTheExternalGetAListOfBoxesEndpoint() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalGetAListOfdBoxes();
+    }
+
+    @When("^I make a request to the external get a list of boxes endpoint with an expired client credentials bearer token$")
+    public void iMakeARequestToTheExternalGetAListOfBoxesEndpointWithAnExpiredClientCredentialsBearerToken() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalGetAListOfBoxesWithExpiredToken();
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with a new box name$")
+    public void iMakeRequestToTheExternalCreateClientManagedBoxEndpointWithANewBoxName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox(format("{\"boxName\": \"%s\"}", pushPullNotificationsApiSteps.getNewBoxName()));
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with an existing box name$")
+    public void iMakeRequestToTheExternalCreateClientManageBoxEndpointWithAnExistingBoxName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox("{\"boxName\": \"My First Client Managed Box\"}");
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with an invalid callback URL for box ID \"([^\"]*)\"$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithAnInvalidCallbackUrlForBoxId(String boxId) {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"callbackUrl\": \"https://example.com\"}"), boxId);
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with a valid callback URL for box ID \"([^\"]*)\"$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithAValidCallbackUrlForBoxId(String boxId) {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"callbackUrl\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"), boxId);
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with no callback URL for box ID \"([^\"]*)\"$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithNoCallbackUrlForBoxId(String boxId) {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"callbackUrl\": \"\"}"), boxId);
+    }
+
+    @When("^I update my callback to a valid URL \"([^\"]*)\"$")
+    public void iUpdateMyCallbackToAValidUrl(String boxId) {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"callbackUrl\": \"\"}"), boxId);
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with an expired client credentials bearer token$")
+    public void iMakeARequestToTheExternalCreateClientManageBoxEndpointWithAnExpiredClientCredentialsBearerToken() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(format("{\"boxName\": \"%s\"}", pushPullNotificationsApiSteps.getNewBoxName()));
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with an expired client credentials bearer token$")
+    public void iMakeARequestToTheExternalUpdateClientManageBoxEndpointWithAnExpiredClientCredentialsBearerToken() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManageBoxWithExpiredBearerToken(format("{\"callbackUrl\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"));
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with an invalid box name field name$")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithAnInvalidBoxNameFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox(format("{\"invalid\": \"newBoxNameTest1\"}"));
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with no box name field name$")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoBoxNameFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox(format("{\"\": \"newBoxNameTest1\"}"));
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with no box name field value")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoBoxNameFieldValue() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox(format("{\"boxName\": \"\"}"));
+    }
+
+    @When("^I make a request to the external create client managed box endpoint with no request body")
+    public void iMakeRequestToTheCreateClientManageBoxEndpointWithNoRequestBody() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalCreateClientManagedBox("");
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with an invalid callback URL field name$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithAnInvalidCallbackUrlFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"invalid\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"), "2eb7c0a-4571-44ad-9cbc-8d5143c0af7f");
+    }
+
+    @When("^I make a request to the external update client managed box endpoint with no callback URL field name$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithNNoCallbackUrlFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxId(format("{\"\": \"https://api.isc.qa.tax.service.gov.uk/test/api-platform-test/destination/notifications\"}"), "2eb7c0a-4571-44ad-9cbc-8d5143c0af7f");
+    }
+    @When("^I make a request to the external update client managed box endpoint with no request body$")
+    public void iMakeRequestToTheExternalUpdateClientManagedBoxEndpointWithNNoRequestBody() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalUpdateClientManagedBoxWithBoxIdAndNoPayload("a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f");
+    }
+
+    @And("^I can delete the created client managed box by ID$")
+    public void iCanDeleteTheCreatedClientManagedBoxById() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithNewClientManagedBoxId();
+        responseHelper.expectedHttpStatusCode(204);
+    }
+
+    @When("^I make a call to the delete client managed box endpoint with a box ID that does not exist$")
+    public void iMakeACallToTheDeleteClientManagedBoxEndpointWithABoxIdThatDoesNotExist() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("ccc1a3e7-2b73-475a-a14c-1428ab3b46bc");
+    }
+
+    @When("^I make a call to the delete client managed box endpoint with a non ownership box ID")
+    public void iMakeACallToTheDeleteClientManagedBoxEndpointWithANonOwnershipBoxId() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("5589dd9a-40e9-4dec-bbe3-9d83f5102a2a");
+    }
+
+    @When("^I make a call to the delete client managed box endpoint with a default box ID")
+    public void iMakeACallToTheDeleteClientManagedBoxEndpointWithADefaultBoxId() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3");
+    }
+
+    @When("^I make a request to the external delete client managed box endpoint with an expired client credentials bearer token$")
+    public void iMakeRequestToTheCreateDeleteManageBoxEndpointWithAnExpired() {
+        pushPullNotificationsApiSteps.iMakeACallToExternalDeleteClientManageBoxWithExpiredBearerToken("a5e3203d-a57e-4787-ba72-2dbfc294455f");
+    }
+
+    @When("^I make a request to the validate client managed box endpoint for box ID \"([^\"]*)\"$")
+    public void iMakeRequestToTheValidateManageBoxEndpointForBoxId(String boxId) {
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"%s\",\"clientId\":\"%s\"}", boxId, config.cmbClientId()));
+    }
+
+    @When("^I make a request to the validate client managed box endpoint with an invalid box ID field name$")
+    public void iMakeRequestToTheValidateClientManagedBoxEndPointWithAnInvalidBoxIdFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"invalid\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"clientId\":\"%s\"}", config.cmbClientId()));
+    }
+
+    @When("^I make a request to the validate client managed box endpoint with no box ID field name$")
+    public void iMakeRequestToTheValidateClientManagedBoxEndPointWithNoBoxIdFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"clientId\":\"%s\"}", config.cmbClientId()));
+    }
+
+    @When("^I make a request to the validate client managed box endpoint with an invalid box ID value$")
+    public void iMakeRequestToTheValidateClientManagedBoxEndPointWithAnInvalidBoxIdValue() {
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"invalid\",\"clientId\":\"%s\"}", config.cmbClientId()));
+    }
+
+    @When("^I make a request to the validate client managed box endpoint with no box ID value")
+    public void iMakeRequestToTheValidateClientManagedBoxEndPointWithNoBoxIdValue() {
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"\",\"clientId\":\"%s\"}", config.cmbClientId()));
+    }
+
+    @When("^I make a request to the validate client managed box endpoint with an invalid client ID field name$")
+    public void iMakeRequestToTheValidateClientManagedBoxEndPointWithAnInvalidClientIdFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"invalid\":\"%s\"}", config.cmbClientId()));
+    }
+
+    @When("^I make a request to the validate client managed box endpoint with no client ID field name$")
+    public void iMakeRequestToTheValidateClientManagedBoxEndPointWithNoClientIdFieldName() {
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"\":\"%s\"}", config.cmbClientId()));
+    }
+
+    @When("^I make a request to the validate client managed box endpoint with no client ID value")
+    public void iMakeRequestToTheValidateClientManagedBoxEndPointWithNoClientIdValue() {
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox(format("{\"boxId\": \"a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f\",\"clientId\":\"\"}"));
+    }
+
+    @When("^I make a request to the validate client managed box endpoint with no request body")
+    public void iMakeRequestToTheValidateClientManagedBoxEndPointWithNoRequestBody() {
+        pushPullNotificationsApiSteps.iMakeACallToValidatedClientManageBox("");
+    }
+
+    @When("^I make a request to the callback endpoint with no request body")
+    public void iMakeRequestToTheCallBackEndpointWithNoRequestBody() {
+        pushPullNotificationsApiSteps.iMakeACallTCallbackWithNoPayload("5fc1f8e5-8881-4863-8a8c-5c897bb5681");
+    }
+
+    @When("^I make a request to the create notification endpoint with a valid XML payload$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAValidXmlPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithXmlPayload("046ceee5-e43f-4159-b5ce-8df5f2b9d1e3", "<foo>bar</foo>");
+    }
+
+    @When("^I make a request to the create notification endpoint with no XML payload$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithNoXmlPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithXmlPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "");
+    }
+
+    @When("^I make a request to the create notification endpoint with an invalid XML payload$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAInvalidXmlPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithXmlPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "<foo>bar<");
+    }
+
+    @When("^I make a request to the create notification endpoint with an valid UUID box that does not exist$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAValidUuidboxThatDoesNotExist() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWhereNoBoxExists("{\"message\": \"jsonbody\"}");
+    }
+
+    @When("^I make a request to the create notification endpoint with an invalid UUID$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAInvalidUuidBoxThatDoesNotExist() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithInvalidUuid("{\"message\": \"jsonbody\"}");
+    }
+
+    @When("^I make a request to the create notification endpoint with a message exceeding the max size$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAMessageExceedingTheMaxSize() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayloadFileTooLarge("3b8e4dd3-a029-4301-a912-1220f3196387");
+    }
+
+    @When("^I make a request to the create notification endpoint with an invalid JSON payload$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithAnInvalidJsonPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"message\": \"json");
+    }
+
+    @When("^I make a request to the create notification endpoint with no JSON payload$")
+    public void iMakeRequestToTheCreateNotificationEndpointWithNoJsonPayload() {
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "");
+    }
+
+    @Given("^I have a generated notification in an acknowledged status$")
+    public void iHaveAGeneratedNotificationInAnAcknowledgedStatus() {
+        iHaveANotificationInStatusPendingForANewBox();
+        contentTypeHeaderHelper.withJsonContentTypeHeader();
+        iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointForTheNewBox();
+        iGetASuccessfulResponseWithNotificationsNowAcknowledged();
+    }
+
+    @When("^I make a request to the external get box notifications endpoint with unknown query parameters$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithUnknownQuerryParameters() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "unknown", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
+    }
+
+    @When("^I make a request to the external get box notifications endpoint with an invalid status query parameter value$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAnInvalidStatusQueryParameterValue() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "foobar", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000");
+    }
+
+    @When("^I make a request to the external get box notifications endpoint with an invalid fromDate query parameter value$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAnInvalidDateToQueryParameterValue() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000+123", "toDate", "2020-07-16T17:13:00.000");
+    }
+
+    @When("^I make a request to the external get box notifications endpoint with an invalid toDate query parameter value$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointWithAnInvalidToDateQueryParameterValue() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING", "fromDate", "2020-06-16T17:13:00.000", "toDate", "2020-07-16T17:13:00.000+123");
+    }
+
+    @When("^I make a request to the external get box notifications endpoint$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpoint() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotifications("3b8e4dd3-a029-4301-a912-1220f3196387", "status", "PENDING");
+    }
+
+    @When("^I make a request to the external get box notifications endpoint for pending status notifications$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForPendingStatusNotifications() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotifications(pushPullNotificationsApiSteps.getNewBoxId());
+    }
+
+    @When("^I make a request to the external get box notifications endpoint for acknowledged status notifications$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForAcknowledgedStatusNotifications() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "ACKNOWLEDGED");
+    }
+
+    @When("^I make a request to the external get box notifications endpoint with a box ID that belongs to another client ID$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForWithANonBelongingBoxId() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter("1e163398-2c83-405d-a11b-bfa671013800", "status", "PENDING");
+    }
+
+    @When("^I have a notification in status pending for a new box$")
+    public void iHaveANotificationInStatusPendingForANewBox() {
+        iMakeRequestToTheCreateNotificationEndpointForAnUnsubscribedBox();
+        iMakeARequestToTheExternalGetBoxNotificationsEndpointForPendingStatusNotifications();
+        pushPullNotificationsApiSteps.hasPendingStatusNotifications();
+    }
+
+    @When("^I make a request to the external put acknowledge notifications endpoint$")
+    public void iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpoint() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("177dcc2d-fb79-4ef8-b450-d442532b4a04");
+    }
+
+    @When("^I make a request to the external put acknowledge notifications endpoint for the new box$")
+    public void iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointForTheNewBox() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications(pushPullNotificationsApiSteps.getNewBoxId());
+    }
+
+    @When("^I make a request to the external put acknowledge notifications endpoint for a box that does not exist$")
+    public void iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointForABoxThatDoesNotExist() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("177dcc2d-fb79-4ef8-b450-d442532b4a99");
+    }
+
+    @When("^I make a request to the external put acknowledge notifications endpoint with a box ID that belongs to another client ID$")
+    public void iMakeARequestToTheExternalPutAcknowledgeNotificationsEndpointWithANonBelongingId() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalPutAcknowledgeNotifications("1e163398-2c83-405d-a11b-bfa671013800");
+    }
+
+    @When("^I make a request to the external get box notifications endpoint for \"(.*)\" notifications with valid date query parameter values$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForNotificationsWithValidDateQueryParameterValues(String statusValue) {
+        String fromDateValue = generateCurrentDate();
+        String toDateValue = generateFutureDate();
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(pushPullNotificationsApiSteps.getNewBoxId(), "status", statusValue, "fromDate", fromDateValue, "toDate", toDateValue);
+    }
+
+    @When("^I make a request to the external get box notifications endpoint for the new box$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForTheNewBox() {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotifications(pushPullNotificationsApiSteps.getNewBoxId());
+        //Thread.Sleep Included to allow enough time for the notification to be processed to acknowledged
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-
-        response(spec.put(PUSH_PULL_BOX_URL).then());
     }
 
-    @Step
-    public void iMakeACallToCreateBoxWithInvalidBody(String clientId, String boxName) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(new InvalidBoxPayload(clientId, boxName));
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.put(PUSH_PULL_BOX_URL).then());
+    @Then("^I get a forbidden response due to an invalid or missing authorization key$")
+    public void iGetAForbiddenResponseDueToAnInvalidorMissingAuthorizationKey() {
+        iGetAForbiddenResponseDueToAuthorizationFailed();
     }
 
-    @Step
-    public void iMakeACallToCreateBoxWithNoBody() {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification());
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.put(PUSH_PULL_BOX_URL).then());
+    @Then("^I get a forbidden response due to an invalid agent header$")
+    public void iGetAForbiddenResponseDueToAnInvalidAgentHeader() {
+        iGetAForbiddenResponseDueToAuthorizationFailed();
     }
 
-    @Step
-    public void iMakeACallToCallbackWithPayload(String boxId, String jsonPayload) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonPayload);
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.put(format(PUSH_PULL_CALLBACK_URL, BASE_URL, boxId)).then());
+    @Then("^I get a forbidden response due to missing agent header$")
+    public void iGetAForbiddenResponseDueToMissingAgentHeader() {
+        iGetAForbiddenResponseDueToAuthorizationFailed();
     }
 
-    @Step
-    public void iMakeACallTCallbackWithNoPayload(String boxId) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification());
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.put(format(PUSH_PULL_CALLBACK_URL, BASE_URL, boxId)).then());
+    // OK - 2XXs
+    @Then("^I get a successful response$")
+    public void iGetASuccessfulResponse() {
+        responseHelper.expectedHttpStatusCode(200);
     }
 
-    @Step
-    public void iMakeACallToCallbackWhereNoBoxExists(String jsonPayload) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonPayload);
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.put(PUSH_PULL_CALLBACK_NO_BOX_URL).then());
+    @Then("^A box is successfully generated$")
+    public void aBoxIsSuccessfullyGenerated() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertBoxGenerated();
     }
 
-    @Step
-    public void iMakeACallToCreateNotificationsWithJsonPayload(String boxId, String jsonPayload) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonPayload);
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then());
+    @Then("^the new box is successfully returned$")
+    public void theNewBoxIsSuccessfullyReturned() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertNewBoxExists();
     }
 
-    @Step
-    public void iMakeACallToCreateNotificationsWithJsonPayloadFile(String boxId) {
-        builder().withNoProxy();
-
-        String location = "notifications/2Mb.json";
-        File jsonDataPayload = new File(location);
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonDataPayload);
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then());
+    @Then("^I get a successful response where all boxes are returned$")
+    public void iGetASuccessfulResponseWhereAllBoxesAreReturned() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertAllBoxes();
     }
 
-    @Step
-    public void iMakeACallToCreateNotificationsWithJsonPayloadFileTooLarge(String boxId) {
-        builder().withNoProxy();
-
-        //notifications.maxSize configured to 2.1 MB in QA
-        String location = "notifications/3Mb.json";
-        File jsonDataPayload = new File(location);
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonDataPayload);
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then());
+    @Then("^I get a successful response with default and client managed boxes displayed$")
+    public void iGetASuccessfulResponseWithDefaultAndClientManagedBoxesDisplayed() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertListOfBoxes();
     }
 
-    @Step
-    public void iMakeACallToCreateNotificationsWithXmlPayload(String boxId, String xmlPayload) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(xmlPayload);
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.post(format(PUSH_PULL_NOTIFICATIONS_URL, BASE_URL, boxId)).then());
+    @Then("^I get a successful response with no boxes displayed$")
+    public void iGetASuccessfulResponseWithNoBoxesDisplayed() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertNoBoxes();
     }
 
-    @Step
-    public void iMakeACallToCreateNotificationsWhereNoBoxExists(String jsonPayload) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonPayload);
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.post(PUSH_PULL_NOTIFICATIONS_NO_BOX_URL).then());
+    @Then("^I get a successful response with a successful true response message$")
+    public void iGetASuccessfulResponseWithASuccessfulTrueResponseMessage() {
+        responseHelper.expectedHttpStatusCode(200);
+        responseHelper.expectedJsonResponseBody("{\"successful\":true}");
     }
 
-
-    @Step
-    public void iMakeACallToCreateNotificationsWithInvalidUuid(String jsonPayload) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonPayload);
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.post(PUSH_PULL_NOTIFICATIONS_URL_INVALID_UUID).then());
+    @Then("^I get a successful response with the correct secret returned$")
+    public void iGetASuccessfulResponseWithTheCorrectSecretReturned() {
+        responseHelper.expectedHttpStatusCode(200);
+        responseHelper.expectedJsonResponseBody("[{\"value\":\"FUHT3LOIF7EGOUP6OO7L3Q6GVNNJOZUM\"}]");
     }
 
-    @Step
-    public void iMakeACallToCreateWrappedNotificationsWithJsonPayload(String boxId, String jsonPayload) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonPayload);
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.post(format(PUSH_PULL_WRAPPED_NOTIFICATIONS_URL, BASE_URL, boxId)).then());
+    @Then("^I can set a callback url$")
+    public void iCanSetACallbackUrl() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertCallbackUrlUpdated();
     }
 
-    public void iMakeACallToCreateWrappedNotificationsWhereNoBoxExists(String jsonPayload) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonPayload);
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.post(PUSH_PULL_WRAPPED_NOTIFICATIONS_NO_BOX_URL).then());
+    @Then("^I get an invalid callback URL response$")
+    public void iGetAValidationFailedResponse() {
+        responseHelper.expectedHttpStatusCode(200);
+        responseHelper.expectedJsonResponseBody("{\"successful\":false,\"errorMessage\":\"Invalid callback URL. Check the information you have provided is correct.\"}");
     }
 
-    @Step
-    public void iMakeACallToCreateWrappedNotificationsWithInvalidUuid(String jsonPayload) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonPayload);
-
-        if (userAgent != null) {
-            spec = spec.header("User-Agent", userAgent);
-        }
-
-        response(spec.post(PUSH_PULL_WRAPPED_NOTIFICATIONS_URL_INVALID_UUID).then());
+    @Then("^I get a successful response with the correct notification details for the new box$")
+    public void iGetASuccessfulResponseWithTheCorrectNotificationDetailsForTheNewBox() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForTheNewBox();
     }
 
-    @Step
-    public void iMakeACallToCreateBoxWithNoQueryParameters() {
-        builder().withNoProxy();
-
-        Response r =
-                given()
-                        .spec(specification())
-                        .get(PUSH_PULL_BOX_URL);
-
-        response(r.then());
+    @Then("^I get a successful response with the correct notification details$")
+    public void iGetASuccessfulResponseWithTheCorrectNotificationDetails() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForPendingStatusAndDateParameters();
     }
 
-    @Step
-    public void iMakeACallToCreateBoxWithQueryParameters(String clientIdParameterName, String clientIdValue, String boxNameParameterName, String boxNameValue) {
-        builder().withNoProxy();
-
-        Response r =
-                given()
-                        .spec(specification())
-                        .get(PUSH_PULL_BOX_URL + "?" + clientIdParameterName + "=" + clientIdValue + "&" + boxNameParameterName + "=" + boxNameValue);
-
-        response(r.then());
+    @Then("^I get a successful response with the correct acknowledged notification details$")
+    public void iGetASuccessfulResponseWithTheCorrectAcknowledgedNotificationDetails() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForAcknowledgedStatusAndDateParameters();
     }
 
-    @Step
-    public void iMakeACallToSecrets(String clientId) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification());
-
-        if (authorizationKey != null) {
-            spec = spec.header("Authorization", authorizationKey);
-        }
-
-        response(spec.get(format(PUSH_PULL_SECRETS_URL, BASE_URL, clientId)).then());
+    @Then("^I get a successful response with the correct max size notification details for the new box$")
+    public void iGetASuccessfulResponseWithTheCorrectMaxSIzeNotificationDetailsForTheNewBox() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasCorrectMaxSizeNotificationDetailsForTheNewBox();
     }
 
-    @Step
-    public void iMakeACallToExternalGetAListOfdBoxes() {
-
-        response(
-                given()
-                        .spec(specification())
-                        .get(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
+    @Then("^I get a successful response with pending notifications")
+    public void iGetASuccessfulResponseWithPendingNotifications() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasPendingStatusNotifications();
     }
 
-    @Step
-    public void iMakeACallToExternalGetAListOfBoxesWithExpiredToken() {
-
-        response(
-                given()
-                        .header("Authorization", "Bearer 32b61a0150e231e38efeeb664c2a79a2")
-                        .spec(specification())
-                        .get(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
+    @Then("^I get a successful response with acknowledged notifications")
+    public void iGetASuccessfulResponseWithAcknowledgedNotifications() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasAcknowledgedStatusNotifications();
     }
 
-    @Step
-    public void iMakeACallToExternalCreateClientManagedBox(String jsonPayload) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .body(jsonPayload)
-                        .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
+    @Then("^the existing client managed box is successfully updated$")
+    public void theExistingClientManagedBoxIsSuccessfullyUpdated() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertNewClientManagedBoxGenerated();
     }
 
-    @Step
-    public void iMakeACallToExternalUpdateClientManagedBoxWithBoxId(String jsonPayload, String boxId) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .body(jsonPayload)
-                        .put(format("%s/%s/box/" + boxId + "/callback", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
+    @Then("^I get a validate \"([^\"]*)\" response$")
+    public void iGetAValidateTrueResponse(boolean response) {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.asserValidateClientManagedBoxResponse(response);
     }
 
-    @Step
-    public void iMakeACallToExternalUpdateClientManagedBoxWithBoxIdAndNoPayload(String boxId) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .put(format("%s/%s/box/" + boxId + "/callback", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
+    @Then("^I get a validate callback URL true response$")
+    public void iGetAValidateCallbackUrlTrueResponse() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertValidateCallbackUrlResponse(true);
     }
 
-    @Step
-    public void iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(String jsonPayload) {
-
-        response(
-                given()
-                        .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
-                        .spec(specification())
-                        .body(jsonPayload)
-                        .put(format("%s/%s/box/a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f/callback", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
+    @Then("^I get a validate callback URL false response$")
+    public void iGetAValidateCallbackUrlFalseResponse() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.assertInvalidCallbackUrlResponse(false);
     }
 
-    public void iMakeACallToExternalUpdateClientManageBoxWithExpiredBearerToken(String jsonPayload) {
-
-        response(
-                given()
-                        .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
-                        .spec(specification())
-                        .body(jsonPayload)
-                        .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
+    @Then("^A new box is successfully generated$")
+    public void aNewBoxIsSuccessfullyGenerated() {
+        responseHelper.expectedHttpStatusCode(201);
+        pushPullNotificationsApiSteps.assertNewBoxGenerated();
     }
 
-    @Step
-    public void iMakeACallToExternalDeleteClientManageBoxWithNewClientManagedBoxId() {
-
-        response(
-                given()
-                        .spec(specification())
-                        .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + newClientManagedBoxId)
-                        .then()
-        );
+    @Then("^A new client managed box is successfully generated$")
+    public void aNewClientManagedBoxIsSuccessfullyGenerated() {
+        responseHelper.expectedHttpStatusCode(201);
+        pushPullNotificationsApiSteps.assertNewClientManagedBoxGenerated();
     }
 
-    @Step
-    public void iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId(String clientManagedBoxId) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + clientManagedBoxId)
-                        .then()
-        );
+    @Then("^A notification is successfully generated$")
+    public void aNotificationsIsSuccessfullyGenerated() {
+        responseHelper.expectedHttpStatusCode(201) ;
+        pushPullNotificationsApiSteps.assertNotificationCreated();
     }
 
-    @Step
-    public void iMakeACallToExternalDeleteClientManageBoxWithExpiredBearerToken(String clientManagedBoxId) {
-
-        response(
-                given()
-                        .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
-                        .spec(specification())
-                        .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + clientManagedBoxId)
-                        .then()
-        );
+    @Then("^A notification with a confirmation URL is successfully generated$")
+    public void aNotificationWithAConfirmationUrlIsSuccessfullyGenerated() {
+        responseHelper.expectedHttpStatusCode(201);
+        pushPullNotificationsApiSteps.assertNotificationWithConfirmationUrlCreated();
     }
 
-    @Step
-    public void iMakeACallToValidatedClientManageBox(String jsonPayload) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonPayload);
-
-        response(spec.post(format(PUSH_PULL_VALIDATE_CMB_BOX_URL)).then());
+    @Then("^I get a successful response with notifications now acknowledged")
+    public void iGetASuccessfulResponseWithNotificationsNowAcknowledged() {
+        responseHelper.expectedHttpStatusCode(204);
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "ACKNOWLEDGED");
+        pushPullNotificationsApiSteps.hasAcknowledgedStatusNotifications();
     }
 
-    @Step
-    public void iMakeACallToValidatedClientManageBoxWithNoBody() {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification());
-
-        response(spec.post(format(PUSH_PULL_VALIDATE_CMB_BOX_URL)).then());
+    // Bad Requests - 400s
+    @Then("^I get a standard bad request response")
+    public void iGetAStandardBadRequestResponse() {
+        responseHelper.expectedHttpStatusCode(400);
     }
 
-    @Step
-    public void withAuthorizationKey(final String authorizationKey) {
-        this.authorizationKey = authorizationKey;
+    @Then("^I get a bad request response due to an invalid request payload$")
+    public void iGetABadRequestResponseDueToAnInvalidRequestPayload() {
+        iGetAnInvalidRequestPayloadResponse();
+        responseHelper.expectedJsonMessage("JSON body is invalid against expected format");
     }
 
-    @Step
-    public void withUserAgent(final String userAgent) {
-        this.userAgent = userAgent;
+    @Then("^I get a bad request response due to request contains more than 5 headers$")
+    public void iGetABadRequestResponseDueToRequestContainsMoreThan5Headers() {
+        iGetAnInvalidRequestPayloadResponse();
+        responseHelper.expectedJsonMessage("Request contains more than 5 private headers");
     }
 
-    @Step
-    public void withInternalBearerToken(final String internalBearerToken) {
-        this.internalBearerToken = internalBearerToken;
+    @Then("^I get a bad request response due to invalid or unknown query parameters$")
+    public void iGetABadRequestResponseDueToInvalidOrUnknownQueryParameters() {
+        iGetAnInvalidRequestPayloadResponse();
+        responseHelper.expectedJsonMessage("Invalid / Unknown query parameter provided");
     }
 
-    @Step
-    public void withValidQueryParameters(final String clientId, String boxName) {
-        this.clientId = clientId;
-        this.boxName = boxName;
+    @Then("^I get a bad request response due to the box ID not being a valid UUID$")
+    public void iGetABadRequestResponseDueToTheBoxIdNotBeingAValidUuid() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonErrorCode("BAD_REQUEST");
+        responseHelper.expectedJsonMessage("Box ID is not a UUID");
     }
 
-    @Step
-    public void assertCallbackUrlUpdated() {
-        response().body("successful", is(true));
+    @Then("^I get a bad request response due to content type not supported or message syntax invalid$")
+    public void iGetABadRequestResponseDueToContentTypeNotSupportedOrMessageSyntaxInvalid() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseHelper.expectedJsonMessage("Message syntax is invalid");
     }
 
-    @Step
-    public void assertNotificationCreated() {
-        response().body("notificationId", is(notNullValue()));
-        notificationId = response().extract().path("notificationId").toString();
+    @Then("^I get a bad request response due missing parameter values$")
+    public void iGetABadRequestResponseDueToMissingParameterValues() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseHelper.expectedJsonMessage("Expecting boxName and clientId in request body");
     }
 
-    @Step
-    public void assertNotificationWithConfirmationUrlCreated() {
-        response().body("notificationId", is(notNullValue()));
-        response().body("confirmationId", is(notNullValue()));
-        notificationId = response().extract().path("notificationId").toString();
+    @Then("^I get a bad request response due to invalid box name query parameter$")
+    public void iGetABadRequestResponseDueToInvalidBoxNameQueryParameter() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonMessage("Must specify both boxName and clientId query parameters or neither");
     }
 
-    @Step
-    public void assertBoxGenerated() {
-        response().body("boxId", is("de9aed9c-b319-49a4-99e9-a8a659fc0bf6"));
+    @Then("^I get a bad request response due to invalid client ID query parameter$")
+    public void iGetABadRequestResponseDueToInvalidClientIdQueryParameter() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonMessage("Must specify both boxName and clientId query parameters or neither");
     }
 
-    @Step
-    public void assertNewBoxGenerated() {
-        newBoxId = response().extract().path("boxId").toString();
+    @Then("^I get an invalid request payload response due to an invalid status parameter provided$")
+    public void iGetAnInvalidRequestPayloadResponseDueToAnInvalidStatusQueryParameterProvided() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseHelper.expectedJsonMessage("Invalid Status parameter provided");
     }
 
-    @Step
-    public void assertNewClientManagedBoxGenerated() {
-        newClientManagedBoxId = response().extract().path("boxId").toString();
-        response().body("boxId", is(newClientManagedBoxId));
+    @Then("^I get an invalid request payload response due to an unparsable date value parameter provided$")
+    public void iGetAnInvalidRequestPayloadResponseDueToAnUnparsableDateValueQueryParameterProvided() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseHelper.expectedJsonMessage("Unparsable DateValue Param provided");
     }
 
-    @Step
-    public void assertListOfBoxes() {
-        //Assert Client Managed Box
-        response().body("boxId", hasItem("a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"));
-        response().body("boxName", hasItem(("My First Client Managed Box")));
-        response().body("clientManaged", hasItem((true)));
-
-        //Assert Default Box
-        response().body("boxId", hasItem("e0284be5-9102-4af9-8575-529a45808239"));
-        response().body("boxName", hasItem(("DEFAULT")));
-        response().body("clientManaged", hasItem((false)));
-
-        //Assert Common Fields & Values Present for both default and CMBs
-        response().body("boxCreator.clientId", everyItem(is(config.cmbClientId())));
-        response().body("applicationId", everyItem(is("93a3c5da-a731-4d8b-b180-5463e49da76b")));
-        response().body("subscriber.callBackUrl", everyItem(is(oneOf(config.callbackUrl(), ""))));
-        response().body("subscriber.subscribedDateTime", everyItem(is(notNullValue())));
-        response().body("subscriber.subscriptionType", everyItem(is(oneOf("API_PUSH_SUBSCRIBER", "API_PULL_SUBSCRIBER"))));
+    @Then("^I get a bad request response due to missing client ID$")
+    public void iGetABadRequestResponseDueToMissingClientIdAndCallbackUrl() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseHelper.expectedJsonMessage("clientId is required");
     }
 
-    @Step
-    public void assertNoBoxes() {
-        String results = response().extract().path("").toString();
-        assertThat(results, equalTo(("[]")));
+    @Then("^I get a bad request response due to missing box ID or client ID$")
+    public void iGetABadRequestResponseDueToMissingBoxIdOrClientId() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseHelper.expectedJsonMessage("Expecting boxId and clientId in request body");
     }
 
-    @Step
-    public void asserValidateClientManagedBoxResponse(Boolean validValue) {
-        response().body("valid", is(validValue));
+    @Then("^I get a bad request response due to missing box name$")
+    public void iGetABadRequestResponseDueToMissingBoxName() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseHelper.expectedJsonMessage("Expecting boxName in request body");
     }
 
-    @Step
-    public void assertValidateCallbackUrlResponse(Boolean value) {
-        response().body("successful", is(value));
+    @Then("^I get a bad request response due to missing callback URL$")
+    public void iGetABadRequestResponseDueToMissingCallbackUrl() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseHelper.expectedJsonMessage("Expecting boxName in request body");
     }
 
-    @Step
-    public void assertInvalidCallbackUrlResponse(Boolean value) {
-        assertValidateCallbackUrlResponse(value);
-        response().body("errorMessage", is("Invalid callback URL. Check the information you have provided is correct."));
+    @Then("^I get a bad request response due to message version invalid")
+    public void iGetABadRequestResponseDueToMessageVersionInvalid() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+        responseHelper.expectedJsonMessage("Message version is invalid");
     }
 
-    @Step
-    public void assertBoxGeneratedWithNoPayload() {
-        response().body("boxId", is("ef9aebe1-24d3-4c41-9b22-e1eeedb32d45"));
+    // Unauthorised - 401s
+    @Then("^I get an unauthorised response due to an invalid bearer token$")
+    public void iGetAnUnauthorisedResponseDueToAnInvalidBearerToken() {
+        responseHelper.expectedHttpStatusCode(401);
+        responseHelper.expectedJsonErrorCode("UNAUTHORISED");
+        responseHelper.expectedJsonMessage("Invalid bearer token");
     }
 
-    @Step
-    public void assertAllBoxes() {
-        response().body("boxId", everyItem(is(notNullValue())));
-        response().body("boxName", everyItem(is(notNullValue())));
-        response().body("boxCreator", everyItem(is(notNullValue())));
+    @Then("^I get an unauthorised response due to invalid authentication information provided$")
+    public void iGetAnUnauthorisedResponseDueToAnInvalidAuthenticationInformationProivded() {
+        responseHelper.expectedHttpStatusCode(401);
+        responseHelper.expectedJsonErrorCode("INVALID_CREDENTIALS");
+        responseHelper.expectedJsonMessage("Invalid Authentication information provided");
     }
 
-    @Step
-    public void assertBoxExists() {
-        response().body("boxId", is("5fc1f8e5-8881-4863-8a8c-5c897bb56815"));
-        response().body("boxName", is("API Platform Acceptance Test Box"));
-        response().body("boxCreator.clientId", is("3ZdSQUrCrLEoyXFRjCgmj60qlfAa"));
+    @Then("^I get an unauthorised response due to client ID mismatch$")
+    public void iGetAnUnauthorisedResponseDueToClientIdMismatch() {
+        responseHelper.expectedHttpStatusCode(401);
+        responseHelper.expectedJsonErrorCode("UNAUTHORISED");
+        responseHelper.expectedJsonMessage("Client Id did not match");
     }
 
-    @Step
-    public void assertNewBoxExists() {
-        response().body("boxId", is(newBoxId));
-        response().body("boxName", is(newBoxName));
-        response().body("boxCreator.clientId", is(config.clientId()));
+    // Forbidden - 403s
+    @Then("^I get a forbidden response$")
+    public void iGetAForbiddenResponse() {
+        responseHelper.expectedHttpStatusCode(403);
+        responseHelper.expectedJsonErrorCode("FORBIDDEN");
+        responseHelper.expectedJsonMessage("Access denied");
     }
 
-    @Step
-    public void iMakeACallToTheExternalGetBoxNotifications(String boxId) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .get(format("%s/%s/%s/notifications", baseApiUrl(), apiContext, boxId))
-                        .then()
-        );
+    @Then("^I get a forbidden response due to invalid scope$")
+    public void iGetAForbiddenResponseDueToInvalidResponse() {
+        iGetAForbiddenResponse("INVALID_SCOPE");
+        responseHelper.expectedJsonMessage("Can not access the required resource. Ensure this token has all the required scopes.");
     }
 
-    @Step
-    public void iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(String boxId, String statusQueryParam, String statusQueryValue, String fromDateQueryParam, String fromDateQueryValue, String toDateQueryParam, String toDateQueryValue) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .get(format("%s/%s/%s/notifications?%s=%s&%s=%s&%s=%s", baseApiUrl(), apiContext, boxId, statusQueryParam, statusQueryValue, fromDateQueryParam, fromDateQueryValue, toDateQueryParam, toDateQueryValue))
-                        .then()
-        );
+    private void iGetAForbiddenResponseDueToAuthorizationFailed() {
+        responseHelper.expectedHttpStatusCode(403);
+        responseHelper.expectedJsonErrorCode("FORBIDDEN");
+        responseHelper.expectedJsonMessage("Authorisation failed");
     }
 
-    @Step
-    public void iMakeACallToTheExternalGetBoxNotifications(String boxId, String statusQueryParam, String statusQueryValue) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .get(format("%s/%s/%s/notifications", baseApiUrl(), apiContext, boxId))
-                        .then()
-        );
+    // Not Found - 404s
+    @Then("^I get a not found response due to box not found$")
+    public void iGetANotFoundResponseDueToBoxNotFound() {
+        responseHelper.expectedHttpStatusCode(404);
+        responseHelper.expectedJsonErrorCode("BOX_NOT_FOUND");
+        responseHelper.expectedJsonMessage("Box not found");
     }
 
-    @Step
-    public void iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(String boxId, String statusQueryParam, String statusQueryValue) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .get(format("%s/%s/%s/notifications?%s=%s", baseApiUrl(), apiContext, boxId, statusQueryParam, statusQueryValue))
-                        .then()
-        );
+    @Then("^I get a matching resource not found response$")
+    public void iGetAMatchingResourceNotFoundResponse() {
+        iGetNotFoundResponse("MATCHING_RESOURCE_NOT_FOUND");
+        responseHelper.expectedJsonMessage("A resource with the name in the request can not be found in the API");
     }
 
-    @Step
-    public void iMakeACallToTheExternalPutAcknowledgeNotifications(String boxId) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .body(format("{\"notificationIds\": [\"%s\"]}", notificationId))
-                        .put(format("%s/%s/%s/notifications/acknowledge", baseApiUrl(), apiContext, boxId))
-                        .then()
-        );
+    // Invalid or Missing Request Header - 406s
+    @Then("^I get an unacceptable response due to a missing accept header$")
+    public void iGetAnUnacceptableResponseDueToAMissingAcceptHeader() {
+        iGetAnAcceptHeaderInvalidResponse();
     }
 
-    @Step
-    public void hasCorrectNotificationDetailsForTheNewBox() {
-        response().body("notificationId", is(singletonList(notificationId)));
-        response().body("boxId", is(singletonList(newBoxId)));
-        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
-        response().body("status", is(singletonList("ACKNOWLEDGED")));
-        response().body("createdDateTime", is(notNullValue()));
+    @Then("^I get an unacceptable response due to an invalid accept header$")
+    public void iGetANotAcceptableResponseDueToAnInvalidAcceptHeader() {
+        iGetAnAcceptHeaderInvalidResponse();
     }
 
-    @Step
-    public void hasCorrectMaxSizeNotificationDetailsForTheNewBox() {
-        response().body("notificationId", is(singletonList(notificationId)));
-        response().body("boxId", is(singletonList(newBoxId)));
-        response().body("message", is(notNullValue()));
-        response().body("status", is(singletonList("ACKNOWLEDGED")));
-        response().body("createdDateTime", is(notNullValue()));
+    // Request Entity Too Large - 413s
+    @Then("^I get a request entity too large response$")
+    public void iGetARequestEntityTooLargeResponse() {
+        responseHelper.expectedHttpStatusCode(413);
+        responseHelper.expectedJsonErrorCode("UNKNOWN_ERROR");
+        responseHelper.expectedJsonMessage("Request Entity Too Large");
     }
 
-    @Step
-    public void hasPendingStatusNotifications() {
-        response().body("notificationId", hasItem((notificationId)));
-        response().body("status", everyItem(is("PENDING")));
+    // Unsupported Media Type - 415s
+    @Then("^I get an unsupported media type response$")
+    public void iGetAnUnsupportedMediaTypeResponse() {
+        responseHelper.expectedHttpStatusCode(415);
+        responseHelper.expectedJsonMessage("Expecting text/json or application/json body");
     }
 
-    @Step
-    public void hasCorrectNotificationDetailsForPendingStatusAndDateParameters() {
-        response().body("notificationId", is(singletonList(notificationId)));
-        response().body("boxId", is(singletonList(newBoxId)));
-        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
-        response().body("status", is(singletonList("PENDING")));
-        response().body("createdDateTime", is(notNullValue()));
+    @Then("^I get an unsupported media type response version two$")
+    public void iGetAnUnsupportedMediaTypeResponseVersionTwo() {
+        responseHelper.expectedHttpStatusCode(415);
+        responseHelper.expectedJsonErrorCode("BAD_REQUEST");
+        responseHelper.expectedJsonMessage("Expecting text/json or application/json body");
     }
 
-    @Step
-    public void hasCorrectNotificationDetailsForAcknowledgedStatusAndDateParameters() {
-        response().body("notificationId", is(singletonList(notificationId)));
-        response().body("boxId", is(singletonList(newBoxId)));
-        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
-        response().body("status", is(singletonList("ACKNOWLEDGED")));
-        response().body("createdDateTime", is(notNullValue()));
+    @Then("^I get an unsupported media type response due to content type not supported$")
+    public void iGetAnUnsupportedMediaTypeResponseDueToContentTypeNoSupported() {
+        responseHelper.expectedHttpStatusCode(415);
+        responseHelper.expectedJsonErrorCode("BAD_REQUEST");
+        responseHelper.expectedJsonMessage("Content Type not Supported");
     }
 
-    public void hasAcknowledgedStatusNotifications() {
-        response().body("notificationId", hasItems((notificationId)));
-        response().body("status", everyItem(is("ACKNOWLEDGED")));
+    private String generateCurrentDate() {
+        LocalDateTime date = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        return date.format(formatter);
+    }
+
+    private String generateFutureDate() {
+        LocalDateTime date = LocalDateTime.now().plusDays(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        return date.format(formatter);
+    }
+
+    @Then("^I get the JSON message \"([^\"]*)\"$")
+    public void iGetTheJsonMessage(final String jsonMessage) {
+        responseHelper.expectedJsonMessage(jsonMessage);
+    }
+
+    private void iGetAnInvalidRequestPayloadResponse() {
+        responseHelper.expectedHttpStatusCode(400);
+        responseHelper.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
+    }
+
+    private void iGetAForbiddenResponse(String expectedErrorCode) {
+        responseHelper.expectedHttpStatusCode(403);
+        responseHelper.expectedJsonErrorCode(expectedErrorCode);
+    }
+
+    private void iGetNotFoundResponse(String expectedErrorCode) {
+        responseHelper.expectedHttpStatusCode(404);
+        responseHelper.expectedJsonErrorCode(expectedErrorCode);
+    }
+
+    private void iGetAnAcceptHeaderInvalidResponse() {
+        responseHelper.expectedHttpStatusCode(406);
+        responseHelper.expectedJsonErrorCode("ACCEPT_HEADER_INVALID");
+        responseHelper.expectedJsonMessage("The accept header is missing or invalid");
     }
 }

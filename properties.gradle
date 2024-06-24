@@ -1,8 +1,0 @@
-ext {
-    slf4jVersion = '1.7.7'
-    serenityCoreVersion = '3.3.4'
-    serenityCucumberVersion = '3.3.4'
-    junitVersion = '4.13.1'
-    assertJVersion = '3.23.1'
-    logbackVersion = '1.2.10'
-}
