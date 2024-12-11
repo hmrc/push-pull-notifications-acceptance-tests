@@ -848,14 +848,6 @@ public class PushPullNotificationsApiSteps extends ResponseSteps {
         responseHelper.expectedJsonMessage("clientId is required");
     }
 
-    //TODO - FIND USAGES - RELATED TO CMB
-    @Then("^I get a bad request response due to missing box ID or client ID$")
-    public void iGetABadRequestResponseDueToMissingBoxIdOrClientId() {
-        responseHelper.expectedHttpStatusCode(400);
-        responseHelper.expectedJsonErrorCode("INVALID_REQUEST_PAYLOAD");
-        responseHelper.expectedJsonMessage("Expecting boxId and clientId in request body");
-    }
-
     @Then("^I get a bad request response due to missing box name$")
     public void iGetABadRequestResponseDueToMissingBoxName() {
         responseHelper.expectedHttpStatusCode(400);

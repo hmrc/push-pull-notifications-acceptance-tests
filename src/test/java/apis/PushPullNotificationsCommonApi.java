@@ -34,7 +34,6 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     private static final String PUSH_PULL_WRAPPED_NOTIFICATIONS_NO_BOX_URL = format("%s/box/07787f13-dcae-4168-8685-c00a33b86999/wrapped-notifications", BASE_URL);
     private static final String PUSH_PULL_WRAPPED_NOTIFICATIONS_URL_INVALID_UUID = format("%s/box/foobar/wrapped-notifications", BASE_URL);
     private static final String PUSH_PULL_SECRETS_URL = "%s/client/%s/secrets";
-    private static final String PUSH_PULL_CREATE_CMB_BOX_URL = format("%s/cmb/box", BASE_URL);
     private final String apiContext = "misc/push-pull-notification/box";
     private String authorizationKey;
     private String userAgent;
@@ -42,7 +41,6 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     private String clientId;
     private String boxName;
     private String newBoxId;
-    private String newClientManagedBoxId;
     private String notificationId;
     private final String newBoxName = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new Date());
 
@@ -388,22 +386,10 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     }
 
     @Step
-    public void assertBoxGeneratedWithNoPayload() {
-        response().body("boxId", is("ef9aebe1-24d3-4c41-9b22-e1eeedb32d45"));
-    }
-
-    @Step
     public void assertAllBoxes() {
         response().body("boxId", everyItem(is(notNullValue())));
         response().body("boxName", everyItem(is(notNullValue())));
         response().body("boxCreator", everyItem(is(notNullValue())));
-    }
-
-    @Step
-    public void assertBoxExists() {
-        response().body("boxId", is("5fc1f8e5-8881-4863-8a8c-5c897bb56815"));
-        response().body("boxName", is("API Platform Acceptance Test Box"));
-        response().body("boxCreator.clientId", is("3ZdSQUrCrLEoyXFRjCgmj60qlfAa"));
     }
 
     @Step
