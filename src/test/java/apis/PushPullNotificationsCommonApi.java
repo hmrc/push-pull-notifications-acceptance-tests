@@ -34,17 +34,13 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     private static final String PUSH_PULL_WRAPPED_NOTIFICATIONS_NO_BOX_URL = format("%s/box/07787f13-dcae-4168-8685-c00a33b86999/wrapped-notifications", BASE_URL);
     private static final String PUSH_PULL_WRAPPED_NOTIFICATIONS_URL_INVALID_UUID = format("%s/box/foobar/wrapped-notifications", BASE_URL);
     private static final String PUSH_PULL_SECRETS_URL = "%s/client/%s/secrets";
-    private static final String PUSH_PULL_CREATE_CMB_BOX_URL = format("%s/cmb/box", BASE_URL);
-    private static final String PUSH_PULL_VALIDATE_CMB_BOX_URL = format("%s/cmb/validate", BASE_URL);
     private final String apiContext = "misc/push-pull-notification/box";
-    private final String cmbApiContext = "misc/push-pull-notification/cmb";
     private String authorizationKey;
     private String userAgent;
     private String internalBearerToken;
     private String clientId;
     private String boxName;
     private String newBoxId;
-    private String newClientManagedBoxId;
     private String notificationId;
     private final String newBoxName = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new Date());
 
@@ -325,144 +321,6 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     }
 
     @Step
-    public void iMakeACallToExternalGetAListOfdBoxes() {
-
-        response(
-                given()
-                        .spec(specification())
-                        .get(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
-    }
-
-    @Step
-    public void iMakeACallToExternalGetAListOfBoxesWithExpiredToken() {
-
-        response(
-                given()
-                        .header("Authorization", "Bearer 32b61a0150e231e38efeeb664c2a79a2")
-                        .spec(specification())
-                        .get(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
-    }
-
-    @Step
-    public void iMakeACallToExternalCreateClientManagedBox(String jsonPayload) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .body(jsonPayload)
-                        .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
-    }
-
-    @Step
-    public void iMakeACallToExternalUpdateClientManagedBoxWithBoxId(String jsonPayload, String boxId) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .body(jsonPayload)
-                        .put(format("%s/%s/box/" + boxId + "/callback", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
-    }
-
-    @Step
-    public void iMakeACallToExternalUpdateClientManagedBoxWithBoxIdAndNoPayload(String boxId) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .put(format("%s/%s/box/" + boxId + "/callback", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
-    }
-
-    @Step
-    public void iMakeACallToExternalCreateClientManageBoxWithExpiredBearerToken(String jsonPayload) {
-
-        response(
-                given()
-                        .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
-                        .spec(specification())
-                        .body(jsonPayload)
-                        .put(format("%s/%s/box/a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f/callback", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
-    }
-
-    public void iMakeACallToExternalUpdateClientManageBoxWithExpiredBearerToken(String jsonPayload) {
-
-        response(
-                given()
-                        .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
-                        .spec(specification())
-                        .body(jsonPayload)
-                        .put(format("%s/%s/box", baseApiUrl(), cmbApiContext))
-                        .then()
-        );
-    }
-
-    @Step
-    public void iMakeACallToExternalDeleteClientManageBoxWithNewClientManagedBoxId() {
-
-        response(
-                given()
-                        .spec(specification())
-                        .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + newClientManagedBoxId)
-                        .then()
-        );
-    }
-
-    @Step
-    public void iMakeACallToExternalDeleteClientManageBoxWithClientManagedBoxId(String clientManagedBoxId) {
-
-        response(
-                given()
-                        .spec(specification())
-                        .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + clientManagedBoxId)
-                        .then()
-        );
-    }
-
-    @Step
-    public void iMakeACallToExternalDeleteClientManageBoxWithExpiredBearerToken(String clientManagedBoxId) {
-
-        response(
-                given()
-                        .header("Authorization", "Bearer 49511e91f510b62619d9bffa2639a507")
-                        .spec(specification())
-                        .delete(format("%s/%s/box/", baseApiUrl(), cmbApiContext) + clientManagedBoxId)
-                        .then()
-        );
-    }
-
-    @Step
-    public void iMakeACallToValidatedClientManageBox(String jsonPayload) {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification())
-                .body(jsonPayload);
-
-        response(spec.post(format(PUSH_PULL_VALIDATE_CMB_BOX_URL)).then());
-    }
-
-    @Step
-    public void iMakeACallToValidatedClientManageBoxWithNoBody() {
-        builder().withNoProxy();
-
-        RequestSpecification spec = given()
-                .spec(specification());
-
-        response(spec.post(format(PUSH_PULL_VALIDATE_CMB_BOX_URL)).then());
-    }
-
-    @Step
     public void withAuthorizationKey(final String authorizationKey) {
         this.authorizationKey = authorizationKey;
     }
@@ -512,38 +370,6 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     }
 
     @Step
-    public void assertNewClientManagedBoxGenerated() {
-        newClientManagedBoxId = response().extract().path("boxId").toString();
-        response().body("boxId", is(newClientManagedBoxId));
-    }
-
-    @Step
-    public void assertListOfBoxes() {
-        //Assert Client Managed Box
-        response().body("boxId", hasItem("a2eb7c0a-4571-44ad-9cbc-8d5143c0af7f"));
-        response().body("boxName", hasItem(("My First Client Managed Box")));
-        response().body("clientManaged", hasItem((true)));
-
-        //Assert Default Box
-        response().body("boxId", hasItem("e0284be5-9102-4af9-8575-529a45808239"));
-        response().body("boxName", hasItem(("DEFAULT")));
-        response().body("clientManaged", hasItem((false)));
-
-        //Assert Common Fields & Values Present for both default and CMBs
-        response().body("boxCreator.clientId", everyItem(is(config.cmbClientId())));
-        response().body("applicationId", everyItem(is("93a3c5da-a731-4d8b-b180-5463e49da76b")));
-        response().body("subscriber.callBackUrl", everyItem(is(oneOf(config.callbackUrl(), ""))));
-        response().body("subscriber.subscribedDateTime", everyItem(is(notNullValue())));
-        response().body("subscriber.subscriptionType", everyItem(is(oneOf("API_PUSH_SUBSCRIBER", "API_PULL_SUBSCRIBER"))));
-    }
-
-    @Step
-    public void assertNoBoxes() {
-        String results = response().extract().path("").toString();
-        assertThat(results, equalTo(("[]")));
-    }
-
-    @Step
     public void asserValidateClientManagedBoxResponse(Boolean validValue) {
         response().body("valid", is(validValue));
     }
@@ -560,22 +386,10 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     }
 
     @Step
-    public void assertBoxGeneratedWithNoPayload() {
-        response().body("boxId", is("ef9aebe1-24d3-4c41-9b22-e1eeedb32d45"));
-    }
-
-    @Step
     public void assertAllBoxes() {
         response().body("boxId", everyItem(is(notNullValue())));
         response().body("boxName", everyItem(is(notNullValue())));
         response().body("boxCreator", everyItem(is(notNullValue())));
-    }
-
-    @Step
-    public void assertBoxExists() {
-        response().body("boxId", is("5fc1f8e5-8881-4863-8a8c-5c897bb56815"));
-        response().body("boxName", is("API Platform Acceptance Test Box"));
-        response().body("boxCreator.clientId", is("3ZdSQUrCrLEoyXFRjCgmj60qlfAa"));
     }
 
     @Step
