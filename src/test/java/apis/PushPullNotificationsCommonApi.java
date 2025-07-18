@@ -23,7 +23,8 @@ import static org.hamcrest.collection.IsIn.oneOf;
 public class PushPullNotificationsCommonApi extends CommonApi {
 
     //private static final String BASE_URL = "http://localhost:6701";
-    private static final String BASE_URL = "https://push-pull-notifications-api.protected.mdtp";
+    //private static final String BASE_URL = "https://push-pull-notifications-api.protected.mdtp";
+    private static final String BASE_URL = "https://developer.qa.tax.service.gov.uk/api-platform-test-support/test-only/push-pull-notifications-api";
     private static final String PUSH_PULL_BOX_URL = format("%s/box", BASE_URL);
     private static final String PUSH_PULL_CALLBACK_URL = "%s/box/%s/callback";
     private static final String PUSH_PULL_CALLBACK_NO_BOX_URL = format("%s/box/046ceee5-e43f-4159-b5ce-8df5f2b9d999/callback", BASE_URL);
@@ -459,7 +460,7 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     public void hasCorrectNotificationDetailsForTheNewBox() {
         response().body("notificationId", is(singletonList(notificationId)));
         response().body("boxId", is(singletonList(newBoxId)));
-        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
+        response().body("message", is(singletonList("{\"message\":\"jsonbody\"}")));
         response().body("status", is(singletonList("ACKNOWLEDGED")));
         response().body("createdDateTime", is(notNullValue()));
     }
@@ -483,7 +484,7 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     public void hasCorrectNotificationDetailsForPendingStatusAndDateParameters() {
         response().body("notificationId", is(singletonList(notificationId)));
         response().body("boxId", is(singletonList(newBoxId)));
-        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
+        response().body("message", is(singletonList("{\"message\":\"jsonbody\"}")));
         response().body("status", is(singletonList("PENDING")));
         response().body("createdDateTime", is(notNullValue()));
     }
@@ -492,7 +493,7 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     public void hasCorrectNotificationDetailsForAcknowledgedStatusAndDateParameters() {
         response().body("notificationId", is(singletonList(notificationId)));
         response().body("boxId", is(singletonList(newBoxId)));
-        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
+        response().body("message", is(singletonList("{\"message\":\"jsonbody\"}")));
         response().body("status", is(singletonList("ACKNOWLEDGED")));
         response().body("createdDateTime", is(notNullValue()));
     }
@@ -500,5 +501,8 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     public void hasAcknowledgedStatusNotifications() {
         response().body("notificationId", hasItems((notificationId)));
         response().body("status", everyItem(is("ACKNOWLEDGED")));
+    }
+
+    public void iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(String newBoxId, String status, String statusValue, String count) {
     }
 }

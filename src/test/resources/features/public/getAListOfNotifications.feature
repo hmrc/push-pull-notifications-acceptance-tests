@@ -1,4 +1,4 @@
-@feature
+@this @feature
 Feature: Push Pull Notifications API - Get A List of Notifications
 
   ### [GET] Get A List of Notifications
@@ -28,6 +28,21 @@ Feature: Push Pull Notifications API - Get A List of Notifications
     And I have a valid bearer token for scope "read:pull-notifications" for my standard application using client credentials
     When I make a request to the external get box notifications endpoint for "PENDING" notifications with valid date query parameter values
     Then I get a successful response with the correct notification details
+
+
+
+  @get-notifications @notifications @regression-tests
+  Scenario: Calling the external get notifications endpoint with valid count parameter values for pending notifications works
+    Given I have all valid request headers for PPNS
+
+    And  I make two requests to the create notifications endpoint to generate two pending notifications for an unsubscribed box
+    #And I make two requests to the create notification endpoint with a valid JSON payload
+
+    And I have a valid bearer token for scope "read:pull-notifications" for my standard application using client credentials
+
+    When I make a request to the external get box notifications endpoint for "PENDING" notifications with valid single count query parameter values
+
+    Then I get a single successful response with the correct notification details
 
   @get-notifications @notifications @regression-tests
   Scenario: Calling the external get notifications endpoint with valid date query parameter values for acknowledged notifications works
