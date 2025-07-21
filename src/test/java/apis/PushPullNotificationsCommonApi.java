@@ -428,7 +428,7 @@ public class PushPullNotificationsCommonApi extends CommonApi {
         response(
                 given()
                         .spec(specification())
-                        .get(format("%s/%s/%s/notifications", baseApiUrl(), apiContext, boxId))
+                        .get(format("%s/%s/%s/notifications?%s=%s", baseApiUrl(), apiContext, boxId,statusQueryParam, statusQueryValue))
                         .then()
         );
     }
@@ -478,6 +478,7 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     public void hasPendingStatusNotifications() {
         response().body("notificationId", hasItem((notificationId)));
         response().body("status", everyItem(is("PENDING")));
+        response().body("message", is(singletonList("{\"message\":\"jsonbody\"}")));
     }
 
     @Step

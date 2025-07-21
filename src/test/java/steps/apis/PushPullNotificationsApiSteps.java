@@ -174,20 +174,16 @@ public class PushPullNotificationsApiSteps extends ResponseSteps {
         aNotificationsIsSuccessfullyGenerated();
     }
 
-    @When("^I make two requests to the create notifications endpoint to generate two pending notifications for an unsubscribed box$")
-    public void iMakeTwoRequestToTheCreateNotificationEndpointForAnUnsubscribedBox() {
+
+    @When("^I make a request to the create notifications endpoint to generate 2 pending notifications for an unsubscribed box$")
+    public void iMakeRequestToTheCreateNotificationEndpointForAnUnsubscribedBoxTwo() {
         iCreateANewBox();
-        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(pushPullNotificationsApiSteps.getNewBoxId(), "{\"message\" : \"jsonbody\"}");
+        String newBoxId = pushPullNotificationsApiSteps.getNewBoxId();
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(newBoxId, "{\"message\" : \"jsonbody\"}");
         aNotificationsIsSuccessfullyGenerated();
-        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(pushPullNotificationsApiSteps.getNewBoxId(), "{\"message\" : \"jsonbody\"}");
+        pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(newBoxId, "{\"message\" : \"jsonbody2\"}");
         aNotificationsIsSuccessfullyGenerated();
     }
-
-    //@When("^I make two requests to the create notification endpoint with a valid JSON payload$")
-    //public void iMakeTwoRequestToTheCreateNotificationEndpointWithAValidJsonPayload() {
-    //    pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"message\": \"jsonbody\"}");
-    //    pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload("3b8e4dd3-a029-4301-a912-1220f3196387", "{\"message\": \"jsonbody\"}");
-    //}
 
     @When("^I make a request to the create wrapped notification endpoint with a JSON notification$")
     public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAJsonNotification() {
@@ -593,6 +589,11 @@ public class PushPullNotificationsApiSteps extends ResponseSteps {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotifications(pushPullNotificationsApiSteps.getNewBoxId());
     }
 
+    @When("^I make a request to the external get box notifications endpoint for pending status notifications with a count of \"(\\d*)\"$")
+    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForPendingStatusNotifications(final String count) {
+        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotifications(pushPullNotificationsApiSteps.getNewBoxId(),"count", count);
+    }
+
     @When("^I make a request to the external get box notifications endpoint for acknowledged status notifications$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForAcknowledgedStatusNotifications() {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithOnlyStatusQueryParameter(pushPullNotificationsApiSteps.getNewBoxId(), "status", "ACKNOWLEDGED");
@@ -745,7 +746,7 @@ public class PushPullNotificationsApiSteps extends ResponseSteps {
         return response.jsonPath().getList("notifications", Notification.class);
     }
 
-    
+
     @Then("^I get a successful response with the correct acknowledged notification details$")
     public void iGetASuccessfulResponseWithTheCorrectAcknowledgedNotificationDetails() {
         responseHelper.expectedHttpStatusCode(200);
