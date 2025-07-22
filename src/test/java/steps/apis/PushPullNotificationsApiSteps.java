@@ -179,11 +179,9 @@ public class PushPullNotificationsApiSteps extends ResponseSteps {
         String newBoxId = pushPullNotificationsApiSteps.getNewBoxId();
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(newBoxId, "{\"message\" : \"jsonbody\"}");
         aNotificationsIsSuccessfullyGenerated();
-        System.out.println("New Box ID = " + newBoxId);
 
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(newBoxId, "{\"message\" : \"jsonbody2\"}");
         secondNotificationsIsSuccessfullyGenerated();
-        System.out.println("New Box ID = " + newBoxId);
     }
 
 

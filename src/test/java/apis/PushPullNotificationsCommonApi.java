@@ -352,13 +352,11 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     public void assertNotificationCreated() {
         response().body("notificationId", is(notNullValue()));
         notificationId = response().extract().path("notificationId").toString();
-        System.out.println("NotificationID = " + notificationId);
     }
 
     public void assertSecondNotificationCreated() {
         response().body("notificationId", is(notNullValue()));
         notificationId2 = response().extract().path("notificationId").toString();
-        System.out.println("NotificationID2 = " + notificationId2);
     }
 
     @Step
