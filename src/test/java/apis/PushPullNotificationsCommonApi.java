@@ -486,7 +486,7 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     public void hasPendingStatusNotifications() {
         response().body("notificationId", hasItem((notificationId)));
         response().body("status", everyItem(is("PENDING")));
-        response().body("message", is(singletonList("{\"message\":\"jsonbody\"}")));
+        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
     }
 
     public void hasSinglePendingNotification() {
