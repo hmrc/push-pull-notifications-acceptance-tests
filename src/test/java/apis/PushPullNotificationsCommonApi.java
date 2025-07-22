@@ -18,7 +18,6 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.collection.IsIn.oneOf;
 
 public class PushPullNotificationsCommonApi extends CommonApi {
 
@@ -43,6 +42,7 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     private String boxName;
     private String newBoxId;
     private String notificationId;
+    private String notificationId2;
     private final String newBoxName = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new Date());
 
     public String getNewBoxName() {
@@ -351,6 +351,13 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     public void assertNotificationCreated() {
         response().body("notificationId", is(notNullValue()));
         notificationId = response().extract().path("notificationId").toString();
+        System.out.println("NotificationID = " + notificationId);
+    }
+
+    public void assertSecondNotificationCreated() {
+        response().body("notificationId", is(notNullValue()));
+        notificationId2 = response().extract().path("notificationId").toString();
+        System.out.println("NotificationID2 = " + notificationId2);
     }
 
     @Step
@@ -481,6 +488,21 @@ public class PushPullNotificationsCommonApi extends CommonApi {
         response().body("message", is(singletonList("{\"message\":\"jsonbody\"}")));
     }
 
+    public void hasSinglePendingNotification() {
+        response().body("size()", is(1));
+        response().body("notificationId", hasItem((notificationId)));
+        response().body("[0].status", equalTo("PENDING"));
+        response().body("[0].message", equalTo("{\"message\":\"jsonbody\"}"));
+    }
+
+    public void hasTwoPendingNotifications() {
+        response().body("size()", is(2));
+        response().body("notificationId", hasItems(notificationId, notificationId2));
+        response().body("status", everyItem(equalTo("PENDING")));
+        response().body("[0].message", equalTo("{\"message\":\"jsonbody\"}"));
+        response().body("[1].message", equalTo("{\"message\":\"jsonbody2\"}"));
+    }
+
     @Step
     public void hasCorrectNotificationDetailsForPendingStatusAndDateParameters() {
         response().body("notificationId", is(singletonList(notificationId)));
@@ -504,6 +526,4 @@ public class PushPullNotificationsCommonApi extends CommonApi {
         response().body("status", everyItem(is("ACKNOWLEDGED")));
     }
 
-    public void iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(String newBoxId, String status, String statusValue, String count) {
-    }
 }

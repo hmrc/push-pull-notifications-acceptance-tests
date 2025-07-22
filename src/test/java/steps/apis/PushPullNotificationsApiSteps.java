@@ -2,7 +2,6 @@ package steps.apis;
 
 import apis.PushPullNotificationsCommonApi;
 import helpers.apis.ContentTypeHeaderHelper;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,13 +9,12 @@ import io.restassured.internal.RestAssuredResponseOptionsGroovyImpl;
 import net.serenitybdd.annotations.Steps;
 import utilities.configuration.Configuration;
 
-import javax.management.Notification;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import static java.lang.String.format;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class PushPullNotificationsApiSteps extends ResponseSteps {
 
@@ -181,9 +179,13 @@ public class PushPullNotificationsApiSteps extends ResponseSteps {
         String newBoxId = pushPullNotificationsApiSteps.getNewBoxId();
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(newBoxId, "{\"message\" : \"jsonbody\"}");
         aNotificationsIsSuccessfullyGenerated();
+        System.out.println("New Box ID = " + newBoxId);
+
         pushPullNotificationsApiSteps.iMakeACallToCreateNotificationsWithJsonPayload(newBoxId, "{\"message\" : \"jsonbody2\"}");
-        aNotificationsIsSuccessfullyGenerated();
+        secondNotificationsIsSuccessfullyGenerated();
+        System.out.println("New Box ID = " + newBoxId);
     }
+
 
     @When("^I make a request to the create wrapped notification endpoint with a JSON notification$")
     public void iMakeRequestToTheCreateWrappedNotificationEndpointWithAJsonNotification() {
@@ -638,14 +640,6 @@ public class PushPullNotificationsApiSteps extends ResponseSteps {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(pushPullNotificationsApiSteps.getNewBoxId(), "status", statusValue, "fromDate", fromDateValue, "toDate", toDateValue);
     }
 
-    @When("^I make a request to the external get box notifications endpoint for \"(.*)\" notifications with valid single count query parameter values$")
-    public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForNotificationsWithValidSingleCountQueryParameterValues(String statusValue) {
-        //String fromDateValue = generateCurrentDate();
-        //String toDateValue = generateFutureDate();
-        int count = 1;
-        pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotificationsWithQueryParameters(pushPullNotificationsApiSteps.getNewBoxId(), "status", statusValue, String.valueOf(count));
-    }
-
     @When("^I make a request to the external get box notifications endpoint for the new box$")
     public void iMakeARequestToTheExternalGetBoxNotificationsEndpointForTheNewBox() {
         pushPullNotificationsApiSteps.iMakeACallToTheExternalGetBoxNotifications(pushPullNotificationsApiSteps.getNewBoxId());
@@ -732,21 +726,6 @@ public class PushPullNotificationsApiSteps extends ResponseSteps {
         pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForPendingStatusAndDateParameters();
     }
 
-    @Then("^I get a single successful response with the correct notification details$")
-    public void iGetASingleSuccessfulResponseWithTheCorrectNotificationDetails() {
-        responseHelper.expectedHttpStatusCode(200);
-
-        List<Notification> notifications = getNotificationsFromResponse();
-        assertEquals(String.valueOf(1), notifications.size(), "Expected exactly one notification");
-
-        pushPullNotificationsApiSteps.hasCorrectNotificationDetailsForPendingStatusAndDateParameters();
-    }
-
-    public List<Notification> getNotificationsFromResponse() {
-        return response.jsonPath().getList("notifications", Notification.class);
-    }
-
-
     @Then("^I get a successful response with the correct acknowledged notification details$")
     public void iGetASuccessfulResponseWithTheCorrectAcknowledgedNotificationDetails() {
         responseHelper.expectedHttpStatusCode(200);
@@ -763,6 +742,18 @@ public class PushPullNotificationsApiSteps extends ResponseSteps {
     public void iGetASuccessfulResponseWithPendingNotifications() {
         responseHelper.expectedHttpStatusCode(200);
         pushPullNotificationsApiSteps.hasPendingStatusNotifications();
+    }
+
+    @Then("^I get a successful single response with pending notifications")
+    public void iGetASuccessfulSingleResponseWithPendingNotifications() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasSinglePendingNotification();
+    }
+
+    @Then("^I get two successful responses with pending notifications")
+    public void iGetTwoSuccessfulResponsesWithPendingNotifications() {
+        responseHelper.expectedHttpStatusCode(200);
+        pushPullNotificationsApiSteps.hasTwoPendingNotifications();
     }
 
     @Then("^I get a successful response with acknowledged notifications")
@@ -799,6 +790,12 @@ public class PushPullNotificationsApiSteps extends ResponseSteps {
     public void aNotificationsIsSuccessfullyGenerated() {
         responseHelper.expectedHttpStatusCode(201) ;
         pushPullNotificationsApiSteps.assertNotificationCreated();
+    }
+
+    @Then("^Second notification is successfully generated$")
+    public void secondNotificationsIsSuccessfullyGenerated() {
+        responseHelper.expectedHttpStatusCode(201) ;
+        pushPullNotificationsApiSteps.assertSecondNotificationCreated();
     }
 
     @Then("^A notification with a confirmation URL is successfully generated$")
