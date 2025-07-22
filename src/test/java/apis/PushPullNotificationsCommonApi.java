@@ -22,8 +22,9 @@ import static org.hamcrest.Matchers.hasItems;
 public class PushPullNotificationsCommonApi extends CommonApi {
 
     //private static final String BASE_URL = "http://localhost:6701";
-    //private static final String BASE_URL = "https://push-pull-notifications-api.protected.mdtp";
-    private static final String BASE_URL = "https://developer.qa.tax.service.gov.uk/api-platform-test-support/test-only/push-pull-notifications-api";
+    private static final String BASE_URL = "https://push-pull-notifications-api.protected.mdtp";
+    //Note unprotected QA endpoint can be used for running tests locally against QA for debugging all of the happy path scenarios
+    //private static final String BASE_URL = "https://developer.qa.tax.service.gov.uk/api-platform-test-support/test-only/push-pull-notifications-api";
     private static final String PUSH_PULL_BOX_URL = format("%s/box", BASE_URL);
     private static final String PUSH_PULL_CALLBACK_URL = "%s/box/%s/callback";
     private static final String PUSH_PULL_CALLBACK_NO_BOX_URL = format("%s/box/046ceee5-e43f-4159-b5ce-8df5f2b9d999/callback", BASE_URL);

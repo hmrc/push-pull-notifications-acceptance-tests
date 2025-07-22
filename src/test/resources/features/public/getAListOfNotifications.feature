@@ -13,7 +13,7 @@ Feature: Push Pull Notifications API - Get A List of Notifications
     When I make a request to the external get box notifications endpoint for pending status notifications
     Then I get a successful response with pending notifications
 
-  @this @get-notifications @notifications @regression-tests
+  @get-notifications @notifications @regression-tests
   Scenario: Calling the external get notifications endpoint for 1 pending status notifications works
     Given I have all valid request headers for PPNS
     And I make a request to the create notifications endpoint to generate 2 pending notifications for an unsubscribed box
@@ -21,7 +21,7 @@ Feature: Push Pull Notifications API - Get A List of Notifications
     When I make a request to the external get box notifications endpoint for pending status notifications with a count of "1"
     Then I get a successful single response with pending notifications
 
-  @this @get-notifications @notifications @regression-tests
+  @get-notifications @notifications @regression-tests
   Scenario: Calling the external get notifications endpoint for 2 pending status notifications works
     Given I have all valid request headers for PPNS
     And I make a request to the create notifications endpoint to generate 2 pending notifications for an unsubscribed box
