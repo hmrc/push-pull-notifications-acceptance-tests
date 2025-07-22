@@ -468,7 +468,7 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     public void hasCorrectNotificationDetailsForTheNewBox() {
         response().body("notificationId", is(singletonList(notificationId)));
         response().body("boxId", is(singletonList(newBoxId)));
-        response().body("message", is(singletonList("{\"message\":\"jsonbody\"}")));
+        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
         response().body("status", is(singletonList("ACKNOWLEDGED")));
         response().body("createdDateTime", is(notNullValue()));
     }
@@ -493,22 +493,22 @@ public class PushPullNotificationsCommonApi extends CommonApi {
         response().body("size()", is(1));
         response().body("notificationId", hasItem((notificationId)));
         response().body("[0].status", equalTo("PENDING"));
-        response().body("[0].message", equalTo("{\"message\":\"jsonbody\"}"));
+        response().body("[0].message", equalTo("{\"message\" : \"jsonbody\"}"));
     }
 
     public void hasTwoPendingNotifications() {
         response().body("size()", is(2));
         response().body("notificationId", hasItems(notificationId, notificationId2));
         response().body("status", everyItem(equalTo("PENDING")));
-        response().body("[0].message", equalTo("{\"message\":\"jsonbody\"}"));
-        response().body("[1].message", equalTo("{\"message\":\"jsonbody2\"}"));
+        response().body("[0].message", equalTo("{\"message\" : \"jsonbody\"}"));
+        response().body("[1].message", equalTo("{\"message\" : \"jsonbody2\"}"));
     }
 
     @Step
     public void hasCorrectNotificationDetailsForPendingStatusAndDateParameters() {
         response().body("notificationId", is(singletonList(notificationId)));
         response().body("boxId", is(singletonList(newBoxId)));
-        response().body("message", is(singletonList("{\"message\":\"jsonbody\"}")));
+        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
         response().body("status", is(singletonList("PENDING")));
         response().body("createdDateTime", is(notNullValue()));
     }
@@ -517,7 +517,7 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     public void hasCorrectNotificationDetailsForAcknowledgedStatusAndDateParameters() {
         response().body("notificationId", is(singletonList(notificationId)));
         response().body("boxId", is(singletonList(newBoxId)));
-        response().body("message", is(singletonList("{\"message\":\"jsonbody\"}")));
+        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
         response().body("status", is(singletonList("ACKNOWLEDGED")));
         response().body("createdDateTime", is(notNullValue()));
     }
