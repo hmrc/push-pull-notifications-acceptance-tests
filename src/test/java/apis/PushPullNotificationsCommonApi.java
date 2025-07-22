@@ -18,12 +18,13 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.collection.IsIn.oneOf;
 
 public class PushPullNotificationsCommonApi extends CommonApi {
 
     //private static final String BASE_URL = "http://localhost:6701";
     private static final String BASE_URL = "https://push-pull-notifications-api.protected.mdtp";
+    //Note unprotected QA endpoint can be used for running tests locally against QA for debugging all of the happy path scenarios
+    //private static final String BASE_URL = "https://developer.qa.tax.service.gov.uk/api-platform-test-support/test-only/push-pull-notifications-api";
     private static final String PUSH_PULL_BOX_URL = format("%s/box", BASE_URL);
     private static final String PUSH_PULL_CALLBACK_URL = "%s/box/%s/callback";
     private static final String PUSH_PULL_CALLBACK_NO_BOX_URL = format("%s/box/046ceee5-e43f-4159-b5ce-8df5f2b9d999/callback", BASE_URL);
@@ -42,6 +43,7 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     private String boxName;
     private String newBoxId;
     private String notificationId;
+    private String notificationId2;
     private final String newBoxName = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new Date());
 
     public String getNewBoxName() {
@@ -352,6 +354,11 @@ public class PushPullNotificationsCommonApi extends CommonApi {
         notificationId = response().extract().path("notificationId").toString();
     }
 
+    public void assertSecondNotificationCreated() {
+        response().body("notificationId", is(notNullValue()));
+        notificationId2 = response().extract().path("notificationId").toString();
+    }
+
     @Step
     public void assertNotificationWithConfirmationUrlCreated() {
         response().body("notificationId", is(notNullValue()));
@@ -427,7 +434,7 @@ public class PushPullNotificationsCommonApi extends CommonApi {
         response(
                 given()
                         .spec(specification())
-                        .get(format("%s/%s/%s/notifications", baseApiUrl(), apiContext, boxId))
+                        .get(format("%s/%s/%s/notifications?%s=%s", baseApiUrl(), apiContext, boxId,statusQueryParam, statusQueryValue))
                         .then()
         );
     }
@@ -477,6 +484,22 @@ public class PushPullNotificationsCommonApi extends CommonApi {
     public void hasPendingStatusNotifications() {
         response().body("notificationId", hasItem((notificationId)));
         response().body("status", everyItem(is("PENDING")));
+        response().body("message", is(singletonList("{\"message\" : \"jsonbody\"}")));
+    }
+
+    public void hasSinglePendingNotification() {
+        response().body("size()", is(1));
+        response().body("notificationId", hasItem((notificationId)));
+        response().body("[0].status", equalTo("PENDING"));
+        response().body("[0].message", equalTo("{\"message\" : \"jsonbody\"}"));
+    }
+
+    public void hasTwoPendingNotifications() {
+        response().body("size()", is(2));
+        response().body("notificationId", hasItems(notificationId, notificationId2));
+        response().body("status", everyItem(equalTo("PENDING")));
+        response().body("[0].message", equalTo("{\"message\" : \"jsonbody\"}"));
+        response().body("[1].message", equalTo("{\"message\" : \"jsonbody2\"}"));
     }
 
     @Step
@@ -501,4 +524,5 @@ public class PushPullNotificationsCommonApi extends CommonApi {
         response().body("notificationId", hasItems((notificationId)));
         response().body("status", everyItem(is("ACKNOWLEDGED")));
     }
+
 }
